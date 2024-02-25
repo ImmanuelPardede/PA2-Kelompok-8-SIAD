@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'admin',
+        'passwords' => 'admins',
     ],
 
     /*
@@ -36,11 +36,21 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
+        ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staffs',
+        ],
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'gurus',
         ],
     ],
+    
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -60,16 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Staff::class,
+        ],
+        'gurus' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class,
+        ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

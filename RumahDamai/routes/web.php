@@ -1,34 +1,52 @@
 <?php
- 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 
-use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AccountController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
     return view('welcome');
 });
- 
-Auth::routes();
-   
-//Normal Users Routes List
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-   
-    Route::get('/home', [HomeController::class, 'index'])->name('admin.home');
 
-    Route::post('/admin/create-user', [AdminController::class, 'createUser'])->name('admin.create.user');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'processLogin']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
+
+
+Route::group(['middleware' => ['auth:admin']], function () {
+    Route::get('/admin/home', function () {
+        return view('admin.home');
+    })->name('admin.home');
+
+
+    
+    Route::resource('admin/accounts', AccountController::class)->parameters([
+        'accounts' => 'id',
+    ]);
+});    
+
+// Staff Routes
+Route::group(['middleware' => ['auth:staff']], function () {
+    Route::get('/staff/home', function () {
+        return view('staff.home');
+    })->name('home');
 });
-   
-//Admin Routes List
-Route::middleware(['auth', 'user-access:staff'])->group(function () {
-   
-    Route::get('/staff/home', [HomeController::class, 'staffHome'])->name('staff.home');
-});
-   
-//Admin Routes List
-Route::middleware(['auth', 'user-access:guru'])->group(function () {
-   
-    Route::get('/guru/home', [HomeController::class, 'guruHome'])->name('guru.home');
+
+// Guru Routes
+Route::group(['middleware' => ['auth:guru']], function () {
+    Route::get('/guru/home', function () {
+        return view('guru.home');
+    })->name('home');
 });
