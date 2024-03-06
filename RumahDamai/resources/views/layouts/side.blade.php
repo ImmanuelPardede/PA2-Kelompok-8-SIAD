@@ -1,4 +1,4 @@
-    
+
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -26,6 +26,7 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhan.index') }}">Kebutuhan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('lokasiTugas.index') }}">Lokasi Tugas</a></li>
               </ul>
             </div>
           </li>
