@@ -1,9 +1,10 @@
 <?php
- 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AnakController;
+use App\Http\Controllers\MasterData\LokasiTugasController;
 use App\Http\Controllers\MasterData\AgamaController;
 use App\Http\Controllers\MasterData\JenisKelaminController;
 use App\Http\Controllers\MasterData\GolonganDarahController;
@@ -15,13 +16,13 @@ use App\Http\Controllers\MasterData\KebutuhanController;
 Route::get('/', function () {
     return view('welcome');
 });
- 
+
 Auth::routes();
 
 
 //Normal Users Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
-   
+
     Route::get('admin/index', [HomeController::class, 'adminHome'])->name('admin.home');
 
     Route::resource('admin/anak', AnakController::class);
@@ -34,16 +35,19 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::resource('masterdata/kebutuhan', KebutuhanController::class);
 
+    Route::resource('masterdata/lokasiTugas', LokasiTugasController::class);
+
+
 });
-   
+
 //Admin Routes List
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
-   
+
     Route::get('/guru/home', [HomeController::class, 'guruHome'])->name('guru.home');
 });
-   
+
 //Admin Routes List
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-   
+
     Route::get('/staff/home', [HomeController::class, 'staffHome'])->name('staff.home');
 });

@@ -9,6 +9,6 @@
             <strong>Nama Kelamin:</strong> {{ $kebutuhan->jenis_kebutuhan }}
         </div>
 
-        <a href="{{ route('jenisKelamin.index') }}" class="btn btn-primary mt-3">Kembali</a>
+        <a href="{{ route('kebutuhan.index') }}" class="btn btn-primary mt-3">Kembali</a>
     </div>
 @endsection

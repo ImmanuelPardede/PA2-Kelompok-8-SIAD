@@ -1,11 +1,11 @@
 @extends('layouts.master')
-    
+
 @section('content')
 <div class="row">
     <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ route('admin.home') }}</div>
-    
+
                 <div class="card-body">
                     You are a Admin User.
                     <a href="{{ route('anak.index') }}" class="btn btn-primary mt-3">Kelola Anak</a>
@@ -22,9 +22,13 @@
                                 <a class="btn btn-primary mt-3" href="{{ route('jenisKelamin.index') }}">Kelola Jenis Kelamin</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Lokasi Tugas</td>
+                            <td>
+                                <a class="btn btn-primary mt-3" href="{{ route('lokasiTugas.index') }}">Kelola Lokasi Tugas</a>
+                            </td>
+                        </tr>
                     </table>
-                
-                    
                     </div>
                 </div>
         </div>
