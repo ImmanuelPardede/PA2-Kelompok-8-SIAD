@@ -19,8 +19,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="lokasi_penugasan">Lokasi Penugasan:</label>
-                <input type="text" class="form-control" name="lokasi_penugasan" value="{{ old('lokasi_penugasan') }}" required>
+                <label for="wilayah">Wilayah:</label>
+                <input type="text" class="form-control" name="wilayah" value="{{ old('wilayah') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lokasi">Lokasi:</label>
+                <input type="text" class="form-control" name="lokasi" value="{{ old('lokasi') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-success">Simpan</button>
