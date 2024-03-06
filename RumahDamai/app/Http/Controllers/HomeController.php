@@ -1,9 +1,9 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
- 
+
 class HomeController extends Controller
 {
     /**
@@ -15,34 +15,26 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
- 
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+
+    public function adminHome()
     {
-        return view('adminHome');
+        return view('admin.index');
     }
- 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function staffHome()
-    {
-        return view('staffHome');
-    }
-    
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function guruHome()
     {
         return view('guruHome');
+    }
+
+    public function staffHome()
+    {
+        return view('staffHome');
     }
 }

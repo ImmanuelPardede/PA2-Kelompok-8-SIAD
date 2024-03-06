@@ -5,18 +5,23 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>YPA Rumah Damai</title>
+  <title>Skydash Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="{{ asset('majestic-master/vendors/mdi/css/materialdesignicons.min.css') }}">
-
-  <link rel="stylesheet" href="{{ asset('majestic-master/vendors/base/vendor.bundle.base.css') }}">
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/feather/feather.css')}}">
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css')}}">
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/css/vendor.bundle.base.css')}}">
   <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" href="{{ asset('majestic-master/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css')}}">
+  <link rel="stylesheet" type="{{ asset('skydash/text/css" href="js/select.dataTables.min.css')}}">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="{{ asset('majestic-master/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('skydash/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('majestic-master/images/favicon.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('skydash/images/favicon.png')}}')}}" />
 </head>
 <body>
+
+
+  

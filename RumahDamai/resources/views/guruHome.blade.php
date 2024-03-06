@@ -1,4 +1,5 @@
-@extends('layouts.app')
+//resources/views/managerHome.blade.php
+@extends('layouts.master')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -7,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
     
                 <div class="card-body">
-                    You are a guru User.
+                    You are a Guru User.
                 </div>
             </div>
         </div>

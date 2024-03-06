@@ -1,11 +1,14 @@
 <?php
- 
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
- 
+
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -14,13 +17,17 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('type')->default(false); //add type boolean Users: 0=>User, 1=>Admin, 2=>Manager 
+            $table->string('status')->default('aktif');
+            $table->boolean('role')->default(false); //add type boolean Users: 0=>User, 1=>Admin, 2=>Manager 
             $table->rememberToken();
             $table->timestamps();
         });
     }
- 
-    public function down()
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }

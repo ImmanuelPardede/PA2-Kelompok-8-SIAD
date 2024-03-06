@@ -28,20 +28,30 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        
        
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->type == 'staff') {
-                return redirect()->route('staff.home');
-            }else if (auth()->user()->type == 'guru') {
-                return redirect()->route('guru.home');
-            }else{
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'status' => 'aktif'))) {
+            $user = auth()->user();
+        
+            if ($user->role == 'admin') {
                 return redirect()->route('admin.home');
+            } elseif ($user->role == 'guru') {
+                return redirect()->route('guru.home');
+            } elseif ($user->role == 'staff') {
+                return redirect()->route('staff.home');
             }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
         }
-            
+    
+        // If authentication fails or the user type is not recognized
+        return redirect()->route('login')->with('error', 'Email-Address And Password Are Wrong.');
     }
-}
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect()->route('login'); // Redirect to login page after logout
+    }
+}    
