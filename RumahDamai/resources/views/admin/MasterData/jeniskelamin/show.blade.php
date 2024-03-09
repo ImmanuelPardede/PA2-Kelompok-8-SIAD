@@ -5,7 +5,6 @@
         <h2>Detail Kelamin</h2>
 
         <div>
-            <strong>ID:</strong> {{ $kelamin->id }}<br>
             <strong>Nama Kelamin:</strong> {{ $kelamin->jenis_kelamin }}
         </div>
 

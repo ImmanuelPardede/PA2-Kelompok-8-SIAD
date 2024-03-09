@@ -5,7 +5,6 @@
         <h2>Detail Golongan Darah</h2>
 
         <div>
-            <strong>ID:</strong> {{ $darah->id }}<br>
             <strong>Nama Darah:</strong> {{ $darah->golongan_darah }}
         </div>
 

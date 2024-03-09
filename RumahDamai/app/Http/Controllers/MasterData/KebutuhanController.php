@@ -13,9 +13,8 @@ class KebutuhanController extends Controller
      */
     public function index()
     {
-        $kebutuhanList = Kebutuhan::all();
+        $kebutuhanList = Kebutuhan::orderBy('jenis_kebutuhan', 'asc')->get();
         return view('admin.masterdata.kebutuhan.index', compact('kebutuhanList'));
-
     }
 
     /**
@@ -45,7 +44,7 @@ class KebutuhanController extends Controller
      */
     public function show(string $id)
     {
-        
+
         $kebutuhan = Kebutuhan::find($id);
         return view('admin.masterdata.kebutuhan.show', compact('kebutuhan'));
     }

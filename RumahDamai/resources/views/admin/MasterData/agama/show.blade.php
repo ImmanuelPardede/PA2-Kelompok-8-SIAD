@@ -5,7 +5,6 @@
         <h2>Detail Agama</h2>
 
         <div>
-            <strong>ID:</strong> {{ $agama->id }}<br>
             <strong>Nama Agama:</strong> {{ $agama->agama }}
         </div>
 

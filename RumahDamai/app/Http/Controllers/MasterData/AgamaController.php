@@ -13,7 +13,7 @@ class AgamaController extends Controller
      */
     public function index()
     {
-        $agamaList = Agama::all();
+        $agamaList = Agama::orderBy('agama', 'asc')->get();
         return view('admin.masterdata.agama.index', compact('agamaList'));
     }
 

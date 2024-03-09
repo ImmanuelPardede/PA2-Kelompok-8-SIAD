@@ -28,6 +28,30 @@
                                 <a class="btn btn-primary mt-3" href="{{ route('lokasiTugas.index') }}">Kelola Lokasi Tugas</a>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Kebutuhan Anak</td>
+                            <td>
+                                <a class="btn btn-primary mt-3" href="{{ route('kebutuhan.index') }}">Kelola Tingkat Pendidikan</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tingkat Pendidikan</td>
+                            <td>
+                                <a class="btn btn-primary mt-3" href="{{ route('pendidikan.index') }}">Kelola Tingkat Pendidikan</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Golongan Darah</td>
+                            <td>
+                                <a class="btn btn-primary mt-3" href="{{ route('golonganDarah.index') }}">Kelola olongan Darah</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Pekerjaan</td>
+                            <td>
+                                <a class="btn btn-primary mt-3" href="{{ route('pekerjaan.index') }}">Kelola Jenis Pekerjaan</a>
+                            </td>
+                        </tr>
                     </table>
                     </div>
                 </div>

@@ -9,9 +9,8 @@ use App\Http\Controllers\MasterData\AgamaController;
 use App\Http\Controllers\MasterData\JenisKelaminController;
 use App\Http\Controllers\MasterData\GolonganDarahController;
 use App\Http\Controllers\MasterData\KebutuhanController;
-
-
-
+use App\Http\Controllers\MasterData\PekerjaanController;
+use App\Http\Controllers\MasterData\PendidikanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +36,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::resource('masterdata/lokasiTugas', LokasiTugasController::class);
 
+    Route::resource('masterdata/pendidikan', PendidikanController::class);
+
+    Route::resource('masterdata/pekerjaan', PekerjaanController::class);
 
 });
 

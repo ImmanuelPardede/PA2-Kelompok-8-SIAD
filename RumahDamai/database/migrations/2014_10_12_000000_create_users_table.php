@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status')->default('aktif');
-            $table->boolean('role')->default(false); //add type boolean Users: 0=>User, 1=>Admin, 2=>Manager 
+            $table->boolean('role')->default(false); //add type boolean Users: 0=>User, 1=>Admin, 2=>Manager
             $table->rememberToken();
             $table->timestamps();
         });

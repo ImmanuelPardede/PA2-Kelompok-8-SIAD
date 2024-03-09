@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <h2>Detail Kelamin</h2>
+        <h2>Detail Jenis Kebutuhan</h2>
 
         <div>
-            <strong>ID:</strong> {{ $kebutuhan->id }}<br>
-            <strong>Nama Kelamin:</strong> {{ $kebutuhan->jenis_kebutuhan }}
+            <strong>Jenis Kebutuhan:</strong> {{ $kebutuhan->jenis_kebutuhan }}<br>
+            <strong>Deskripsi:</strong> {{ $kebutuhan->deskripsi }}
         </div>
 
         <a href="{{ route('kebutuhan.index') }}" class="btn btn-primary mt-3">Kembali</a>

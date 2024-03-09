@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Kebutuhan extends Model
 {
     use HasFactory;
-    protected $table = 'kebutuhan'; 
-    protected $fillable = ['id','jenis_kebutuhan']; 
+    
+    protected $table = 'kebutuhan';
+    protected $fillable = ['id','jenis_kebutuhan'];
 
     public function anak(){
         return $this->hasMany(Anak::class);

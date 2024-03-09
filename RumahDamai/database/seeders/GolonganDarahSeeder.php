@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class GolonganDarahSeeder extends Seeder
 {
     /**
@@ -14,8 +13,17 @@ class GolonganDarahSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('golongan_darah')->insert([
-            'golongan_darah' => 'O',
-        ]);
+        $golongan_darah = [
+            'A',
+            'B',
+            'AB',
+            'O'
+        ];
+
+        foreach ($golongan_darah as $golongan) {
+            DB::table('golongan_darah')->insert([
+                'golongan_darah' => $golongan,
+            ]);
+        }
     }
 }

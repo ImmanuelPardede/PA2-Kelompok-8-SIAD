@@ -24,9 +24,11 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('agama.index') }}">Agama</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhan.index') }}">Kebutuhan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('lokasiTugas.index') }}">Lokasi Tugas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhan.index') }}">Kebutuhan Anak</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('pendidikan.index') }}">Tingkat Pendidikan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('pekerjaan.index') }}">Jenis Pekerjaan</a></li>
               </ul>
             </div>
           </li>

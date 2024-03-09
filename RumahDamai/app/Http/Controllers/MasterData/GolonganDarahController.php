@@ -13,12 +13,12 @@ class GolonganDarahController extends Controller
      */
     public function index()
     {
-        $golonganDarahList = GolonganDarah::all();
+        $golonganDarahList = GolonganDarah::orderBy('golongan_darah', 'asc')->get();
         return view('admin.masterdata.golonganDarah.index', compact('golonganDarahList'));
 
     }
     /**
-     * 
+     *
      * Show the form for creating a new resource.
      */
     public function create()

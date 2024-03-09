@@ -14,8 +14,15 @@ class JenisKelaminSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('jenis_kelamin')->insert([
-            'jenis_kelamin' => 'Laki - Laki',
-        ]);
+        $jenis_kelamin = [
+            'Laki-laki',
+            'Perempuan',
+        ];
+
+        foreach ($jenis_kelamin as $kelamin) {
+            DB::table('jenis_kelamin')->insert([
+                'jenis_kelamin' => $kelamin
+            ]);
+        }
     }
 }
