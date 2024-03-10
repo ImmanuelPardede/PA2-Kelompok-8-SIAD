@@ -16,7 +16,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nama Wilayah</th>
                     <th>Nama Lokasi</th>
                     <th>Aksi</th>
@@ -25,7 +24,6 @@
             <tbody>
                 @forelse ($lokasiList as $lokasi)
                     <tr>
-                        <td>{{ $lokasi->lokasi_penugasan_id }}</td>
                         <td>{{ $lokasi->wilayah }}</td>
                         <td>{{ $lokasi->lokasi }}</td>
                         <td>

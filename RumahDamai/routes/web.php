@@ -6,11 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AnakController;
 use App\Http\Controllers\MasterData\LokasiTugasController;
 use App\Http\Controllers\MasterData\AgamaController;
+use App\Http\Controllers\MasterData\DonasiController;
 use App\Http\Controllers\MasterData\JenisKelaminController;
 use App\Http\Controllers\MasterData\GolonganDarahController;
 use App\Http\Controllers\MasterData\KebutuhanController;
 use App\Http\Controllers\MasterData\PekerjaanController;
 use App\Http\Controllers\MasterData\PendidikanController;
+use App\Http\Controllers\MasterData\SponsorshipController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +41,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('masterdata/pendidikan', PendidikanController::class);
 
     Route::resource('masterdata/pekerjaan', PekerjaanController::class);
+
+    Route::resource('masterdata/sponsorship', SponsorshipController::class);
+
+    Route::resource('masterdata/donasi', DonasiController::class);
 
 });
 

@@ -17,7 +17,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nama Agama</th>
                     <th>Aksi</th>
                 </tr>
@@ -25,10 +24,8 @@
             <tbody>
                 @forelse ($agamaList as $agama)
                     <tr>
-                        <td>{{ $agama->id }}</td>
                         <td>{{ $agama->agama }}</td>
                         <td>
-                            <a href="{{ route('agama.show', $agama->id) }}" class="btn btn-info">Detail</a>
                             <a href="{{ route('agama.edit', $agama->id) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('agama.destroy', $agama->id) }}" method="post" style="display:inline;">
                                 @csrf

@@ -36,5 +36,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PekerjaanSeeder::class,
         ]);
+        $this->call([
+            DonasiSeeder::class,
+        ]);
+        $this->call([
+            SponsorshipSeeder::class,
+        ]);
     }
 }

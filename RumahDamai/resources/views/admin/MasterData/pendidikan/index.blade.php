@@ -16,7 +16,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Tingkat Pendidikan</th>
                     <th>Aksi</th>
                 </tr>
@@ -24,10 +23,8 @@
             <tbody>
                 @forelse ($pendidikanList as $pendidikan)
                     <tr>
-                        <td>{{ $pendidikan->id }}</td>
                         <td>{{ $pendidikan->tingkat_pendidikan }}</td>
                         <td>
-                            <a href="{{ route('pendidikan.show', $pendidikan->id) }}" class="btn btn-info">Detail</a>
                             <a href="{{ route('pendidikan.edit', $pendidikan->id) }}" class="btn btn-warning">Edit</a>
                             <form action="{{ route('pendidikan.destroy', $pendidikan->id) }}" method="post" style="display:inline;">
                                 @csrf

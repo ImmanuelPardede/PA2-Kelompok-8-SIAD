@@ -29,6 +29,8 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('pendidikan.index') }}">Tingkat Pendidikan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('pekerjaan.index') }}">Jenis Pekerjaan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis Sponsorship</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
               </ul>
             </div>
           </li>

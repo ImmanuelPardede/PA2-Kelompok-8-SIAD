@@ -9,8 +9,8 @@ class Agama extends Model
 {
     use HasFactory;
 
-    protected $table = 'agama'; // Sesuaikan dengan nama tabel yang Anda buat
-    protected $fillable = ['id','agama']; // Sesuaikan dengan kolom yang dapat diisi
+    protected $table = 'agama'; 
+    protected $fillable = ['id','agama'];
 
     public function anak(){
         return $this->hasMany(Anak::class);

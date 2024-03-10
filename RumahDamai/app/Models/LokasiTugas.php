@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class LokasiTugas extends Model
 {
     use HasFactory;
+    
     protected $table = 'lokasi_penugasan';
-    protected $primaryKey = 'lokasi_penugasan_id'; 
-    protected $fillable = ['wilayah', 'lokasi', 'deskripsi'];
+    protected $fillable = ['lokasi_penugasan_id', 'wilayah', 'lokasi', 'deskripsi'];
 
     public function anak(){
         return $this->hasMany(Anak::class);

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Data Kebutuhan</h2>
+        <h2>Jenis Sponsorship</h2>
 
         <!-- Tampilkan notifikasi jika ada -->
         @if(session('success'))
@@ -11,23 +11,23 @@
             </div>
         @endif
 
-        <a href="{{ route('kebutuhan.create') }}" class="btn btn-success mb-3">Tambah Jenis Kebutuhan</a>
+        <a href="{{ route('sponsorship.create') }}" class="btn btn-success mb-3">Tambah Jenis Sponsorship</a>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nama Kebutuhan</th>
+                    <th>Jenis Sponsorship</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($kebutuhanList as $kebutuhan)
+                @forelse ($sponsorshipList as $sponsorship)
                     <tr>
-                        <td>{{ $kebutuhan->jenis_kebutuhan }}</td>
+                        <td>{{ $sponsorship->jenis_sponsorship }}</td>
                         <td>
-                            <a href="{{ route('kebutuhan.show', $kebutuhan->id) }}" class="btn btn-info">Detail</a>
-                            <a href="{{ route('kebutuhan.edit', $kebutuhan->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('kebutuhan.destroy', $kebutuhan->id) }}" method="post" style="display:inline;">
+                            <a href="{{ route('sponsorship.show', $sponsorship->id) }}" class="btn btn-info">Detail</a>
+                            <a href="{{ route('sponsorship.edit', $sponsorship->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="post" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -36,7 +36,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">Tidak ada data Kebutuhan.</td>
+                        <td colspan="3">Tidak ada Jenis Sponsorship.</td>
                     </tr>
                 @endforelse
             </tbody>

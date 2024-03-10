@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Jenis Pekerjaan</h2>
+        <h2>Jenis Donasi</h2>
 
         <!-- Tampilkan notifikasi jika ada -->
         @if(session('success'))
@@ -11,25 +11,23 @@
             </div>
         @endif
 
-        <a href="{{ route('pekerjaan.create') }}" class="btn btn-success mb-3">Tambah Jenis Pekerjaan</a>
+        <a href="{{ route('donasi.create') }}" class="btn btn-success mb-3">Tambah Jenis Donasi</a>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Jenis Pekerjaan</th>
+                    <th>Jenis Donasi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($pekerjaanList as $pekerjaan)
+                @forelse ($donasiList as $donasi)
                     <tr>
-                        <td>{{ $pekerjaan->id }}</td>
-                        <td>{{ $pekerjaan->jenis_pekerjaan }}</td>
+                        <td>{{ $donasi->jenis_donasi }}</td>
                         <td>
-                            <a href="{{ route('pekerjaan.show', $pekerjaan->id) }}" class="btn btn-info">Detail</a>
-                            <a href="{{ route('pekerjaan.edit', $pekerjaan->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('pekerjaan.destroy', $pekerjaan->id) }}" method="post" style="display:inline;">
+                            <a href="{{ route('donasi.show', $donasi->id) }}" class="btn btn-info">Detail</a>
+                            <a href="{{ route('donasi.edit', $donasi->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('donasi.destroy', $donasi->id) }}" method="post" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -38,7 +36,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">Tidak ada data Jenis Pekerjaan.</td>
+                        <td colspan="3">Tidak ada Jenis Donasi.</td>
                     </tr>
                 @endforelse
             </tbody>
