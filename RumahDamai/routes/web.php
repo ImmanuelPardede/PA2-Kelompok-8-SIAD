@@ -12,6 +12,7 @@ use App\Http\Controllers\MasterData\GolonganDarahController;
 use App\Http\Controllers\MasterData\KebutuhanController;
 use App\Http\Controllers\MasterData\PekerjaanController;
 use App\Http\Controllers\MasterData\PendidikanController;
+use App\Http\Controllers\MasterData\PenyakitController;
 use App\Http\Controllers\MasterData\SponsorshipController;
 
 Route::get('/', function () {
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('masterdata/sponsorship', SponsorshipController::class);
 
     Route::resource('masterdata/donasi', DonasiController::class);
+
+    Route::resource('masterdata/penyakit', PenyakitController::class);
 
 });
 

@@ -42,5 +42,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SponsorshipSeeder::class,
         ]);
+        $this->call([
+            PenyakitSeeder::class,
+        ]);
     }
 }

@@ -31,6 +31,7 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('pekerjaan.index') }}">Jenis Pekerjaan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis Sponsorship</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('penyakit.index') }}">Jenis Penyakit</a></li>
               </ul>
             </div>
           </li>
