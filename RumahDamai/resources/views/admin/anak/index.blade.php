@@ -13,28 +13,18 @@
                 <table class="table mt-3 table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Nama Lengkap</th>
-                            <th scope="col">Agama</th>
                             <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Golongan Darah</th>
                             <th scope="col">Kebutuhan</th>
-                            <th scope="col">Tempat Lahir</th>
-                            <th scope="col">Tanggal Lahir</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($anakList as $anak)
                             <tr>
-                                <td>{{ $anak->id }}</td>
-                                <td>{{ $anak->namaLengkap }}</td>
-                                <td>{{ $anak->Agama->agama }}</td>
+                                <td>{{ $anak->nama_lengkap }}</td>
                                 <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
-                                <td>{{ $anak->golonganDarah->golongan_darah }}</td>
                                 <td>{{ $anak->kebutuhan->jenis_kebutuhan }}</td>
-                                <td>{{ $anak->tempatLahir }}</td>
-                                <td>{{ $anak->tanggalLahir }}</td>
                                 <td>
                                     <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Lihat</a>
                                     <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>

@@ -8,8 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Anak extends Model
 {
     use HasFactory;
+
     protected $table = 'anak';
-    protected $fillable = ['namaLengkap', 'tempatLahir', 'tanggalLahir','nama_ibu','nama_ayah','nama_wali','foto_profile','disukai','tidak_disukai','alamat','kelebihan','kekurangan','agama_id','golongan_darah_id', 'jenis_kelamin_id', 'kebutuhan_id'];
+
+    protected $fillable = [
+        'foto_profil',
+        'nama_lengkap',
+        'agama_id',
+        'jenis_kelamin_id',
+        'golongan_darah_id',
+        'kebutuhan_id',
+        'penyakit_id',
+        'tempatLahir',
+        'tanggalLahir',
+        'tanggal_masuk',
+        'tanggal_keluar',
+        'disukai',
+        'tidak_disukai',
+        'alamat',
+        'kelebihan',
+        'kekurangan',
+    ];
 
     public function agama()
     {
@@ -31,4 +50,8 @@ class Anak extends Model
         return $this->belongsTo(Kebutuhan::class, 'kebutuhan_id');
     }
 
+    public function penyakit()
+    {
+        return $this->belongsTo(Penyakit::class, 'penyakit_id');
+    }
 }

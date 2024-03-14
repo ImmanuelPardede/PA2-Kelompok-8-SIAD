@@ -9,13 +9,14 @@ use App\Models\Agama;
 use App\Models\GolonganDarah;
 use App\Models\JenisKelamin;
 use App\Models\Kebutuhan;
+use App\Models\Penyakit;
 
 class AnakController extends Controller
 {
 
     public function index()
     {
-        $anakList = Anak::with('agama','jenisKelamin','golonganDarah','kebutuhan')->get();
+        $anakList = Anak::orderBy('created_at', 'desc')->get();
         return view('admin.anak.index', compact('anakList'));
     }
 
@@ -27,8 +28,9 @@ class AnakController extends Controller
         $agama = Agama::all();
         $jenisKelamin = JenisKelamin::all();
         $golonganDarah = GolonganDarah::all();
-        $jenisKebutuhan = Kebutuhan::all();
-        return view('admin.anak.create',compact('agama','jenisKelamin','golonganDarah','jenisKebutuhan'));
+        $kebutuhan = Kebutuhan::all();
+        $penyakit = Penyakit::all();
+        return view('admin.anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
     }
 
     /**
@@ -37,27 +39,23 @@ class AnakController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'namaLengkap' => 'required|string',
-            'agama_id' => 'required|string',
-            'jenis_kelamin_id' => 'required|string',
-            'golongan_darah_id' => 'required|string',
-            'kebutuhan_id' => 'required|string',
-            'tempatLahir' => 'required|string',
-            'nama_ibu' => 'required|string',
+            'nama_lengkap' => 'required|string',
+            'tempatLahir' => 'nullable|string',
+            'tanggalLahir' => 'nullable|date',
         ]);
 
-        Anak::create($request->all());
+        $data = $request->except('_token');
+        Anak::create($data);
 
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
     }
-
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $anak = Anak::find($id);
+        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit')->find($id);
         return view('admin.anak.show', compact('anak'));
     }
 
@@ -70,8 +68,9 @@ class AnakController extends Controller
         $jenisKelamin = JenisKelamin::all();
         $golonganDarah = GolonganDarah::all();
         $kebutuhan = Kebutuhan::all();
+        $penyakit = Penyakit::all();
         $anak = Anak::find($id);
-        return view('admin.anak.edit', compact('anak','agama', 'jenisKelamin','golonganDarah','kebutuhan'));
+        return view('admin.anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
     }
 
     /**
@@ -80,9 +79,9 @@ class AnakController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'namaLengkap' => 'required|string',
-            'tempatLahir' => 'required|string',
-            'tanggalLahir' => 'required|date',
+            'nama_lengkap' => 'required|string',
+            'tempatLahir' => 'nullable|string',
+            'tanggalLahir' => 'nullable|date',
         ]);
 
         $anak = Anak::find($id);
