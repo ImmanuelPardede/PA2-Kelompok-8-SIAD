@@ -12,15 +12,15 @@ class CreateAnakTable extends Migration
             $table->id();
             $table->string('foto_profil')->nullable();
             $table->string('nama_lengkap')->nullable();
-            
+
             $table->unsignedBigInteger('agama_id')->nullable();
             $table->unsignedBigInteger('jenis_kelamin_id')->nullable();
             $table->unsignedBigInteger('golongan_darah_id')->nullable();
             $table->unsignedBigInteger('kebutuhan_id')->nullable();
             $table->unsignedBigInteger('penyakit_id')->nullable();
 
-            $table->string('tempatLahir')->nullable();
-            $table->date('tanggalLahir')->nullable();
+            $table->string('tempat_lahir')->nullable(); 
+            $table->date('tanggal_lahir')->nullable();
             $table->date('tanggal_masuk')->nullable();
             $table->dateTime('tanggal_keluar')->nullable();
             $table->string('disukai')->nullable();

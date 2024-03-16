@@ -14,6 +14,7 @@ use App\Http\Controllers\MasterData\PekerjaanController;
 use App\Http\Controllers\MasterData\PendidikanController;
 use App\Http\Controllers\MasterData\PenyakitController;
 use App\Http\Controllers\MasterData\SponsorshipController;
+use App\Http\Controllers\Admin\OrangTuaWaliController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/index', [HomeController::class, 'adminHome'])->name('admin.home');
 
     Route::resource('admin/anak', AnakController::class);
+
+    Route::resource('admin/orangTuaWali', OrangTuaWaliController::class);
 
     Route::resource('masterdata/agama', AgamaController::class);
 
