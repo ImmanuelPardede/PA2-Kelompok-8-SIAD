@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($riwayatMedisList as $riwayatMedis)
+                @forelse ($riwayatmedisList as $riwayatMedis)
                     <tr>
                         <td>{{ $riwayatMedis->riwayat_perawatan }}</td>
                         <td>

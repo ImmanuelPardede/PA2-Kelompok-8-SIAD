@@ -15,28 +15,28 @@
             </div>
         @endif
 
-        <form action="{{ route('riwayatMedis.update', $riwayatMedis->id) }}" method="post">
+        <form action="{{ route('riwayatMedis.update', $riwayatmedis->id) }}" method="post">
             @csrf
             @method('PUT')
 
             <div class="form-group">
                 <label for="riwayat_perawatan">Riwayat Perawatan:</label>
-                <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan', $riwayatMedis->riwayat_perawatan) }}" required>
+                <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan', $riwayatmedis->riwayat_perawatan) }}" required>
             </div>
 
             <div class="form-group">
                 <label for="riwayat_perilaku">Riwayat Perilaku:</label>
-                <textarea class="form-control" name="riwayat_perilaku" required>{{ old('riwayat_perilaku', $riwayatMedis->riwayat_perilaku) }}</textarea>
+                <textarea class="form-control" name="riwayat_perilaku" required>{{ old('riwayat_perilaku', $riwayatmedis->riwayat_perilaku) }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="deskripsi_riwayat">Deskripsi Riwayat:</label>
-                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat', $riwayatMedis->deskripsi_riwayat) }}" required>
+                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat', $riwayatmedis->deskripsi_riwayat) }}" required>
             </div>
 
             <div class="form-group">
                 <label for="kondisi">Kondisi:</label>
-                <textarea class="form-control" name="kondisi" required>{{ old('kondisi', $riwayatMedis->kondisi) }}</textarea>
+                <textarea class="form-control" name="kondisi" required>{{ old('kondisi', $riwayatmedis->kondisi) }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-warning">Update</button>

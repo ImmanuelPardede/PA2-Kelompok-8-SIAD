@@ -19,6 +19,28 @@
             @csrf
 
             <div class="form-group">
+                <label for="anak_id">Nama Anak:</label>
+                <select class="form-control" id="anak_id" name="anak_id" required>
+                    <option value="" disabled selected>-- Nama Anak --</option>
+                    @foreach ($anak as $anakItem)
+                        <option value="{{ $anakItem->id }}" {{ old('anak_id') == $anakItem->id ? 'selected' : '' }}>
+                            {{ $anakItem->nama_lengkap }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="penyakit_id">Jenis Penyakit:</label>
+                <select class="form-control" id="penyakit_id" name="penyakit_id" required>
+                    <option value="" disabled selected>-- Pilih Jenis Penyakit --</option>
+                    @foreach ($penyakit as $penyakitList)
+                        <option value="{{ $penyakitList->id }}">{{ $penyakitList->jenis_penyakit }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="riwayat_perawatan">Riwayat Medis:</label>
                 <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan') }}" required>
             </div>

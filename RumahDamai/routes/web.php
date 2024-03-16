@@ -15,6 +15,7 @@ use App\Http\Controllers\MasterData\PendidikanController;
 use App\Http\Controllers\MasterData\PenyakitController;
 use App\Http\Controllers\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\OrangTuaWaliController;
+use App\Http\Controllers\Admin\RiwayatMedisController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -51,6 +52,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('masterdata/donasi', DonasiController::class);
 
     Route::resource('masterdata/penyakit', PenyakitController::class);
+
+    Route::resource('masterdata/riwayatMedis', RiwayatMedisController::class);
+
 
 });
 
