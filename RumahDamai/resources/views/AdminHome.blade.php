@@ -1,3 +1,5 @@
+{{-- ini percobaan bray --}}
+
 @extends('layouts.master')
 
 @section('content')
