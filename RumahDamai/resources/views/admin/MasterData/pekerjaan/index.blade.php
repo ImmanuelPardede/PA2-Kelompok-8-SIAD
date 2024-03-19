@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Lokasi Penugasan</h2>
+        <h2>Jenis Pekerjaan</h2>
 
         <!-- Tampilkan notifikasi jika ada -->
         @if(session('success'))
@@ -11,25 +11,23 @@
             </div>
         @endif
 
-        <a href="{{ route('lokasiTugas.create') }}" class="btn btn-success mb-3">Tambah Lokasi Penugasan</a>
+        <a href="{{ route('pekerjaan.create') }}" class="btn btn-success mb-3">Tambah Jenis Pekerjaan</a>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nama Wilayah</th>
-                    <th>Nama Lokasi</th>
+                    <th>Jenis Pekerjaan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($lokasiList as $lokasi)
+                @forelse ($pekerjaanList as $pekerjaan)
                     <tr>
-                        <td>{{ $lokasi->wilayah }}</td>
-                        <td>{{ $lokasi->lokasi }}</td>
+                        <td>{{ $pekerjaan->jenis_pekerjaan }}</td>
                         <td>
-                            <a href="{{ route('lokasiTugas.show', $lokasi->id) }}" class="btn btn-info">Detail</a>
-                            <a href="{{ route('lokasiTugas.edit', $lokasi->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('lokasiTugas.destroy', $lokasi->id) }}" method="post" style="display:inline;">
+                            <a href="{{ route('pekerjaan.show', $pekerjaan->id) }}" class="btn btn-info">Detail</a>
+                            <a href="{{ route('pekerjaan.edit', $pekerjaan->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('pekerjaan.destroy', $pekerjaan->id) }}" method="post" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -38,7 +36,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">Tidak ada data Lokasi Penugasan.</td>
+                        <td colspan="3">Tidak ada Jenis Pekerjaan.</td>
                     </tr>
                 @endforelse
             </tbody>

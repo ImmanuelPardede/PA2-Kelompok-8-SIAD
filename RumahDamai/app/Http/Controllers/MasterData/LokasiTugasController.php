@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LokasiTugas;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LokasiTugasController extends Controller
 {
@@ -45,46 +46,61 @@ class LokasiTugasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $lokasi_penugasan_id)
-    {
-        $lokasi = LokasiTugas::findOrFail($lokasi_penugasan_id);
+    public function show(string $id)
+{
+    try {
+        $lokasi = LokasiTugas::findOrFail($id);
         return view('admin.masterdata.lokasiTugas.show', compact('lokasi'));
+    } catch (ModelNotFoundException $e) {
+        abort(404);
     }
+}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $lokasi_penugasan_id)
-    {
-        $lokasiPenugasan = LokasiTugas::findOrFail($lokasi_penugasan_id);
+    public function edit(string $id)
+{
+    try {
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
         return view('admin.masterdata.lokasiTugas.edit', compact('lokasiPenugasan'));
+    } catch (ModelNotFoundException $e) {
+        abort(404);
     }
+}
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $lokasi_penugasan_id)
-    {
-        $request->validate([
-            'lokasi' => 'required|string',
-            'wilayah' => 'required|string',
-            'deskripsi' => 'required|string',
-        ]);
+    public function update(Request $request, string $id)
+{
+    $request->validate([
+        'lokasi' => 'required|string',
+        'wilayah' => 'required|string',
+        'deskripsi' => 'required|string',
+    ]);
 
-        $lokasiPenugasan = LokasiTugas::findOrFail($lokasi_penugasan_id);
+    try {
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
         $lokasiPenugasan->update($request->all());
-
         return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil diperbarui.');
+    } catch (ModelNotFoundException $e) {
+        abort(404);
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $lokasi_penugasan_id): RedirectResponse
-    {
-        $lokasiPenugasan = LokasiTugas::findOrFail($lokasi_penugasan_id);
+    public function destroy(string $id): RedirectResponse
+{
+    try {
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
         $lokasiPenugasan->delete();
-
         return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil dihapus.');
+    } catch (ModelNotFoundException $e) {
+        abort(404);
     }
+}
 }

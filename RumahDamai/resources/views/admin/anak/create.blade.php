@@ -75,7 +75,8 @@
             </div>
             <div class="form-group">
                 <label for="kelebihan">Kelebihan:</label>
-                <textarea class="form-control" name="kelebihan" rows="3"></textarea>
+                <img src="{{ asset('storage/images/' . $product->image) }}" alt="" style="max-width: 100px;">
+                <textarea class="form-control" id="kelebihan" name="kelebihan" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="kekurangan">Kekurangan:</label>
