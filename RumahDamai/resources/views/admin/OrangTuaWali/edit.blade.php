@@ -152,6 +152,12 @@
                     value="{{ $orangtuawali->tanggal_lahir_wali }}">
             </div>
 
+            <div class="form-group">
+                <label for="no_hp_wali">No. HP Wali:</label>
+                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali"
+                    value="{{ $orangtuawali->no_hp_wali }}">
+            </div>
+
             <button type="submit" class="btn btn-warning">Update</button>
         </form>
     </div>

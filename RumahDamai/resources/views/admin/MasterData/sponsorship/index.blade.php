@@ -1,45 +1,53 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
-        <h2>Jenis Sponsorship</h2>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="card-title">Jenis Sponsorship</h1>
 
-        <!-- Tampilkan notifikasi jika ada -->
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+                <!-- Tampilkan notifikasi jika ada -->
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <a href="{{ route('sponsorship.create') }}" class="btn btn-success mb-3">Tambah Jenis Sponsorship</a>
             </div>
-        @endif
 
-        <a href="{{ route('sponsorship.create') }}" class="btn btn-success mb-3">Tambah Jenis Sponsorship</a>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Jenis Sponsorship</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($sponsorshipList as $sponsorship)
-                    <tr>
-                        <td>{{ $sponsorship->jenis_sponsorship }}</td>
-                        <td>
-                            <a href="{{ route('sponsorship.show', $sponsorship->id) }}" class="btn btn-info">Detail</a>
-                            <a href="{{ route('sponsorship.edit', $sponsorship->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="post" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3">Tidak ada Jenis Sponsorship.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+            <div class="table-responsive">
+                <table class="table mt-3 table-hover">
+                    <thead>
+                        <tr>
+                            <th>Jenis Sponsorship</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($sponsorshipList as $sponsorship)
+                            <tr>
+                                <td>{{ $sponsorship->jenis_sponsorship }}</td>
+                                <td>
+                                    <a href="{{ route('sponsorship.show', $sponsorship->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('sponsorship.edit', $sponsorship->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="post" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2">Tidak ada Jenis Sponsorship.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+</div>
 @endsection

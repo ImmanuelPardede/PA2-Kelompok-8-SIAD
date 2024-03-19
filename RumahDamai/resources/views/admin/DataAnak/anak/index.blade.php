@@ -6,7 +6,13 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="card-title">Data Anak</h1>
-                <a href="{{ route('anak.create') }}" class="btn btn-success">Tambah Anak</a>
+                <!-- Tampilkan notifikasi jika ada -->
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <a href="{{ route('anak.create') }}" class="btn btn-success mb-3">Tambah Anak</a>
             </div>
 
             <div class="table-responsive">
@@ -20,27 +26,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($anakList as $anak)
+                        @forelse ($anakList as $anak)
                             <tr>
                                 <td>{{ $anak->nama_lengkap }}</td>
                                 <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
                                 <td>{{ $anak->kebutuhan->jenis_kebutuhan }}</td>
                                 <td>
-                                    <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Lihat</a>
+                                    <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('anak.destroy', $anak->id) }}" method="post" class="d-inline">
+                                    <form action="{{ route('anak.destroy', $anak->id) }}" method="post"
+                                        style="display:inline;" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4">Tidak ada Data Anak.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

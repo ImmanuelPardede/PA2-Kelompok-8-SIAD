@@ -31,6 +31,7 @@ class OrangTuaWali extends Model
         'alamat_wali',
         'pekerjaan_wali_id',
         'tanggal_lahir_wali',
+        'no_hp_wali',
     ];
 
     public function anak()
@@ -42,7 +43,7 @@ class OrangTuaWali extends Model
     {
         return $this->belongsTo(Agama::class, 'agama_id');
     }
-    
+
     public function pekerjaan_ayah()
     {
         return $this->belongsTo(Pekerjaan::class, 'pekerjaan_ayah_id');

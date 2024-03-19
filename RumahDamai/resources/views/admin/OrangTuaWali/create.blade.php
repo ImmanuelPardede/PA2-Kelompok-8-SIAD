@@ -14,7 +14,6 @@
                     @endforeach
                 </select>
             </div>
-
             <div class="form-group">
                 <label for="agama_id">Agama:</label>
                 <select class="form-control" id="agama_id" name="agama_id" required>
@@ -58,7 +57,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah:</label>
-                <select class="form-control" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id" required>
+                <select class="form-control" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
@@ -75,7 +74,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_ibu_id">Pekerjaan Ibu:</label>
-                <select class="form-control" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id" required>
+                <select class="form-control" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
@@ -96,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_wali_id">Pekerjaan Wali:</label>
-                <select class="form-control" id="pekerjaan_wali_id" name="pekerjaan_wali_id" required>
+                <select class="form-control" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
@@ -106,6 +105,10 @@
             <div class="form-group">
                 <label for="tanggal_lahir_wali">Tanggal Lahir Wali:</label>
                 <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali">
+            </div>
+            <div class="form-group">
+                <label for="no_hp_wali">No. HP Wali:</label>
+                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali">
             </div>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\DataAnak;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class AnakController extends Controller
     public function index()
     {
         $anakList = Anak::orderBy('created_at', 'desc')->get();
-        return view('admin.anak.index', compact('anakList'));
+        return view('admin.DataAnak.Anak.index', compact('anakList'));
     }
 
     /**
@@ -30,7 +30,7 @@ class AnakController extends Controller
         $golonganDarah = GolonganDarah::all();
         $kebutuhan = Kebutuhan::all();
         $penyakit = Penyakit::all();
-        return view('admin.anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
+        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
     }
 
     /**
@@ -56,7 +56,7 @@ class AnakController extends Controller
     public function show(string $id)
     {
         $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit')->find($id);
-        return view('admin.anak.show', compact('anak'));
+        return view('admin.DataAnak.Anak.show', compact('anak'));
     }
 
     /**
@@ -70,7 +70,7 @@ class AnakController extends Controller
         $kebutuhan = Kebutuhan::all();
         $penyakit = Penyakit::all();
         $anak = Anak::find($id);
-        return view('admin.anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
+        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
     }
 
     /**
