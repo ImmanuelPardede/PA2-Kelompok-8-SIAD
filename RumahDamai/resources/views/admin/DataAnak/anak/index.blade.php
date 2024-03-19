@@ -15,6 +15,7 @@
                     <a href="{{ route('anak.create') }}" class="btn btn-success mb-3">Tambah Anak</a>
                 </div>
 
+<<<<<<< Updated upstream
                 <div class="table-responsive">
                     <table class="table mt-3 table-hover">
                         <thead>
@@ -23,6 +24,37 @@
                                 <th scope="col">Jenis Kelamin</th>
                                 <th scope="col">Kebutuhan</th>
                                 <th scope="col">Aksi</th>
+=======
+            <div class="table-responsive">
+                <table class="table mt-3 table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nama Lengkap</th>
+                            <th scope="col">Jenis Kelamin</th>
+                            <th scope="col">Kebutuhan</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($anakList as $anak)
+                            <tr>
+                                <td><img src="{{ asset($anak->foto_profil) }}" alt=""></td>
+                                <td>{{ $anak->nama_lengkap }}</td>
+                                <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
+                                <td>{{ $anak->kebutuhan->jenis_kebutuhan }}</td>
+                                <td>
+                                    <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('anak.destroy', $anak->id) }}" method="post"
+                                        style="display:inline;" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                    </form>
+                                </td>
+>>>>>>> Stashed changes
                             </tr>
                         </thead>
                         <tbody>

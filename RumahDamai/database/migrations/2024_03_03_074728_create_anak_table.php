@@ -29,7 +29,6 @@ class CreateAnakTable extends Migration
             $table->string('kelebihan')->nullable();
             $table->string('kekurangan')->nullable();
             $table->timestamps();
-
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('penyakit_id')->references('id')->on('penyakit');
             $table->foreign('jenis_kelamin_id')->references('id')->on('jenis_kelamin');

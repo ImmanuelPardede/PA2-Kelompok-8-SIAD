@@ -6,11 +6,11 @@
 
         <p><strong>Foto Profil:</strong></p>
         @if($anak->foto_profil)
-            <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil">
-            <strong>Foto Profil:</strong> {{ $anak->foto_profil }}
-        @else
-            <p>Tidak ada foto profil.</p>
-        @endif
+        <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil Anak" class="w-25">
+    @else
+        <p>Tidak ada foto profil.</p>
+    @endif
+    
 
 
         <p><strong>Nama Lengkap:</strong> {{ $anak->nama_lengkap }}</p>
