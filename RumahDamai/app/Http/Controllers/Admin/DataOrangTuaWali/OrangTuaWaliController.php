@@ -13,7 +13,7 @@ class OrangTuaWaliController extends Controller
 {
     public function index()
     {
-        $orangtuawaliList = OrangTuaWali::orderBy('created_at', 'desc')->get();
+        $orangtuawaliList = OrangTuaWali::orderBy('created_at', 'desc')->paginate(7);
         return view('admin.OrangTuaWali.index', compact('orangtuawaliList'));
     }
 

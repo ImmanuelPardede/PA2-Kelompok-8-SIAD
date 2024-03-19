@@ -13,7 +13,7 @@ class PendidikanController extends Controller
      */
     public function index()
     {
-        $pendidikanList = Pendidikan::orderBy('tingkat_pendidikan', 'asc')->get();
+        $pendidikanList = Pendidikan::orderBy('tingkat_pendidikan', 'asc')->paginate(7);
         return view('admin.masterdata.pendidikan.index', compact('pendidikanList'));
 
     }

@@ -16,7 +16,7 @@ class AnakController extends Controller
 
     public function index()
     {
-        $anakList = Anak::orderBy('created_at', 'desc')->get();
+        $anakList = Anak::orderBy('created_at', 'desc')->paginate(7);
         return view('admin.DataAnak.Anak.index', compact('anakList'));
     }
 

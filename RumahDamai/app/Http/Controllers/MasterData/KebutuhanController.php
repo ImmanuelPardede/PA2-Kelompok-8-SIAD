@@ -13,7 +13,7 @@ class KebutuhanController extends Controller
      */
     public function index()
     {
-        $kebutuhanList = Kebutuhan::orderBy('jenis_kebutuhan', 'asc')->get();
+        $kebutuhanList = Kebutuhan::orderBy('jenis_kebutuhan', 'asc')->paginate(7);
         return view('admin.masterdata.kebutuhan.index', compact('kebutuhanList'));
     }
 

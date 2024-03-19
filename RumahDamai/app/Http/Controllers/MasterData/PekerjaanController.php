@@ -13,7 +13,7 @@ class PekerjaanController extends Controller
      */
     public function index()
     {
-        $pekerjaanList = Pekerjaan::orderBy('jenis_pekerjaan', 'asc')->get();
+        $pekerjaanList = Pekerjaan::orderBy('jenis_pekerjaan', 'asc')->paginate(7);
         return view('admin.masterdata.pekerjaan.index', compact('pekerjaanList'));
     }
 

@@ -15,7 +15,7 @@ class LokasiTugasController extends Controller
      */
     public function index()
     {
-        $lokasiList = LokasiTugas::orderBy('wilayah', 'asc')->get();
+        $lokasiList = LokasiTugas::orderBy('wilayah', 'asc')->paginate(7);
         return view('admin.masterdata.lokasiTugas.index', compact('lokasiList'));
     }
 

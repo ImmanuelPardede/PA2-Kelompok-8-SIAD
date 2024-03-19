@@ -32,8 +32,8 @@
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('riwayatMedis.edit', $riwayatMedis->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('riwayatMedis.destroy', $riwayatMedis->id) }}"
-                                            method="post" style="display:inline;">
+                                        <form action="{{ route('riwayatMedis.destroy', $riwayatMedis->id) }}" method="post"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger"
@@ -48,6 +48,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-end">
+                    {{ $riwayatmedisList->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

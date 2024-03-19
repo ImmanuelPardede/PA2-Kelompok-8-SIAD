@@ -13,7 +13,7 @@ class DonasiController extends Controller
      */
     public function index()
     {
-        $donasiList = Donasi::orderBy('jenis_donasi', 'asc')->get();
+        $donasiList = Donasi::orderBy('jenis_donasi', 'asc')->paginate(7);
         return view('admin.masterdata.donasi.index', compact('donasiList'));
 
     }

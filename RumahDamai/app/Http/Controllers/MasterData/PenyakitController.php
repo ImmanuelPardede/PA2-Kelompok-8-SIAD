@@ -13,7 +13,7 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        $penyakitList = Penyakit::orderBy('jenis_penyakit', 'asc')->get();
+        $penyakitList = Penyakit::orderBy('jenis_penyakit', 'asc')->paginate(7);
         return view('admin.masterdata.penyakit.index', compact('penyakitList'));
 
     }

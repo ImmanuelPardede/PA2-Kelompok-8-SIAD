@@ -13,7 +13,7 @@ class GolonganDarahController extends Controller
      */
     public function index()
     {
-        $golonganDarahList = GolonganDarah::orderBy('golongan_darah', 'asc')->get();
+        $golonganDarahList = GolonganDarah::orderBy('golongan_darah', 'asc')->paginate(7);
         return view('admin.masterdata.golonganDarah.index', compact('golonganDarahList'));
 
     }

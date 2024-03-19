@@ -49,6 +49,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="d-flex justify-content-end">
+                {{ $lokasiList->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>

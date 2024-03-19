@@ -13,7 +13,7 @@ class RiwayatMedisController extends Controller
 {
     public function index()
     {
-        $riwayatmedisList = RiwayatMedis::orderBy('created_at', 'desc')->get();
+        $riwayatmedisList = RiwayatMedis::orderBy('created_at', 'desc')->paginate(7);
         return view('admin.DataAnak.riwayatMedis.index', compact('riwayatmedisList'));
     }
 

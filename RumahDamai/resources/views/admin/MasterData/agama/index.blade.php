@@ -44,6 +44,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="d-flex justify-content-end">
+                {{ $agamaList->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>

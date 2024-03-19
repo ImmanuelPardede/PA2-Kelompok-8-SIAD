@@ -10,7 +10,7 @@ class JenisKelaminController extends Controller
 {
     public function index()
     {
-        $jenisKelaminList = JenisKelamin::orderBy('jenis_kelamin', 'asc')->get();
+        $jenisKelaminList = JenisKelamin::orderBy('jenis_kelamin', 'asc')->paginate(7);
         return view('admin.masterdata.jenisKelamin.index', compact('jenisKelaminList'));
     }
 

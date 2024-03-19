@@ -47,6 +47,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="d-flex justify-content-end">
+                {{ $sponsorshipList->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </div>
 </div>

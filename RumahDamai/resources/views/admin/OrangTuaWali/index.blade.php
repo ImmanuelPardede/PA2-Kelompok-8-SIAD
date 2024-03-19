@@ -41,13 +41,16 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @empty
+                            @empty
                                 <tr>
                                     <td colspan="2">Tidak ada Riwayat Medis.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-end">
+                    {{ $orangtuawaliList->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

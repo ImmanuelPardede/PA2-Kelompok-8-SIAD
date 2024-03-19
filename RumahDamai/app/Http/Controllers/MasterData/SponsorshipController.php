@@ -14,7 +14,7 @@ class SponsorshipController extends Controller
      */
     public function index()
     {
-        $sponsorshipList = Sponsorship::orderBy('jenis_sponsorship', 'asc')->get();
+        $sponsorshipList = Sponsorship::orderBy('jenis_sponsorship', 'asc')->paginate(7);
         return view('admin.masterdata.sponsorship.index', compact('sponsorshipList'));
 
     }
