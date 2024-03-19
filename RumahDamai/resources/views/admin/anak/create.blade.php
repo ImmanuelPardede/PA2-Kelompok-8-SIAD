@@ -46,12 +46,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="tempatLahir">Tempat Lahir:</label>
-                <input type="text" class="form-control" name="tempatLahir" required>
+                <label for="tempat_lahir">Tempat Lahir:</label>
+                <input type="text" class="form-control" name="tempat_lahir" required>
             </div>
             <div class="form-group">
-                <label for="tanggalLahir">Tanggal Lahir:</label>
-                <input type="date" class="form-control" name="tanggalLahir" required>
+                <label for="tanggal_lahir">Tanggal Lahir:</label>
+                <input type="date" class="form-control" name="tanggal_lahir" required>
             </div>
             <div class="form-group">
                 <label for="tanggal_masuk">Tanggal Masuk:</label>
@@ -75,8 +75,7 @@
             </div>
             <div class="form-group">
                 <label for="kelebihan">Kelebihan:</label>
-                <img src="{{ asset('storage/images/' . $product->image) }}" alt="" style="max-width: 100px;">
-                <textarea class="form-control" id="kelebihan" name="kelebihan" rows="3"></textarea>
+                <textarea class="form-control" name="kelebihan" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="kekurangan">Kekurangan:</label>
@@ -85,6 +84,7 @@
             <div class="form-group">
                 <label for="foto_profil">Foto Profil:</label>
                 <input type="file" class="form-control" name="foto_profil">
+                <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
             </div>
             <div class="form-group">
                 <label for="penyakit_id">Penyakit</label>

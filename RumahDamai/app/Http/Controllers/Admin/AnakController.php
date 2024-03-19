@@ -37,28 +37,18 @@ class AnakController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'nama_lengkap' => 'required|string',
-        'tempatLahir' => 'nullable|string',
-        'tanggalLahir' => 'nullable|date',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
-    ]);
+    {
+        $request->validate([
+            'nama_lengkap' => 'required|string',
+            'tempatLahir' => 'nullable|string',
+            'tanggalLahir' => 'nullable|date',
+        ]);
 
-    // Cek apakah file gambar sudah diunggah
-    if ($request->hasFile('image')) {
-        $anak = new Anak();
+        $data = $request->except('_token');
+        Anak::create($data);
 
-        // Simpan gambar ke direktori storage/app/public/images
-        $imagePath = $request->file('image')->store('public/images');
-        $anak->foto_profil = basename($imagePath);
+        return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
     }
-
-    $data = $request->except('_token', 'image'); // Exclude 'image' from data
-    Anak::create($data);
-
-    return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
-}
 
     /**
      * Display the specified resource.
@@ -87,18 +77,18 @@ class AnakController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $request->validate([
-        'nama_lengkap' => 'required|string',
-        'tempatLahir' => 'nullable|string',
-        'tanggalLahir' => 'nullable|date',
-    ]);
+    {
+        $request->validate([
+            'nama_lengkap' => 'required|string',
+            'tempatLahir' => 'nullable|string',
+            'tanggalLahir' => 'nullable|date',
+        ]);
 
-    $anak = Anak::find($id);
-    $anak->update($request->all());
+        $anak = Anak::find($id);
+        $anak->update($request->all());
 
-    return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
-}
+        return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
+    }
 
     /**
      * Remove the specified resource from storage.

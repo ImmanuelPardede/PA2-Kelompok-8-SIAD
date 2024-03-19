@@ -18,8 +18,8 @@
         <p><strong>Jenis Kelamin:</strong> {{ $anak->jenisKelamin->jenis_kelamin }}</p>
         <p><strong>Golongan Darah:</strong> {{ $anak->golonganDarah->golongan_darah }}</p>
         <p><strong>Kebutuhan:</strong> {{ $anak->kebutuhan->jenis_kebutuhan }}</p>
-        <p><strong>Tempat Lahir:</strong> {{ $anak->tempatLahir }}</p>
-        <p><strong>Tanggal Lahir:</strong> {{ $anak->tanggalLahir }}</p>
+        <p><strong>Tempat Lahir:</strong> {{ $anak->tempat_lahir }}</p>
+        <p><strong>Tanggal Lahir:</strong> {{ $anak->tanggal_lahir }}</p>
 
         <p><strong>Tanggal Masuk:</strong> {{ $anak->tanggal_masuk }}</p>
         <p><strong>Tanggal Keluar:</strong> {{ $anak->tanggal_keluar }}</p>
