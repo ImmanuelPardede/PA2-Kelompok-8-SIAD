@@ -1,5 +1,5 @@
 //resources/views/managerHome.blade.php
-@extends('layouts.app')
+@extends('layouts.master')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
