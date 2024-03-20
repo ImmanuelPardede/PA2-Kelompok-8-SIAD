@@ -1,36 +1,107 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
-        <h2>Detail Orang Tua/Wali</h2>
-
-        <p><strong>Nama Anak:</strong> {{ $orangtuawali->anak ? $orangtuawali->anak->nama_lengkap : 'Data tidak tersedia' }}</p>
-        <p><strong>Agama:</strong> {{ $orangtuawali->agama ? $orangtuawali->agama->agama : 'Data tidak tersedia' }}</p>
-        <p><strong>Nama Ibu:</strong> {{ $orangtuawali->nama_ibu ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Nama Ayah:</strong> {{ $orangtuawali->nama_ayah ?? 'Data tidak tersedia' }}</p>
-        <p><strong>NIK Ayah:</strong> {{ $orangtuawali->nik_ayah ?? 'Data tidak tersedia' }}</p>
-        <p><strong>NIK Ibu:</strong> {{ $orangtuawali->nik_ibu ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Tanggal Lahir Ayah:</strong> {{ $orangtuawali->tanggal_lahir_ayah ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Tanggal Lahir Ibu:</strong> {{ $orangtuawali->tanggal_lahir_ibu ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Alamat Orang Tua:</strong> {{ $orangtuawali->alamat_orangtua ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Pendidikan Ayah:</strong> {{ $orangtuawali->pendidikan_ayah ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Pekerjaan Ayah:</strong> {{ $orangtuawali->pekerjaan_ayah ? $orangtuawali->pekerjaan_ayah->jenis_pekerjaan : 'Data tidak tersedia' }}</p>
-        <p><strong>No Hp Ayah:</strong> {{ $orangtuawali->no_hp_ayah ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Pendidikan Ibu:</strong> {{ $orangtuawali->pendidikan_ibu ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Pekerjaan Ibu:</strong> {{ $orangtuawali->pekerjaan_ibu ? $orangtuawali->pekerjaan_ibu->jenis_pekerjaan : 'Data tidak tersedia' }}</p>
-        <p><strong>No Hp Ibu:</strong> {{ $orangtuawali->no_hp_ibu ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Nama Wali:</strong> {{ $orangtuawali->nama_wali ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Alamat Wali:</strong> {{ $orangtuawali->alamat_wali ?? 'Data tidak tersedia' }}</p>
-        <p><strong>Pekerjaan Wali:</strong> {{ $orangtuawali->pekerjaan_wali ? $orangtuawali->pekerjaan_wali->jenis_pekerjaan : 'Data tidak tersedia' }}</p>
-        <p><strong>Tanggal Lahir Wali:</strong> {{ $orangtuawali->tanggal_lahir_wali ?? 'Data tidak tersedia' }}</p>
-        <p><strong>No Hp Wali:</strong> {{ $orangtuawali->no_hp_wali ?? 'Data tidak tersedia' }}</p>
-
-        <a href="{{ route('orangTuaWali.edit', $orangtuawali->id) }}" class="btn btn-warning">Edit</a>
-
-        <form action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-        </form>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Detail Orang Tua/Wali</h4>
+            <p class="card-description">Orang tua?</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Nama Anak:</th>
+                                    <td>{{ $orangtuawali->anak ? $orangtuawali->anak->nama_lengkap : 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Agama:</th>
+                                    <td>{{ $orangtuawali->agama ? $orangtuawali->agama->agama : 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Ayah:</th>
+                                    <td>{{ $orangtuawali->nama_ayah ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama Ibu:</th>
+                                    <td>{{ $orangtuawali->nama_ibu ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>NIK Ayah:</th>
+                                    <td>{{ $orangtuawali->nik_ayah ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>NIK Ibu:</th>
+                                    <td>{{ $orangtuawali->nik_ibu ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir Ayah:</th>
+                                    <td>{{ $orangtuawali->tanggal_lahir_ayah ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir Ibu:</th>
+                                    <td>{{ $orangtuawali->tanggal_lahir_ibu ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat Orang Tua</th>
+                                    <td>{{ $orangtuawali->alamat_orantua ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pendidikan Ayah:</th>
+                                    <td>{{ $orangtuawali->pendidikan_ayah ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pekerjaan Ayah:</th>
+                                    <td>{{ $orangtuawali->pekerjaan_ayah_id ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pendidikan Ibu:</th>
+                                    <td>{{ $orangtuawali->pendidikan_ibu ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pekerjaan Ibu:</th>
+                                    <td>{{ $orangtuawali->pekerjaan_ibu_id ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>No Hp Ibu:</th>
+                                    <td>{{ $orangtuawali->no_hp_ibu ?? 'Data tidak tersedia' }}</td>
+                                </tr>                                
+                                <tr>
+                                    <th>Nama WAli:</th>
+                                    <td>{{ $orangtuawali->nama_wali ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pekerjaan WAli:</th>
+                                    <td>{{ $orangtuawali->pekerjaan_wali_id ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Lahir WAli:</th>
+                                    <td>{{ $orangtuawali->tanggal_lahir_wali ?? 'Data tidak tersedia' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Image or other details related to parent/wali -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ route('orangTuaWali.edit', $orangtuawali->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
 @endsection
+
+
+
