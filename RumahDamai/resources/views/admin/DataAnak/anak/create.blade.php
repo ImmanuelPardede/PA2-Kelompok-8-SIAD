@@ -11,16 +11,17 @@
             </div>
             <div class="form-group">
                 <label for="agama_id">Agama</label>
-                <select class="form-control" id="agama_id" name="agama_id">
+                <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                     <option value="" disabled selected>-- Pilih Agama --</option>
                     @foreach ($agama as $agamaItem)
                         <option value="{{ $agamaItem->id }}">{{ $agamaItem->agama }}</option>
                     @endforeach
                 </select>
             </div>
+            
             <div class="form-group">
                 <label for="jenis_kelamin_id">Jenis Kelamin</label>
-                <select class="form-control" id="jenis_kelamin_id" name="jenis_kelamin_id">
+                <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id">
                     <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
                     @foreach ($jenisKelamin as $jenisKelaminItem)
                         <option value="{{ $jenisKelaminItem->id }}">{{ $jenisKelaminItem->jenis_kelamin }}</option>
@@ -29,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label for="golongan_darah_id">Golongan Darah</label>
-                <select class="form-control" id="golongan_darah_id" name="golongan_darah_id">
+                <select class="form-control js-example-basic-single " id="golongan_darah_id" name="golongan_darah_id">
                     <option value="" disabled selected>-- Pilih Golongan Darah --</option>
                     @foreach ($golonganDarah as $golonganDarahItem)
                         <option value="{{ $golonganDarahItem->id }}">{{ $golonganDarahItem->golongan_darah }}</option>
@@ -38,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label for="kebutuhan_id">Jenis Kebutuhan</label>
-                <select class="form-control" id="kebutuhan_id" name="kebutuhan_id">
+                <select class="form-control js-example-basic-single" id="kebutuhan_id" name="kebutuhan_id">
                     <option value="" disabled selected>-- Pilih Jenis Kebutuhan --</option>
                     @foreach ($kebutuhan as $kebutuhanItem)
                         <option value="{{ $kebutuhanItem->id }}">{{ $kebutuhanItem->jenis_kebutuhan }}</option>

@@ -19,14 +19,14 @@
                     <table class="table mt-3 table-hover">
                         <thead>
                             <tr>
-                                <th>Riwayat Medis</th>
+                                <th>Riwayat Medis Dari</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($riwayatmedisList as $riwayatMedis)
                                 <tr>
-                                    <td>{{ $riwayatMedis->riwayat_perawatan }}</td>
+                                    <td>{{ $riwayatMedis->anak->nama_lengkap }}</td>
                                     <td>
                                         <a href="{{ route('riwayatMedis.show', $riwayatMedis->id) }}"
                                             class="btn btn-info">Detail</a>

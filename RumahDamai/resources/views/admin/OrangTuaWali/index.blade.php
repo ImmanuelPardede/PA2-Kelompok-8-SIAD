@@ -19,7 +19,7 @@
                     <table class="table mt-3 table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Nama Anak</th>
+                                <th scope="col">Orang Tua Dari Anak</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>

@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label for="anak_id">Nama Anak</label>
-                <select class="form-control" id="anak_id" name="anak_id" required>
+                <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
                     <option value="" disabled selected>-- Nama Anak --</option>
                     @foreach ($anak as $anakItem)
                         <option value="{{ $anakItem->id }}">{{ $anakItem->nama_lengkap }}</option>
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="agama_id">Agama:</label>
-                <select class="form-control" id="agama_id" name="agama_id" required>
+                <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" required>
                     <option value="" disabled selected>-- Pilih Agama --</option>
                     @foreach ($agama as $agamaItem)
                         <option value="{{ $agamaItem->id }}">{{ $agamaItem->agama }}</option>
@@ -57,7 +57,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah:</label>
-                <select class="form-control" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
+                <select class="form-control js-example-basic-single" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
@@ -74,7 +74,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_ibu_id">Pekerjaan Ibu:</label>
-                <select class="form-control" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
+                <select class="form-control js-example-basic-single" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
@@ -95,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label for="pekerjaan_wali_id">Pekerjaan Wali:</label>
-                <select class="form-control" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
+                <select class="form-control js-example-basic-single" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
                     <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanItem)
                         <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>

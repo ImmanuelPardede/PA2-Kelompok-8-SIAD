@@ -135,3 +135,13 @@
         </li>
     </ul>
 </nav>
+
+
+
+<script>
+    $(document).ready(function(){
+        $('.sidebar .nav-item').on('mouseleave', function(){
+            $(this).find('.collapse').collapse('hide');
+        });
+    });
+</script>
