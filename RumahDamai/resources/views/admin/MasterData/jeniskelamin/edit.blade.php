@@ -24,6 +24,7 @@
                 <input type="text" class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin', $jenisKelamin->jenis_kelamin) }}" required>
             </div>
 
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-warning">Update</button>
         </form>
     </div>

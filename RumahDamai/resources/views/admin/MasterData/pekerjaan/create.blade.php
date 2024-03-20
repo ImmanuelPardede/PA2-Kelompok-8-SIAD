@@ -23,6 +23,7 @@
                 <input type="text" class="form-control" name="jenis_pekerjaan" value="{{ old('jenis_pekerjaan') }}" required>
             </div>
 
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
     </div>

@@ -74,13 +74,15 @@ Orang tua?      </p>
 </tr>
 <tr>
     <th>Penyakit</th>
-    <td>{{ $anak->penyakit->jenis_penyakit }}</td>
+    <td>{{ optional($anak->penyakit)->jenis_penyakit }}</td>
 </tr>
           </tbody>
         </table>
         
       </div>
+      <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
       
+
     </div>
     <div class="col-md-4">
         <div class="image-frame">

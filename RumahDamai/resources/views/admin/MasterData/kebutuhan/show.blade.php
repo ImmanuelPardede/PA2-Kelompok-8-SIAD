@@ -9,6 +9,6 @@
             <strong>Deskripsi:</strong> {{ $kebutuhan->deskripsi }}
         </div>
 
-        <a href="{{ route('kebutuhan.index') }}" class="btn btn-primary mt-3">Kembali</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection

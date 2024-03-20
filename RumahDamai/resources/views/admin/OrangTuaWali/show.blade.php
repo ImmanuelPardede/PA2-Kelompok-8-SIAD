@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- Image or other details related to parent/wali -->
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                 </div>
             </div>
             <div class="row">

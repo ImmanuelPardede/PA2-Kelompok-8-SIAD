@@ -28,6 +28,7 @@
                 <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
     </div>

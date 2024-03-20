@@ -41,30 +41,43 @@ class AnakController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'nama_lengkap' => 'required|string',
-            'tempatLahir' => 'nullable|string',
-            'tanggalLahir' => 'nullable|date',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adding image validation rules
+            'agama_id' => 'required',
+            'jenis_kelamin_id' => 'required',
+            'golongan_darah_id' => 'required',
+            'kebutuhan_id' => 'required',
+            'penyakit_id' => 'nullable',
+            'tempat_lahir' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'disukai' => 'nullable|string',
+            'tidak_disukai' => 'nullable|string',
+            'alamat' => 'required|string',
+            'kelebihan' => 'nullable|string',
+            'kekurangan' => 'nullable|string',
+
         ]);
-    
-        // Menyimpan data kecuali token
+
         $data = $request->except('_token');
-    
+        $data['status'] = 'aktif';
+        $data['tanggal_masuk'] = now();
+
+
         if ($request->hasFile('foto_profil')) {
             $gambar = $request->file('foto_profil');
             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Getting file name without extension
-            $new_gambar = time() .'_'. $slug .'.'. $gambar->getClientOriginalExtension(); // Appending extension to file name
-    
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Appending extension to file name
+
             // Pindahkan gambar ke direktori yang diinginkan
             $gambar->move('uploads/anak/', $new_gambar);
-    
+
             // Update path gambar pada entitas anak yang ada
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar; // Updating $data array with new image path
         }
-    
+
         // Membuat data anak baru di database
         Anak::create($data);
-    
+
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
     }
 
@@ -99,27 +112,37 @@ class AnakController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_lengkap' => 'required|string',
-            'tempatLahir' => 'nullable|string',
-            'tanggalLahir' => 'nullable|date',
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk gambar
+            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nama_lengkap' => 'nullable|string',
+            'agama_id' => 'nullable',
+            'jenis_kelamin_id' => 'nullable',
+            'golongan_darah_id' => 'nullable',
+            'kebutuhan_id' => 'nullable',
+            'penyakit_id' => 'nullable',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'disukai' => 'nullable|string',
+            'tidak_disukai' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'kelebihan' => 'nullable|string',
+            'kekurangan' => 'nullable|string',
         ]);
-    
+
         // Ambil anak yang ada berdasarkan ID
         $anak = Anak::find($id);
-    
+
         // Update data lainnya kecuali foto profil
         $data = $request->except('_token', '_method', 'foto_profil');
-    
+
         if ($request->hasFile('foto_profil')) {
             // Proses penyimpanan gambar baru
             $gambar = $request->file('foto_profil');
             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Dapatkan nama file tanpa ekstensi
-            $new_gambar = time() .'_'. $slug .'.'. $gambar->getClientOriginalExtension(); // Tambahkan ekstensi ke nama file
-    
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Tambahkan ekstensi ke nama file
+
             // Pindahkan gambar ke direktori yang diinginkan di storage Laravel
             $gambar->move('uploads/anak', $new_gambar);
-    
+
             // Hapus gambar lama jika ada
             if ($anak->foto_profil) {
                 // Pastikan file lama ada sebelum menghapus
@@ -127,18 +150,16 @@ class AnakController extends Controller
                     unlink(public_path($anak->foto_profil)); // Hapus file lama
                 }
             }
-    
+
             // Update path gambar pada entitas anak yang ada
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
         }
-    
+
         // Lakukan update data anak
         $anak->update($data);
-    
+
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }
-    
-    
 
 
     /**

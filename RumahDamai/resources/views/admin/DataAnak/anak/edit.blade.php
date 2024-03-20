@@ -131,6 +131,7 @@
                 </select>
             </div>
 
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a> 
             <button type="submit" class="btn btn-warning">Update</button>
         </form>
     </div>

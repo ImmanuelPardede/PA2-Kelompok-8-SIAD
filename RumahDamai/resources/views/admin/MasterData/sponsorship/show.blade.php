@@ -9,6 +9,6 @@
             <strong>Deskripsi:</strong> {{ $sponsorship->deskripsi }}
         </div>
 
-        <a href="{{ route('sponsorship.index') }}" class="btn btn-primary mt-3">Kembali</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection
