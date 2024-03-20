@@ -51,10 +51,18 @@
                 <label for="alamat_orangtua">Alamat Orangtua:</label>
                 <input type="text" class="form-control" id="alamat_orangtua" name="alamat_orangtua">
             </div>
+            
             <div class="form-group">
-                <label for="pendidikan_ayah">Pendidikan Ayah:</label>
-                <input type="text" class="form-control" id="pendidikan_ayah" name="pendidikan_ayah">
+                <label for="pendidikan_ayah_id">Pendidikan Ayah:</label>
+                <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id" required>
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    @foreach ($pendidikan as $pendidikanItem)
+                        <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>
+                    @endforeach
+                </select>
             </div>
+
+
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah:</label>
                 <select class="form-control js-example-basic-single" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
@@ -69,8 +77,13 @@
                 <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah">
             </div>
             <div class="form-group">
-                <label for="pendidikan_ibu">Pendidikan Ibu:</label>
-                <input type="text" class="form-control" id="pendidikan_ibu" name="pendidikan_ibu">
+                <label for="pendidikan_ibu_id">Pendidikan ibu:</label>
+                <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id" required>
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    @foreach ($pendidikan as $pendidikanItem)
+                        <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="pekerjaan_ibu_id">Pekerjaan Ibu:</label>

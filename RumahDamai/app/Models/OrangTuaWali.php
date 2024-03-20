@@ -21,10 +21,10 @@ class OrangTuaWali extends Model
         'tanggal_lahir_ayah',
         'tanggal_lahir_ibu',
         'alamat_orangtua',
-        'pendidikan_ayah',
+        'pendidikan_ayah_id',
         'pekerjaan_ayah_id',
         'no_hp_ayah',
-        'pendidikan_ibu',
+        'pendidikan_ibu_id',
         'pekerjaan_ibu_id',
         'no_hp_ibu',
         'nama_wali',
@@ -58,4 +58,17 @@ class OrangTuaWali extends Model
     {
         return $this->belongsTo(Pekerjaan::class, 'pekerjaan_wali_id');
     }
+
+    public function pendidikan_ayah()
+    {
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_ayah_id');
+    }
+    
+    public function pendidikan_ibu()
+    {
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_ibu_id');
+    }
+
+
+    
 }

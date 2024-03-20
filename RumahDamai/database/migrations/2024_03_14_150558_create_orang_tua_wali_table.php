@@ -22,10 +22,10 @@ class CreateOrangTuaWaliTable extends Migration
             $table->date('tanggal_lahir_ayah')->nullable();
             $table->date('tanggal_lahir_ibu')->nullable();
             $table->string('alamat_orangtua')->nullable();
-            $table->string('pendidikan_ayah')->nullable();
+            $table->string('pendidikan_ayah_id')->nullable();
             $table->unsignedBigInteger('pekerjaan_ayah_id')->nullable();
             $table->bigInteger('no_hp_ayah')->nullable();
-            $table->string('pendidikan_ibu')->nullable();
+            $table->string('pendidikan_ibu_id')->nullable();
             $table->unsignedBigInteger('pekerjaan_ibu_id')->nullable();
             $table->bigInteger('no_hp_ibu')->nullable();
             $table->string('nama_wali')->nullable();

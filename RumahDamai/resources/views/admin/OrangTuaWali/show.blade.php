@@ -45,23 +45,23 @@
                                 </tr>
                                 <tr>
                                     <th>Alamat Orang Tua</th>
-                                    <td>{{ $orangtuawali->alamat_orantua ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $orangtuawali->alamat_orangtua ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Pendidikan Ayah:</th>
-                                    <td>{{ $orangtuawali->pendidikan_ayah ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $orangtuawali->pendidikan_ayah->tingkat_pendidikan ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Pekerjaan Ayah:</th>
-                                    <td>{{ $orangtuawali->pekerjaan_ayah_id ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $orangtuawali->pekerjaan_ayah->jenis_pekerjaan ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Pendidikan Ibu:</th>
-                                    <td>{{ $orangtuawali->pendidikan_ibu ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $orangtuawali->pendidikan_ibu->tingkat_pendidikan ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Pekerjaan Ibu:</th>
-                                    <td>{{ $orangtuawali->pekerjaan_ibu_id ?? 'Data tidak tersedia' }}</td>
+                                    <td>{{ $orangtuawali->pekerjaan_ibu->jenis_pekerjaan ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
                                     <th>No Hp Ibu:</th>

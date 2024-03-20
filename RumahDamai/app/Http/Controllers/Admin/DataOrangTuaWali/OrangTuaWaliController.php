@@ -7,6 +7,7 @@ use App\Models\OrangTuaWali;
 use App\Models\Agama;
 use App\Models\Anak;
 use App\Models\Pekerjaan;
+use App\Models\Pendidikan;
 use Illuminate\Http\Request;
 
 class OrangTuaWaliController extends Controller
@@ -22,7 +23,8 @@ class OrangTuaWaliController extends Controller
         $anak = Anak::all();
         $agama = Agama::all();
         $pekerjaan = Pekerjaan::all();
-        return view('admin.OrangTuaWali.create', compact('anak', 'agama', 'pekerjaan'));
+        $pendidikan = Pendidikan::all();
+        return view('admin.OrangTuaWali.create', compact('anak', 'agama', 'pekerjaan', 'pendidikan'));
     }
 
     public function store(Request $request)
@@ -37,10 +39,10 @@ class OrangTuaWaliController extends Controller
             'tanggal_lahir_ayah' => 'nullable|date',
             'tanggal_lahir_ibu' => 'nullable|date',
             'alamat_orangtua' => 'nullable|string',
-            'pendidikan_ayah' => 'nullable|string',
+            'pendidikan_ayah_id' => 'nullable|string',
             'pekerjaan_ayah_id' => 'nullable',
             'no_hp_ayah' => 'nullable|numeric',
-            'pendidikan_ibu' => 'nullable|string',
+            'pendidikan_ibu_id' => 'nullable|string',
             'pekerjaan_ibu_id' => 'nullable',
             'no_hp_ibu' => 'nullable|numeric',
             'nama_wali' => 'nullable|string',
@@ -67,7 +69,8 @@ class OrangTuaWaliController extends Controller
         $agama = Agama::all();
         $orangtuawali = OrangTuaWali::find($id);
         $pekerjaan = Pekerjaan::all();
-        return view('admin.OrangTuaWali.edit', compact('orangtuawali', 'anak', 'agama', 'pekerjaan'));
+        $pendidikan = Pendidikan::all();
+        return view('admin.OrangTuaWali.edit', compact('orangtuawali', 'anak', 'agama', 'pekerjaan','pendidikan'));
     }
 
     public function update(Request $request, $id)
@@ -82,10 +85,10 @@ class OrangTuaWaliController extends Controller
             'tanggal_lahir_ayah' => 'nullable|date',
             'tanggal_lahir_ibu' => 'nullable|date',
             'alamat_orangtua' => 'nullable|string',
-            'pendidikan_ayah' => 'nullable|string',
+            'pendidikan_ayah_id' => 'nullable|string',
             'pekerjaan_ayah_id' => 'nullable',
             'no_hp_ayah' => 'nullable|numeric',
-            'pendidikan_ibu' => 'nullable|string',
+            'pendidikan_ibu_id' => 'nullable|string',
             'pekerjaan_ibu_id' => 'nullable',
             'no_hp_ibu' => 'nullable|numeric',
             'nama_wali' => 'nullable|string',
