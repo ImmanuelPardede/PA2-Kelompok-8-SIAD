@@ -6,8 +6,8 @@
 
         <div>
             <strong>Nama Wilayah:</strong> {{ $lokasi->wilayah }}<br>
-            <strong>Lokasi:</strong> {{ $lokasi->lokasi }}<br>
-            <strong>Deskripsi:</strong> {{ $lokasi->deskripsi }}
+            <strong>Lokasi:</strong> {{ $lokasi->lokasi ?? 'Data tidak tersedia'}}<br>
+            <strong>Deskripsi:</strong> {{ $lokasi->deskripsi ?? 'Data tidak tersedia'}}
         </div>
 
         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>

@@ -19,21 +19,22 @@
                     <p>Tidak ada foto profil.</p>
                 @endif
 
-                <p><strong>Nama Lengkap:</strong> {{ $anak->nama_lengkap }}</p>
-                <p><strong>Agama:</strong> {{ $anak->agama->agama }}</p>
-                <p><strong>Jenis Kelamin:</strong> {{ $anak->jenisKelamin->jenis_kelamin }}</p>
-                <p><strong>Golongan Darah:</strong> {{ $anak->golonganDarah->golongan_darah }}</p>
-                <p><strong>Kebutuhan:</strong> {{ $anak->kebutuhan->jenis_kebutuhan }}</p>
-                <p><strong>Tempat Lahir:</strong> {{ $anak->tempat_lahir }}</p>
-                <p><strong>Tanggal Lahir:</strong> {{ $anak->tanggal_lahir }}</p>
-                <p><strong>Tanggal Masuk:</strong> {{ $anak->tanggal_masuk }}</p>
-                <p><strong>Tanggal Keluar:</strong> {{ $anak->tanggal_keluar }}</p>
-                <p><strong>Disukai:</strong> {{ $anak->disukai }}</p>
-                <p><strong>Tidak Disukai:</strong> {{ $anak->tidak_disukai }}</p>
-                <p><strong>Alamat:</strong> {{ $anak->alamat }}</p>
-                <p><strong>Kelebihan:</strong> {{ $anak->kelebihan }}</p>
-                <p><strong>Kekurangan:</strong> {{ $anak->kekurangan }}</p>
-                <p><strong>Penyakit:</strong> {{ optional($anak->penyakit)->jenis_penyakit }}</p>
+                <p><strong>Nama Lengkap:</strong> {{ $anak->nama_lengkap ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Agama:</strong> {{ $anak->agama->agama ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Jenis Kelamin:</strong> {{ $anak->jenisKelamin->jenis_kelamin ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Golongan Darah:</strong> {{ $anak->golonganDarah->golongan_darah ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Kebutuhan:</strong> {{ $anak->kebutuhan->jenis_kebutuhan ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Tempat Lahir:</strong> {{ $anak->tempat_lahir ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Tanggal Lahir:</strong> {{ $anak->tanggal_lahir ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Disukai:</strong> {{ $anak->disukai ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Tidak Disukai:</strong> {{ $anak->tidak_disukai ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Alamat:</strong> {{ $anak->alamat ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Kelebihan:</strong> {{ $anak->kelebihan ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Kekurangan:</strong> {{ $anak->kekurangan ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Penyakit:</strong> {{ optional($anak->penyakit)->jenis_penyakit ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Tanggal Masuk:</strong> {{ $anak->tanggal_masuk ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Tanggal Keluar:</strong> {{ $anak->tanggal_keluar ?? 'Data tidak tersedia'}}</p>
+                <p><strong>Status:</strong> {{ $anak->status ?? 'Data tidak tersedia'}}</p>
 
                 <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
             </div>

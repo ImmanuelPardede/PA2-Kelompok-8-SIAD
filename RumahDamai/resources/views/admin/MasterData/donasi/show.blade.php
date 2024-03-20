@@ -6,7 +6,7 @@
 
         <div>
             <strong>Jenis Donasi:</strong> {{ $donasi->jenis_donasi }}<br>
-            <strong>Deskripsi:</strong> {{ $donasi->deskripsi }}
+            <strong>Deskripsi:</strong> {{ $donasi->deskripsi ?? 'Data tidak tersedia'}}
         </div>
 
         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>

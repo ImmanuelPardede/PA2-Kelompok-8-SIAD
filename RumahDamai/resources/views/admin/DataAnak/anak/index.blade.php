@@ -36,6 +36,13 @@
                                     <td>
                                         <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
                                         <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
+                                        <form action="{{ route('anak.nonaktifkan', $anak->id) }}" method="post"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-danger"
+                                                onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
+                                        </form>
                                         <form action="{{ route('anak.destroy', $anak->id) }}" method="post"
                                             style="display:inline;" class="d-inline">
                                             @csrf

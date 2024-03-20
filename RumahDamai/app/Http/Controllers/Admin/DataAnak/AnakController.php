@@ -163,13 +163,33 @@ class AnakController extends Controller
 
 
     /**
+     * UnActive the specified resource from storage.
+     */
+
+    public function nonaktifkan(string $id)
+{
+    $anak = Anak::find($id);
+    if ($anak) {
+        $anak->update(['status' => 'nonaktif']);
+        return redirect()->route('anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
+    } else {
+        return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+    }
+}
+
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
+        // Hapus anak berdasarkan ID
         $anak = Anak::find($id);
-        $anak->delete();
-
-        return redirect()->route('anak.index')->with('success', 'Data anak berhasil dihapus.');
+        if ($anak) {
+            $anak->delete();
+            return redirect()->route('anak.index')->with('success', 'Data anak berhasil dihapus.');
+        } else {
+            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+        }
     }
 }

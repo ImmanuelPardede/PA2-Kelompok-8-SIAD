@@ -28,6 +28,7 @@ class Anak extends Model
         'alamat',
         'kelebihan',
         'kekurangan',
+        'status',
     ];
 
     public function agama()

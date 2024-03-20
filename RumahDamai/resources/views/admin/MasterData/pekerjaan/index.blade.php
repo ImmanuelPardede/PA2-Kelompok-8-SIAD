@@ -30,7 +30,6 @@
                             <tr>
                                 <td>{{ $pekerjaan->jenis_pekerjaan }}</td>
                                 <td>
-                                    <a href="{{ route('pekerjaan.show', $pekerjaan->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('pekerjaan.edit', $pekerjaan->id) }}" class="btn btn-warning">Edit</a>
                                     <form action="{{ route('pekerjaan.destroy', $pekerjaan->id) }}" method="post" style="display:inline;">
                                         @csrf
