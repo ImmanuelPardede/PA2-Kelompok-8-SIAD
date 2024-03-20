@@ -25,12 +25,6 @@
         <p><strong>Tanggal Lahir Wali:</strong> {{ $orangtuawali->tanggal_lahir_wali ?? 'Data tidak tersedia' }}</p>
         <p><strong>No Hp Wali:</strong> {{ $orangtuawali->no_hp_wali ?? 'Data tidak tersedia' }}</p>
 
-        <a href="{{ route('orangTuaWali.edit', $orangtuawali->id) }}" class="btn btn-warning">Edit</a>
-
-        <form action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-        </form>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection

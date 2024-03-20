@@ -110,6 +110,7 @@
                 <label for="no_hp_wali">No. HP Wali:</label>
                 <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali">
             </div>
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
     </div>

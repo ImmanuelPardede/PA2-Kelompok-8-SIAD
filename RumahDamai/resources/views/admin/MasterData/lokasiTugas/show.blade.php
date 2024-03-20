@@ -10,6 +10,6 @@
             <strong>Deskripsi:</strong> {{ $lokasi->deskripsi }}
         </div>
 
-        <a href="{{ route('lokasiTugas.index') }}" class="btn btn-primary mt-3">Kembali</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection

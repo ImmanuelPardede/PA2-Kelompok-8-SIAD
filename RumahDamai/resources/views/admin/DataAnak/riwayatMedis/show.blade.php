@@ -11,6 +11,6 @@
             <strong>Kondisi:</strong> {{ $riwayatmedis->kondisi }}
         </div>
 
-        <a href="{{ route('riwayatMedis.index') }}" class="btn btn-primary mt-3">Kembali</a>
-    </div>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+     </div>
 @endsection
