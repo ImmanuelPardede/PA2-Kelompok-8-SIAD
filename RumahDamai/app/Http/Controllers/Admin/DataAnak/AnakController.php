@@ -161,23 +161,6 @@ class AnakController extends Controller
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }
 
-
-    /**
-     * UnActive the specified resource from storage.
-     */
-
-    public function nonaktifkan(string $id)
-{
-    $anak = Anak::find($id);
-    if ($anak) {
-        $anak->update(['status' => 'nonaktif']);
-        return redirect()->route('anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
-    } else {
-        return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
-    }
-}
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -186,10 +169,43 @@ class AnakController extends Controller
         // Hapus anak berdasarkan ID
         $anak = Anak::find($id);
         if ($anak) {
+            // Hapus foto profil jika ada
+            if ($anak->foto_profil) {
+                // Pastikan file ada sebelum menghapus
+                if (file_exists(public_path($anak->foto_profil))) {
+                    unlink(public_path($anak->foto_profil)); // Hapus file gambar
+                }
+            }
+    
             $anak->delete();
             return redirect()->route('anak.index')->with('success', 'Data anak berhasil dihapus.');
         } else {
             return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
+
+
+    public function nonaktifkan(string $id)
+    {
+        $anak = Anak::find($id);
+        if ($anak) {
+            $anak->update(['status' => 'nonaktif']);
+            return redirect()->route('anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
+        } else {
+            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+        }
+    }
+    
+    public function aktifkan(string $id)
+{
+    $anak = Anak::find($id);
+    if ($anak) {
+        $anak->update(['status' => 'aktif']);
+        return redirect()->route('anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
+    } else {
+        return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+    }
+}
+
+    
 }

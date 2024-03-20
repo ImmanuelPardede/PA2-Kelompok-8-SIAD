@@ -27,6 +27,7 @@ Auth::routes();
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/index', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::resource('/DataAnak/anak', AnakController::class);
+    Route::patch('/anak/{id}/aktifkan', [AnakController::class, 'aktifkan'])->name('anak.aktifkan');
     Route::patch('/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('anak.nonaktifkan');
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
