@@ -19,6 +19,23 @@
               <span class="menu-title">Data Orangtua/Wali</span>
             </a>
           </li> --}}
+        
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
+                aria-controls="form-elements">
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Data Anak</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat Medis</a></li>
+                </ul>
+            </div>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <i class="icon-layout menu-icon"></i>
@@ -45,21 +62,6 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('penyakit.index') }}">Jenis Penyakit</a>
                     </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                aria-controls="form-elements">
-                <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Data Anak</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat Medis</a></li>
                 </ul>
             </div>
         </li>

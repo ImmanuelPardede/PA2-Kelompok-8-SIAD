@@ -73,7 +73,8 @@
       </li>
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-          <img src="skydash/images/faces/face28.jpg" alt="profile"/>
+          {{ Auth::user()->name }}
+          <img src="skydash/images/faces/face28.jpg" alt=""/>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="dropdown-item">

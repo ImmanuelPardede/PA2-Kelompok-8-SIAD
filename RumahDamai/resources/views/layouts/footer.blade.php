@@ -33,6 +33,12 @@
 <script src="{{ asset('skydash/js/dashboard.js')}}"></script>
 <script src="{{ asset('skydash/js/Chart.roundedBarCharts.js')}}"></script>
 <!-- End custom js for this page-->
+
+<script src="{{ asset('skydash/js/utama/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('skydash/js/utama/bootstrap.min.js')}}"></script>
+<script src="{{ asset('skydash/js/utama/popper.min.js')}}"></script>
+
+
 </body>
 
 </html>

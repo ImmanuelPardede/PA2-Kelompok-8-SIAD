@@ -20,6 +20,11 @@
   <link rel="stylesheet" href="{{ asset('skydash/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('skydash/images/favicon.png')}}')}}" />
+
+
+  <link rel="stylesheet" href="{{ asset('skydash/vendors/css/bootstrap.min.css')}}">
+
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 </head>
 <body>
 
