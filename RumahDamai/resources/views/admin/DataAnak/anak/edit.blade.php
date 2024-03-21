@@ -5,7 +5,7 @@
         <h2>Edit Anak</h2>
 
         <p><strong>Foto Profil:</strong></p>
-        @if($anak->foto_profil)
+        @if ($anak->foto_profil)
             <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil">
             <strong>Foto Profil:</strong> {{ $anak->foto_profil }}
         @else
@@ -23,7 +23,8 @@
 
             <div class="form-group">
                 <label for="nama_lengkap">Nama Lengkap:</label>
-                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="{{ $anak->nama_lengkap }}" required>
+                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
+                    value="{{ $anak->nama_lengkap }}" required>
             </div>
 
             <div class="form-group">
@@ -43,7 +44,8 @@
                 <select class="form-control" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
                     <option value="" disabled>-- Pilih Jenis Kelamin --</option>
                     @foreach ($jenisKelamin as $kelaminlist)
-                        <option value="{{ $kelaminlist->id }}" {{ $anak->jenis_kelamin_id == $kelaminlist->id ? 'selected' : '' }}>
+                        <option value="{{ $kelaminlist->id }}"
+                            {{ $anak->jenis_kelamin_id == $kelaminlist->id ? 'selected' : '' }}>
                             {{ $kelaminlist->jenis_kelamin }}
                         </option>
                     @endforeach
@@ -55,7 +57,8 @@
                 <select class="form-control" id="golongan_darah_id" name="golongan_darah_id" required>
                     <option value="" disabled>-- Pilih Golongan Darah --</option>
                     @foreach ($golonganDarah as $darahlist)
-                        <option value="{{ $darahlist->id }}" {{ $anak->golongan_darah_id == $darahlist->id ? 'selected' : '' }}>
+                        <option value="{{ $darahlist->id }}"
+                            {{ $anak->golongan_darah_id == $darahlist->id ? 'selected' : '' }}>
                             {{ $darahlist->golongan_darah }}
                         </option>
                     @endforeach
@@ -67,7 +70,8 @@
                 <select class="form-control" id="kebutuhan_id" name="kebutuhan_id" required>
                     <option value="" disabled>-- Pilih Kebutuhan --</option>
                     @foreach ($kebutuhan as $kebutuhanlist)
-                        <option value="{{ $kebutuhanlist->id }}" {{ $anak->kebutuhan_id == $kebutuhanlist->id ? 'selected' : '' }}>
+                        <option value="{{ $kebutuhanlist->id }}"
+                            {{ $anak->kebutuhan_id == $kebutuhanlist->id ? 'selected' : '' }}>
                             {{ $kebutuhanlist->jenis_kebutuhan }}
                         </option>
                     @endforeach
@@ -76,22 +80,26 @@
 
             <div class="form-group">
                 <label for="tempat_lahir">Tempat Lahir:</label>
-                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ $anak->tempat_lahir }}" required>
+                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                    value="{{ $anak->tempat_lahir }}" required>
             </div>
 
             <div class="form-group">
                 <label for="tanggal_lahir">Tanggal Lahir:</label>
-                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ $anak->tanggal_lahir }}" required>
+                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                    value="{{ $anak->tanggal_lahir }}" required>
             </div>
 
             <div class="form-group">
                 <label for="tanggal_masuk">Tanggal Masuk:</label>
-                <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk" value="{{ $anak->tanggal_masuk }}">
+                <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk"
+                    value="{{ $anak->tanggal_masuk }}">
             </div>
 
             <div class="form-group">
                 <label for="tanggal_keluar">Tanggal Keluar:</label>
-                <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar" value="{{ $anak->tanggal_keluar }}">
+                <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar"
+                    value="{{ $anak->tanggal_keluar }}">
             </div>
 
             <div class="form-group">
@@ -101,7 +109,8 @@
 
             <div class="form-group">
                 <label for="tidak_disukai">Tidak Disukai:</label>
-                <input type="text" class="form-control" id="tidak_disukai" name="tidak_disukai" value="{{ $anak->tidak_disukai }}">
+                <input type="text" class="form-control" id="tidak_disukai" name="tidak_disukai"
+                    value="{{ $anak->tidak_disukai }}">
             </div>
 
             <div class="form-group">
@@ -124,14 +133,15 @@
                 <select class="form-control" id="penyakit_id" name="penyakit_id">
                     <option value="" disabled>-- Pilih Penyakit --</option>
                     @foreach ($penyakit as $penyakitlist)
-                        <option value="{{ $penyakitlist->id }}" {{ $anak->penyakit_id == $penyakitlist->id ? 'selected' : '' }}>
+                        <option value="{{ $penyakitlist->id }}"
+                            {{ $anak->penyakit_id == $penyakitlist->id ? 'selected' : '' }}>
                             {{ $penyakitlist->jenis_penyakit }}
                         </option>
                     @endforeach
                 </select>
             </div>
 
-            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a> 
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-warning">Update</button>
         </form>
     </div>

@@ -128,34 +128,25 @@ class AnakController extends Controller
             'kekurangan' => 'nullable|string',
         ]);
 
-        // Ambil anak yang ada berdasarkan ID
         $anak = Anak::find($id);
-
-        // Update data lainnya kecuali foto profil
         $data = $request->except('_token', '_method', 'foto_profil');
 
         if ($request->hasFile('foto_profil')) {
-            // Proses penyimpanan gambar baru
             $gambar = $request->file('foto_profil');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Dapatkan nama file tanpa ekstensi
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Tambahkan ekstensi ke nama file
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-            // Pindahkan gambar ke direktori yang diinginkan di storage Laravel
             $gambar->move('uploads/anak', $new_gambar);
 
-            // Hapus gambar lama jika ada
             if ($anak->foto_profil) {
-                // Pastikan file lama ada sebelum menghapus
                 if (file_exists(public_path($anak->foto_profil))) {
-                    unlink(public_path($anak->foto_profil)); // Hapus file lama
+                    unlink(public_path($anak->foto_profil));
                 }
             }
 
-            // Update path gambar pada entitas anak yang ada
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
         }
 
-        // Lakukan update data anak
         $anak->update($data);
 
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
@@ -176,7 +167,7 @@ class AnakController extends Controller
                     unlink(public_path($anak->foto_profil)); // Hapus file gambar
                 }
             }
-    
+
             $anak->delete();
             return redirect()->route('anak.index')->with('success', 'Data anak berhasil dihapus.');
         } else {
@@ -189,23 +180,26 @@ class AnakController extends Controller
     {
         $anak = Anak::find($id);
         if ($anak) {
-            $anak->update(['status' => 'nonaktif']);
+            // Mengisi tanggal_keluar dengan tanggal saat ini
+            $anak->tanggal_keluar = now();
+            $anak->status = 'nonaktif';
+            $anak->save();
+
             return redirect()->route('anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
         } else {
             return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
-    
-    public function aktifkan(string $id)
-{
-    $anak = Anak::find($id);
-    if ($anak) {
-        $anak->update(['status' => 'aktif']);
-        return redirect()->route('anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
-    } else {
-        return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
-    }
-}
 
-    
+
+    public function aktifkan(string $id)
+    {
+        $anak = Anak::find($id);
+        if ($anak) {
+            $anak->update(['status' => 'aktif']);
+            return redirect()->route('anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
+        } else {
+            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+        }
+    }
 }

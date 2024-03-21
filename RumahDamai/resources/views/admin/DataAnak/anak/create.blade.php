@@ -18,7 +18,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="form-group">
                 <label for="jenis_kelamin_id">Jenis Kelamin</label>
                 <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id">

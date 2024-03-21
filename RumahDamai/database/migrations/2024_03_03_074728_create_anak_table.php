@@ -13,6 +13,7 @@ class CreateAnakTable extends Migration
             $table->string('foto_profil')->nullable();
             $table->string('nama_lengkap')->nullable();
             $table->unsignedBigInteger('agama_id')->nullable();
+
             $table->unsignedBigInteger('jenis_kelamin_id')->nullable();
             $table->unsignedBigInteger('golongan_darah_id')->nullable();
             $table->unsignedBigInteger('kebutuhan_id')->nullable();
