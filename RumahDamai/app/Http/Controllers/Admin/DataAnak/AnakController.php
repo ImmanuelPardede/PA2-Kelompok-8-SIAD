@@ -191,12 +191,14 @@ class AnakController extends Controller
         }
     }
 
-
     public function aktifkan(string $id)
     {
         $anak = Anak::find($id);
         if ($anak) {
-            $anak->update(['status' => 'aktif']);
+            $anak->tanggal_keluar = null; // Menghapus tanggal_keluar
+            $anak->status = 'aktif';
+            $anak->save();
+
             return redirect()->route('anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
         } else {
             return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
