@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\MasterData\PenyakitController;
 use App\Http\Controllers\Admin\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
 use App\Http\Controllers\Raport\RaportController;
+use App\Http\Controllers\Admin\DataDonatur\DonaturController;
+
 
 
 Route::get('/', function () {
@@ -33,6 +35,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::patch('/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('anak.nonaktifkan');
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
+    Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
     Route::resource('/masterdata/agama', AgamaController::class);
     Route::resource('/masterdata/jenisKelamin', JenisKelaminController::class);
     Route::resource('/masterdata/golonganDarah', GolonganDarahController::class);
