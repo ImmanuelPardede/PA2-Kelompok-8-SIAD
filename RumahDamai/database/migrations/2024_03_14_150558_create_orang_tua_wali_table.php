@@ -33,6 +33,7 @@ class CreateOrangTuaWaliTable extends Migration
             $table->unsignedBigInteger('pekerjaan_wali_id')->nullable();
             $table->date('tanggal_lahir_wali')->nullable();
             $table->timestamps();
+            
             $table->foreign('anak_id')->references('id')->on('anak');
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('pekerjaan_ayah_id')->references('id')->on('pekerjaan');
