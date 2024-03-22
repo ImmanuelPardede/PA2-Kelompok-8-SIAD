@@ -66,9 +66,15 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('raport.index') }}">
+                <i class="icon-paper menu-icon"></i>
+                <span class="menu-title">Raport Anak</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="icon-bar-graph menu-icon"></i>
-                <span class="menu-title">Charts</span>
+                <span class="menu-title">Raport</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">

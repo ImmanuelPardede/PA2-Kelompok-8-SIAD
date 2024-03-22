@@ -5,17 +5,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DataAnak\AnakController;
 use App\Http\Controllers\Admin\DataOrangTuaWali\OrangTuaWaliController;
-use App\Http\Controllers\MasterData\LokasiTugasController;
-use App\Http\Controllers\MasterData\AgamaController;
-use App\Http\Controllers\MasterData\DonasiController;
-use App\Http\Controllers\MasterData\JenisKelaminController;
-use App\Http\Controllers\MasterData\GolonganDarahController;
-use App\Http\Controllers\MasterData\KebutuhanController;
-use App\Http\Controllers\MasterData\PekerjaanController;
-use App\Http\Controllers\MasterData\PendidikanController;
-use App\Http\Controllers\MasterData\PenyakitController;
-use App\Http\Controllers\MasterData\SponsorshipController;
+use App\Http\Controllers\Admin\MasterData\LokasiTugasController;
+use App\Http\Controllers\Admin\MasterData\AgamaController;
+use App\Http\Controllers\Admin\MasterData\DonasiController;
+use App\Http\Controllers\Admin\MasterData\JenisKelaminController;
+use App\Http\Controllers\Admin\MasterData\GolonganDarahController;
+use App\Http\Controllers\Admin\MasterData\KebutuhanController;
+use App\Http\Controllers\Admin\MasterData\PekerjaanController;
+use App\Http\Controllers\Admin\MasterData\PendidikanController;
+use App\Http\Controllers\Admin\MasterData\PenyakitController;
+use App\Http\Controllers\Admin\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
+use App\Http\Controllers\Raport\RaportController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,6 +43,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/sponsorship', SponsorshipController::class);
     Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
+    Route::resource('/raport', RaportController::class);
+    Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
+
+
 });
 
 // Admin Routes List
