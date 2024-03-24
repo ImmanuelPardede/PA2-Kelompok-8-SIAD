@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('donatur', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('donasi_id')->nullable();
             $table->string('nama_donatur')->nullable();
             $table->string('email_donatur')->nullable()->unique();
             $table->string('no_hp_donatur')->nullable();
@@ -21,7 +20,6 @@ return new class extends Migration
             $table->string('foto_donatur')->nullable();
             $table->timestamps();
 
-            $table->foreign('donasi_id')->references('id')->on('donasi')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -19,6 +19,11 @@ class RiwayatMedis extends Model
 
     public function anak()
     {
-        return $this->belongsTo(Anak::class, 'anak_id');
+        return $this->belongsTo(Anak::class, 'anak_id', 'id');
+    }
+
+    public function penyakit()
+    {
+        return $this->hasOne(Penyakit::class, 'id', 'penyakit_id');
     }
 }

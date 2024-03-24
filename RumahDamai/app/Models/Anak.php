@@ -18,7 +18,6 @@ class Anak extends Model
         'jenis_kelamin_id',
         'golongan_darah_id',
         'kebutuhan_id',
-        'penyakit_id',
         'tempat_lahir',
         'tanggal_lahir',
         'tanggal_masuk',
@@ -49,6 +48,11 @@ class Anak extends Model
     public function kebutuhan()
     {
         return $this->belongsTo(Kebutuhan::class, 'kebutuhan_id');
+    }
+
+    public function riwayatMedis()
+    {
+        return $this->hasMany(RiwayatMedis::class, 'anak_id', 'id');
     }
 
     public function penyakit()

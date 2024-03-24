@@ -7,13 +7,13 @@
             @csrf
             <div class="form-group">
                 <label for="donasi_id">Jenis Donasi</label>
-                <select class="form-control js-example-basic-single" id="donasi_id" name="donasi_id">
-                    <option value="" disabled selected>-- Jenis Donasi --</option>
+                <select class="form-control js-example-basic-single" id="donasi_id" name="donasi_id[]" multiple>
                     @foreach ($donasi as $donasiItem)
                         <option value="{{ $donasiItem->id }}">{{ $donasiItem->jenis_donasi }}</option>
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="nama_donatur">Nama Donatur:</label>
                 <input type="text" class="form-control" id="nama_donatur" name="nama_donatur">

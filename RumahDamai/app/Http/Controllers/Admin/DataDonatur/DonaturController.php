@@ -25,7 +25,8 @@ class DonaturController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'donasi_id' => 'required',
+            'donasi_id' => 'nullable|array',
+            'donasi_id.*' => 'exists:donasi,id',
             'nama_donatur' => 'nullable|string',
             'email_donatur' => 'nullable|string',
             'no_hp_donatur' => 'nullable|string',
@@ -33,20 +34,30 @@ class DonaturController extends Controller
             'foto_donatur' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Process foto_donatur upload
+        // Proses upload foto_donatur
         if ($request->hasFile('foto_donatur')) {
             $gambar = $request->file('foto_donatur');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Getting file name without extension
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Appending extension to file name
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-            // Pindahkan gambar ke direktori yang diinginkan
             $gambar->move('uploads/donatur/', $new_gambar);
 
-            // Update path gambar pada data yang akan disimpan
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
         }
 
-        Donatur::create($validatedData);
+        $donatur = new Donatur([
+            'nama_donatur' => $validatedData['nama_donatur'],
+            'email_donatur' => $validatedData['email_donatur'],
+            'no_hp_donatur' => $validatedData['no_hp_donatur'],
+            'jumlah_donasi' => $validatedData['jumlah_donasi'],
+            'foto_donatur' => $validatedData['foto_donatur'],
+        ]);
+        $donatur->save();
+
+        // Menyimpan relasi dengan donasi
+        if (isset($validatedData['donasi_id'])) {
+            $donatur->donasi()->attach($validatedData['donasi_id']);
+        }
 
         return redirect()->route('dataDonatur.index')->with('success', 'Data Donatur berhasil ditambahkan.');
     }
@@ -67,7 +78,8 @@ class DonaturController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'donasi_id' => 'nullable',
+            'donasi_id' => 'nullable|array',
+            'donasi_id.*' => 'exists:donasi,id',
             'nama_donatur' => 'nullable|string',
             'email_donatur' => 'nullable|string',
             'no_hp_donatur' => 'nullable|string',
@@ -77,19 +89,15 @@ class DonaturController extends Controller
 
         $donatur = Donatur::find($id);
 
-        // Process foto_donatur upload for update
         if ($request->hasFile('foto_donatur')) {
             $gambar = $request->file('foto_donatur');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Getting file name without extension
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Appending extension to file name
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-            // Pindahkan gambar ke direktori yang diinginkan
             $gambar->move('uploads/donatur/', $new_gambar);
 
-            // Update path gambar pada data yang akan diupdate
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
 
-            // Hapus foto lama jika ada
             if ($donatur->foto_donatur) {
                 if (file_exists(public_path($donatur->foto_donatur))) {
                     unlink(public_path($donatur->foto_donatur));

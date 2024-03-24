@@ -89,7 +89,9 @@ class AnakController extends Controller
     public function show(string $id)
     {
         $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit')->find($id);
-        return view('admin.DataAnak.Anak.show', compact('anak'));
+        $penyakit = $anak->penyakit;
+
+        return view('admin.DataAnak.Anak.show', compact('anak', 'penyakit'));
     }
 
     /**

@@ -73,30 +73,43 @@
                                     </tr>
                                     <tr>
                                         <th>Penyakit</th>
-                                        <td>{{ optional($anak->penyakit)->jenis_penyakit ?? 'Data tidak tersedia' }}</td>
+                                        <td>
+                                            @if ($anak->riwayatMedis->isNotEmpty())
+                                                @foreach ($anak->riwayatMedis as $riwayatMedis)
+                                                    {{ $riwayatMedis->penyakit->jenis_penyakit }}<br>
+                                                @endforeach
+                                            @else
+                                                Data riwayat medis tidak tersedia.
+                                            @endif
+                                        </td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                         @if ($anak->status === 'aktif')
-                            <form action="{{ route('anak.nonaktifkan', $anak->id) }}" method="post" style="display:inline;">
+                            <form action="{{ route('anak.nonaktifkan', $anak->id) }}" method="post"
+                                style="display:inline;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
                             </form>
                         @else
                             <form action="{{ route('anak.aktifkan', $anak->id) }}" method="post" style="display:inline;">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
+                                <button type="submit" class="btn btn-success"
+                                    onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
                             </form>
                         @endif
                     </div>
                     <div class="col-md-4">
                         <div class="image-frame">
                             @if ($anak->foto_profil)
-                                <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil Anak" class="img-fluid rounded">
+                                <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil Anak"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Tidak ada foto profil.</p>
                             @endif
