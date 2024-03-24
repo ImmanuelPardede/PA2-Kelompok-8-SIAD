@@ -79,15 +79,6 @@
                 <input type="file" class="form-control" name="foto_profil">
                 <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
             </div>
-            <div class="form-group">
-                <label for="penyakit_id">Penyakit</label>
-                <select class="form-control" id="penyakit_id" name="penyakit_id">
-                    <option value="" disabled selected>-- Pilih Penyakit --</option>
-                    @foreach ($penyakit as $penyakitItem)
-                        <option value="{{ $penyakitItem->id }}">{{ $penyakitItem->jenis_penyakit }}</option>
-                    @endforeach
-                </select>
-            </div>
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>

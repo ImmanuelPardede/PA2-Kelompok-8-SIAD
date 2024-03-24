@@ -13,8 +13,16 @@
                                 <tbody>
                                     <tr>
                                         <th>Jenis Donasi:</th>
-                                        <td>{{ $donatur->donasi ? $donatur->donasi->jenis_donasi : 'Data tidak tersedia' }}
+                                        <td>
+                                            @if ($donatur->donasi->count() > 0)
+                                                @foreach ($donatur->donasi as $jenis_donasi)
+                                                    {{ $jenis_donasi->jenis_donasi }},
+                                                @endforeach
+                                            @else
+                                                Data tidak tersedia
+                                            @endif
                                         </td>
+
                                     </tr>
                                     <tr>
                                         <th>Nama Donatur:</th>

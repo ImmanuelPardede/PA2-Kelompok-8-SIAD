@@ -128,19 +128,6 @@
                 <textarea class="form-control" id="kekurangan" name="kekurangan" rows="3">{{ $anak->kekurangan }}</textarea>
             </div>
 
-            <div class="form-group">
-                <label for="penyakit_id">Penyakit:</label>
-                <select class="form-control" id="penyakit_id" name="penyakit_id">
-                    <option value="" disabled>-- Pilih Penyakit --</option>
-                    @foreach ($penyakit as $penyakitlist)
-                        <option value="{{ $penyakitlist->id }}"
-                            {{ $anak->penyakit_id == $penyakitlist->id ? 'selected' : '' }}>
-                            {{ $penyakitlist->jenis_penyakit }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-warning">Update</button>
         </form>
