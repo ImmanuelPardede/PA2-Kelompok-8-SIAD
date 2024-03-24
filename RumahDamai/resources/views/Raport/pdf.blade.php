@@ -1,3 +1,8 @@
+<p>Periode Bulan : {{$raport->periode_bulan }}</p>
+<p>Nama : {{$raport->anak->nama_lengkap }}</p>
+<p>Kelas kronologis :</p>
+<p> PPI No : 1<p>
+
 <table border="1">
     <tbody>
         <tr>
@@ -8,15 +13,16 @@
         </tr>
         <tr>
             <td>Kelas kemampuan</td>
-            <td>Naratif
-</td>
+            <td>Naratif</td>
         </tr>
+        @foreach($detailraport as $index => $detail)
         <tr>
-            <td></td>
-            <td>{{ $raport->area }}</td>
-            <td>{{ $raport->kemampuan }}</td>
-            <td>{{ $raport->kelas_kemampuan }}</td>
-            <td>{{ $raport->naratif }}</td>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $detail->area }}</td>
+            <td>{{ $detail->kemampuan }}</td>
+            <td>{{ $detail->kelas_kemampuan }}</td>
+            <td>{{ $detail->naratif }}</td>
         </tr>
+        @endforeach
     </tbody>
 </table>

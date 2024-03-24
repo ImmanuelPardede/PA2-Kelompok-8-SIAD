@@ -27,8 +27,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Normal Users Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
+
+    
     Route::get('/admin/index', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::resource('/DataAnak/anak', AnakController::class);
     Route::patch('/anak/{id}/aktifkan', [AnakController::class, 'aktifkan'])->name('anak.aktifkan');
@@ -46,10 +47,23 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/sponsorship', SponsorshipController::class);
     Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
-    Route::resource('/raport', RaportController::class);
+
+
+    /* Raport Demo */
+/*     Route::resource('/raport', RaportController::class);
     Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
+ */
 
 
+    Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
+Route::get('/raport/show/{id}', [RaportController::class, 'show'])->name('raport.show');
+Route::get('/raport/create', [RaportController::class, 'create'])->name('raport.create');
+Route::post('/raport/store', [RaportController::class, 'store'])->name('raport.store');
+Route::get('/raport/edit/{id}', [RaportController::class, 'edit'])->name('raport.edit');
+Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('raport.update');
+Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
+Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
+Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 });
 
 // Admin Routes List
