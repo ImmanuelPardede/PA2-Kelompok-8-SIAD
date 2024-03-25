@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\DataDonatur;
+namespace App\Http\Controllers\Staff\DataDonatur;
 
 use App\Models\Donasi;
 use Illuminate\Http\Request;

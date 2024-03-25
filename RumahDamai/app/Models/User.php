@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
     ];
 
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -50,5 +51,10 @@ class User extends Authenticatable
         return new Attribute(
             get: fn ($value) =>  ["admin", "guru", "staff"][$value],
         );
+    }
+
+    public function todoLists()
+    {
+        return $this->hasMany(TodoList::class);
     }
 }

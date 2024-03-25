@@ -46,7 +46,7 @@ class AnakController extends Controller
             'agama_id' => 'required',
             'jenis_kelamin_id' => 'required',
             'golongan_darah_id' => 'required',
-            'kebutuhan_disabilitas_id' => 'required',
+            'kebutuhan_disabilitas_id' => 'nullable',
             'penyakit_id' => 'nullable',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
@@ -74,6 +74,11 @@ class AnakController extends Controller
             // Update path gambar pada entitas anak yang ada
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar; // Updating $data array with new image path
         }
+
+        if ($request->has('kebutuhan_disabilitas_id')) {
+            $data['kebutuhan_disabilitas_id'] = $request->kebutuhan_disabilitas_id;
+        }
+        
 
         // Membuat data anak baru di database
         Anak::create($data);

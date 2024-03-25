@@ -27,9 +27,9 @@
         <div class="card card-tale">
           <div class="card-body">
             <p class="mb-4">Pegawai</p>
-            <p class="fs-30 mb-2">{{ $totalPegawai }}</p>
+            <p class="fs-30 mb-2">4006</p>
             <p>Terdata, Sejak Dibuat Sistem Ini</p>
-        </div>
+          </div>
         </div>
       </div>
       <div class="col-md-3 mb-4 stretch-card transparent">
@@ -79,6 +79,9 @@
               </thead>
 
             </table>
+
+
+            
           </div>
         </div>
       </div>
@@ -88,7 +91,7 @@
                         <div class="card-body">
                             <h4 class="card-title">To Do Lists</h4>
                             <div class="list-wrapper pt-2">
-                                <ul  id="todo-list"class="d-flex flex-column-reverse todo-list todo-list-custom">
+                                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
                                     <li>
                                         <div class="form-check form-check-flat">
                                             <label class="form-check-label">
@@ -137,8 +140,8 @@
                                 </ul>
           </div>
           <div class="add-items d-flex mb-0 mt-2">
-                                <input id="todo-input" type="text" class="form-control todo-list-input"  placeholder="Tambahkan">
-                                <button id="add-todo-btn" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+                                <input type="text" class="form-control todo-list-input"  placeholder="Tambahkan">
+                                <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -146,11 +149,87 @@
   </div>
 
 
-
-
+  
+  <div class="container mt-5">
+    <h2>Todo List</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="addTaskForm">
+                <div class="form-group">
+                    <label for="task">Task:</label>
+                    <input type="text" class="form-control" id="task" name="task" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <ul id="todoList" class="list-group">
+        <!-- Todo list items will be dynamically added here -->
+    </ul>
+</div>
 
 </div>
 
+<script>
+  $(document).ready(function(){
+      // Function to fetch and display todo list
+      function fetchTodoList() {
+          $.get('/api/todolist', function(data){
+              $('#todoList').empty();
+              $.each(data, function(index, todo){
+                  $('#todoList').append(`
+                      <li class="list-group-item">
+                          <input type="checkbox" class="form-check-input" id="todo_${todo.id}" ${todo.completed ? 'checked' : ''}>
+                          <label class="form-check-label ${todo.completed ? 'completed' : ''}" for="todo_${todo.id}">${todo.task}</label>
+                          <button type="button" class="btn btn-danger btn-sm float-right delete-btn" data-id="${todo.id}">Delete</button>
+                      </li>
+                  `);
+              });
+          });
+      }
 
+      // Initial fetch of todo list
+      fetchTodoList();
 
+      // Add task form submission
+      $('#addTaskForm').submit(function(event){
+          event.preventDefault();
+          var task = $('#task').val();
+
+          $.post('/api/todolist', {task: task}, function(data){
+              fetchTodoList();
+              $('#task').val('');
+          });
+      });
+
+      // Update task completion status
+      $('#todoList').on('change', 'input[type="checkbox"]', function(){
+          var id = $(this).attr('id').split('_')[1];
+          var completed = $(this).prop('checked');
+
+          $.ajax({
+              url: `/api/todolist/${id}`,
+              type: 'PUT',
+              data: {completed: completed},
+              success: function(){
+                  fetchTodoList();
+              }
+          });
+      });
+
+      // Delete task
+      $('#todoList').on('click', '.delete-btn', function(){
+          var id = $(this).data('id');
+
+          $.ajax({
+              url: `/api/todolist/${id}`,
+              type: 'DELETE',
+              success: function(){
+                  fetchTodoList();
+              }
+          });
+      });
+  });
+</script>
 @endsection

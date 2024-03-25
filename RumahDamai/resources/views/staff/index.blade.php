@@ -27,9 +27,9 @@
         <div class="card card-tale">
           <div class="card-body">
             <p class="mb-4">Pegawai</p>
-            <p class="fs-30 mb-2">{{ $totalPegawai }}</p>
+            <p class="fs-30 mb-2">4006</p>
             <p>Terdata, Sejak Dibuat Sistem Ini</p>
-        </div>
+          </div>
         </div>
       </div>
       <div class="col-md-3 mb-4 stretch-card transparent">
@@ -88,7 +88,7 @@
                         <div class="card-body">
                             <h4 class="card-title">To Do Lists</h4>
                             <div class="list-wrapper pt-2">
-                                <ul  id="todo-list"class="d-flex flex-column-reverse todo-list todo-list-custom">
+                                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
                                     <li>
                                         <div class="form-check form-check-flat">
                                             <label class="form-check-label">
@@ -137,8 +137,8 @@
                                 </ul>
           </div>
           <div class="add-items d-flex mb-0 mt-2">
-                                <input id="todo-input" type="text" class="form-control todo-list-input"  placeholder="Tambahkan">
-                                <button id="add-todo-btn" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+                                <input type="text" class="form-control todo-list-input"  placeholder="Tambahkan">
+                                <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,5 @@
 
 
 </div>
-
-
 
 @endsection

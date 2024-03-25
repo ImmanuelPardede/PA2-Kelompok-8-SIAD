@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,18 +24,21 @@ class HomeController extends Controller
      */
 
 
-    public function adminHome()
-    {
-        return view('admin.index');
-    }
-
-    public function guruHome()
-    {
-        return view('guruHome');
-    }
-
-    public function staffHome()
-    {
-        return view('staffHome');
-    }
+     public function adminHome()
+     {
+         $totalPegawai = User::count();
+         return view('admin.index', compact('totalPegawai'));
+     }
+     
+     public function guruHome()
+     {
+         $totalPegawai = User::count();
+         return view('guru.index', compact('totalPegawai'));
+     }
+     
+     public function staffHome()
+     {
+         $totalPegawai = User::count();
+         return view('staff.index', compact('totalPegawai'));
+     }
 }

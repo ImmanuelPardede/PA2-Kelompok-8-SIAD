@@ -18,7 +18,7 @@ use App\Http\Controllers\Admin\MasterData\PenyakitController;
 use App\Http\Controllers\Admin\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
 use App\Http\Controllers\Guru\Raport\RaportController;
-use App\Http\Controllers\Admin\DataDonatur\DonaturController;
+use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 
 
 
@@ -37,7 +37,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::patch('/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('anak.nonaktifkan');
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
-    Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
     Route::resource('/masterdata/agama', AgamaController::class);
     Route::resource('/masterdata/jenisKelamin', JenisKelaminController::class);
     Route::resource('/masterdata/golonganDarah', GolonganDarahController::class);
@@ -59,7 +58,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 // Admin Routes List
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
-    Route::get('/guru/home', [HomeController::class, 'guruHome'])->name('guru.home');
+    Route::get('/guru/index', [HomeController::class, 'guruHome'])->name('guru.home');
 
 Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
 Route::get('/raport/show/{id}', [RaportController::class, 'show'])->name('raport.show');
@@ -74,5 +73,11 @@ Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.p
 
 // Staff Routes List
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
-    Route::get('/staff/home', [HomeController::class, 'staffHome'])->name('staff.home');
+    Route::get('/staff/index', [HomeController::class, 'staffHome'])->name('staff.home');
+
+    Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
+
 });
+
+
+

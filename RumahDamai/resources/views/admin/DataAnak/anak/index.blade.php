@@ -33,7 +33,6 @@
                                     <td><img src="{{ asset($anak->foto_profil) }}" alt=""></td>
                                     <td>{{ $anak->nama_lengkap }}</td>
                                     <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
-                                    <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas }}</td>
                                     <td>{{ $anak->status }}</td>
 
                                     <td>

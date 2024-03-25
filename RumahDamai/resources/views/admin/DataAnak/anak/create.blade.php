@@ -42,10 +42,14 @@
                 <select class="form-control js-example-basic-single" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id">
                     <option value="" disabled selected>-- Pilih Jenis Kebutuhan Disabilitas --</option>
                     @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitasItem)
-                        <option value="{{ $kebutuhanDisabilitasItem->id }}">{{ $kebutuhanDisabilitasItem->jenis_kebutuhan_disabilitas }}</option>
+                        @if ($kebutuhanDisabilitasItem && $kebutuhanDisabilitasItem->jenis_kebutuhan_disabilitas) <!-- Check if the item and its property are not null -->
+                            <option value="{{ $kebutuhanDisabilitasItem->id }}">{{ $kebutuhanDisabilitasItem->jenis_kebutuhan_disabilitas }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
+            
+            
             <div class="form-group">
                 <label for="tempat_lahir">Tempat Lahir:</label>
                 <input type="text" class="form-control" name="tempat_lahir">
