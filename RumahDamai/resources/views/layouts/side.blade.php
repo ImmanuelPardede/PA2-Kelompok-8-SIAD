@@ -20,58 +20,67 @@
             </a>
           </li> --}}
 
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                aria-controls="form-elements">
-                <i class="icon-columns menu-icon"></i>
-                <span class="menu-title">Data Anak</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat Medis</a></li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <i class="icon-layout menu-icon"></i>
-                <span class="menu-title">Master Data</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('agama.index') }}">Agama</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('lokasiTugas.index') }}">Lokasi Tugas</a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhan.index') }}">Kebutuhan Anak</a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('pendidikan.index') }}">Tingkat
-                            Pendidikan</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan
-                            Darah</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('pekerjaan.index') }}">Jenis Pekerjaan</a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
-                            Sponsorship</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('penyakit.index') }}">Jenis Penyakit</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('raport.index') }}">
-                <i class="icon-paper menu-icon"></i>
-                <span class="menu-title">Raport Anak</span>
-            </a>
-        </li>
-        <li class="nav-item">
+          @auth 
+          @if(auth()->user()->role === 'admin') 
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
+                      aria-controls="form-elements">
+                      <i class="icon-columns menu-icon"></i>
+                      <span class="menu-title">Data Anak</span>
+                      <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="form-elements">
+                      <ul class="nav flex-column sub-menu">
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat Medis</a></li>
+                      </ul>
+                  </div>
+              </li>
+      
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                      <i class="icon-layout menu-icon"></i>
+                      <span class="menu-title">Master Data</span>
+                      <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="ui-basic">
+                      <ul class="nav flex-column sub-menu">
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('agama.index') }}">Agama</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a>
+                          </li>
+                          <!-- Add other Master Data items here -->
+                      </ul>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                    <i class="icon-grid-2 menu-icon"></i>
+                    <span class="menu-title">Pendukung</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="tables">
+                    <ul class="nav flex-column sub-menu">
+                        {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('pendukung.index') }}">Pendukung</a></li> --}}
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('dataDonatur.index') }}">Donatur</a></li>
+                    </ul>
+                </div>
+            </li>
+          @endif
+      @endauth
+      
+        @auth 
+        @if(auth()->user()->role === 'guru') 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('raport.index') }}">
+                    <i class="icon-paper menu-icon"></i>
+                    <span class="menu-title">Raport Anak</span>
+                </a>
+            </li>
+        @endif
+    @endauth
+    
+        {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="icon-bar-graph menu-icon"></i>
                 <span class="menu-title">Raport</span>
@@ -82,21 +91,10 @@
                     <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                <i class="icon-grid-2 menu-icon"></i>
-                <span class="menu-title">Pendukung</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-                <ul class="nav flex-column sub-menu">
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('pendukung.index') }}">Pendukung</a></li> --}}
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('dataDonatur.index') }}">Donatur</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+
+        
+        {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
                 <i class="icon-contract menu-icon"></i>
                 <span class="menu-title">Icons</span>
@@ -139,7 +137,7 @@
                 <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Documentation</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </nav>
 

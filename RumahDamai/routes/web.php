@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\MasterData\PendidikanController;
 use App\Http\Controllers\Admin\MasterData\PenyakitController;
 use App\Http\Controllers\Admin\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
-use App\Http\Controllers\Raport\RaportController;
+use App\Http\Controllers\Guru\Raport\RaportController;
 use App\Http\Controllers\Admin\DataDonatur\DonaturController;
 
 
@@ -54,8 +54,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
  */
 
+});
 
-    Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
+// Admin Routes List
+Route::middleware(['auth', 'user-access:guru'])->group(function () {
+    Route::get('/guru/home', [HomeController::class, 'guruHome'])->name('guru.home');
+
+Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
 Route::get('/raport/show/{id}', [RaportController::class, 'show'])->name('raport.show');
 Route::get('/raport/create', [RaportController::class, 'create'])->name('raport.create');
 Route::post('/raport/store', [RaportController::class, 'store'])->name('raport.store');
@@ -64,11 +69,6 @@ Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('ra
 Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
-});
-
-// Admin Routes List
-Route::middleware(['auth', 'user-access:guru'])->group(function () {
-    Route::get('/guru/home', [HomeController::class, 'guruHome'])->name('guru.home');
 });
 
 // Staff Routes List

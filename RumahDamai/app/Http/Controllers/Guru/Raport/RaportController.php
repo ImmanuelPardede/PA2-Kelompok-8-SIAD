@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Raport;
+namespace App\Http\Controllers\Guru\Raport;
 
 use App\Http\Controllers\Controller;
 use App\Models\Raport;
@@ -16,26 +16,26 @@ class RaportController extends Controller
     public function index()
     {
         $anak = Anak::all();
-        return view('raport.index', compact('anak'));
+        return view('guru.raport.index', compact('anak'));
     }
 
     public function show($id)
     {
         $anak = Anak::all();
         $raports = Raport::where('anak_id', $id)->get();
-        return view('raport.show', compact('raports','anak'));
+        return view('guru.raport.show', compact('raports','anak'));
     }
 
     public function create()
     {
         $anak = Anak::all();
-        return view('raport.create', compact('anak'));    }
+        return view('guru.raport.create', compact('anak'));    }
 
         public function detail($id)
         {
             $raport = Raport::findOrFail($id);
             $detailraports = DetailRaport::where('raport_id', $id)->get(); // Pastikan variabel ini terdefinisi
-            return view('raport.detail', compact('raport', 'detailraports'));
+            return view('guru.raport.detail', compact('raport', 'detailraports'));
         }
         
         
@@ -75,8 +75,10 @@ class RaportController extends Controller
         DetailRaport::create($data2);
     }
 
-    return redirect()->route('raport.index')
-        ->with('success', 'Raport created successfully.');
+    $anakId = $request->input('anak_id');
+
+return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport created successfully.');
+
 }
 
     
@@ -89,7 +91,7 @@ public function edit($id)
     $periode_awal = $periode_bulan[0];
     $periode_akhir = $periode_bulan[1];
     $detailraports = DetailRaport::where('raport_id', $id)->get(); // Mendapatkan detail raport berdasarkan ID raport
-    return view('raport.edit', compact('raport', 'anak', 'periode_awal', 'periode_akhir', 'detailraports'));
+    return view('guru.raport.edit', compact('raport', 'anak', 'periode_awal', 'periode_akhir', 'detailraports'));
 }
 
 
@@ -135,8 +137,10 @@ public function edit($id)
         DetailRaport::create($data);
     }
 
-    return redirect()->route('raport.index')->with('success', 'Raport updated successfully.');
-}
+    $raport = Raport::findOrFail($id);
+    $anakId = $raport->anak_id;
+    
+    return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport updated successfully.');}
 
 
 public function destroy($id)
@@ -148,7 +152,7 @@ public function destroy($id)
     $raport = Raport::findOrFail($id);
     $raport->delete();
 
-    return redirect()->route('raport.index')->with('success', 'Raport deleted successfully.');
+    return redirect()->route('guru.raport.index')->with('success', 'Raport deleted successfully.');
 }
 
 
@@ -157,7 +161,7 @@ public function pdf($id)
     $raport = Raport::findOrFail($id);
     $detailraports = DetailRaport::where('raport_id', $id)->get(); // Change variable name here
     $namaFile = 'raport_' . str_replace(' ', '_', $raport->anak->nama_lengkap) . '_' . str_replace(' ', '', $raport->periode_bulan) . '.pdf';
-    $pdf = PDF::loadview('raport.pdf', compact('raport', 'detailraports'));
+    $pdf = PDF::loadview('guru.raport.pdf', compact('raport', 'detailraports'));
     return $pdf->download($namaFile);
     
 }

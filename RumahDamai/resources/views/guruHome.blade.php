@@ -1,4 +1,3 @@
-//resources/views/managerHome.blade.php
 @extends('layouts.master')
 @section('content')
 <div class="container">
