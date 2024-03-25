@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Detail Jenis Kebutuhan</h2>
+        <h2>Detail Jenis Kebutuhan Disabilitas</h2>
 
         <div>
             <strong>Jenis Kebutuhan:</strong> {{ $kebutuhan->jenis_kebutuhan }}<br>

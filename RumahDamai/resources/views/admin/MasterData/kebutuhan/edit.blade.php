@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Edit Jenis kebutuhan</h2>
+        <h2>Edit Jenis kebutuhan Disabilitas</h2>
 
         <!-- Tampilkan pesan kesalahan validasi jika ada -->
         @if ($errors->any())

@@ -15,28 +15,11 @@ class AgamaSeeder extends Seeder
     {
         $agama = [
             'Islam',
-            'Kristen',
-            'Hindu',
+            'Kristen Protestan',
+            'Kristen Katolik',
             'Buddha',
-            'Yahudi',
-            'Sikhisme',
-            'Taoisme',
-            'Shinto',
-            'Baha\'i',
-            'Jainisme',
-            'Zoroastrianisme',
-            'Konfusianisme',
-            'Mormonisme',
-            'Wicca',
-            'Animisme',
-            'Shintoisme Neo-Jepang',
-            'Caodaisme',
-            'Tenrikyo',
-            'Cheondoisme',
-            'Bahá\'í Faith',
-            'Eckankar',
-            'Deisme',
-            'Panteisme',
+            'Hindu',
+            'Konghucu',
         ];
 
         foreach ($agama as $nama_agama) {
