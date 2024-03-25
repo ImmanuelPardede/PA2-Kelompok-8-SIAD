@@ -14,25 +14,25 @@
                     </div>
                 @endif
 
-                <a href="{{ route('kebutuhan.create') }}" class="btn btn-success mb-3">Tambah Jenis Kebutuhan</a>
+                <a href="{{ route('kebutuhanDisabilitas.create') }}" class="btn btn-success mb-3">Tambah Jenis Kebutuhan Disabilitas</a>
             </div>
 
             <div class="table-responsive">
                 <table class="table mt-3 table-hover">
                     <thead>
                         <tr>
-                            <th>Nama Kebutuhan</th>
+                            <th>Kebutuhan Disabilitas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($kebutuhanList as $kebutuhan)
+                        @forelse ($kebutuhanDisabilitasList as $kebutuhan_disabilitas)
                             <tr>
-                                <td>{{ $kebutuhan->jenis_kebutuhan }}</td>
+                                <td>{{ $kebutuhan_disabilitas->jenis_kebutuhan_disabilitas }}</td>
                                 <td>
-                                    <a href="{{ route('kebutuhan.show', $kebutuhan->id) }}" class="btn btn-info">Detail</a>
-                                    <a href="{{ route('kebutuhan.edit', $kebutuhan->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('kebutuhan.destroy', $kebutuhan->id) }}" method="post" style="display:inline;">
+                                    <a href="{{ route('kebutuhanDisabilitas.show', $kebutuhan_disabilitas->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('kebutuhanDisabilitas.edit', $kebutuhan_disabilitas->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('kebutuhanDisabilitas.destroy', $kebutuhan_disabilitas->id) }}" method="post" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
@@ -41,14 +41,14 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3">Tidak ada data Kebutuhan.</td>
+                                <td colspan="3">Tidak ada data Kebutuhan Disabilitas.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
             <div class="d-flex justify-content-end">
-                {{ $kebutuhanList->links('pagination::bootstrap-4') }}
+                {{ $kebutuhanDisabilitasList->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

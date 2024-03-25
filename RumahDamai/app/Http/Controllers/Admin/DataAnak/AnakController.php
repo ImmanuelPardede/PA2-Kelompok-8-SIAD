@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin\DataAnak;
 
 use App\Http\Controllers\Controller;
+use App\Models\KebutuhanDisabilitas;
 use Illuminate\Http\Request;
 use App\Models\Anak;
 use App\Models\Agama;
 use App\Models\GolonganDarah;
 use App\Models\JenisKelamin;
-use App\Models\Kebutuhan;
 use App\Models\Penyakit;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -30,9 +30,9 @@ class AnakController extends Controller
         $agama = Agama::all();
         $jenisKelamin = JenisKelamin::all();
         $golonganDarah = GolonganDarah::all();
-        $kebutuhan = Kebutuhan::all();
+        $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
-        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
+        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit'));
     }
 
     /**
@@ -46,7 +46,7 @@ class AnakController extends Controller
             'agama_id' => 'required',
             'jenis_kelamin_id' => 'required',
             'golongan_darah_id' => 'required',
-            'kebutuhan_id' => 'required',
+            'kebutuhan_disabilitas_id' => 'required',
             'penyakit_id' => 'nullable',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
@@ -88,7 +88,7 @@ class AnakController extends Controller
      */
     public function show(string $id)
     {
-        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit')->find($id);
+        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit')->find($id);
         $penyakit = $anak->penyakit;
 
         return view('admin.DataAnak.Anak.show', compact('anak', 'penyakit'));
@@ -102,10 +102,10 @@ class AnakController extends Controller
         $agama = Agama::all();
         $jenisKelamin = JenisKelamin::all();
         $golonganDarah = GolonganDarah::all();
-        $kebutuhan = Kebutuhan::all();
+        $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
         $anak = Anak::find($id);
-        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhan', 'penyakit'));
+        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit'));
     }
 
     /**
@@ -119,7 +119,7 @@ class AnakController extends Controller
             'agama_id' => 'nullable',
             'jenis_kelamin_id' => 'nullable',
             'golongan_darah_id' => 'nullable',
-            'kebutuhan_id' => 'nullable',
+            'kebutuhan_disabilitas_id' => 'nullable',
             'penyakit_id' => 'nullable',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',

@@ -28,8 +28,8 @@
                                         <td>{{ $anak->golonganDarah->golongan_darah ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Kebutuhan</th>
-                                        <td>{{ $anak->kebutuhan->jenis_kebutuhan ?? 'Data tidak tersedia' }}</td>
+                                        <th>Kebutuhan Disabilitas</th>
+                                        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
                                         <th>Tempat Lahir</th>
@@ -71,19 +71,6 @@
                                         <th>Status</th>
                                         <td>{{ $anak->status ?? 'Data tidak tersedia' }}</td>
                                     </tr>
-                                    <tr>
-                                        <th>Penyakit</th>
-                                        <td>
-                                            @if ($anak->riwayatMedis->isNotEmpty())
-                                                @foreach ($anak->riwayatMedis as $riwayatMedis)
-                                                    {{ $riwayatMedis->penyakit->jenis_penyakit }}<br>
-                                                @endforeach
-                                            @else
-                                                Data riwayat medis tidak tersedia.
-                                            @endif
-                                        </td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                         </div>

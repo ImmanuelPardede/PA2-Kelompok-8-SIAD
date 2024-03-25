@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\KebutuhanDisabilitasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -29,7 +30,7 @@ Auth::routes();
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
-    
+
     Route::get('/admin/index', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::resource('/DataAnak/anak', AnakController::class);
     Route::patch('/anak/{id}/aktifkan', [AnakController::class, 'aktifkan'])->name('anak.aktifkan');
@@ -40,7 +41,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/agama', AgamaController::class);
     Route::resource('/masterdata/jenisKelamin', JenisKelaminController::class);
     Route::resource('/masterdata/golonganDarah', GolonganDarahController::class);
-    Route::resource('/masterdata/kebutuhan', KebutuhanController::class);
+    Route::resource('/masterdata/kebutuhanDisabilitas', KebutuhanDisabilitasController::class);
     Route::resource('/masterdata/lokasiTugas', LokasiTugasController::class);
     Route::resource('/masterdata/pendidikan', PendidikanController::class);
     Route::resource('/masterdata/pekerjaan', PekerjaanController::class);

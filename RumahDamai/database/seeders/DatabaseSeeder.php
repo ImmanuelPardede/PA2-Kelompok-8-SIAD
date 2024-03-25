@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             TingkatPendidikanSeeder::class,
         ]);
         $this->call([
-            KebutuhanSeeder::class,
+            KebutuhanDisabilitasSeeder::class,
         ]);
         $this->call([
             PekerjaanSeeder::class,

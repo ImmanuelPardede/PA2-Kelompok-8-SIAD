@@ -38,11 +38,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="kebutuhan_id">Jenis Kebutuhan</label>
-                <select class="form-control js-example-basic-single" id="kebutuhan_id" name="kebutuhan_id">
-                    <option value="" disabled selected>-- Pilih Jenis Kebutuhan --</option>
-                    @foreach ($kebutuhan as $kebutuhanItem)
-                        <option value="{{ $kebutuhanItem->id }}">{{ $kebutuhanItem->jenis_kebutuhan }}</option>
+                <label for="kebutuhan_disabilitas_id">Jenis Kebutuhan Disabilitas</label>
+                <select class="form-control js-example-basic-single" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id">
+                    <option value="" disabled selected>-- Pilih Jenis Kebutuhan Disabilitas --</option>
+                    @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitasItem)
+                        <option value="{{ $kebutuhanDisabilitasItem->id }}">{{ $kebutuhanDisabilitasItem->jenis_kebutuhan_disabilitas }}</option>
                     @endforeach
                 </select>
             </div>

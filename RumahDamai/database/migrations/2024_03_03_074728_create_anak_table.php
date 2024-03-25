@@ -16,7 +16,7 @@ class CreateAnakTable extends Migration
 
             $table->unsignedBigInteger('jenis_kelamin_id')->nullable();
             $table->unsignedBigInteger('golongan_darah_id')->nullable();
-            $table->unsignedBigInteger('kebutuhan_id')->nullable();
+            $table->unsignedBigInteger('kebutuhan_disabilitas_id')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('disukai')->nullable();
@@ -31,7 +31,7 @@ class CreateAnakTable extends Migration
 
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('jenis_kelamin_id')->references('id')->on('jenis_kelamin');
-            $table->foreign('kebutuhan_id')->references('id')->on('kebutuhan');
+            $table->foreign('kebutuhan_disabilitas_id')->references('id')->on('kebutuhan_disabilitas');
             $table->foreign('golongan_darah_id')->references('id')->on('golongan_darah');
         });
     }

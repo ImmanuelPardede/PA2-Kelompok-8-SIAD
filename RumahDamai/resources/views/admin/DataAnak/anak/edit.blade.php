@@ -66,13 +66,13 @@
             </div>
 
             <div class="form-group">
-                <label for="kebutuhan_id">Kebutuhan:</label>
-                <select class="form-control" id="kebutuhan_id" name="kebutuhan_id" required>
-                    <option value="" disabled>-- Pilih Kebutuhan --</option>
-                    @foreach ($kebutuhan as $kebutuhanlist)
-                        <option value="{{ $kebutuhanlist->id }}"
-                            {{ $anak->kebutuhan_id == $kebutuhanlist->id ? 'selected' : '' }}>
-                            {{ $kebutuhanlist->jenis_kebutuhan }}
+                <label for="kebutuhan_disabilitas_id">Kebutuhan Disabilitas:</label>
+                <select class="form-control" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id" required>
+                    <option value="" disabled>-- Pilih Kebutuhan Disabilitas --</option>
+                    @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitaslist)
+                        <option value="{{ $kebutuhanDisabilitaslist->id }}"
+                            {{ $anak->kebutuhan_disabilitas_id == $kebutuhanDisabilitaslist->id ? 'selected' : '' }}>
+                            {{ $kebutuhanDisabilitaslist->jenis_kebutuhan_disabilitas }}
                         </option>
                     @endforeach
                 </select>

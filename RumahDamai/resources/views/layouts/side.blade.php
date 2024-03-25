@@ -50,7 +50,7 @@
                           <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a>
-                          <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhan.index') }}">Jenis Disabilitas</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('kebutuhanDisabilitas.index') }}">Jenis Kebutuhan</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('lokasiTugas.index') }}">Lokasi Penugasan</a>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('pekerjaan.index') }}">Jenis Pekerjaan</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('pendidikan.index') }}">Jenis Pendidikan</a>
