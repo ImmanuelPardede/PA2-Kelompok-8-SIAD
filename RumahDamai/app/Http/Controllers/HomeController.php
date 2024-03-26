@@ -39,13 +39,13 @@ class HomeController extends Controller
          $totalPegawai = User::count();
          return view('admin.index', compact('totalPegawai'));
      }
-     
+
      public function guruHome()
      {
          $totalPegawai = User::count();
          return view('guru.index', compact('totalPegawai'));
      }
-     
+
      public function staffHome()
      {
          $totalPegawai = User::count();
