@@ -2,23 +2,11 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
+            <a href="{{ route('dashboard') }}" class="nav-link">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="{{ route('anak.index') }}">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Data Anak</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('orangTuaWali.index') }}">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Data Orangtua/Wali</span>
-            </a>
-          </li> --}}
 
           @auth
           @if(auth()->user()->role === 'admin')
@@ -83,7 +71,6 @@
         </a>
         <div class="collapse" id="tables">
             <ul class="nav flex-column sub-menu">
-                {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('pendukung.index') }}">Pendukung</a></li> --}}
                 <li class="nav-item"> <a class="nav-link" href="{{ route('dataDonatur.index') }}">Donatur</a></li>
             </ul>
         </div>

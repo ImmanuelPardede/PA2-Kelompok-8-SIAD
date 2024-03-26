@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Pengumuman;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+     public function dashboard()
+     {
+        $pengumumans = Pengumuman::all();
+         $totalPegawai = User::count();
+         return view('dashboard', compact('totalPegawai','pengumumans'));
+     }
+
+
 
 
      public function adminHome()

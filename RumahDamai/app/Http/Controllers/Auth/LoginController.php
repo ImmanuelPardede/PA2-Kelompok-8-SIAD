@@ -34,11 +34,11 @@ class LoginController extends Controller
             $user = auth()->user();
         
             if ($user->role == 'admin') {
-                return redirect()->route('admin.home');
+                return redirect()->route('dashboard');
             } elseif ($user->role == 'guru') {
-                return redirect()->route('guru.home');
+                return redirect()->route('dashboard');
             } elseif ($user->role == 'staff') {
-                return redirect()->route('staff.home');
+                return redirect()->route('dashboard');
             }
         }
     
