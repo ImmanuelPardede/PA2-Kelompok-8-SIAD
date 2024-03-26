@@ -72,7 +72,7 @@
             <h5 class="card-title mb-4">Pengumuman</h5>
             <div class="mb-3 ml-auto">
               <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
-                </div>
+            </div>
           </div>
           @endif
 
@@ -189,6 +189,7 @@
     </div>
   </div>
 
-
+</div>
+</div>
 </div>
 @endsection
