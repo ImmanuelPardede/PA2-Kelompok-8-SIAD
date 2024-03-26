@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label for="anak_id">Nama Anak</label>
-                <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
+                <select class="form-control js-example-basic-single" id="anak_id" name="anak_id">
                     <option value="" disabled selected>-- Nama Anak --</option>
                     @foreach ($anak as $anakItem)
                         <option value="{{ $anakItem->id }}">{{ $anakItem->nama_lengkap }}</option>
@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="agama_id">Agama:</label>
-                <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" required>
+                <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                     <option value="" disabled selected>-- Pilih Agama --</option>
                     @foreach ($agama as $agamaItem)
                         <option value="{{ $agamaItem->id }}">{{ $agamaItem->agama }}</option>
@@ -25,23 +25,23 @@
             </div>
             <div class="form-group">
                 <label for="nama_ibu">Nama Ibu:</label>
-                <input type="text" class="form-control" id="nama_ibu" name="nama_ibu" required>
+                <input type="text" class="form-control" id="nama_ibu" name="nama_ibu">
             </div>
             <div class="form-group">
                 <label for="nama_ayah">Nama Ayah:</label>
-                <input type="text" class="form-control" id="nama_ayah" name="nama_ayah" required>
+                <input type="text" class="form-control" id="nama_ayah" name="nama_ayah">
             </div>
             <div class="form-group">
                 <label for="nik_ayah">NIK Ayah:</label>
-                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah" required>
+                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah">
             </div>
             <div class="form-group">
                 <label for="nik_ibu">NIK Ibu:</label>
-                <input type="text" class="form-control" id="nik_ibu" name="nik_ibu" required>
+                <input type="text" class="form-control" id="nik_ibu" name="nik_ibu">
             </div>
             <div class="form-group">
                 <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah:</label>
-                <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah" required>
+                <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah">
             </div>
             <div class="form-group">
                 <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu:</label>
@@ -51,17 +51,16 @@
                 <label for="alamat_orangtua">Alamat Orangtua:</label>
                 <input type="text" class="form-control" id="alamat_orangtua" name="alamat_orangtua">
             </div>
-            
+
             <div class="form-group">
                 <label for="pendidikan_ayah_id">Pendidikan Ayah:</label>
-                <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id" required>
+                <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id">
                     <option value="" disabled selected>-- Pilih Pendidikan --</option>
                     @foreach ($pendidikan as $pendidikanItem)
                         <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>
                     @endforeach
                 </select>
             </div>
-
 
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah:</label>
@@ -78,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label for="pendidikan_ibu_id">Pendidikan ibu:</label>
-                <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id" required>
+                <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id">
                     <option value="" disabled selected>-- Pilih Pendidikan --</option>
                     @foreach ($pendidikan as $pendidikanItem)
                         <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>

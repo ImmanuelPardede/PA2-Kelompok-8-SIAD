@@ -47,6 +47,7 @@
                   <div class="collapse" id="ui-basic">
                       <ul class="nav flex-column sub-menu">
                           <li class="nav-item"> <a class="nav-link" href="{{ route('agama.index') }}">Agama</a></li>
+                          <li class="nav-item"> <a class="nav-link" href="{{ route('disabilitas.index') }}">Jenis Disabilitas</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan Darah</a></li>
                           <li class="nav-item"> <a class="nav-link" href="{{ route('jenisKelamin.index') }}">Jenis Kelamin</a>

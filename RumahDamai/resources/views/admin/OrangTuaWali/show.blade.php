@@ -66,17 +66,17 @@
                                 <tr>
                                     <th>No Hp Ibu:</th>
                                     <td>{{ $orangtuawali->no_hp_ibu ?? 'Data tidak tersedia' }}</td>
-                                </tr>                                
+                                </tr>
                                 <tr>
-                                    <th>Nama WAli:</th>
+                                    <th>Nama Wali:</th>
                                     <td>{{ $orangtuawali->nama_wali ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Pekerjaan WAli:</th>
-                                    <td>{{ $orangtuawali->pekerjaan_wali_id ?? 'Data tidak tersedia' }}</td>
+                                    <th>Pekerjaan Wali:</th>
+                                    <td>{{ $orangtuawali->pekerjaan_wali_id->jenis_pekerjaan ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Tanggal Lahir WAli:</th>
+                                    <th>Tanggal Lahir Wali:</th>
                                     <td>{{ $orangtuawali->tanggal_lahir_wali ?? 'Data tidak tersedia' }}</td>
                                 </tr>
                             </tbody>
@@ -85,16 +85,6 @@
                 </div>
                 <div class="col-md-4">
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="{{ route('orangTuaWali.edit', $orangtuawali->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                    </form>
                 </div>
             </div>
         </div>
