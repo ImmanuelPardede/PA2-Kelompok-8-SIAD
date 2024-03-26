@@ -10,7 +10,7 @@ class Disabilitas extends Model
     use HasFactory;
 
     protected $table = 'disabilitas';
-    protected $fillable = ['jenis_disabilitas','deskripsi'];
+    protected $fillable = ['kategori_disabilitas', 'jenis_disabilitas','deskripsi'];
 
     // public function anakDisabilitas(){
     //     return $this->belongsToMany(AnakDisabilitas::class, 'disabilitas_id');

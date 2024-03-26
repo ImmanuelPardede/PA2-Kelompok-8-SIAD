@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
             AgamaSeeder::class,
         ]);
         $this->call([
+            DisabilitasSeeder::class,
+        ]);
+        $this->call([
             LokasiSeeder::class,
         ]);
         $this->call([

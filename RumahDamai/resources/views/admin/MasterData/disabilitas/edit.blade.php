@@ -20,6 +20,11 @@
             @method('PUT')
 
             <div class="form-group">
+                <label for="kategori_disabilitas">Kategori Disabilitas:</label>
+                <input type="text" class="form-control" name="kategori_disabilitas" value="{{ old('kategori_disabilitas', $jenisDisabilitas->kategori_disabilitas) }}">
+            </div>
+
+            <div class="form-group">
                 <label for="jenis_disabilitas">Jenis Disabilitas:</label>
                 <input type="text" class="form-control" name="jenis_disabilitas" value="{{ old('jenis_disabilitas', $jenisDisabilitas->jenis_disabilitas) }}">
             </div>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('disabilitas', function (Blueprint $table) {
             $table->id();
+            $table->string('kategori_disabilitas');
             $table->string('jenis_disabilitas');
             $table->string('deskripsi', 2000);
             $table->timestamps();
