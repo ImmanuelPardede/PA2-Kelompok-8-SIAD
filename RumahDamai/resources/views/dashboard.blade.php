@@ -36,7 +36,7 @@
         <div class="card card-dark-blue">
           <div class="card-body">
             <p class="mb-4">Anak</p>
-            <p class="fs-30 mb-2">61344</p>
+            <p class="fs-30 mb-2">{{ $totalanak }}</p>
             <p>Terdata, Sejak Dibuat Sistem Ini</p>
           </div>
         </div>
@@ -73,8 +73,8 @@
             <div class="mb-3 ml-auto">
               <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
             </div>
-          </div>
           @endif
+        </div>
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -188,7 +188,7 @@
                     </div>
     </div>
   </div>
-
+</div>
 </div>
 </div>
 </div>

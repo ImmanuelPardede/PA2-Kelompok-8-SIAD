@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pengumuman;
+use App\Models\Anak;
+
 
 class HomeController extends Controller
 {
@@ -27,8 +29,9 @@ class HomeController extends Controller
      public function dashboard()
      {
         $pengumumans = Pengumuman::all();
-         $totalPegawai = User::count();
-         return view('dashboard', compact('totalPegawai','pengumumans'));
+        $totalPegawai = User::count();
+        $totalanak = Anak::count();
+         return view('dashboard', compact('totalPegawai','pengumumans','totalanak'));
      }
 
 
