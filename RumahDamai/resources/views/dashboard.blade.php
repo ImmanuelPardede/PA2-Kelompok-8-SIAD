@@ -185,7 +185,7 @@
                                 <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
                             </div>
                         </div>
-                    </div>
+          </div>
     </div>
   </div>
 </div>

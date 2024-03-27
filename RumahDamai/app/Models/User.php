@@ -19,10 +19,22 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'status',
         'role',
+        'nip',
+        'golongan_darah_id',
+        'jenis_kelamin_id',
+        'agama_id',
+        'pendidikan_id',
+        'alamat',
+        'tanggal_masuk',
+        'tanggal_keluar',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'lokasi_penugasan_id',
+        'foto',
     ];
 
     
@@ -46,6 +58,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+
+
     protected function role(): Attribute
     {
         return new Attribute(
@@ -53,8 +68,29 @@ class User extends Authenticatable
         );
     }
 
-    public function todoLists()
+    public function agama()
     {
-        return $this->hasMany(TodoList::class);
+        return $this->belongsTo(Agama::class, 'agama_id');
     }
+
+    public function jenisKelamin()
+    {
+        return $this->belongsTo(JenisKelamin::class, 'jenis_kelamin_id');
+    }
+
+    public function golonganDarah()
+    {
+        return $this->belongsTo(GolonganDarah::class, 'golongan_darah_id');
+    }
+
+    public function pendidikan()
+    {
+        return $this->belongsTo(Pendidikan::class, 'pendidikan_id');
+    }
+
+    public function Lokasi()
+    {
+        return $this->belongsTo(Pendidikan::class, 'lokasi_penugasan_id');
+    }
+
 }

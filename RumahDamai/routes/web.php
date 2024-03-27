@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
 use App\Http\Controllers\Guru\Raport\RaportController;
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
+use App\Http\Controllers\Admin\Administrator\AdministratorController;
 
 
 
@@ -58,6 +59,17 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
     Route::put('pengumuman/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
     Route::delete('pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
+
+
+    Route::get('/administrator/admin', [AdministratorController::class, 'admin'])->name('admin.administrator.admin');
+    Route::get('/administrator/guru', [AdministratorController::class, 'guru'])->name('admin.administrator.guru');
+    Route::get('/administrator/staff', [AdministratorController::class, 'staff'])->name('admin.administrator.staff');
+    Route::get('/administrator/create', [AdministratorController::class, 'create'])->name('admin.administrator.create');
+    Route::get('/administrator/{id}', [AdministratorController::class, 'show'])->name('admin.administrator.show');
+    Route::post('/administrator/store', [AdministratorController::class, 'store'])->name('admin.administrator.store');
+    Route::get('/administrator/{user}/edit', [AdministratorController::class, 'edit'])->name('admin.administrator.edit');
+    Route::put('/administrator/{user}/update', [AdministratorController::class, 'update'])->name('admin.administrator.update');
+    Route::delete('/administrator/{user}/destroy', [AdministratorController::class, 'destroy'])->name('admin.administrator.destroy');
 
 
     /* Raport Demo */

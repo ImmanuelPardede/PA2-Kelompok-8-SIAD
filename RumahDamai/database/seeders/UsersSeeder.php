@@ -11,21 +11,21 @@ class UsersSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'nama_lengkap' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'role' => '0',
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Guru',
+            'nama_lengkap' => 'Guru',
             'email' => 'guru@gmail.com',
             'password' => Hash::make('password'),
             'role' => '1',
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Staff',
+            'nama_lengkap' => 'Staff',
             'email' => 'staff@gmail.com',
             'password' => Hash::make('password'),
             'role' => '2',
