@@ -92,11 +92,20 @@ Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->nam
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 
+Route::get('/guru/profile/edit/{user}', [AdministratorController::class, 'editGuruProfile'])->name('guru.profile.edit');
+Route::put('/guru/profile/update/{user}', [AdministratorController::class, 'updateStaffProfile'])->name('guru.profile.update');
+Route::get('/guru/profile/show/{user}', [AdministratorController::class, 'showGuruProfile'])->name('guru.profile.show');
+
 });
 
 // Staff Routes List
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
     Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
+
+Route::get('/staff/profile/edit/{user}', [AdministratorController::class, 'editStaffProfile'])->name('staff.profile.edit');
+Route::put('/staff/profile/update/{user}', [AdministratorController::class, 'updateStaffProfile'])->name('staff.profile.update');
+Route::get('/staff/profile/show/{user}', [AdministratorController::class, 'showStaffProfile'])->name('staff.profile.show');
+
 });
 
 

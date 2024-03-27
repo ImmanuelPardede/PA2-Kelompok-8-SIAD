@@ -7,15 +7,16 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-
+        @auth
+            @if (auth()->user()->role === 'admin')
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false"
+                aria-controls="charts">
                 <i class="icon-layout menu-icon"></i>
-                <span class="menu-title">Administrator</span>
+                <span class="menu-title">Kepegawaian</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('admin.administrator.admin') }}">Admin</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('admin.administrator.guru') }}">Guru</a></li>
@@ -24,8 +25,7 @@
             </div>
         </li>
 
-        @auth
-            @if (auth()->user()->role === 'admin')
+
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                         aria-controls="form-elements">
@@ -67,25 +67,19 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                        <i class="icon-grid-2 menu-icon"></i>
-                        <span class="menu-title">Pendukung</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="tables">
-                        <ul class="nav flex-column sub-menu">
-                            {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('pendukung.index') }}">Pendukung</a></li> --}}
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('dataDonatur.index') }}">Donatur</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                
             @endif
         @endauth
 
         @auth
             @if (auth()->user()->role === 'guru')
+            <li class="nav-item">
+                <a href="{{ route('guru.profile.show', ['user' => auth()->user()->id]) }}" class="nav-link">
+                    <i class="icon-grid menu-icon"></i>
+                    <span class="menu-title">Profile</span>
+                </a>
+            </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('raport.index') }}">
                         <i class="icon-paper menu-icon"></i>
@@ -97,6 +91,14 @@
 
     @auth
     @if(auth()->user()->role === 'staff')
+
+    <li class="nav-item">
+        <a href="{{ route('staff.profile.show', ['user' => auth()->user()->id]) }}" class="nav-link">
+            <i class="icon-grid menu-icon"></i>
+            <span class="menu-title">Profile</span>
+        </a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
             <i class="icon-grid-2 menu-icon"></i>
@@ -109,8 +111,12 @@
             </ul>
         </div>
     </li>
+
+
     @endif
 @endauth
+
+
 
         {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">

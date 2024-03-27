@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdministratorController extends Controller
 {
-    // Menampilkan semua akun
+    /* ================================== - Adamin - ===================================================== */
     public function admin()
     {
         $users = User::all();
@@ -28,29 +28,30 @@ class AdministratorController extends Controller
         return view('admin.administrator.staff', compact('users'));
     }
 
-    // Menampilkan form untuk menambahkan akun
     public function create()
     {
-        return view('admin.administrator.create');
+        $users = User::all();
+
+        return view('admin.administrator.create',compact('users'));
     }
 
     public function show($id)
     {
-        $user = User::findOrFail($id); // Mengambil pengguna berdasarkan ID
+        $user = User::findOrFail($id); 
         
-        // Periksa peran pengguna dan sesuaikan tautan kembali
+      
         switch ($user->role) {
             case 0:
                 $redirectRoute = 'admin.administrator.admin';
                 break;
             case 1:
-                $redirectRoute = 'admin.administrator.guru'; // Ganti 'guru.index' dengan nama rute untuk halaman guru
+                $redirectRoute = 'admin.administrator.guru'; 
                 break;
             case 2:
-                $redirectRoute = 'admin.administrator.staff'; // Ganti 'staff.index' dengan nama rute untuk halaman staff
+                $redirectRoute = 'admin.administrator.staff'; 
                 break;
             default:
-                $redirectRoute = 'dashboard'; // Ganti 'home' dengan rute default jika tidak sesuai peran yang diharapkan
+                $redirectRoute = 'dashboard'; 
                 break;
         }
     
@@ -67,30 +68,51 @@ class AdministratorController extends Controller
             'nama_lengkap' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required|string',
+            'role' => 'required|string|in:admin,guru,staff', 
         ]);
-
+    
         $user = new User();
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
+        $user->role = match ($request->role) {
+            'admin' => 0,
+            'guru' => 1,
+            'staff' => 2,
+            default => 0, 
+        };
         $user->save();
-
-        return redirect()->route('admin.administrator.index')->with('success', 'Akun berhasil ditambahkan.');
+    
+        switch ($user->role) { 
+            case 'admin':
+                $redirectRoute = 'admin.administrator.admin';
+                break;
+            case 'guru':
+                $redirectRoute = 'admin.administrator.guru';
+                break;
+            case 'staff':
+                $redirectRoute = 'admin.administrator.staff';
+                break;
+            default:
+                $redirectRoute = 'dashboard'; 
+                break;
+        }
+    
+        return redirect()->route($redirectRoute)->with('success', 'Akun berhasil ditambahkan.');
     }
+    
 
-    // Menampilkan form untuk mengedit akun
+
     public function edit(User $user)
     {
         return view('admin.administrator.edit', compact('user'));
     }
 
-    // Menyimpan perubahan pada akun yang diedit
     public function update(Request $request, User $user)
 {
     $request->validate([
         'nama_lengkap' => 'required|string',
         'email' => 'required|email|unique:users,email,'.$user->id,
-        'role' => 'required|string|in:admin,guru,staff', // Memastikan input hanya admin, guru, atau staff
+        'role' => 'required|string|in:admin,guru,staff', 
         'nip' => 'nullable|string',
         'golongan_darah_id' => 'nullable|string',
         'jenis_kelamin_id' => 'nullable|string',
@@ -105,18 +127,31 @@ class AdministratorController extends Controller
         'foto' => 'nullable|string',
     ]);
 
-    // Inisialisasi nilai role berdasarkan tipe pengguna
     $role = match ($request->role) {
         'admin' => 0,
         'guru' => 1,
         'staff' => 2,
-        default => 0, // Nilai default jika input tidak cocok
+        default => 0, 
     };
 
-    // Update atribut user dan role
     $user->update(array_merge($request->all(), ['role' => $role]));
 
-    return redirect()->route('admin.administrator.index')->with('success', 'Akun berhasil diperbarui.');
+    switch ($user->role) { 
+        case 'admin':
+            $redirectRoute = 'admin.administrator.admin';
+            break;
+        case 'guru':
+            $redirectRoute = 'admin.administrator.guru';
+            break;
+        case 'staff':
+            $redirectRoute = 'admin.administrator.staff';
+            break;
+        default:
+            $redirectRoute = 'dashboard'; 
+            break;
+    }
+
+    return redirect()->route($redirectRoute)->with('success', 'Akun berhasil ditambahkan.');
 }
 
 
@@ -125,7 +160,129 @@ class AdministratorController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
-        return redirect()->route('admin.administrator.index')->with('success', 'Akun berhasil dihapus.');
+        
+        // Tentukan rute redirect berdasarkan peran pengguna yang dihapus
+        switch ($user->role) {
+            case 'admin': 
+                $redirectRoute = 'admin.administrator.admin';
+                break;
+            case 'guru': 
+                $redirectRoute = 'admin.administrator.guru';
+                break;
+            case 'staff': 
+                $redirectRoute = 'admin.administrator.staff';
+                break;
+            default: 
+                $redirectRoute = 'dashboard';
+                break;
+        }
+    
+        return redirect()->route($redirectRoute)->with('success', 'Akun berhasil diperbarui.');
     }
+
+
+    /* ======================================== - GURU - ===================================================== */
+    public function editGuruProfile(User $user)
+{
+    // Pastikan hanya pengguna yang sedang login yang dapat mengedit profil guru mereka sendiri
+    if(auth()->user()->id === $user->id && $user->role === 'guru') {
+        return view('guru.profile.edit', compact('user'));
+    } else {
+        return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit profil guru lain.');
+    }
+}
+
+public function updateGuruProfile(Request $request, User $user)
+{
+    // Validasi data yang dikirimkan untuk update profil guru
+    $request->validate([
+        'nama_lengkap' => 'required|string',
+        'email' => 'required|email|unique:users,email,'.$user->id,
+        'nip' => 'nullable|string',
+        'golongan_darah_id' => 'nullable|string',
+        'jenis_kelamin_id' => 'nullable|string',
+        'agama_id' => 'nullable|string',
+        'pendidikan_id' => 'nullable|string',
+        'alamat' => 'nullable|string',
+        'tanggal_masuk' => 'nullable|date',
+        'tanggal_keluar' => 'nullable|date',
+        'tempat_lahir' => 'nullable|string',
+        'tanggal_lahir' => 'nullable|date',
+        'lokasi_penugasan_id' => 'nullable|string',
+        'foto' => 'nullable|string',
+    ]);
+
+    // Pastikan hanya pengguna yang sedang login yang dapat mengedit profil guru mereka sendiri
+    if(auth()->user()->id === $user->id && $user->role === 'guru') {
+        $user->update($request->all());
+
+        return redirect()->route('guru.profile.show', ['user' => $user])->with('success', 'Profil guru berhasil diperbarui.');
+    } else {
+        return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit profil guru lain.');
+    }
+}
+
+
+public function showGuruProfile(User $user)
+{
+    // Pastikan hanya pengguna yang sedang login yang dapat melihat profil guru mereka sendiri
+    if(auth()->user()->id === $user->id && $user->role === 'guru') {
+        return view('guru.profile.show', compact('user'));
+    } else {
+        return redirect()->back()->with('error', 'Anda tidak diizinkan melihat profil guru lain.');
+    }
+}
+
+    
+    /* ======================================== - STAFF - ===================================================== */
+
+    public function editStaffProfile(User $user)
+    {
+        // Pastikan hanya pengguna yang sedang login yang dapat mengedit profil staff mereka sendiri
+        if(auth()->user()->id === $user->id && $user->role === 'staff') {
+            return view('staff.profile.edit', compact('user'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit profil staff lain.');
+        }
+    }
+    
+    public function updateStaffProfile(Request $request, User $user)
+    {
+        $request->validate([
+            'nama_lengkap' => 'required|string',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'nip' => 'nullable|string',
+            'golongan_darah_id' => 'nullable|string',
+            'jenis_kelamin_id' => 'nullable|string',
+            'agama_id' => 'nullable|string',
+            'pendidikan_id' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'tanggal_masuk' => 'nullable|date',
+            'tanggal_keluar' => 'nullable|date',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'lokasi_penugasan_id' => 'nullable|string',
+            'foto' => 'nullable|string',
+        ]);
+    
+        // Pastikan hanya pengguna yang sedang login yang dapat mengedit profil guru mereka sendiri
+        if(auth()->user()->id === $user->id && $user->role === 'staff') {
+            $user->update($request->all());
+    
+            return redirect()->route('staff.profile.show', ['user' => $user])->with('success', 'Profil guru berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit profil guru lain.');
+        }
+    }
+    
+    public function showStaffProfile(User $user)
+    {
+        // Pastikan hanya pengguna yang sedang login yang dapat melihat profil staff mereka sendiri
+        if(auth()->user()->id === $user->id && $user->role === 'staff') {
+            return view('staff.profile.show', compact('user'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan melihat profil staff lain.');
+        }
+    }
+        
 }

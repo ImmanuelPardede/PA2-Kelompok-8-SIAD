@@ -67,10 +67,12 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between">
-            @if(Auth::user()->role == 'admin')
 
             <h5 class="card-title mb-4">Pengumuman</h5>
+            @if(Auth::user()->role == 'admin')
+
             <div class="mb-3 ml-auto">
+
               <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
             </div>
           @endif
@@ -81,10 +83,7 @@
                     <thead>
                         <tr>
                             <th>Judul</th>
-                            <th>Dibuat</th>
-                            <th>Status</th>
                             @if(Auth::user()->role == 'admin')
-
                             <th>Aksi</th>
                             @endif
 
@@ -93,15 +92,18 @@
                     <tbody>
                         @foreach($pengumumans as $pengumuman)
                         <tr>
-                            <td><a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}">{{ $pengumuman->judul }}</a></td>
-                            <td>{{ $pengumuman->created_at->format('d/m/Y H:i') }}</td>
-                            <!-- Tambahkan logika status di sini -->
-                            <td>Status</td>
-                            <!-- Dropdown menu untuk aksi -->
-                            @if(Auth::user()->role == 'admin')
-
+                          <td>
+                            <a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}">
+                                @if(Auth::user()->role == 'admin') <!-- Admin -->
+                                    {{ Str::limit($pengumuman->judul, 55) }}
+                                @else
+                                    {{ Str::limit($pengumuman->judul, 75) }}
+                                @endif
+                            </a>
+                        </td>
+                        
+                                                    @if(Auth::user()->role == 'admin')
                             <td>
-                              
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Aksi

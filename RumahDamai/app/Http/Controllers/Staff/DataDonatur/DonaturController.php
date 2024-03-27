@@ -13,13 +13,13 @@ class DonaturController extends Controller
     public function index()
     {
         $donaturList = Donatur::orderBy('created_at', 'desc')->paginate(7);
-        return view('admin.DataDonatur.index', compact('donaturList'));
+        return view('staff.DataDonatur.index', compact('donaturList'));
     }
 
     public function create()
     {
         $donasi = Donasi::all();
-        return view('admin.DataDonatur.create', compact('donasi'));
+        return view('staff.DataDonatur.create', compact('donasi'));
     }
 
     public function store(Request $request)
@@ -65,14 +65,14 @@ class DonaturController extends Controller
     public function show($id)
     {
         $donatur = Donatur::with('donasi')->find($id);
-        return view('admin.DataDonatur.show', compact('donatur'));
+        return view('staff.DataDonatur.show', compact('donatur'));
     }
 
     public function edit($id)
     {
         $donasi = Donasi::all();
         $donatur = Donatur::find($id);
-        return view('admin.DataDonatur.edit', compact('donasi', 'donatur'));
+        return view('staff.DataDonatur.edit', compact('donasi', 'donatur'));
     }
 
     public function update(Request $request, $id)
