@@ -76,7 +76,14 @@
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
           {{ Auth::user()->name }}
-          <img src="skydash/images/faces/face28.jpg" alt=""/>
+<!-- Jika pengguna terautentikasi dan memiliki foto profil -->
+@if (Auth::check() && Auth::user()->foto)
+    <img src="{{ asset('uploads/pegawai/' . Auth::user()->foto) }}" alt="">
+@else
+    <!-- Jika pengguna belum terautentikasi atau tidak memiliki foto profil -->
+    <img src="{{ asset('uploads/default/bodat.jpg') }}" alt="Default Photo">
+@endif
+          
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
           <a class="dropdown-item">

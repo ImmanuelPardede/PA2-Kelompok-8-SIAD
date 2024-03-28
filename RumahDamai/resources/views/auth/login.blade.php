@@ -83,19 +83,19 @@ width: 150px;
 </head>
 <body>
   <div class="container">
-    
+
     <img src="{{ asset('skydash/images/logo.png') }}" alt="">
     <figure>YPA Rumah Damai</figure>
     <hr>
     @if ($errors->any())
-            <div style="color: red;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div style="color: red;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <form method="POST" action="{{ url('/login') }}">
             @csrf
       <label for="email">Email:</label>

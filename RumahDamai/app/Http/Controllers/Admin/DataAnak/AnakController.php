@@ -86,8 +86,7 @@ class AnakController extends Controller
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
     }
 
-
-
+  
     /**
      * Display the specified resource.
      */

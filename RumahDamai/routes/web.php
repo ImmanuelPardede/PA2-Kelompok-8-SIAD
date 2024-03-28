@@ -93,7 +93,7 @@ Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('ra
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 
 Route::get('/guru/profile/edit/{user}', [AdministratorController::class, 'editGuruProfile'])->name('guru.profile.edit');
-Route::put('/guru/profile/update/{user}', [AdministratorController::class, 'updateStaffProfile'])->name('guru.profile.update');
+Route::put('/guru/profile/update/{user}', [AdministratorController::class, 'updateGuruProfile'])->name('guru.profile.update');
 Route::get('/guru/profile/show/{user}', [AdministratorController::class, 'showGuruProfile'])->name('guru.profile.show');
 
 });

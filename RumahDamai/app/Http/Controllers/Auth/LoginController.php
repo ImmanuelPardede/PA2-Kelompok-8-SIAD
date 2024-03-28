@@ -21,30 +21,30 @@ class LoginController extends Controller
     }
  
     public function login(Request $request)
-    {   
-        $input = $request->all();
-       
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        
-       
-        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'status' => 'aktif'))) {
-            $user = auth()->user();
-        
-            if ($user->role == 'admin') {
-                return redirect()->route('dashboard');
-            } elseif ($user->role == 'guru') {
-                return redirect()->route('dashboard');
-            } elseif ($user->role == 'staff') {
-                return redirect()->route('dashboard');
-            }
-        }
+{   
+    $input = $request->all();
+   
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
     
-        // If authentication fails or the user type is not recognized
-        return redirect()->route('login')->with('error', 'Email-Address And Password Are Wrong.');
+    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'status' => 'aktif'))) {
+        $user = auth()->user();
+    
+        if ($user->role == 'admin') {
+            return redirect()->route('dashboard');
+        } elseif ($user->role == 'guru') {
+            return redirect()->route('dashboard');
+        } elseif ($user->role == 'staff') {
+            return redirect()->route('dashboard');
+        }
     }
+
+    // Jika auth()->attempt mengembalikan false, tandai bahwa ada kesalahan
+    return back()->withErrors(['email' => 'Email atau password salah.']);
+}
+
 
     public function logout(Request $request)
     {

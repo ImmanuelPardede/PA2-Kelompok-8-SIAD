@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+<div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Daftar Akun Guru</h1>
+    <a href="{{ route('admin.administrator.create') }}" class="btn btn-primary">Create</a>
+</div>
 
     @if ($users->count() > 0)
         <table class="table">
