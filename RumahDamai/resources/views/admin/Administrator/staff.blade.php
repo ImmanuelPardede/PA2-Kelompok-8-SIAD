@@ -1,30 +1,40 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Daftar Akun Staff</h1>
-    <a href="{{ route('admin.administrator.create') }}" class="btn btn-primary">Create</a>
-</div>
-    @if ($users->count() > 0)
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nama Lengkap</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Role</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users->where('role', 'staff') as $user)
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="card-title">Daftar Akun Staff</h1>
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                <a href="{{ route('admin.administrator.create') }}" class="btn btn-success mb-3">Tambah Staff</a>
+            </div>
+
+            <div class="table-responsive">
+                @if ($users->count() > 0)
+                <table class="table mt-3 table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nama Lengkap</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users->where('role', 'staff') as $user)
                         <tr>
                             <td>{{ $user->nama_lengkap }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->status }}</td>
-                            <td>staff</td>
+                            <td>{{ $user->role }}</td>
                             <td>
-                                <a href="{{ route('admin.administrator.show', $user->id) }}" class="btn btn-sm btn-info">Show</a> <!-- Tautan Show -->
+                                <a href="{{ route('admin.administrator.show', $user->id) }}" class="btn btn-sm btn-info">Detail</a> <!-- Ubah "Show" menjadi "Detail" -->
                                 <a href="{{ route('admin.administrator.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                 <form action="{{ route('admin.administrator.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
@@ -33,10 +43,14 @@
                                 </form>
                             </td>
                         </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>Tidak ada akun admin yang tersedia.</p>
-    @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                @else
+                <p>Tidak ada akun admin yang tersedia.</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

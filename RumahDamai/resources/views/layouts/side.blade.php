@@ -74,10 +74,15 @@
         @auth
             @if (auth()->user()->role === 'guru')
             <li class="nav-item">
-                <a href="{{ route('guru.profile.show', ['user' => auth()->user()->id]) }}" class="nav-link">
-                    <i class="icon-grid menu-icon"></i>
-                    <span class="menu-title">Profile</span>
+                <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+                    <i class="mdi mdi-account menu-icon"></i>
+                    <span class="menu-title">Data Induk Pegawai</span>
                 </a>
+                <div class="collapse" id="error">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri </a></li>
+                    </ul>
+                </div>
             </li>
 
                 <li class="nav-item">
@@ -91,12 +96,16 @@
 
     @auth
     @if(auth()->user()->role === 'staff')
-
     <li class="nav-item">
-        <a href="{{ route('staff.profile.show', ['user' => auth()->user()->id]) }}" class="nav-link">
-            <i class="icon-grid menu-icon"></i>
-            <span class="menu-title">Profile</span>
+        <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+            <i class="mdi mdi-account menu-icon"></i>
+            <span class="menu-title">Data Induk Pegawai</span>
         </a>
+        <div class="collapse" id="error">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri </a></li>
+            </ul>
+        </div>
     </li>
 
     <li class="nav-item">

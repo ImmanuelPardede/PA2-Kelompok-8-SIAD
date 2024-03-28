@@ -79,7 +79,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 });
 
-// Admin Routes List
+
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
 
 Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
@@ -92,9 +92,14 @@ Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->nam
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 
-Route::get('/guru/profile/edit/{user}', [AdministratorController::class, 'editGuruProfile'])->name('guru.profile.edit');
-Route::put('/guru/profile/update/{user}', [AdministratorController::class, 'updateGuruProfile'])->name('guru.profile.update');
-Route::get('/guru/profile/show/{user}', [AdministratorController::class, 'showGuruProfile'])->name('guru.profile.show');
+Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
+Route::put('/guru/DataDiri/update/{user}', [AdministratorController::class, 'updateGuruDataDiri'])->name('guru.DataDiri.update');
+Route::get('/guru/DataDiri/show/{user}', [AdministratorController::class, 'showGuruDataDiri'])->name('guru.DataDiri.show');
+Route::get('/guru/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordGuru'])->name('guru.DataDiri.password');
+Route::post('/guru/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordGuru'])->name('guru.DataDiri.password');
+
+
+
 
 });
 
@@ -102,9 +107,11 @@ Route::get('/guru/profile/show/{user}', [AdministratorController::class, 'showGu
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
     Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
 
-Route::get('/staff/profile/edit/{user}', [AdministratorController::class, 'editStaffProfile'])->name('staff.profile.edit');
-Route::put('/staff/profile/update/{user}', [AdministratorController::class, 'updateStaffProfile'])->name('staff.profile.update');
-Route::get('/staff/profile/show/{user}', [AdministratorController::class, 'showStaffProfile'])->name('staff.profile.show');
+Route::get('/staff/DataDiri/edit/{user}', [AdministratorController::class, 'editStaffDataDiri'])->name('staff.DataDiri.edit');
+Route::put('/staff/DataDiri/update/{user}', [AdministratorController::class, 'updateStaffDataDiri'])->name('staff.DataDiri.update');
+Route::get('/staff/DataDiri/show/{user}', [AdministratorController::class, 'showStaffDataDiri'])->name('staff.DataDiri.show');
+Route::get('/staff/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordStaff'])->name('staff.DataDiri.password');
+Route::post('/staff/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('staff.DataDiri.password');
 
 });
 

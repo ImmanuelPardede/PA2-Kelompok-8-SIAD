@@ -22,7 +22,6 @@
                                 <th scope="col">Foto</th>
                                 <th scope="col">Nama Lengkap</th>
                                 <th scope="col">Jenis Kelamin</th>
-                                <th scope="col">Kebutuhan Disabilitas</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
