@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="card-title">Jenis Anak Non Disabilitas</h1>
+                <h1 class="card-title">Anak Non Disabilitas</h1>
 
                 <!-- Tampilkan notifikasi jika ada -->
                 @if(session('success'))
@@ -21,14 +21,21 @@
                 <table class="table mt-3 table-hover">
                     <thead>
                         <tr>
-                            <th>Jenis Anak Non Disabilitas</th>
+                            <th>Nama Anak</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($anakNonDisabilitasList as $anakNonDisabilitas)
                             <tr>
-                                <td>{{ $anakNonDisabilitas->jenis_anak_non_disabilitas }}</td>
+                                <td>{{ $anakNonDisabilitas->anak->nama_lengkap }}</td>
+                                <td>
+                                    @if ($anakNonDisabilitas->anak)
+                                        {{ $anakNonDisabilitas->anak->nama_lengkap }}
+                                    @else
+                                        Anak not found
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('anakNonDisabilitas.show', $anakNonDisabilitas->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('anakNonDisabilitas.edit', $anakNonDisabilitas->id) }}" class="btn btn-warning">Edit</a>

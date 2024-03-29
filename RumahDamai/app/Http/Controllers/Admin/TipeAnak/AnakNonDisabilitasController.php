@@ -14,7 +14,7 @@ class AnakNonDisabilitasController extends Controller
      */
     public function index()
     {
-        $anakNonDisabilitasList = AnakNonDisabilitas::orderBy('jenis_anak_non_disabilitas', 'asc')->paginate(7);
+        $anakNonDisabilitasList = AnakNonDisabilitas::with('anak')->orderBy('jenis_anak_non_disabilitas', 'asc')->paginate(7);
         return view('admin.DataAnak.tipeAnak.anakNonDisabilitas.index', compact('anakNonDisabilitasList'));
 
     }
