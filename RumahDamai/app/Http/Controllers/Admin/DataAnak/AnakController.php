@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin\DataAnak;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnakDisabilitas;
+use App\Models\AnakNonDisabilitas;
+use App\Models\Disabilitas;
+use App\Models\NonDisabilitas;
 use App\Models\KebutuhanDisabilitas;
 use Illuminate\Http\Request;
 use App\Models\Anak;
@@ -55,38 +59,61 @@ class AnakController extends Controller
             'alamat' => 'required|string',
             'kelebihan' => 'nullable|string',
             'kekurangan' => 'nullable|string',
-
+            'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
         ]);
 
-        $data = $request->except('_token');
-        $data['status'] = 'aktif';
-        $data['tanggal_masuk'] = now();
+        // Simpan data anak
+        $anak = Anak::create([
+            'nama_lengkap' => $request->nama_lengkap,
+            'agama_id' => $request->agama_id,
+            'jenis_kelamin_id' => $request->jenis_kelamin_id,
+            'golongan_darah_id' => $request->golongan_darah_id,
+            'kebutuhan_disabilitas_id' => $request->kebutuhan_disabilitas_id,
+            'penyakit_id' => $request->penyakit_id,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'disukai' => $request->disukai,
+            'tidak_disukai' => $request->tidak_disukai,
+            'alamat' => $request->alamat,
+            'kelebihan' => $request->kelebihan,
+            'kekurangan' => $request->kekurangan,
+            'status' => 'aktif',
+            'tanggal_masuk' => now(),
+            'tipe_anak' => $request->tipe_anak,
+        ]);
 
+        if ($request->tipe_anak == 'disabilitas') {
+            AnakDisabilitas::create([
+                'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
+                'nama_lengkap' => $anak->nama_lengkap,
+                'tipe_anak' => 'disabilitas',
+            ]);
+        } elseif ($request->tipe_anak == 'non_disabilitas') {
+            AnakNonDisabilitas::create([
+                'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
+                'nama_lengkap' => $anak->nama_lengkap,
+                'tipe_anak' => 'non_disabilitas',
+            ]);
+        }
 
+        // Mengelola upload foto profil
         if ($request->hasFile('foto_profil')) {
             $gambar = $request->file('foto_profil');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME)); // Getting file name without extension
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension(); // Appending extension to file name
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
             // Pindahkan gambar ke direktori yang diinginkan
             $gambar->move('uploads/anak/', $new_gambar);
 
             // Update path gambar pada entitas anak yang ada
-            $data['foto_profil'] = 'uploads/anak/' . $new_gambar; // Updating $data array with new image path
+            $anak->foto_profil = 'uploads/anak/' . $new_gambar;
+            $anak->save();
         }
-
-        if ($request->has('kebutuhan_disabilitas_id')) {
-            $data['kebutuhan_disabilitas_id'] = $request->kebutuhan_disabilitas_id;
-        }
-        
-
-        // Membuat data anak baru di database
-        Anak::create($data);
 
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
     }
 
-  
+
     /**
      * Display the specified resource.
      */
@@ -109,12 +136,19 @@ class AnakController extends Controller
         $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
         $anak = Anak::find($id);
+
+        // Periksa apakah data anak ditemukan
+        if (!$anak) {
+            return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
+        }
+
         return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit'));
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -132,9 +166,14 @@ class AnakController extends Controller
             'alamat' => 'nullable|string',
             'kelebihan' => 'nullable|string',
             'kekurangan' => 'nullable|string',
+            'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
         ]);
-
         $anak = Anak::find($id);
+
+        if (!$anak) {
+            return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
+        }
+
         $data = $request->except('_token', '_method', 'foto_profil');
 
         if ($request->hasFile('foto_profil')) {
@@ -153,8 +192,34 @@ class AnakController extends Controller
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
         }
 
-        $anak->update($data);
+        if ($request->filled('tipe_anak') && $anak->tipe_anak != $request->tipe_anak) {
+            if ($anak->tipe_anak == 'disabilitas') {
+                $anakDisabilitas = AnakDisabilitas::where('anak_id', $anak->id)->first();
+                if ($anakDisabilitas) {
+                    $anakDisabilitas->delete();
+                }
+            } elseif ($anak->tipe_anak == 'non_disabilitas') {
+                $anakNonDisabilitas = AnakNonDisabilitas::where('anak_id', $anak->id)->first();
+                if ($anakNonDisabilitas) {
+                    $anakNonDisabilitas->delete();
+                }
+            }
+            if ($request->tipe_anak == 'disabilitas') {
+                AnakDisabilitas::updateOrCreate(
+                    ['anak_id' => $anak->id],
+                    ['nama_lengkap' => $anak->nama_lengkap, 'tipe_anak' => 'disabilitas']
+                );
+            } elseif ($request->tipe_anak == 'non_disabilitas') {
+                AnakNonDisabilitas::updateOrCreate(
+                    ['anak_id' => $anak->id],
+                    ['nama_lengkap' => $anak->nama_lengkap, 'tipe_anak' => 'non_disabilitas']
+                );
+            }
 
+            $anak->tipe_anak = $request->tipe_anak;
+            $anak->save();
+        }
+        $anak->update($data);
         return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }
 
@@ -163,14 +228,11 @@ class AnakController extends Controller
      */
     public function destroy(string $id)
     {
-        // Hapus anak berdasarkan ID
         $anak = Anak::find($id);
         if ($anak) {
-            // Hapus foto profil jika ada
             if ($anak->foto_profil) {
-                // Pastikan file ada sebelum menghapus
                 if (file_exists(public_path($anak->foto_profil))) {
-                    unlink(public_path($anak->foto_profil)); // Hapus file gambar
+                    unlink(public_path($anak->foto_profil));
                 }
             }
 
@@ -181,12 +243,10 @@ class AnakController extends Controller
         }
     }
 
-
     public function nonaktifkan(string $id)
     {
         $anak = Anak::find($id);
         if ($anak) {
-            // Mengisi tanggal_keluar dengan tanggal saat ini
             $anak->tanggal_keluar = now();
             $anak->status = 'nonaktif';
             $anak->save();
@@ -201,7 +261,7 @@ class AnakController extends Controller
     {
         $anak = Anak::find($id);
         if ($anak) {
-            $anak->tanggal_keluar = null; // Menghapus tanggal_keluar
+            $anak->tanggal_keluar = null;
             $anak->status = 'aktif';
             $anak->save();
 

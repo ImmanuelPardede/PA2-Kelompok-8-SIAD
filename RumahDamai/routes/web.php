@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\MasterData\LokasiTugasController;
 use App\Http\Controllers\Admin\MasterData\AgamaController;
 use App\Http\Controllers\Admin\MasterData\DonasiController;
 use App\Http\Controllers\Admin\MasterData\DisabilitasController;
+use App\Http\Controllers\Admin\TipeAnak\AnakDisabilitasController;
 use App\Http\Controllers\Admin\MasterData\JenisKelaminController;
 use App\Http\Controllers\Admin\MasterData\GolonganDarahController;
 use App\Http\Controllers\Admin\MasterData\PekerjaanController;
@@ -50,6 +52,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/sponsorship', SponsorshipController::class);
     Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/disabilitas', DisabilitasController::class);
+    Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
+    Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
 
 

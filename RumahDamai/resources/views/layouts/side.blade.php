@@ -45,6 +45,21 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                        <i class="icon-grid-2 menu-icon"></i>
+                        <span class="menu-title">Tipe Anak</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="tables">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('anakDisabilitas.index') }}">Disabilitas</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('anakNonDisabilitas.index') }}">Non Disabilitas</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                         aria-controls="ui-basic">
                         <i class="icon-layout menu-icon"></i>
@@ -67,7 +82,8 @@
                         </ul>
                     </div>
                 </li>
-                
+
+
             @endif
         @endauth
 

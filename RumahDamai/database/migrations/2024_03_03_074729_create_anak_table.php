@@ -27,6 +27,7 @@ class CreateAnakTable extends Migration
             $table->date('tanggal_masuk')->nullable();
             $table->dateTime('tanggal_keluar')->nullable();
             $table->string('status')->default('aktif');
+            $table->string('tipe_anak');
             $table->timestamps();
 
             $table->foreign('agama_id')->references('id')->on('agama');

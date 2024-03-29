@@ -28,6 +28,7 @@ class Anak extends Model
         'kelebihan',
         'kekurangan',
         'status',
+        'tipe_anak',
     ];
 
     public function agama()
@@ -58,5 +59,15 @@ class Anak extends Model
     public function penyakit()
     {
         return $this->belongsTo(Penyakit::class, 'penyakit_id');
+    }
+
+    public function anakDisabilitas()
+    {
+        return $this->hasOne(AnakDisabilitas::class, 'anak_id');
+    }
+
+    public function anakNonDisabilitas()
+    {
+        return $this->hasOne(AnakNonDisabilitas::class, 'anak_id');
     }
 }

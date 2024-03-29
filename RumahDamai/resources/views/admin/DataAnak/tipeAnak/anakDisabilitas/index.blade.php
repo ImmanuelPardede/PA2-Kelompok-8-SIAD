@@ -1,0 +1,62 @@
+@extends('layouts.master')
+
+@section('content')
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="card-title">Jenis Anak Disabilitas</h1>
+
+                <!-- Tampilkan notifikasi jika ada -->
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <a href="{{ route('anakDisabilitas.create') }}" class="btn btn-success mb-3">Tambah Jenis Anak Disabilitas</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table mt-3 table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nama Anak</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($anakDisabilitasList as $anakDisabilitas)
+                            <tr>
+                                <td>
+                                    @if ($anakDisabilitas->anak)
+                                        {{ $anakDisabilitas->anak->nama_lengkap }}
+                                    @else
+                                        Anak not found
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('anakDisabilitas.show', $anakDisabilitas->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('anakDisabilitas.edit', $anakDisabilitas->id) }}" class="btn btn-warning">Edit</a>
+                                    <form action="{{ route('anakDisabilitas.destroy', $anakDisabilitas->id) }}" method="post" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2">Tidak ada Jenis Anak Disabilitas.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-end">
+                {{ $anakDisabilitasList->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
