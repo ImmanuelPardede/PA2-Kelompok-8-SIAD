@@ -6,7 +6,7 @@
         <form action="{{ route('orangTuaWali.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="anak_id">Nama Anak</label>
+                <label for="anak_id">Nama Anak <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="anak_id" name="anak_id">
                     <option value="" disabled selected>-- Nama Anak --</option>
                     @foreach ($anak as $anakItem)
@@ -15,7 +15,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="agama_id">Agama:</label>
+                <label for="agama_id">Agama <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                     <option value="" disabled selected>-- Pilih Agama --</option>
                     @foreach ($agama as $agamaItem)
@@ -24,11 +24,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="nama_ibu">Nama Ibu:</label>
+                <label for="nama_ibu">Nama Ibu <span style="color: red">*</label>
                 <input type="text" class="form-control" id="nama_ibu" name="nama_ibu">
             </div>
             <div class="form-group">
-                <label for="nama_ayah">Nama Ayah:</label>
+                <label for="nama_ayah">Nama Ayah <span style="color: red">*</label>
                 <input type="text" class="form-control" id="nama_ayah" name="nama_ayah">
             </div>
             <div class="form-group">
@@ -40,15 +40,15 @@
                 <input type="text" class="form-control" id="nik_ibu" name="nik_ibu">
             </div>
             <div class="form-group">
-                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah:</label>
+                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah <span style="color: red">*</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah">
             </div>
             <div class="form-group">
-                <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu:</label>
+                <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu <span style="color: red">*</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu">
             </div>
             <div class="form-group">
-                <label for="alamat_orangtua">Alamat Orangtua:</label>
+                <label for="alamat_orangtua">Alamat Orangtua <span style="color: red">*</label>
                 <input type="text" class="form-control" id="alamat_orangtua" name="alamat_orangtua">
             </div>
 
@@ -72,7 +72,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="no_hp_ayah">No. HP Ayah:</label>
+                <label for="no_hp_ayah">No. HP Ayah <span style="color: red">*</label>
                 <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah">
             </div>
             <div class="form-group">
@@ -94,7 +94,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="no_hp_ibu">No. HP Ibu:</label>
+                <label for="no_hp_ibu">No. HP Ibu <span style="color: red">*</label>
                 <input type="text" class="form-control" id="no_hp_ibu" name="no_hp_ibu">
             </div>
             <div class="form-group">

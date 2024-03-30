@@ -14,6 +14,7 @@ class Raport extends Model
     protected $fillable = [
 
         'periode_bulan',
+        'tahun',
         'area',
         'anak_id',
         'kemampuan',

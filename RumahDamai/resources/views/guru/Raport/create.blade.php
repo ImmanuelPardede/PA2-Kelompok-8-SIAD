@@ -6,7 +6,7 @@
     <form action="{{ route('raport.store') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="anak_id">Nama Anak</label>
+            <label for="anak_id">Nama Anak <span style="color: red">*</label>
             <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
                 <option value="" disabled selected>-- Nama Anak --</option>
                 @foreach ($anak as $anakItem)
@@ -15,7 +15,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="periode_bulan">Periode Bulan:</label>
+            <label for="periode_bulan">Periode Bulan <span style="color: red">*</label>
             <div class="input-group">
                 <input type="text" class="form-control" name="periode_awal" placeholder="Bulan Awal" required>
                 <div class="input-group-prepend input-group-append">
@@ -25,7 +25,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="area">Area:</label>
+            <label for="tahun">Tahun <span style="color: red">*</label>
+            <input type="text" class="form-control" id="tahun" name="tahun" required>
+            <small id="tahunHelp" class="form-text text-muted"></small>
+        </div>
+        
+        <div class="form-group">
+            <label for="area">Area</label>
             <input type="text" class="form-control" name="area[]" required>
         </div>
         <div class="form-group">
@@ -69,6 +75,29 @@
     $(document).on('click', '.remove', function(event){
         event.preventDefault(); // Mencegah perilaku default dari link
         $(this).parent().remove();
+    });
+</script>
+
+
+<script>
+    document.getElementById('tahun').addEventListener('input', function () {
+        var tahunInput = this.value;
+        var tahunPattern = /^[0-9]{4}$/;
+
+        if (tahunPattern.test(tahunInput)) {
+            document.getElementById('tahunHelp').textContent = '';
+            this.setCustomValidity('');
+        } else {
+            document.getElementById('tahunHelp').textContent = 'Masukkan tahun yang valid (contoh: 2024)';
+            this.setCustomValidity('Masukkan tahun yang valid (contoh: 2024)');
+        }
+    });
+
+    document.getElementById('tahun').addEventListener('change', function () {
+        if (!this.validity.valid) {
+            this.value = ''; // Mengosongkan nilai input jika tidak valid
+            document.getElementById('tahunHelp').textContent = 'Masukkan tahun yang valid (contoh: 2024)';
+        }
     });
 </script>
 

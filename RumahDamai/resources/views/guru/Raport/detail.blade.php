@@ -18,6 +18,12 @@
                             <div class="col-sm-10 bg-secondary">{{ $raport->periode_bulan }}</div>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-4"><strong>Tahun</strong></div>
+                            <div class="col-sm-10 bg-secondary">{{ $raport->tahun }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <h6 class="card-subtitle mb-2 text-muted">Detail Raports:</h6>

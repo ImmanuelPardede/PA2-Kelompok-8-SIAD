@@ -13,6 +13,7 @@ class Anak extends Model
 
     protected $fillable = [
         'foto_profil',
+        'nia',
         'nama_lengkap',
         'agama_id',
         'jenis_kelamin_id',
@@ -29,6 +30,7 @@ class Anak extends Model
         'kekurangan',
         'status',
         'tipe_anak',
+        'lokasi_id',
     ];
 
     public function agama()
@@ -70,4 +72,10 @@ class Anak extends Model
     {
         return $this->hasOne(AnakNonDisabilitas::class, 'anak_id');
     }
+
+    public function lokasiTugas()
+    {
+        return $this->belongsTo(LokasiTugas::class, 'lokasi_id');
+    }
+    
 }

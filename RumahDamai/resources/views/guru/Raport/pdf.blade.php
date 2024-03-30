@@ -50,9 +50,10 @@
         .atasan{
   margin-top: 20px;
 }
-.yayasan{
-  font-size:24px;
-  font-size:3vw;
+.yayasan {
+    font-size: 24px;
+    font-size: 3vw;
+    text-align: center; /* Menyatukan teks ke tengah */
 }
 
 .garis1{
@@ -70,7 +71,18 @@
         <div class="atasan">
             <h1 class="yayasan"><strong>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</strong></h1>
             <h2 class="yayasan"><strong>LAPORAN HASIL BELAJAR SISWA</strong></h2>
-          </div>
+            <h5 class="yayasan"><strong>@if ($anak->lokasi_id == 1)Desa Lumban Silintong, Kecamatan
+                Balige, Kabupaten Toba
+                @elseif ($anak->lokasi_id == 2)
+                Desa Sawah Lamo, Kecamatan Andam
+                Dewi
+                Kabupaten Tapanuli Tengah.
+                    @else
+                    Data Alamat Tidak Tersedia
+                @endif
+            </strong></h5>
+
+            </div>
         </div>
       </header>
       <hr class="garis1"/>
@@ -84,12 +96,16 @@
                 <table class="no-border-table"> <!-- Add custom class to the table -->
                     <tbody>
                         <tr>
-                            <td>Periode Bulan:</td>
-                            <td>{{ $raport->periode_bulan }}</td>
+                            <td>Periode Bulan</td>
+                            <td>: {{ $raport->periode_bulan }} {{ $raport->tahun }}</td>
                         </tr>
                         <tr>
-                            <td>Nama:</td>
-                            <td>{{ $raport->anak->nama_lengkap }}</td>
+                            <td>Nama</td>
+                            <td>: {{ $raport->anak->nama_lengkap }}</td>
+                        </tr>
+                        <tr>
+                            <td>NIA</td>
+                            <td>: {{ $raport->anak->nia }}</td>
                         </tr>
                         <tr>
                             <td>Kelas Kronologis:</td>

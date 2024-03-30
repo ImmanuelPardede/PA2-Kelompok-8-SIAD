@@ -19,7 +19,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="anak_id">Nama Anak:</label>
+                <label for="anak_id">Nama Anak <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
                     <option value="" disabled selected>-- Nama Anak --</option>
                     @foreach ($anak as $anakItem)
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <label for="penyakit_id">Jenis Penyakit:</label>
+                <label for="penyakit_id">Jenis Penyakit <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="penyakit_id" name="penyakit_id" required>
                     <option value="" disabled selected>-- Pilih Jenis Penyakit --</option>
                     @foreach ($penyakit as $penyakitList)
@@ -41,22 +41,22 @@
             </div>
 
             <div class="form-group">
-                <label for="riwayat_perawatan">Riwayat Medis:</label>
+                <label for="riwayat_perawatan">Riwayat Medis <span style="color: red">*</label>
                 <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="riwayat_perilaku">Riwayat Perilaku:</label>
+                <label for="riwayat_perilaku">Riwayat Perilaku <span style="color: red">*</label>
                 <textarea class="form-control" name="riwayat_perilaku" required>{{ old('riwayat_perilaku') }}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="deskripsi_riwayat">Deskripsi Riwayat:</label>
-                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat') }}" required>
+                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat') }}" >
             </div>
 
             <div class="form-group">
-                <label for="kondisi">Kondisi:</label>
+                <label for="kondisi">Kondisi <span style="color: red">*</label>
                 <textarea class="form-control" name="kondisi" required>{{ old('kondisi') }}</textarea>
             </div>
 

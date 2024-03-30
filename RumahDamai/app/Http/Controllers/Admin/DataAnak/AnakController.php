@@ -9,6 +9,7 @@ use App\Models\Disabilitas;
 use App\Models\NonDisabilitas;
 use App\Models\KebutuhanDisabilitas;
 use Illuminate\Http\Request;
+use App\Models\LokasiTugas;
 use App\Models\Anak;
 use App\Models\Agama;
 use App\Models\GolonganDarah;
@@ -31,12 +32,13 @@ class AnakController extends Controller
      */
     public function create()
     {
+        $lokasiTugas = LokasiTugas::all();
         $agama = Agama::all();
         $jenisKelamin = JenisKelamin::all();
         $golonganDarah = GolonganDarah::all();
         $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
-        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit'));
+        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas'));
     }
 
     /**
@@ -48,8 +50,10 @@ class AnakController extends Controller
             'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'nama_lengkap' => 'required|string',
             'agama_id' => 'required',
+            'nia' => 'nullable',
             'jenis_kelamin_id' => 'required',
             'golongan_darah_id' => 'required',
+            'lokasi_id' => 'required',
             'kebutuhan_disabilitas_id' => 'nullable',
             'penyakit_id' => 'nullable',
             'tempat_lahir' => 'required|string',
@@ -62,7 +66,22 @@ class AnakController extends Controller
             'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
         ]);
 
-        // Simpan data anak
+       // Generate NIA
+       $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
+       $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
+       $tahun_masuk = date('y');
+       $tahun_lahir = substr(date('Y', strtotime($request->tanggal_lahir)), -2);
+   
+       $latest_anak = Anak::where('lokasi_id', $request->lokasi_id)
+                          ->where('tipe_anak', $request->tipe_anak)
+                          ->latest()
+                          ->first();
+   
+       $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
+   
+       $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
+   
+
         $anak = Anak::create([
             'nama_lengkap' => $request->nama_lengkap,
             'agama_id' => $request->agama_id,
@@ -78,9 +97,12 @@ class AnakController extends Controller
             'kelebihan' => $request->kelebihan,
             'kekurangan' => $request->kekurangan,
             'status' => 'aktif',
+            'lokasi_id' => $request->lokasi_id,
             'tanggal_masuk' => now(),
             'tipe_anak' => $request->tipe_anak,
+            'nia' => $nia, // Simpan NIA yang baru diambil
         ]);
+
 
         if ($request->tipe_anak == 'disabilitas') {
             AnakDisabilitas::create([
@@ -119,7 +141,7 @@ class AnakController extends Controller
      */
     public function show(string $id)
     {
-        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit')->find($id);
+        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas')->find($id);
         $penyakit = $anak->penyakit;
 
         return view('admin.DataAnak.Anak.show', compact('anak', 'penyakit'));
@@ -136,13 +158,14 @@ class AnakController extends Controller
         $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
         $anak = Anak::find($id);
+        $lokasiTugas = LokasiTugas::all();
 
         // Periksa apakah data anak ditemukan
         if (!$anak) {
             return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
-        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit'));
+        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas'));
     }
 
     /**
@@ -159,6 +182,7 @@ class AnakController extends Controller
             'golongan_darah_id' => 'nullable',
             'kebutuhan_disabilitas_id' => 'nullable',
             'penyakit_id' => 'nullable',
+            'lokasi_id' => 'nullable',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
             'disukai' => 'nullable|string',
@@ -174,7 +198,9 @@ class AnakController extends Controller
             return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
+  
         $data = $request->except('_token', '_method', 'foto_profil');
+
 
         if ($request->hasFile('foto_profil')) {
             $gambar = $request->file('foto_profil');

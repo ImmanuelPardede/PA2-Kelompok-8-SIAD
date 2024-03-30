@@ -16,6 +16,10 @@
                                         <td>{{ $anak->nama_lengkap ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
+                                        <th>NIA</th>
+                                        <td>{{ $anak->nia ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Agama</th>
                                         <td>{{ $anak->agama->agama ?? 'Data tidak tersedia' }}</td>
                                     </tr>
@@ -67,6 +71,11 @@
                                         <th>Kekurangan</th>
                                         <td>{{ $anak->kekurangan ?? 'Data tidak tersedia' }}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Tempat Yayasan</th>
+                                        <td>{{ optional($anak->lokasiTugas)->lokasi ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                    
                                     <tr>
                                         <th>Status</th>
                                         <td>{{ $anak->status ?? 'Data tidak tersedia' }}</td>

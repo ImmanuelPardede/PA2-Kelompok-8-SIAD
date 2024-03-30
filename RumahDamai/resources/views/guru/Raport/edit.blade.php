@@ -25,6 +25,10 @@
                 <input type="text" class="form-control" name="periode_akhir" placeholder="Bulan Akhir" value="{{ $periode_akhir }}" required>
             </div>
         </div>
+        <div class="form-group">
+            <label for="tahun">Tahun</label>
+            <input type="text" class="form-control" name="tahun" value="{{ $raport->tahun }}" required>
+        </div>
         @foreach($detailraports as $detailraport)
         <div class="form-group">
             <label for="area">Area:</label>

@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Tahun</th>
                             <th>Periode Bulan</th>
                             <th>Aksi</th>
                         </tr>
@@ -32,6 +33,7 @@
                         @foreach($raports as $key => $raport)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            <td>{{ $raport->tahun }}</td>
                             <td>{{ $raport->periode_bulan }}</td>
                             <td>
                                 <a href="{{ route('raport.destroy', $raport->id) }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $raport->id }}').submit();">Delete</a>

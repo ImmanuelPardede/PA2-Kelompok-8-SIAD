@@ -45,6 +45,7 @@ class RaportController extends Controller
         'anak_id' => 'required',
         'periode_awal' => 'required',
         'periode_akhir' => 'required',
+        'tahun' => 'required',
         'area' => 'required',
         'kemampuan' => 'required',
         'kelas_kemampuan' => 'required',
@@ -56,6 +57,7 @@ class RaportController extends Controller
     $raport = new Raport;
     $raport->anak_id = $request->input('anak_id');
     $raport->periode_bulan = $periode_bulan;
+    $raport->tahun = $request->input('tahun'); 
     $raport->save();
 
     $areas = $request->input('area');
@@ -99,6 +101,7 @@ public function edit($id)
 {  
     $request->validate([
         'anak_id' => 'required',
+        'tahun' => 'required',
         'periode_awal' => 'required',
         'periode_akhir' => 'required',
         'area' => 'required',
@@ -152,16 +155,17 @@ public function destroy($id)
     $raport = Raport::findOrFail($id);
     $raport->delete();
 
-    return redirect()->route('guru.raport.index')->with('success', 'Raport deleted successfully.');
+    return redirect()->route('raport.index')->with('success', 'Raport deleted successfully.');
 }
 
 
 public function pdf($id)
 {
     $raport = Raport::findOrFail($id);
+    $anak = $raport->anak;
     $detailraports = DetailRaport::where('raport_id', $id)->get(); // Change variable name here
     $namaFile = 'raport_' . str_replace(' ', '_', $raport->anak->nama_lengkap) . '_' . str_replace(' ', '', $raport->periode_bulan) . '.pdf';
-    $pdf = PDF::loadview('guru.raport.pdf', compact('raport', 'detailraports'));
+    $pdf = PDF::loadview('guru.raport.pdf', compact('raport', 'detailraports','anak'));
     return $pdf->download($namaFile);
     
 }

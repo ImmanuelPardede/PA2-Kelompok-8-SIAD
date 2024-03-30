@@ -15,11 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('anak_id');
             $table->string('periode_bulan')->nullable(); 
-/*             $table->string('area')->nullable(); 
-            $table->string('kemampuan')->nullable(); 
-            $table->string('kelas_kemampuan')->nullable(); 
-            $table->string('naratif', 10000)->nullable(); 
- */
+            $table->string('tahun', 4)->nullable(); 
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak');

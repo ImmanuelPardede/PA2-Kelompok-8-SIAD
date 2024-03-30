@@ -24,7 +24,7 @@
                 </div>
     
                 <div class="form-group">
-                    <label for="golongan_darah_id">Golongan Darah:</label>
+                    <label for="golongan_darah_id">Golongan Darah <span style="color: red">*</label>
                     <select class="form-control js-example-basic-single" id="golongan_darah_id" name="golongan_darah_id">
                         <option value="" disabled selected>-- Pilih Golongan Darah Anda --</option>
                         @foreach ($golongandarah as $darahlist)
@@ -37,7 +37,7 @@
                 </div>
                 
             <div class="form-group">
-                <label for="jenis_kelamin_id">Jenis Kelamin:</label>
+                <label for="jenis_kelamin_id">Jenis Kelamin <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id">
                     <option value="" disabled selected>-- Pilih Jenis Kelamin Anda --</option>
                     @foreach ($jeniskelamin as $kelaminlist)
@@ -50,7 +50,7 @@
             </div>
             
                 <div class="form-group">
-                    <label for="agama_id">Agama:</label>
+                    <label for="agama_id">Agama <span style="color: red">*</label>
                     <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                         <option value="" disabled selected>-- Pilih Agama Anda --</option>
                         @foreach ($agama as $agamalist)
@@ -63,7 +63,7 @@
                 </div>
     
             <div class="form-group">
-                <label for="pendidikan_id">Pendidikan:</label>
+                <label for="pendidikan_id">Pendidikan <span style="color: red">*</label>
                 <select class="form-control js-example-basic-single" id="pendidikan_id" name="pendidikan_id">
                     <option value="" disabled selected>-- Pilih Pendidikan Anda --</option>
                     @foreach ($pendidikan as $pendidikanlist)
@@ -76,7 +76,7 @@
             </div>
             
                 <div class="form-group">
-                    <label for="alamat">Alamat:</label>
+                    <label for="alamat">Alamat <span style="color: red">*</label>
                     <input type="text" name="alamat" id="alamat" class="form-control" value="{{ $user->alamat }}">
                 </div>
                     
@@ -86,7 +86,7 @@
                 </div>
             
                 <div class="form-group">
-                    <label for="tanggal_lahir">Tanggal Lahir:</label>
+                    <label for="tanggal_lahir">Tanggal Lahir <span style="color: red">*</label>
                     <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" value="{{ $user->tanggal_lahir }}">
                 </div>
                 <div class="form-group">
