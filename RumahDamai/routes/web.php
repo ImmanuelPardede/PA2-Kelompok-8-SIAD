@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
+use App\Http\Controllers\Guru\Materi\KelasController;
+use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -95,6 +97,9 @@ Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('ra
 Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
+Route::resource('/materi/kelas', KelasController::class);
+Route::resource('/materi/modulMateri', ModulMateriController::class);
+
 
 Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
 Route::put('/guru/DataDiri/update/{user}', [AdministratorController::class, 'updateGuruDataDiri'])->name('guru.DataDiri.update');
