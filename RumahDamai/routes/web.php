@@ -25,6 +25,7 @@ use App\Http\Controllers\Guru\Raport\RaportController;
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
+use App\Http\Controllers\Admin\Todolist\TodoListController;
 
 
 
@@ -126,5 +127,10 @@ Route::post('/staff/DataDiri/password/{user}', [AdministratorController::class, 
 
 
 Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+
+Route::get('/dashboard', [TodoListController::class, 'index'])->name('dashboard');
+Route::post('/todo/store', [TodoListController::class, 'store'])->name('todo.store');
+Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.destroy');
+Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
 
 

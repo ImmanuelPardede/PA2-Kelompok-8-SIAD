@@ -1,15 +1,38 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+<style>
+  .btn-add {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+
+</style>
+
+<div class="container">
 
 <div class="row">
     <div class="col-md-12 grid-margin">
       <div class="row">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
           <h3 class="font-weight-bold">Haloo {{ Auth::user()->name }}</h3>
-          <h6 class="font-weight-normal mb-0">Hari ini Sistem Berjalan Dengan Baik! Kamu memiliki <span class="text-primary">3 To-doList yang belum kamu kerjakan!</span></h6>
-          @if (session('success'))
+          <h6 class="font-weight-normal mb-0">
+            Hari ini Sistem Berjalan Dengan Baik!
+            @php
+            $userTasks = $todolist->where('user_id', Auth::id());
+        @endphp
+        @if($userTasks->count() > 0)
+        <span class="text-primary">
+              Kamu memiliki  <span class="text-danger">{{ count($todolist) }}</span> To-doList yang belum kamu kerjakan!</span>
+            @else
+                Selamat bekerja!
+            @endif
+        </h6>
+                  @if (session('success'))
           <div class="alert alert-success">
               {{ session('success') }}
           </div>
@@ -134,69 +157,97 @@
     </div>
 
     </div>
+
     <div class="col-md-5 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">To Do Lists</h4>
-                            <div class="list-wrapper pt-2">
-                                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                Oke
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li class="">
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked>
-                                                Oke gass
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                Oke Gass
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li class="">
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked>
-                                                Oke Gass
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-flat">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox">
-                                                oke Gass
-                                            </label>
-                                        </div>
-                                        <i class="remove ti-close"></i>
-                                    </li>
-                                </ul>
+    <div class="card">
+        <div class="card-body">
+            <div>
+              <h5 class="card-title mb-4">Todolist</h5>
+              <div class="list-wrapper pt-2">
+
+                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                  @foreach($todolist->where('user_id', Auth::id()) as $task)
+                  <li>
+                      <div class="form-check form-check-flat">
+                        <label class="form-check-label">
+                          <input class="checkbox" type="checkbox" 
+                          onchange="updateStatus({{ $task->id }}, this.checked)" 
+                          {{ $task->status === 'selesai' ? 'checked' : '' }}>
+                          {{ $task->tugas }}
+                      </label>
+                      
+                      
+                      </div>
+                      <form method="post" action="{{ route('todo.destroy', $task->id) }}" style="display: inline;">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-link"><i class="remove ti-close"></i></button>
+                    </form>
+
+                  </li>
+                    @endforeach
+                </ul>
+            </div>
+            </div>
+            <div class="add-task">
+              <form method="post" action="{{ route('todo.store') }}">
+                  @csrf
+                  <div class="input-group">
+                      <input type="text" name="tugas" class="form-control input-task border-0 bg-transparent" placeholder="Tambahkan Todolist anda !" style="outline: none;">
+                      <div class="input-group-append">
+                          <button type="submit" class="btn btn-add">
+                              <i class="icon-circle-plus"></i>
+                          </button>
+                      </div>
+                  </div>
+              </form>
           </div>
-          <div class="add-items d-flex mb-0 mt-2">
-                                <input type="text" class="form-control todo-list-input"  placeholder="Tambahkan">
-                                <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-                            </div>
-                        </div>
-          </div>
+          
+            @if(session('success'))
+                <p class="success-message">{{ session('success') }}</p>
+            @endif
+        </div>
     </div>
+</div>
+
+
+
+
+
+
   </div>
 </div>
 </div>
 </div>
+
+<script>
+  function updateStatus(taskId, checked) {
+      // Buat objek FormData untuk mengirim data
+      var formData = new FormData();
+      formData.append('_token', '{{ csrf_token() }}'); // Tambahkan CSRF token
+      formData.append('status', checked ? 'selesai' : 'menunggu'); // Tentukan status baru
+
+      // Kirim permintaan POST ke endpoint edit
+      fetch(`/todo/${taskId}/edit`, {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => {
+          if (response.ok) {
+              console.log('Task status updated successfully.');
+              // Refresh halaman
+              location.reload();
+          } else {
+              console.error('Failed to update task status.');
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  }
+</script>
+
+
+
         
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pengumuman;
 use App\Models\Anak;
+use App\Models\TodoList;
 
 
 class HomeController extends Controller
@@ -25,16 +26,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
-     public function dashboard()
-     {
+    public function dashboard()
+    {
         $pengumumans = Pengumuman::all();
         $totalPegawai = User::count();
         $totalanak = Anak::count();
-         return view('dashboard', compact('totalPegawai','pengumumans','totalanak'));
-     }
-
-
+        $todolist = TodoList::all();
+        
+        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist'));
+    }
+    
 
 
      public function adminHome()
