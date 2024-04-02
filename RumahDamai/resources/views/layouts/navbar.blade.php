@@ -25,54 +25,51 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
+
+    <ul class="navbar-nav navbar-nav-right">
+       
+      
+      
       <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-          <i class="icon-bell mx-0"></i>
-          <span class="count"></span>
+            <i class="icon-bell mx-0"></i>
+            @if(Auth::user()->unreadNotifications->count() > 0)
+                <span class="count">{{ Auth::user()->unreadNotifications->count() }}</span>
+            @endif
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-          <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-success">
-                <i class="ti-info-alt mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-normal">Application Error</h6>
-              <p class="font-weight-light small-text mb-0 text-muted">
-                Just now
-              </p>
-            </div>
-          </a>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-warning">
-                <i class="ti-settings mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-normal">Settings</h6>
-              <p class="font-weight-light small-text mb-0 text-muted">
-                Private message
-              </p>
-            </div>
-          </a>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-info">
-                <i class="ti-user mx-0"></i>
-              </div>
-            </div>
-            <div class="preview-item-content">
-              <h6 class="preview-subject font-weight-normal">New user registration</h6>
-              <p class="font-weight-light small-text mb-0 text-muted">
-                2 days ago
-              </p>
-            </div>
-          </a>
+            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+            @php $firstNotification = true; @endphp
+            @foreach(Auth::user()->notifications as $notification)
+                @if ($firstNotification)
+                    <a class="dropdown-item preview-item" href="#pengumuman">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-success">
+                                <i class="ti-info-alt mx-0"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <h6 class="preview-subject font-weight-normal">Pengumuman terbaru</h6>
+                            <p class="font-weight-light small-text mb-0 text-muted">
+                                {{ $notification->created_at->diffForHumans() }}
+                            </p>
+                        </div>
+                    </a>
+                    @php $firstNotification = false; @endphp
+                @endif
+            @endforeach
         </div>
-      </li>
+    </li>
+            
+    
+
+    
+    
+
+
+
+
+
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
           <!-- Ganti teks statis dengan nama lengkap pengguna yang terautentikasi -->
@@ -133,3 +130,34 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
   </form>
+
+
+  <script>
+document.getElementById('notificationDropdown').addEventListener('click', function() {
+    var countElement = this.querySelector('.count');
+    if (countElement) {
+        countElement.style.display = 'none';
+        // Send an AJAX request to mark notifications as read
+        fetch('/mark-as-read', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                console.log('Notifications marked as read.');
+            } else {
+                console.error('Failed to mark notifications as read.');
+            }
+        }).catch(error => {
+            console.error('An error occurred:', error);
+        });
+    }
+});
+
+
+
+
+
+  </script>

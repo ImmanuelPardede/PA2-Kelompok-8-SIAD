@@ -20,18 +20,24 @@
       <div class="row">
         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
           <h3 class="font-weight-bold">Haloo {{ Auth::user()->name }}</h3>
+          @php
+          $userTasks = $todolist->where('user_id', Auth::id());
+          $totalUserTasks = $userTasks->count();
+          @endphp
+          
           <h6 class="font-weight-normal mb-0">
-            Hari ini Sistem Berjalan Dengan Baik!
-            @php
-            $userTasks = $todolist->where('user_id', Auth::id());
-        @endphp
-        @if($userTasks->count() > 0)
-        <span class="text-primary">
-              Kamu memiliki  <span class="text-danger">{{ count($todolist) }}</span> To-doList yang belum kamu kerjakan!</span>
-            @else
-                Selamat bekerja!
-            @endif
-        </h6>
+              Hari ini Sistem Berjalan Dengan Baik!
+              @if($totalUserTasks > 0) 
+          <a href="#todo"> <span class="text-primary">
+            Kamu memiliki <span class="text-danger">{{ $totalUserTasks }}</span> To-doList yang belum kamu kerjakan!</span></a>
+
+                 
+              @else
+                  Selamat bekerja!
+              @endif
+          </h6>
+
+          
                   @if (session('success'))
           <div class="alert alert-success">
               {{ session('success') }}
@@ -96,7 +102,7 @@
         <div class="card-body">
           <div class="d-flex justify-content-between">
 
-            <h5 class="card-title mb-4">Pengumuman</h5>
+            <h5 id="pengumuman" class="card-title mb-4">Pengumuman</h5>
             @if(Auth::user()->role == 'admin')
 
             <div class="mb-3 ml-auto">
@@ -121,19 +127,23 @@
                         @foreach($pengumumans as $pengumuman)
                         <tr>
                           <td>
-                            <a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}">
+                            @if(!$pengumuman->isReadByUser(Auth::id()))
+                                <i class="fas fa-exclamation-circle text-danger"></i>
+                            @endif
+                            <a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}"><span class="text-primary">[{{ $pengumuman->kategori }}]</span>
                                 @if(Auth::user()->role == 'admin') <!-- Admin -->
-                                    {{ Str::limit($pengumuman->judul, 55) }}
+                                    {!! Str::limit($pengumuman->judul, 40) !!}
                                 @else
-                                    {{ Str::limit($pengumuman->judul, 75) }}
+                                    {!! Str::limit($pengumuman->judul, 60) !!}
                                 @endif
                             </a>
                         </td>
+                        
 
                                                     @if(Auth::user()->role == 'admin')
                             <td>
                                 <div class="dropdown">
-                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Aksi
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -162,7 +172,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-              <h5 class="card-title mb-4">Todolist</h5>
+              <h5 class="card-title mb-4" id="todo">Todolist</h5>
               <div class="list-wrapper pt-2">
 
                 <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
@@ -203,9 +213,6 @@
               </form>
           </div>
           
-            @if(session('success'))
-                <p class="success-message">{{ session('success') }}</p>
-            @endif
         </div>
     </div>
 </div>

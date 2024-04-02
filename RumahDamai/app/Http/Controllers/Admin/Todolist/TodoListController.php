@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Todolist;
 
 use App\Http\Controllers\Controller; 
 use App\Models\TodoList;
+use App\Models\LokasiTugas;
 use App\Models\Pengumuman;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -18,12 +19,14 @@ class TodoListController extends Controller
 
     public function index()
     {
-        $pengumumans = Pengumuman::all();
+        $pengumumans = Pengumuman::orderBy('created_at', 'desc')->get();
         $totalPegawai = User::count();
         $totalanak = Anak::count();
         $todolist = TodoList::all();
+        $user = User::all();
+        $lokasi = LokasiTugas::all();
         
-        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist'));
+        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','user','lokasi'));
     }
     
     public function store(Request $request)

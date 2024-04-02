@@ -22,4 +22,10 @@ class Pengumuman extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function isReadByUser($userId)
+{
+    return session()->has('pengumuman_' . $this->id . '_read_' . $userId);
+}
+
 }

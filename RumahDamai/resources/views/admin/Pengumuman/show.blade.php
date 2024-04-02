@@ -2,18 +2,20 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $pengumuman->judul }}</div>
-
                 <div class="card-body">
-                    <p>{{ $pengumuman->deskripsi }}</p>
-                    <p><strong>Kategori:</strong> {{ $pengumuman->kategori }}</p>
+                    <h4><span class="text-primary">[{{ $pengumuman->kategori }}]</span> {{ $pengumuman->judul }}</h4>
+                    <hr>
+                    <p>
+                        <div class="container">
+                        {!! $pengumuman->deskripsi !!}
+                    </p>
+                    {{ $lokasi->where('id', $pengumuman->user->lokasi_penugasan_id)->first()->lokasi }}, {{ $pengumuman->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
+
+                    <a href="{{ route('dashboard') }}" class="btn btn-primary float-right mt-3">Kembali</a>
+                </div>
                 </div>
                 <div class="card-footer">
-                    <div class="text-muted">Diposting oleh {{ $pengumuman->user->name }} pada {{ $pengumuman->created_at->format('d M Y H:i') }}</div>
-                    <a href="{{ route('dashboard') }}" class="btn btn-primary mt-3">Kembali</a>
                 </div>
             </div>
         </div>

@@ -127,6 +127,8 @@ Route::post('/staff/DataDiri/password/{user}', [AdministratorController::class, 
 
 
 Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+Route::post('/mark-as-read', [PengumumanController::class, 'markAsRead'])->name('mark-as-read');
+
 
 Route::get('/dashboard', [TodoListController::class, 'index'])->name('dashboard');
 Route::post('/todo/store', [TodoListController::class, 'store'])->name('todo.store');

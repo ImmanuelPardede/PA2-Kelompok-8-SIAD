@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Pengumuman;
 
+use App\Notifications\PengumumanNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pengumuman;
+use App\Models\LokasiTugas;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -39,25 +42,33 @@ class PengumumanController extends Controller
             'kategori' => 'required',
         ]);
 
-        // Hanya admin yang boleh membuat pengumuman
-        if (Auth::user()->role == 'admin') {
-            Pengumuman::create([
-                'judul' => $request->judul,
-                'deskripsi' => $request->deskripsi,
-                'kategori' => $request->kategori,
-                'user_id' => Auth::id(),
-            ]);
+        $pengumuman = Pengumuman::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'kategori' => $request->kategori,
+            'user_id' => Auth::id(),
+        ]);
+    
 
-            return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil ditambahkan.');
-        } else {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki izin untuk membuat pengumuman.');
-        }
+            $users = User::where('role', '!=', 'admin')->get();
+
+            // Send notification to each user
+            foreach ($users as $user) {
+                $user->notify(new PengumumanNotification($pengumuman));
+            }
+        
+
+              return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil ditambahkan.');
+
     }
 
     public function show($id)
     {
+        
+        $user = User::all();
+        $lokasi = LokasiTugas::all();
         $pengumuman = Pengumuman::findOrFail($id);
-        return view('admin.pengumuman.show', compact('pengumuman'));
+        return view('admin.pengumuman.show', compact('pengumuman','user','lokasi'));
     }
 
     public function edit($id)
@@ -93,6 +104,12 @@ class PengumumanController extends Controller
         return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil dihapus.');
     }
 
+
+    public function markAsRead()
+{
+    Auth::user()->unreadNotifications->markAsRead();
+    return response()->json(['success' => true]);
+}
 
 
 }
