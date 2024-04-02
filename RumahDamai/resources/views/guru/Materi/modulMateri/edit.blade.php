@@ -24,7 +24,6 @@
                         </select>
                     </div>
 
-
                     <div class="form-group">
                         <label for="nama_materi">Nama Materi</label>
                         <input type="text" class="form-control" name="nama_materi"
@@ -33,7 +32,8 @@
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi:</label>
-                        <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
+                        <textarea class="form-control" name="deskripsi"
+                            required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
                     </div>
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

@@ -32,9 +32,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4">
-                            <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>

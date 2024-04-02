@@ -24,6 +24,8 @@
                 <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 
+            <input type="hidden" name="guru_id" value="{{ auth()->user()->id }}">
+
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>

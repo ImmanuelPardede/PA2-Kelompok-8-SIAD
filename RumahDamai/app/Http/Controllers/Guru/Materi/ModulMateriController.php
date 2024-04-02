@@ -6,12 +6,19 @@ use App\Models\Kelas;
 use App\Models\ModulMateri;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
 
 class ModulMateriController extends Controller
 {
     public function index()
     {
-        $modulMateriList = ModulMateri::orderBy('created_at', 'desc')->paginate(7);
+        $guruId = Auth::id();
+
+        $modulMateriList = ModulMateri::where('guru_id', $guruId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(7);
+
         return view('guru.materi.modulMateri.index', compact('modulMateriList'));
     }
 
@@ -42,20 +49,33 @@ class ModulMateriController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
-        // Mendapatkan tahun ajaran dari kelas yang dipilih
-        $kelas = Kelas::findOrFail($request->kelas_id);
-        $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
+        $userId = Auth::id();
+        $userRole = Auth::user()->role;
 
-        // Memasukkan nilai 'tahun_kurikulum_id' ke dalam input
-        $input = $request->all();
-        $input['tanggal_publish'] = now();
-        $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
+        if ($userRole === 'guru') {
+            $kelas = Kelas::findOrFail($request->kelas_id);
+            $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
 
-        // Simpan data ke dalam database
-        ModulMateri::create($input);
+            $modulMateri = new ModulMateri([
+                'kelas_id' => $request->kelas_id,
+                'nama_materi' => $request->nama_materi,
+                'deskripsi' => $request->deskripsi,
+                'guru_id' => $userId,
+                'tahun_kurikulum_id' => $tahun_kurikulum_id,
+                'tanggal_publish' => now(),
+            ]);
 
-        return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil ditambahkan.');
+            $modulMateri->save();
+
+            return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil ditambahkan.');
+        } else {
+            return redirect()->route('modulMateri.index')->with('error', 'Anda tidak diizinkan membuat Modul Materi.');
+        }
     }
+
+
+
+
 
 
 
