@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guru\Materi;
 
 use App\Http\Controllers\Controller;
+use App\Models\TahunKurikulum;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 
@@ -22,7 +23,8 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('guru.materi.kelas.create');
+        $tahunKurikulum = TahunKurikulum::all();
+        return view('guru.materi.kelas.create', compact('tahunKurikulum'));
     }
 
     /**
@@ -54,9 +56,13 @@ class KelasController extends Controller
     public function edit(string $id)
     {
         $kelas = Kelas::find($id);
-        return view('guru.materi.kelas.edit', compact('kelas'));
+        $tahunKurikulum = TahunKurikulum::all();
+        return view('guru.materi.kelas.edit', compact('kelas', 'tahunKurikulum'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     /**
      * Update the specified resource in storage.
      */
@@ -64,13 +70,24 @@ class KelasController extends Controller
     {
         $request->validate([
             'nama_kelas' => 'nullable|string',
+            'tahun_kurikulum_id' => 'nullable|exists:tahun_kurikulum,id', // tambahkan validasi untuk tahun_kurikulum_id
         ]);
 
-        $kelas = Kelas::find($id);
-        $kelas->update($request->all());
+        $kelas = Kelas::findOrFail($id);
+
+        // Update data kelas
+        $kelas->fill($request->all())->save();
+
+        // Update tahun_kurikulum_id di tabel Silabus yang terkait dengan kelas ini
+        $kelas->silabus()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
+
+        // Update tahun_kurikulum_id di tabel ModulMateri yang terkait dengan kelas ini
+        $kelas->modulMateri()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
 
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

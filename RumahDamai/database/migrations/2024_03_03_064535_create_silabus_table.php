@@ -4,28 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSilabusTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('kelas', function (Blueprint $table) {
+        Schema::create('silabus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kelas');
+            $table->unsignedBigInteger('kelas_id');
+            $table->string('nama_silabus');
+            $table->string('deskripsi', 2000);
             $table->unsignedBigInteger('tahun_kurikulum_id');
             $table->timestamps();
 
+            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('kelas');
     }
-};
+}

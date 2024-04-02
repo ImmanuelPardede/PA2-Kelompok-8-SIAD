@@ -93,6 +93,8 @@
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
                                     Sponsorship</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('tahunKurikulum.index') }}">Tahun
+                                    Kurikulum</a>
                         </ul>
                     </div>
                 </li>
@@ -132,10 +134,10 @@
                     </a>
                     <div class="collapse" id="tables">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('kelas.index') }}">Kelas</a></li>
-                                    <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('modulMateri.index') }}">Modul Materi</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('modulMateri.index') }}">Modul
+                                    Materi</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('silabus.index') }}">Silabus</a></li>
                         </ul>
                     </div>
                 </li>

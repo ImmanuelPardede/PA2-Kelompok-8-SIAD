@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\TahunKurikulumController;
 use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
 use App\Http\Controllers\Guru\Materi\KelasController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
+use App\Http\Controllers\Guru\Materi\SilabusController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -58,6 +60,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
     Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
+    Route::resource('/masterdata/tahunKurikulum', TahunKurikulumController::class);
+
 
 
 
@@ -100,6 +104,7 @@ Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('ra
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 Route::resource('/materi/kelas', KelasController::class);
 Route::resource('/materi/modulMateri', ModulMateriController::class);
+Route::resource('/materi/silabus', SilabusController::class);
 
 
 Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');

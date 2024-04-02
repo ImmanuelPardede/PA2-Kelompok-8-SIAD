@@ -18,8 +18,21 @@ class ModulMateriController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        return view('guru.materi.modulMateri.create', compact('kelas'));
+        $tahun_kurikulum_id = null; // Inisialisasi variabel
+
+        // Cek apakah ada kelas yang dipilih dalam request
+        if (request()->has('kelas_id')) {
+            $selectedKelasId = request()->input('kelas_id');
+            $selectedKelas = Kelas::find($selectedKelasId);
+
+            if ($selectedKelas) {
+                $tahun_kurikulum_id = $selectedKelas->tahun_kurikulum_id;
+            }
+        }
+
+        return view('guru.materi.modulMateri.create', compact('kelas', 'tahun_kurikulum_id'));
     }
+
 
     public function store(Request $request)
     {
@@ -29,10 +42,21 @@ class ModulMateriController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
-        ModulMateri::create($request->all());
+        // Mendapatkan tahun ajaran dari kelas yang dipilih
+        $kelas = Kelas::findOrFail($request->kelas_id);
+        $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
+
+        // Memasukkan nilai 'tahun_kurikulum_id' ke dalam input
+        $input = $request->all();
+        $input['tanggal_publish'] = now();
+        $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
+
+        // Simpan data ke dalam database
+        ModulMateri::create($input);
 
         return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil ditambahkan.');
     }
+
 
 
 
@@ -44,25 +68,35 @@ class ModulMateriController extends Controller
 
     public function edit(string $id)
     {
-        $modulMateri = ModulMateri::find($id);
+        $modulMateri = ModulMateri::findOrFail($id);
         $kelas = Kelas::all(); // Mengambil data kelas untuk dropdown
 
         return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas'));
     }
 
-
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'kelas_id' => 'required|exists:kelas,id',
             'nama_materi' => 'required|string',
             'deskripsi' => 'required|string',
         ]);
 
-        $modulMateri = ModulMateri::find($id); // Mengubah $modulmateri menjadi $modulMateri
-        $modulMateri->update($request->all());
+        $modulMateri = ModulMateri::findOrFail($id);
+
+        // Mendapatkan tahun ajaran dari kelas yang dipilih
+        $kelas = Kelas::findOrFail($request->kelas_id);
+        $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
+
+        // Memasukkan nilai 'tahun_kurikulum_id' ke dalam input
+        $input = $request->all();
+        $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
+
+        $modulMateri->update($input);
 
         return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil diperbarui.');
     }
+
 
     public function destroy(string $id)
     {

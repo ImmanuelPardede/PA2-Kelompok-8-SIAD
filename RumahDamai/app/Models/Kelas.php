@@ -10,9 +10,20 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
-    protected $fillable = ['nama_kelas'];
+    protected $fillable = ['nama_kelas', 'tahun_kurikulum_id'];
 
-    public function ModulMateri(){
-        return $this->belongsToMany(ModulMateri::class, 'kelas_id');
+    public function tahunKurikulum()
+    {
+        return $this->belongsTo(TahunKurikulum::class, 'tahun_kurikulum_id');
+    }
+
+    public function modulMateri()
+    {
+        return $this->hasMany(ModulMateri::class, 'kelas_id');
+    }
+
+    public function silabus()
+    {
+        return $this->hasMany(Silabus::class, 'kelas_id');
     }
 }

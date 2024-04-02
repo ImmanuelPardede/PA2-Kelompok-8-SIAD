@@ -23,8 +23,19 @@
                 <input type="text" class="form-control" name="nama_kelas" value="{{ old('nama_kelas') }}">
             </div>
 
+            <div class="form-group">
+                <label for="tahun_kurikulum_id">Tahun Kurikulum:</label>
+                <select class="form-control" id="tahun_kurikulum_id" name="tahun_kurikulum_id">
+                    <option value="" disabled selected>-- Pilih Tahun Kurikulum --</option>
+                    @foreach ($tahunKurikulum as $item)
+                        <option value="{{ $item->id }}">{{ $item->tahun_kurikulum }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
+
     </div>
 @endsection
