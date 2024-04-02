@@ -52,5 +52,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TahunKurikulumSeeder::class,
         ]);
+        $this->call([
+            KelasSeeder::class,
+        ]);
     }
 }

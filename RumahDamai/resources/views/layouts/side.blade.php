@@ -64,6 +64,21 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">Pendidikan</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="error">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('tahunKurikulum.index') }}">Tahun
+                                    Kurikulum</a>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                         aria-controls="ui-basic">
                         <i class="icon-layout menu-icon"></i>
@@ -75,7 +90,8 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('agama.index') }}">Agama</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('disabilitas.index') }}">Jenis
                                     Disabilitas</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis Donasi</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('donasi.index') }}">Jenis
+                                    Donasi</a>
                             </li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('golonganDarah.index') }}">Golongan
                                     Darah</a></li>
@@ -93,8 +109,6 @@
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
                                     Sponsorship</a>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('tahunKurikulum.index') }}">Tahun
-                                    Kurikulum</a>
                         </ul>
                     </div>
                 </li>
@@ -134,10 +148,10 @@
                     </a>
                     <div class="collapse" id="tables">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('modulMateri.index') }}">Modul
                                     Materi</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('silabus.index') }}">Silabus</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('silabus.index') }}">Silabus</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\MasterData\TahunKurikulumController;
+use App\Http\Controllers\Admin\Pendidikan\TahunKurikulumController;
 use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
-use App\Http\Controllers\Guru\Materi\KelasController;
+use App\Http\Controllers\Admin\Pendidikan\KelasController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use App\Http\Controllers\Guru\Materi\SilabusController;
 use Illuminate\Support\Facades\Route;
@@ -60,8 +60,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
     Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
-    Route::resource('/masterdata/tahunKurikulum', TahunKurikulumController::class);
-
+    Route::resource('/pendidikan/tahunKurikulum', TahunKurikulumController::class);
+    Route::resource('/pendidikan/kelas', KelasController::class);
 
 
 
@@ -102,7 +102,6 @@ Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('ra
 Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
-Route::resource('/materi/kelas', KelasController::class);
 Route::resource('/materi/modulMateri', ModulMateriController::class);
 Route::resource('/materi/silabus', SilabusController::class);
 

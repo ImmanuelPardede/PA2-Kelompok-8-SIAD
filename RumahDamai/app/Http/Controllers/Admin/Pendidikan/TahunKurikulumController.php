@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\MasterData;
+namespace App\Http\Controllers\Admin\Pendidikan;
 
 use App\Http\Controllers\Controller;
 use App\Models\TahunKurikulum;
@@ -14,7 +14,7 @@ class TahunKurikulumController extends Controller
     public function index()
     {
         $tahunKurikulumList = TahunKurikulum::orderBy('tahun_kurikulum', 'asc')->paginate(7);
-        return view('admin.masterdata.tahunKurikulum.index', compact('tahunKurikulumList'));
+        return view('admin.pendidikan.tahunKurikulum.index', compact('tahunKurikulumList'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TahunKurikulumController extends Controller
      */
     public function create()
     {
-        return view('admin.masterdata.tahunKurikulum.create');
+        return view('admin.pendidikan.tahunKurikulum.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class TahunKurikulumController extends Controller
     public function show($id)
     {
         $tahunKurikulum = TahunKurikulum::findOrFail($id);
-        return view('admin.masterdata.tahunKurikulum.show', compact('tahunKurikulum'));
+        return view('admin.pendidikan.tahunKurikulum.show', compact('tahunKurikulum'));
     }
 
     /**
@@ -56,7 +56,7 @@ class TahunKurikulumController extends Controller
     public function edit($id)
     {
         $tahunKurikulum = TahunKurikulum::findOrFail($id);
-        return view('admin.masterdata.tahunKurikulum.edit', compact('tahunKurikulum'));
+        return view('admin.pendidikan.tahunKurikulum.edit', compact('tahunKurikulum'));
     }
 
     /**

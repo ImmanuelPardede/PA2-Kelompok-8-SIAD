@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Guru\Materi;
+namespace App\Http\Controllers\Admin\Pendidikan;
 
 use App\Http\Controllers\Controller;
 use App\Models\TahunKurikulum;
@@ -15,7 +15,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelasList = Kelas::orderBy('nama_kelas', 'asc')->paginate(7);
-        return view('guru.materi.kelas.index', compact('kelasList'));
+        return view('admin.pendidikan.kelas.index', compact('kelasList'));
     }
 
     /**
@@ -24,7 +24,7 @@ class KelasController extends Controller
     public function create()
     {
         $tahunKurikulum = TahunKurikulum::all();
-        return view('guru.materi.kelas.create', compact('tahunKurikulum'));
+        return view('admin.pendidikan.kelas.create', compact('tahunKurikulum'));
     }
 
     /**
@@ -47,7 +47,7 @@ class KelasController extends Controller
     public function show(string $id)
     {
         $kelas = Kelas::find($id);
-        return view('guru.materi.kelas.show', compact('kelas'));
+        return view('admin.pendidikan.kelas.show', compact('kelas'));
     }
 
     /**
@@ -57,7 +57,7 @@ class KelasController extends Controller
     {
         $kelas = Kelas::find($id);
         $tahunKurikulum = TahunKurikulum::all();
-        return view('guru.materi.kelas.edit', compact('kelas', 'tahunKurikulum'));
+        return view('admin.pendidikan.kelas.edit', compact('kelas', 'tahunKurikulum'));
     }
 
     /**
