@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ModulMateri extends Model
+class Silabus extends Model
 {
     use HasFactory;
 
-    protected $table = 'modul_materi';
+    protected $table = 'silabus';
     protected $fillable = [
         'kelas_id',
-        'nama_materi',
+        'nama_silabus',
         'deskripsi',
         'tahun_kurikulum_id',
     ];

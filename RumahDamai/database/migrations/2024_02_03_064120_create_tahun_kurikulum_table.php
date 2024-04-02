@@ -4,20 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTahunKurikulumTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('kelas', function (Blueprint $table) {
+        Schema::create('tahun_kurikulum', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kelas');
-            $table->unsignedBigInteger('tahun_kurikulum_id');
+            $table->integer('tahun_kurikulum');
             $table->timestamps();
-
-            $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('tahun_kurikulum');
     }
-};
+}
