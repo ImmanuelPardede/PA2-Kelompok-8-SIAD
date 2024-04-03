@@ -29,8 +29,13 @@
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
-                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
+                <label for="file_modul">File Modul</label>
+                <input type="file" class="form-control" name="file_modul">
+            </div>
+
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi</label>
+                <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
             </div>
 
             <input type="hidden" name="guru_id" value="{{ auth()->user()->id }}">

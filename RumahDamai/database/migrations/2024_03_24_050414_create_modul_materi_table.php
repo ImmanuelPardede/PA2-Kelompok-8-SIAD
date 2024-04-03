@@ -14,8 +14,9 @@ class CreateModulMateriTable extends Migration
             $table->string('nama_materi');
             $table->unsignedBigInteger('minggu_pembelajaran_id');
             $table->unsignedBigInteger('tahun_kurikulum_id');
-            $table->string('deskripsi', 2000);
             $table->unsignedBigInteger('guru_id');
+            $table->string('file_modul');
+            $table->string('deskripsi', 2000);
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

@@ -8,6 +8,9 @@ use App\Models\ModulMateri;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 
 class ModulMateriController extends Controller
@@ -17,13 +20,15 @@ class ModulMateriController extends Controller
         $guruId = Auth::id();
 
         $modulMateriList = ModulMateri::where('guru_id', $guruId)
-            ->orderBy('created_at', 'desc')
+            ->with('mingguPembelajaran')
+            ->orderBy('created_at', 'asc')
             ->paginate(7);
 
         $mingguPembelajaran = MingguPembelajaran::all(); // Ambil data minggu pembelajaran
 
         return view('guru.materi.modulMateri.index', compact('modulMateriList', 'mingguPembelajaran'));
     }
+
 
 
     public function create()
@@ -45,7 +50,6 @@ class ModulMateriController extends Controller
         return view('guru.materi.modulMateri.create', compact('kelas', 'mingguPembelajaran', 'tahun_kurikulum_id'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
@@ -53,6 +57,7 @@ class ModulMateriController extends Controller
             'nama_materi' => 'required|string',
             'deskripsi' => 'required|string',
             'minggu_pembelajaran_id' => 'required|exists:minggu_pembelajaran,id',
+            'file_modul' => 'nullable|mimes:pdf,doc,docx', // Ubah validasi file
         ]);
 
         $userId = Auth::id();
@@ -72,6 +77,14 @@ class ModulMateriController extends Controller
                 'tanggal_publish' => now(),
             ]);
 
+            if ($request->hasFile('file_modul')) {
+                $file = $request->file('file_modul');
+                $fileContent = time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('documents', $fileContent, 'public');
+
+                $modulMateri->file_modul = $fileContent; // Simpan nama file
+            }
+
             $modulMateri->save();
 
             return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil ditambahkan.');
@@ -79,10 +92,6 @@ class ModulMateriController extends Controller
             return redirect()->route('modulMateri.index')->with('error', 'Anda tidak diizinkan membuat Modul Materi.');
         }
     }
-
-
-
-
 
 
 
@@ -132,5 +141,22 @@ class ModulMateriController extends Controller
         $modulMateri->delete();
 
         return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil dihapus.');
+    }
+
+    public function download(string $id)
+    {
+        $modulMateri = ModulMateri::find($id);
+
+        if (!$modulMateri || !$modulMateri->file_modul) {
+            return redirect()->back()->with('error', 'File Modul tidak ditemukan.');
+        }
+
+        $filePath = storage_path("app/public/documents/{$modulMateri->file_modul}");
+
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('error', 'File Modul tidak ditemukan.');
+        }
+
+        return new BinaryFileResponse($filePath);
     }
 }

@@ -111,6 +111,7 @@ Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->nam
 Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
 Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 Route::resource('/materi/modulMateri', ModulMateriController::class);
+Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
 Route::resource('/materi/silabus', SilabusController::class);
 
 
