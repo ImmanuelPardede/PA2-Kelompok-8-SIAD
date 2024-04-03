@@ -74,6 +74,11 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('tahunKurikulum.index') }}">Tahun
                                     Kurikulum</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('tahunAjaran.index') }}">Tahun
+                                    Ajaran</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('semesterTahunAjaran.index') }}">Semester Ajaran</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('mingguPembelajaran.index') }}">
+                                    Pembelajaran</a>
                         </ul>
                     </div>
                 </li>

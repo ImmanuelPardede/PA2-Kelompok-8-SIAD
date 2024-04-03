@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Pendidikan\MingguPembelajaranController;
+use App\Http\Controllers\Admin\Pendidikan\SemesterTahunAjaranController;
 use App\Http\Controllers\Admin\Pendidikan\TahunKurikulumController;
 use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
 use App\Http\Controllers\Admin\Pendidikan\KelasController;
@@ -27,6 +29,7 @@ use App\Http\Controllers\Guru\Raport\RaportController;
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
+use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
 
 
@@ -62,6 +65,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/penyakit', PenyakitController::class);
     Route::resource('/pendidikan/tahunKurikulum', TahunKurikulumController::class);
     Route::resource('/pendidikan/kelas', KelasController::class);
+
+    Route::resource('/pendidikan/tahunAjaran', TahunAjaranController::class);
+    Route::resource('/pendidikan/semesterTahunAjaran', SemesterTahunAjaranController::class);
+    Route::resource('/pendidikan/mingguPembelajaran', MingguPembelajaranController::class);
+
 
 
 
