@@ -12,7 +12,7 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Kelas:</th>
+                                        <th>Kelas</th>
                                         <td>
                                             @if ($modulMateri->kelas)
                                                 {{ $modulMateri->kelas->nama_kelas }}
@@ -22,19 +22,29 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Nama Materi:</th>
+                                        <th>Nama Materi</th>
                                         <td>{{ $modulMateri->nama_materi ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Deskripsi:</th>
+                                        <th>Modul Minggu</th>
+                                        <td>
+                                            @if ($modulMateri->mingguPembelajaran)
+                                                {{ $modulMateri->mingguPembelajaran->minggu_pembelajaran }}
+                                            @else
+                                                Data tidak tersedia
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi</th>
                                         <td>{{ $modulMateri->deskripsi ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
                     <div class="col-md-4">
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -13,14 +13,20 @@ class ModulMateri extends Model
     protected $fillable = [
         'kelas_id',
         'nama_materi',
+        'minggu_pembelajaran_id',
+        'tahun_kurikulum_id',
         'deskripsi',
         'guru_id',
-        'tahun_kurikulum_id',
     ];
 
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
+    public function mingguPembelajaran()
+    {
+        return $this->belongsTo(MingguPembelajaran::class, 'minggu_pembelajaran_id');
     }
 
     public function tahunKurikulum()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guru\Materi;
 
 use App\Models\Kelas;
+use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,15 +20,19 @@ class ModulMateriController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(7);
 
-        return view('guru.materi.modulMateri.index', compact('modulMateriList'));
+        $mingguPembelajaran = MingguPembelajaran::all(); // Ambil data minggu pembelajaran
+
+        return view('guru.materi.modulMateri.index', compact('modulMateriList', 'mingguPembelajaran'));
     }
+
 
     public function create()
     {
         $kelas = Kelas::all();
-        $tahun_kurikulum_id = null; // Inisialisasi variabel
+        $mingguPembelajaran = MingguPembelajaran::all(); // Tambahkan data MingguPembelajaran
 
-        // Cek apakah ada kelas yang dipilih dalam request
+        $tahun_kurikulum_id = null;
+
         if (request()->has('kelas_id')) {
             $selectedKelasId = request()->input('kelas_id');
             $selectedKelas = Kelas::find($selectedKelasId);
@@ -37,7 +42,7 @@ class ModulMateriController extends Controller
             }
         }
 
-        return view('guru.materi.modulMateri.create', compact('kelas', 'tahun_kurikulum_id'));
+        return view('guru.materi.modulMateri.create', compact('kelas', 'mingguPembelajaran', 'tahun_kurikulum_id'));
     }
 
 
@@ -47,6 +52,7 @@ class ModulMateriController extends Controller
             'kelas_id' => 'required|exists:kelas,id',
             'nama_materi' => 'required|string',
             'deskripsi' => 'required|string',
+            'minggu_pembelajaran_id' => 'required|exists:minggu_pembelajaran,id',
         ]);
 
         $userId = Auth::id();
@@ -62,6 +68,7 @@ class ModulMateriController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'guru_id' => $userId,
                 'tahun_kurikulum_id' => $tahun_kurikulum_id,
+                'minggu_pembelajaran_id' => $request->minggu_pembelajaran_id,
                 'tanggal_publish' => now(),
             ]);
 
@@ -90,8 +97,9 @@ class ModulMateriController extends Controller
     {
         $modulMateri = ModulMateri::findOrFail($id);
         $kelas = Kelas::all(); // Mengambil data kelas untuk dropdown
+        $mingguPembelajaran = MingguPembelajaran::all();
 
-        return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas'));
+        return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas', 'mingguPembelajaran'));
     }
 
     public function update(Request $request, string $id)

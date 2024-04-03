@@ -20,6 +20,15 @@
             </div>
 
             <div class="form-group">
+                <label for="minggu_pembelajaran_id">Minggu Pembelajaran</label>
+                <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id">
+                    @foreach ($mingguPembelajaran as $mingguPembelajaranItem)
+                        <option value="{{ $mingguPembelajaranItem->id }}">{{ $mingguPembelajaranItem->minggu_pembelajaran }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="deskripsi">Deskripsi:</label>
                 <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>

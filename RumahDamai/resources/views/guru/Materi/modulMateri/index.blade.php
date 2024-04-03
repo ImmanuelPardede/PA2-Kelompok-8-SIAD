@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nama Materi</th>
+                                <th scope="col">Modul Minggu</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                             @forelse ($modulMateriList as $modulMateri)
                                 <tr>
                                     <td>{{ $modulMateri->nama_materi }}</td>
+                                    <td>{{ $modulMateri->mingguPembelajaran->minggu_pembelajaran }}</td>
                                     <td>
                                         <a href="{{ route('modulMateri.show', $modulMateri->id) }}"
                                             class="btn btn-info">Detail</a>

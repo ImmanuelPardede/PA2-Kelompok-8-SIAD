@@ -12,12 +12,14 @@ class CreateModulMateriTable extends Migration
             $table->id();
             $table->unsignedBigInteger('kelas_id');
             $table->string('nama_materi');
+            $table->unsignedBigInteger('minggu_pembelajaran_id');
             $table->unsignedBigInteger('tahun_kurikulum_id');
             $table->string('deskripsi', 2000);
             $table->unsignedBigInteger('guru_id');
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+            $table->foreign('minggu_pembelajaran_id')->references('id')->on('minggu_pembelajaran')->onDelete('cascade');
             $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
             $table->foreign('guru_id')->references('id')->on('users')->onDelete('cascade');
         });

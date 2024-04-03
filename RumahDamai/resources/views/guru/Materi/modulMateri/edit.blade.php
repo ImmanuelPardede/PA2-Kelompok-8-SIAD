@@ -31,6 +31,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="minggu_pembelajaran_id">Minggu Pembelajaran</label>
+                        <select class="form-control" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id">
+                            <option value="" disabled>-- Minggu Pembelajaran --</option>
+                            @foreach ($mingguPembelajaran as $mingguPembelajarandata)
+                                <option value="{{ $mingguPembelajarandata->id }}"
+                                    {{ $modulMateri->minggu_pembelajaran_id == $mingguPembelajarandata->id ? 'selected' : '' }}>
+                                    {{ $mingguPembelajarandata->minggu_pembelajaran }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="deskripsi">Deskripsi:</label>
                         <textarea class="form-control" name="deskripsi"
                             required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
