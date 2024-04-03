@@ -15,8 +15,6 @@
                     <a href="{{ route('dashboard') }}" class="btn btn-primary float-right mt-3">Kembali</a>
                 </div>
                 </div>
-                <div class="card-footer">
-                </div>
             </div>
         </div>
     </div>
