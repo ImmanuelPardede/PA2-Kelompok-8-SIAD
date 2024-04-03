@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Pendidikan;
 
 use App\Http\Controllers\Controller;
+use App\Models\SemesterTahunAjaran;
+use App\Models\TahunAjaran;
 use App\Models\TahunKurikulum;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
@@ -24,7 +26,9 @@ class KelasController extends Controller
     public function create()
     {
         $tahunKurikulum = TahunKurikulum::all();
-        return view('admin.pendidikan.kelas.create', compact('tahunKurikulum'));
+        $tahunAjaran = TahunAjaran::all();
+        $semesterTahunAjaran = SemesterTahunAjaran::all();
+        return view('admin.pendidikan.kelas.create', compact('tahunKurikulum', 'tahunAjaran', 'semesterTahunAjaran'));
     }
 
     /**
@@ -57,12 +61,11 @@ class KelasController extends Controller
     {
         $kelas = Kelas::find($id);
         $tahunKurikulum = TahunKurikulum::all();
-        return view('admin.pendidikan.kelas.edit', compact('kelas', 'tahunKurikulum'));
+        $tahunAjaran = TahunAjaran::all();
+        $semesterTahunAjaran = SemesterTahunAjaran::all();
+        return view('admin.pendidikan.kelas.edit', compact('kelas', 'tahunKurikulum', 'tahunAjaran','semesterTahunAjaran'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     /**
      * Update the specified resource in storage.
      */
@@ -70,18 +73,12 @@ class KelasController extends Controller
     {
         $request->validate([
             'nama_kelas' => 'nullable|string',
-            'tahun_kurikulum_id' => 'nullable|exists:tahun_kurikulum,id', // tambahkan validasi untuk tahun_kurikulum_id
+            'tahun_kurikulum_id' => 'nullable|exists:tahun_kurikulum,id',
         ]);
 
         $kelas = Kelas::findOrFail($id);
-
-        // Update data kelas
         $kelas->fill($request->all())->save();
-
-        // Update tahun_kurikulum_id di tabel Silabus yang terkait dengan kelas ini
         $kelas->silabus()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
-
-        // Update tahun_kurikulum_id di tabel ModulMateri yang terkait dengan kelas ini
         $kelas->modulMateri()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
 
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diperbarui.');

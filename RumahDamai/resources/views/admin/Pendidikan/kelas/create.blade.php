@@ -19,7 +19,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="nama_kelas">Nama Kelas:</label>
+                <label for="nama_kelas">Nama Kelas</label>
                 <input type="text" class="form-control" name="nama_kelas" value="{{ old('nama_kelas') }}">
             </div>
 
@@ -29,6 +29,26 @@
                     <option value="" disabled selected>-- Pilih Tahun Kurikulum --</option>
                     @foreach ($tahunKurikulum as $item)
                         <option value="{{ $item->id }}">{{ $item->tahun_kurikulum }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tahun_ajaran_id">Tahun Ajaran</label>
+                <select class="form-control" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                    <option value="" disabled selected>-- Pilih Tahun Ajaran --</option>
+                    @foreach ($tahunAjaran as $item)
+                        <option value="{{ $item->id }}">{{ $item->tahun_ajaran }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="semester_tahun_ajaran_id">Semester Tahun Ajaran</label>
+                <select class="form-control" id="semester_tahun_ajaran_id" name="semester_tahun_ajaran_id">
+                    <option value="" disabled selected>-- Pilih Semester Tahun Ajaran --</option>
+                    @foreach ($semesterTahunAjaran as $item)
+                        <option value="{{ $item->id }}">{{ $item->semester_tahun_ajaran }}</option>
                     @endforeach
                 </select>
             </div>

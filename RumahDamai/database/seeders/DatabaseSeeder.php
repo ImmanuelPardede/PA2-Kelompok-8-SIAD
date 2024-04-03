@@ -53,13 +53,13 @@ class DatabaseSeeder extends Seeder
             TahunKurikulumSeeder::class,
         ]);
         $this->call([
-            KelasSeeder::class,
-        ]);
-        $this->call([
             TahunAjaranSeeder::class,
         ]);
         $this->call([
             SemesterTahunAjaranSeeder::class,
+        ]);
+        $this->call([
+            KelasSeeder::class,
         ]);
         $this->call([
             MingguPembelajaranSeeder::class,
