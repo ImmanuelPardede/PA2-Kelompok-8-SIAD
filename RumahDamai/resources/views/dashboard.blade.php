@@ -37,6 +37,30 @@
               @endif
           </h6>
 
+
+          @if (!Auth::user()->isProfileComplete() && Auth::user()->role !== 'admin')
+    <div class="container mt-4">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Perhatian!</strong> Data diri kamu belum lengkap. Silahkan lengkapi!
+            <ul class="mt-2 mb-0">
+                @foreach(Auth::user()->missingProfileFields() as $field)
+                    <li>{{ $field }}</li>
+                @endforeach
+            </ul>
+            @if(Auth::user()->role === 'guru' || Auth::user()->role === 'staff')
+                <a href="{{ Auth::user()->role === 'guru' ? route('guru.DataDiri.edit', ['user' => Auth::user()]) : route('staff.DataDiri.edit', ['user' => Auth::user()]) }}" class="mt-2">Edit Data Diri</a>
+            @endif
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+
+
+      
+
+
           
                   @if (session('success'))
           <div class="alert alert-success">

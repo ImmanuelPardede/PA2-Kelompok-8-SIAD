@@ -59,7 +59,55 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function isProfileComplete()
+    {
+        // Customize this logic based on your requirements.
+        return !empty($this->nama_lengkap) &&
+               !empty($this->email) &&
+               !empty($this->password) &&
+               !empty($this->status) &&
+               !empty($this->role) &&
+               !empty($this->nip) &&
+               !empty($this->golongan_darah_id) &&
+               !empty($this->jenis_kelamin_id) &&
+               !empty($this->agama_id) &&
+               !empty($this->pendidikan_id) &&
+               !empty($this->alamat) &&
+               !empty($this->tanggal_masuk) &&
+               !empty($this->tempat_lahir) &&
+               !empty($this->tanggal_lahir) &&
+               !empty($this->lokasi_penugasan_id) &&
+               !empty($this->foto);
+    }
 
+    public function missingProfileFields()
+    {
+        $missingFields = [];
+
+        if (empty($this->nama_lengkap)) {
+            $missingFields[] = 'Nama Lengkap';
+        }
+
+        if (empty($this->email)) {
+            $missingFields[] = 'Email';
+        }
+
+        if (empty($this->password)) {
+            $missingFields[] = 'Password';
+        }
+
+        if (empty($this->status)) {
+            $missingFields[] = 'Status';
+        }
+
+        if (empty($this->role)) {
+            $missingFields[] = 'Role';
+        }
+
+        // Add other fields as needed...
+
+        return $missingFields;
+    }
 
 
     protected function role(): Attribute
