@@ -11,20 +11,24 @@ class CreateJadwalPembelajaranTable extends Migration
         Schema::create('jadwal_pembelajaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kelas_id');
-            $table->string('nama_materi');
-            $table->unsignedBigInteger('tahun_kurikulum_id');
-            $table->string('deskripsi', 2000);
+            $table->unsignedBigInteger('minggu_pembelajaran_id'); // Add this line
+            $table->unsignedBigInteger('modul_materi_id'); // Change 'nama_materi' to 'modul_materi_id'
             $table->unsignedBigInteger('guru_id');
+            $table->date('tanggal'); // Change to 'date' data type
+            $table->time('jam_mulai'); // Add this line
+            $table->time('jam_selesai');
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
-            $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
+            $table->foreign('minggu_pembelajaran_id')->references('id')->on('minggu_pembelajaran')->onDelete('cascade');
+            $table->foreign('modul_materi_id')->references('id')->on('modul_materi')->onDelete('cascade');
             $table->foreign('guru_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('jadwal_pembelajaran');
     }
 }
+

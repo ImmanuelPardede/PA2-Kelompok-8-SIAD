@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Pendidikan\SemesterTahunAjaranController;
 use App\Http\Controllers\Admin\Pendidikan\TahunKurikulumController;
 use App\Http\Controllers\Admin\TipeAnak\AnakNonDisabilitasController;
 use App\Http\Controllers\Admin\Pendidikan\KelasController;
+use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use App\Http\Controllers\Guru\Materi\SilabusController;
 use Illuminate\Support\Facades\Route;
@@ -113,6 +114,8 @@ Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.p
 Route::resource('/materi/modulMateri', ModulMateriController::class);
 Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
 Route::resource('/materi/silabus', SilabusController::class);
+Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
+
 
 
 Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
@@ -149,3 +152,6 @@ Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.
 Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
 
 
+Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index'])->name('jadwal.index');
+Route::post('/jadwal', [JadwalPembelajaranController::class, 'store'])->name('jadwal.store');
+Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwal.edit');

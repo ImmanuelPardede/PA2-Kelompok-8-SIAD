@@ -5,24 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ModulMateri extends Model
+class JadwalPembelajaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'modul_materi';
+    protected $table = 'jadwal_pembelajaran';
     protected $fillable = [
         'kelas_id',
-        'nama_materi',
         'minggu_pembelajaran_id',
-        'tahun_kurikulum_id',
+        'modul_materi_id',
         'guru_id',
-        'file_modul',
-        'deskripsi',
+        'tanggal',
+        'jam_mulai',
+        'jam_selesai',
     ];
+
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class, 'kelas_id');
+        return $this->belongsTo(Kelas::class);
     }
 
     public function mingguPembelajaran()
@@ -30,13 +31,13 @@ class ModulMateri extends Model
         return $this->belongsTo(MingguPembelajaran::class, 'minggu_pembelajaran_id');
     }
 
-    public function tahunKurikulum()
+    public function modulMateri()
     {
-        return $this->belongsTo(TahunKurikulum::class, 'tahun_kurikulum_id');
+        return $this->belongsTo(ModulMateri::class);
     }
 
-    public function jadwalPembelajaran()
+    public function guru()
     {
-        return $this->hasMany(JadwalPembelajaran::class);
+        return $this->belongsTo(User::class, 'guru_id');
     }
 }

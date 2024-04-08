@@ -7,6 +7,12 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('jadwal.index') }}" class="nav-link">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Jadwal</span>
+            </a>
+        </li>
         @auth
             @if (auth()->user()->role === 'admin')
                 <li class="nav-item">
@@ -76,7 +82,8 @@
                                     Kurikulum</a>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('tahunAjaran.index') }}">Tahun
                                     Ajaran</a>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('semesterTahunAjaran.index') }}">Semester Ajaran</a>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('semesterTahunAjaran.index') }}">Semester Ajaran</a>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('mingguPembelajaran.index') }}">
                                     Pembelajaran</a>
                         </ul>

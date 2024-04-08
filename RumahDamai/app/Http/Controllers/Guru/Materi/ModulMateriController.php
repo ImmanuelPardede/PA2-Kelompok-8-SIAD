@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guru\Materi;
 
+use App\Models\JadwalPembelajaran;
 use App\Models\Kelas;
 use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Carbon\Carbon;
+
 
 
 class ModulMateriController extends Controller
@@ -86,6 +89,7 @@ class ModulMateriController extends Controller
             }
 
             $modulMateri->save();
+            $this->tambahJadwalPembelajaran($modulMateri);
 
             return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil ditambahkan.');
         } else {
@@ -158,5 +162,20 @@ class ModulMateriController extends Controller
         }
 
         return new BinaryFileResponse($filePath);
+    }
+
+    public function tambahJadwalPembelajaran(ModulMateri $modulMateri)
+    {
+        $jadwalPembelajaran = new JadwalPembelajaran([
+            'kelas_id' => $modulMateri->kelas_id,
+            'minggu_pembelajaran_id' => $modulMateri->minggu_pembelajaran_id,
+            'modul_materi_id' => $modulMateri->id,
+            'guru_id' => $modulMateri->guru_id,
+            'tanggal' => now()->toDateString(), // Tanggal hari ini
+            'jam_mulai' => '08:00:00', // Jam mulai (contoh)
+            'jam_selesai' => '10:00:00', // Jam selesai (contoh)
+        ]);
+
+        $jadwalPembelajaran->save();
     }
 }
