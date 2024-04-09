@@ -152,6 +152,7 @@ Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.
 Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
 
 
-Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index'])->name('jadwal.index');
-Route::post('/jadwal', [JadwalPembelajaranController::class, 'store'])->name('jadwal.store');
-Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwal.edit');
+Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index'])->name('jadwalPembelajaran.index');
+Route::post('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'store'])->name('jadwalPembelajaran.store');
+Route::put('/jadwalPembelajaran/update/{id}', [JadwalPembelajaranController::class, 'update'])->name('jadwalPembelajaran.update');
+Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwalPembelajaran.edit');

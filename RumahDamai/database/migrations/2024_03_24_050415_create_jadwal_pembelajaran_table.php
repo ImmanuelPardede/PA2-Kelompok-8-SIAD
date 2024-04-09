@@ -11,12 +11,13 @@ class CreateJadwalPembelajaranTable extends Migration
         Schema::create('jadwal_pembelajaran', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kelas_id');
-            $table->unsignedBigInteger('minggu_pembelajaran_id'); // Add this line
-            $table->unsignedBigInteger('modul_materi_id'); // Change 'nama_materi' to 'modul_materi_id'
+            $table->unsignedBigInteger('minggu_pembelajaran_id');
+            $table->unsignedBigInteger('modul_materi_id');
             $table->unsignedBigInteger('guru_id');
-            $table->date('tanggal'); // Change to 'date' data type
-            $table->time('jam_mulai'); // Add this line
-            $table->time('jam_selesai');
+            $table->date('tanggal_pembelajaran')->nullable();
+            $table->string('hari_pembelajaran')->nullable();
+            $table->time('jam_mulai')->nullable();
+            $table->time('jam_selesai')->nullable();
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

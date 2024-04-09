@@ -23,6 +23,16 @@
                 <input type="text" class="form-control" name="minggu_pembelajaran" value="{{ old('minggu_pembelajaran', $mingguPembelajaran->tahun_kurikulum) }}">
             </div>
 
+            <div class="form-group">
+                <label for="tanggal_mulai">Tanggal Mulai</label>
+                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai', $tanggal_mulai) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="tanggal_berakhir">Tanggal Berakhir</label>
+                <input type="date" class="form-control" name="tanggal_berakhir" value="{{ old('tanggal_berakhir', $tanggal_berakhir) }}">
+            </div>
+
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-warning">Update</button>
         </form>

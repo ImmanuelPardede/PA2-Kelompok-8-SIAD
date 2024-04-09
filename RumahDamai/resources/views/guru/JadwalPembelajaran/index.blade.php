@@ -10,24 +10,27 @@
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Kelas</th>
-                            <th>Minggu Pembelajaran</th>
-                            <th>Materi Pembelajaran</th>
                             <th>Guru</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Pembelajaran</th>
+                            <th>Hari Pembelajaran</th>
                             <th>Jam Mulai</th>
                             <th>Jam Selesai</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jadwalPembelajaran as $jadwal)
                         <tr>
                             <td>{{ $jadwal->kelas->nama_kelas }}</td>
-                            <td>{{ $jadwal->mingguPembelajaran->minggu_pembelajaran }}</td>
-                            <td>{{ $jadwal->modulMateri->nama_materi }}</td>
                             <td>{{ $jadwal->guru->nama_lengkap }}</td>
-                            <td>{{ $jadwal->tanggal }}</td>
+                            <td>{{ $jadwal->tanggal_pembelajaran }}</td>
+                            <td>{{ $jadwal->hari_pembelajaran }}</td>
                             <td>{{ $jadwal->jam_mulai }}</td>
                             <td>{{ $jadwal->jam_selesai }}</td>
+                            <td>
+                                <a href="{{ route('jadwalPembelajaran.edit', $jadwal->id) }}"
+                                    class="btn btn-warning">Edit</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

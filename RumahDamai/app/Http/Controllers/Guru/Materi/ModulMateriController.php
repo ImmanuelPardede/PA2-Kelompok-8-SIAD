@@ -171,9 +171,6 @@ class ModulMateriController extends Controller
             'minggu_pembelajaran_id' => $modulMateri->minggu_pembelajaran_id,
             'modul_materi_id' => $modulMateri->id,
             'guru_id' => $modulMateri->guru_id,
-            'tanggal' => now()->toDateString(), // Tanggal hari ini
-            'jam_mulai' => '08:00:00', // Jam mulai (contoh)
-            'jam_selesai' => '10:00:00', // Jam selesai (contoh)
         ]);
 
         $jadwalPembelajaran->save();

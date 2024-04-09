@@ -27,9 +27,9 @@
     <ul class="navbar-nav navbar-nav-right">
 
     <ul class="navbar-nav navbar-nav-right">
-       
-      
-      
+
+
+
       <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
             <i class="icon-bell mx-0"></i>
@@ -60,11 +60,11 @@
             @endforeach
         </div>
     </li>
-            
-    
 
-    
-    
+
+
+
+
 
 
 
@@ -84,7 +84,7 @@
           </span> <!-- Teks "halo" yang Anda tambahkan -->
           <!-- Tambahkan ikon panah ke bawah -->
       </a>
-      
+
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
 
           @if(auth()->user()->role == 'guru')
@@ -112,7 +112,7 @@
           </a>
         </div>
       </li>
-      
+
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
       <span class="icon-menu"></span>
@@ -122,7 +122,7 @@
 <!-- partial -->
 <div class="container-fluid page-body-wrapper">
   <!-- partial:partials/_settings-panel.html -->
- 
+
     <!-- partial -->
 
 

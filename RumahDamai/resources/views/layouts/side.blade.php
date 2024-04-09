@@ -8,7 +8,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('jadwal.index') }}" class="nav-link">
+            <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Jadwal</span>
             </a>

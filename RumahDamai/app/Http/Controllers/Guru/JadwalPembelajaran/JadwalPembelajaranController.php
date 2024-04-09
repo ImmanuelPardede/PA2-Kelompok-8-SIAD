@@ -3,27 +3,38 @@
 namespace App\Http\Controllers\Guru\JadwalPembelajaran;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
+use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
 use App\Models\JadwalPembelajaran;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class JadwalPembelajaranController extends Controller
 {
-    public function tambahJadwalPembelajaran(ModulMateri $modulMateri)
+    public function tambahJadwalPembelajaran(Request $request, ModulMateri $modulMateri)
     {
-        $jadwalPembelajaran = new JadwalPembelajaran();
-        $jadwalPembelajaran->kelas_id = $modulMateri->kelas_id;
-        $jadwalPembelajaran->minggu_pembelajaran_id = $modulMateri->minggu_pembelajaran_id;
-        $jadwalPembelajaran->modul_materi_id = $modulMateri->id;
-        $jadwalPembelajaran->user_id = Auth::id();
-        $jadwalPembelajaran->tanggal = Carbon::now()->toDateString();
-        $jadwalPembelajaran->jam_mulai = '08:00:00';
-        $jadwalPembelajaran->jam_selesai = '10:00:00';
-        $jadwalPembelajaran->save();
+        $existingJadwal = JadwalPembelajaran::where('modul_materi_id', $modulMateri->id)->first();
 
-        return redirect()->route('guru.JadwalPembelajaran.index')->with('success', 'Jadwal pembelajaran berhasil ditambahkan.');
+        if ($existingJadwal) {
+            // Jika jadwal sudah ada, tampilkan form edit
+            return $this->edit($existingJadwal->id);
+        } else {
+            // Jika tidak, tambahkan jadwal baru
+            $jadwalPembelajaran = new JadwalPembelajaran();
+            $jadwalPembelajaran->kelas_id = $modulMateri->kelas_id;
+            $jadwalPembelajaran->minggu_pembelajaran_id = $modulMateri->minggu_pembelajaran_id;
+            $jadwalPembelajaran->modul_materi_id = $modulMateri->id;
+            $jadwalPembelajaran->guru_id = Auth::id();
+            $jadwalPembelajaran->save();
+
+            return redirect()->route('guru.JadwalPembelajaran.index')->with('success', 'Jadwal pembelajaran berhasil ditambahkan.');
+        }
     }
+
 
     public function index()
     {
@@ -32,5 +43,53 @@ class JadwalPembelajaranController extends Controller
             ->paginate(7);
 
         return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran'));
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'kelas_id' => 'required',
+            'minggu_pembelajaran_id' => 'required',
+            'modul_materi_id' => 'required',
+            'guru_id' => 'required',
+            'tanggal_pembelajaran' => 'required|date',
+            'hari_pembelajaran' => 'required|string',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+        ]);
+
+        JadwalPembelajaran::create($validatedData);
+
+        return redirect()->route('jadwalPembelajaran.index')->with('success', 'Jadwal Pembelajaran berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $jadwalPembelajaran = JadwalPembelajaran::findOrFail($id);
+        $daftarMingguPembelajaran = MingguPembelajaran::all();
+        $daftarKelas = Kelas::all();
+        $daftarModulMateri = ModulMateri::all();
+        $daftarGuru = User::all();
+
+        return view('guru.JadwalPembelajaran.edit', compact('jadwalPembelajaran', 'daftarKelas', 'daftarMingguPembelajaran', 'daftarModulMateri', 'daftarGuru'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'kelas_id' => 'required',
+            'minggu_pembelajaran_id' => 'required',
+            'modul_materi_id' => 'required',
+            'guru_id' => 'required',
+            'tanggal_pembelajaran' => 'required|date',
+            'hari_pembelajaran' => 'required|string',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+        ]);
+
+        $jadwalPembelajaran = JadwalPembelajaran::findOrFail($id);
+        $jadwalPembelajaran->update($validatedData);
+
+        return redirect()->route('jadwalPembelajaran.index')->with('success', 'Jadwal Pembelajaran berhasil diperbarui.');
     }
 }

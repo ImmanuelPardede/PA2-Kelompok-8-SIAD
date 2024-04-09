@@ -15,11 +15,18 @@ class JadwalPembelajaran extends Model
         'minggu_pembelajaran_id',
         'modul_materi_id',
         'guru_id',
-        'tanggal',
+        'tanggal_pembelajaran',
+        'hari_pembelajaran',
         'jam_mulai',
         'jam_selesai',
     ];
-
+    
+    protected $attributes = [
+        'hari_pembelajaran' => null,
+        'tanggal_pembelajaran' => null,
+        'jam_mulai' => null,
+        'jam_selesai' => null,
+    ];
 
     public function kelas()
     {

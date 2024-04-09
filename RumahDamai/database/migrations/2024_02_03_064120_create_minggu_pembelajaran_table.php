@@ -14,6 +14,8 @@ class CreateMingguPembelajaranTable extends Migration
         Schema::create('minggu_pembelajaran', function (Blueprint $table) {
             $table->id();
             $table->string('minggu_pembelajaran');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_berakhir');
             $table->timestamps();
         });
     }

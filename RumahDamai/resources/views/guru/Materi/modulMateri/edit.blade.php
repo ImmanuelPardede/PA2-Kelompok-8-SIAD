@@ -5,12 +5,10 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Edit Materi</h2>
-
                 <form action="{{ route('modulMateri.update', $modulMateri->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
                     <div class="form-group">
                         <label for="kelas_id">Nama Kelas</label>
                         <select class="form-control" id="kelas_id" name="kelas_id">
@@ -50,8 +48,7 @@
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi"
-                            required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
+                        <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
                     </div>
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

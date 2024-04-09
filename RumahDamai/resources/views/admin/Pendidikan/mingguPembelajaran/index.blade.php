@@ -20,6 +20,8 @@
                     <thead>
                         <tr>
                             <th>Minggu Pembelajaran</th>
+                            <th>Tanggal Mulai</th>
+                            <th>Tanggal Berakhir</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -27,6 +29,8 @@
                         @forelse ($mingguPembelajaranList as $mingguPembelajaran)
                             <tr>
                                 <td>{{ $mingguPembelajaran->minggu_pembelajaran }}</td>
+                                <td>{{ $mingguPembelajaran->tanggal_mulai }}</td>
+                                <td>{{ $mingguPembelajaran->tanggal_berakhir }}</td>
                                 <td>
                                     <a href="{{ route('mingguPembelajaran.edit', $mingguPembelajaran->id) }}" class="btn btn-warning">Edit</a>
                                     <form action="{{ route('mingguPembelajaran.destroy', $mingguPembelajaran->id) }}" method="post" style="display:inline;">
