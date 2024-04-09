@@ -20,7 +20,7 @@ class JadwalPembelajaran extends Model
         'jam_mulai',
         'jam_selesai',
     ];
-    
+
     protected $attributes = [
         'hari_pembelajaran' => null,
         'tanggal_pembelajaran' => null,

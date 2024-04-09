@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Pendidikan\KelasController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use App\Http\Controllers\Guru\Materi\SilabusController;
+use App\Http\Controllers\KalenderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -156,3 +157,6 @@ Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index']
 Route::post('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'store'])->name('jadwalPembelajaran.store');
 Route::put('/jadwalPembelajaran/update/{id}', [JadwalPembelajaranController::class, 'update'])->name('jadwalPembelajaran.update');
 Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwalPembelajaran.edit');
+
+
+Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');

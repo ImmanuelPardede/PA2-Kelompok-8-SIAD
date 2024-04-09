@@ -48,14 +48,14 @@ class JadwalPembelajaranController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'kelas_id' => 'required',
-            'minggu_pembelajaran_id' => 'required',
-            'modul_materi_id' => 'required',
-            'guru_id' => 'required',
-            'tanggal_pembelajaran' => 'required|date',
-            'hari_pembelajaran' => 'required|string',
-            'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+            'kelas_id' => 'nullable',
+            'minggu_pembelajaran_id' => 'nullable',
+            'modul_materi_id' => 'nullable',
+            'guru_id' => 'nullable',
+            'tanggal_pembelajaran' => 'nullable|date',
+            'hari_pembelajaran' => 'nullable|string',
+            'jam_mulai' => 'nullable|date_format:H:i',
+            'jam_selesai' => 'nullable|date_format:H:i|after:jam_mulai',
         ]);
 
         JadwalPembelajaran::create($validatedData);
@@ -74,20 +74,28 @@ class JadwalPembelajaranController extends Controller
         return view('guru.JadwalPembelajaran.edit', compact('jadwalPembelajaran', 'daftarKelas', 'daftarMingguPembelajaran', 'daftarModulMateri', 'daftarGuru'));
     }
 
+
     public function update(Request $request, $id)
     {
+        $jadwalPembelajaran = JadwalPembelajaran::findOrFail($id);
+
         $validatedData = $request->validate([
-            'kelas_id' => 'required',
-            'minggu_pembelajaran_id' => 'required',
-            'modul_materi_id' => 'required',
-            'guru_id' => 'required',
-            'tanggal_pembelajaran' => 'required|date',
-            'hari_pembelajaran' => 'required|string',
-            'jam_mulai' => 'required|date_format:H:i',
-            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+            'kelas_id' => 'nullable',
+            'minggu_pembelajaran_id' => 'nullable',
+            'modul_materi_id' => 'nullable',
+            'guru_id' => 'nullable',
+            'tanggal_pembelajaran' => 'nullable|date',
+            'hari_pembelajaran' => 'nullable|string',
+            'jam_mulai' => 'nullable|date_format:H:i',
+            'jam_selesai' => 'nullable|date_format:H:i|after:jam_mulai',
         ]);
 
-        $jadwalPembelajaran = JadwalPembelajaran::findOrFail($id);
+        // Hapus validasi untuk jam_mulai dan jam_selesai jika keduanya tidak diisi
+        if (!$request->filled('jam_mulai') && !$request->filled('jam_selesai')) {
+            unset($validatedData['jam_mulai']);
+            unset($validatedData['jam_selesai']);
+        }
+
         $jadwalPembelajaran->update($validatedData);
 
         return redirect()->route('jadwalPembelajaran.index')->with('success', 'Jadwal Pembelajaran berhasil diperbarui.');
