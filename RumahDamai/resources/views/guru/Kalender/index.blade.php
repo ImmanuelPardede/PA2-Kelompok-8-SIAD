@@ -6,7 +6,12 @@
             table-layout: fixed;
         }
 
-        .table-fixed th,
+        .table-fixed th {
+            text-align: center;
+            width: 50px;
+            height: 50px;
+        }
+
         .table-fixed td {
             width: 125px;
             height: 125px;
@@ -41,7 +46,7 @@
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-fixed">
-                                <thead>
+                                <thead class="bg-primary text-white">
                                     <tr>
                                         <th width="125">Time</th>
                                         @foreach ($weekDays as $day)
@@ -52,7 +57,8 @@
                                 <tbody>
                                     @foreach ($calendarData as $time => $days)
                                         <tr>
-                                            <td>{{ $time }}</td>
+                                            <td>{{ \Carbon\Carbon::parse(explode(' - ', $time)[0])->format('H:i') }} -
+                                                {{ \Carbon\Carbon::parse(explode(' - ', $time)[1])->format('H:i') }}</td>
                                             @foreach ($weekDays as $day)
                                                 @if (isset($days[$day]))
                                                     <td class="align-middle text-center special"
@@ -63,11 +69,11 @@
                                                                 {{ $days[$day]['kelas'] }}<br>
                                                             </div>
                                                         @else
-                                                            Kosong
+                                                            ....
                                                         @endif
                                                     </td>
                                                 @else
-                                                    <td class="special">Kosong</td>
+                                                    <td class="special">....</td>
                                                 @endif
                                             @endforeach
                                         </tr>

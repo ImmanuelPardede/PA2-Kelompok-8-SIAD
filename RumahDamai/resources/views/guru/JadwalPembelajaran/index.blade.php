@@ -21,12 +21,12 @@
                     <tbody>
                         @foreach ($jadwalPembelajaran as $jadwal)
                         <tr>
-                            <td>{{ $jadwal->kelas->nama_kelas }}</td>
-                            <td>{{ $jadwal->guru->nama_lengkap }}</td>
-                            <td>{{ $jadwal->tanggal_pembelajaran }}</td>
-                            <td>{{ $jadwal->hari_pembelajaran }}</td>
-                            <td>{{ $jadwal->jam_mulai }}</td>
-                            <td>{{ $jadwal->jam_selesai }}</td>
+                            <td>{{ $jadwal->kelas ? $jadwal->kelas->nama_kelas : '' }}</td>
+                            <td>{{ $jadwal->guru ? $jadwal->guru->nama_lengkap : '' }}</td>
+                            <td>{{ $jadwal->tanggal_pembelajaran ? \Carbon\Carbon::parse($jadwal->tanggal_pembelajaran)->format('d/m/Y') : '' }}</td>
+                            <td>{{ $jadwal->hari_pembelajaran ?? '' }}</td>
+                            <td>{{ $jadwal->jam_mulai ? \Carbon\Carbon::parse($jadwal->jam_mulai)->format('H:i') : '' }}</td>
+                            <td>{{ $jadwal->jam_selesai ? \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') : '' }}</td>
                             <td>
                                 <a href="{{ route('jadwalPembelajaran.edit', $jadwal->id) }}"
                                     class="btn btn-warning">Edit</a>

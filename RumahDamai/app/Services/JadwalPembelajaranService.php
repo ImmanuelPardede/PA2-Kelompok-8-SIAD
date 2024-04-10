@@ -3,13 +3,15 @@
 namespace App\Services;
 
 use App\Models\JadwalPembelajaran;
+use Carbon\Carbon;
 
 class JadwalPembelajaranService
 {
-    public function generateCalendarData($weekDays)
+    public function generateCalendarData($weekDays, $startOfWeek, $endOfWeek)
     {
         $calendarData = [];
         $jadwalPembelajaran = JadwalPembelajaran::with(['kelas', 'guru'])
+            ->whereBetween('tanggal_pembelajaran', [$startOfWeek, $endOfWeek])
             ->orderBy('tanggal_pembelajaran')
             ->get();
 

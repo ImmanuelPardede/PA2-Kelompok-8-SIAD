@@ -38,12 +38,16 @@ class JadwalPembelajaranController extends Controller
 
     public function index()
     {
+        $userId = Auth::id();
+
         $jadwalPembelajaran = JadwalPembelajaran::with(['modulMateri', 'modulMateri.mingguPembelajaran'])
+            ->where('guru_id', $userId)
             ->orderBy('created_at', 'asc')
             ->paginate(7);
 
         return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran'));
     }
+
 
     public function store(Request $request)
     {
@@ -89,6 +93,14 @@ class JadwalPembelajaranController extends Controller
             'jam_mulai' => 'nullable|date_format:H:i',
             'jam_selesai' => 'nullable|date_format:H:i|after:jam_mulai',
         ]);
+
+        // Ambil hanya bagian jam dari input
+        if ($request->filled('jam_mulai')) {
+            $validatedData['jam_mulai'] = Carbon::parse($validatedData['jam_mulai'])->format('H:i');
+        }
+        if ($request->filled('jam_selesai')) {
+            $validatedData['jam_selesai'] = Carbon::parse($validatedData['jam_selesai'])->format('H:i');
+        }
 
         // Hapus validasi untuk jam_mulai dan jam_selesai jika keduanya tidak diisi
         if (!$request->filled('jam_mulai') && !$request->filled('jam_selesai')) {

@@ -8,12 +8,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
-                <i class="icon-grid menu-icon"></i>
-                <span class="menu-title">Jadwal</span>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="{{ route('kalender.index') }}" class="nav-link">
                 <i class="icon-grid menu-icon"></i>
                 <span class="menu-title">Kalender</span>
@@ -148,6 +142,13 @@
                                 </a></li>
                         </ul>
                     </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
+                        <i class="icon-grid menu-icon"></i>
+                        <span class="menu-title">Jadwal</span>
+                    </a>
                 </li>
 
                 <li class="nav-item">
