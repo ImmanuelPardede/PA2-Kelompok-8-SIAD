@@ -20,18 +20,18 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="wilayah">Wilayah:</label>
-                <input type="text" class="form-control" name="wilayah" value="{{ old('wilayah', $lokasiPenugasan->wilayah) }}" required>
+                <label for="wilayah">Wilayah</label>
+                <input type="text" class="form-control" name="wilayah" value="{{ old('wilayah', $lokasiPenugasan->wilayah) }}">
             </div>
 
             <div class="form-group">
-                <label for="lokasi">Lokasi:</label>
-                <input type="text" class="form-control" name="lokasi" value="{{ old('lokasi', $lokasiPenugasan->lokasi) }}" required>
+                <label for="lokasi">Lokasi</label>
+                <input type="text" class="form-control" name="lokasi" value="{{ old('lokasi', $lokasiPenugasan->lokasi) }}">
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
-                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi', $lokasiPenugasan->deskripsi) }}</textarea>
+                <label for="deskripsi">Deskripsi</label>
+                <textarea class="form-control" name="deskripsi">{{ old('deskripsi', $lokasiPenugasan->deskripsi) }}</textarea>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label for="donasi_id">Jenis Donasi:</label>
-                    <select class="form-control" id="donasi_id" name="donasi_id" required>
+                    <select class="form-control" id="donasi_id" name="donasi_id">
                         <option value="" disabled>-- Jenis Donasi --</option>
                         @foreach ($donasi as $donasidata)
                             <option value="{{ $donasidata->id }}" {{ $donatur->donasi_id == $donasidata->id ? 'selected' : '' }}>
@@ -38,13 +38,13 @@
                 <div class="form-group">
                     <label for="nama_donatur">Nama Donatur:</label>
                     <input type="text" class="form-control" id="nama_donatur" name="nama_donatur"
-                        value="{{ $donatur->nama_donatur }}" required>
+                        value="{{ $donatur->nama_donatur }}">
                 </div>
 
                 <div class="form-group">
                     <label for="email_donatur">Email Donatur:</label>
                     <input type="text" class="form-control" id="email_donatur" name="email_donatur"
-                        value="{{ $donatur->email_donatur }}" required>
+                        value="{{ $donatur->email_donatur }}">
                 </div>
 
                 <div class="form-group">

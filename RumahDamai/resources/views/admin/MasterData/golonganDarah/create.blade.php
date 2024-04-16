@@ -19,7 +19,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="golongan_darah">Nama Golongan Darah:</label>
+                <label for="golongan_darah">Nama Golongan Darah</label>
                 <input type="text" class="form-control" name="golongan_darah" value="{{ old('golongan_darah') }}" required>
             </div>
 

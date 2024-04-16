@@ -19,12 +19,12 @@
             @csrf
 
             <div class="form-group">
-                <label for="jenis_sponsorship">Jenis Sponsorship:</label>
+                <label for="jenis_sponsorship">Jenis Sponsorship<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="jenis_sponsorship" value="{{ old('jenis_sponsorship') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
+                <label for="deskripsi">Deskripsi<span style="color: red">*</span></label>
                 <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 

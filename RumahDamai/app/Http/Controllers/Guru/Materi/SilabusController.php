@@ -48,17 +48,15 @@ class SilabusController extends Controller
             'deskripsi' => 'nullable|string',
         ]);
 
-        // Mendapatkan ID pengguna yang sedang login
         $loggedInUserId = Auth::id();
 
         $kelas = Kelas::findOrFail($request->kelas_id);
         $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
 
-        // Menyiapkan data yang akan disimpan
         $input = $request->all();
         $input['tanggal_publish'] = now();
         $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
-        $input['user_id'] = $loggedInUserId; // Mengisi 'user_id' dengan ID pengguna yang sedang login
+        $input['user_id'] = $loggedInUserId;
 
         Silabus::create($input);
 
@@ -76,10 +74,10 @@ class SilabusController extends Controller
     {
         $silabus = Silabus::findOrFail($id);
         $kelas = Kelas::all();
-        $tahunKurikulum = TahunKurikulum::all(); // Menambahkan ini untuk mendapatkan semua data tahun kurikulum
+        $tahunKurikulum = TahunKurikulum::all();
         $loggedInUserId = Auth::id();
 
-        return view('guru.materi.silabus.edit', compact('silabus', 'kelas', 'tahunKurikulum')); // Menambahkan $tahunKurikulum ke dalam compact
+        return view('guru.materi.silabus.edit', compact('silabus', 'kelas', 'tahunKurikulum'));
     }
 
 

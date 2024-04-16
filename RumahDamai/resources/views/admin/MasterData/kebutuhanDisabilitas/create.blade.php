@@ -19,13 +19,13 @@
             @csrf
 
             <div class="form-group">
-                <label for="jenis_kebutuhan_disabilitas">Nama Kebutuhan Disabilitas:</label>
+                <label for="jenis_kebutuhan_disabilitas">Nama Kebutuhan Disabilitas<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="jenis_kebutuhan_disabilitas" value="{{ old('jenis_kebutuhan_disabilitas') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
-                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
+                <label for="deskripsi">Deskripsi</label>
+                <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

@@ -20,8 +20,8 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="tingkat_pendidikan">Jendang Pendidikan:</label>
-                <input type="text" class="form-control" name="tingkat_pendidikan" value="{{ old('tingkat_pendidikan', $tingkatPendidikan->tingkat_pendidikan) }}" required>
+                <label for="tingkat_pendidikan">Jendang Pendidikan</label>
+                <input type="text" class="form-control" name="tingkat_pendidikan" value="{{ old('tingkat_pendidikan', $tingkatPendidikan->tingkat_pendidikan) }}">
             </div>
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-warning">Update</button>

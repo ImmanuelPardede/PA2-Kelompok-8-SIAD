@@ -48,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
+                        <textarea class="form-control" name="deskripsi">{{ old('deskripsi', $modulMateri->deskripsi) }}</textarea>
                     </div>
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

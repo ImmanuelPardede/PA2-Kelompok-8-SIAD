@@ -19,18 +19,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="minggu_pembelajaran">Minggu Pembelajaran</label>
-                <input type="text" class="form-control" name="minggu_pembelajaran" value="{{ old('minggu_pembelajaran') }}">
+                <label for="minggu_pembelajaran">Minggu Pembelajaran<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="minggu_pembelajaran" value="{{ old('minggu_pembelajaran') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="tanggal_mulai">Tanggal Mulai</label>
-                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai') }}">
+                <label for="tanggal_mulai">Tanggal Mulai<span style="color: red">*</span></label>
+                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="tanggal_berakhir">Tanggal Berakhir</label>
-                <input type="date" class="form-control" name="tanggal_berakhir" value="{{ old('tanggal_berakhir') }}">
+                <label for="tanggal_berakhir">Tanggal Berakhir<span style="color: red">*</span></label>
+                <input type="date" class="form-control" name="tanggal_berakhir" value="{{ old('tanggal_berakhir') }}" required>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
