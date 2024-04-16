@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Guru\Materi;
 
 use App\Models\Kelas;
 use App\Models\Silabus;
+use App\Models\TahunKurikulum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class SilabusController extends Controller
 {
@@ -17,8 +21,12 @@ class SilabusController extends Controller
 
     public function create()
     {
+        $tahunKurikulum = TahunKurikulum::all();
         $kelas = Kelas::all();
-        $tahun_kurikulum_id = null;
+        $loggedInUserId = Auth::id();
+
+        // Ambil data user yang sedang login (yang membuat silabus) dan memiliki role "guru"
+        $users = User::where('role', 'guru')->where('id', $loggedInUserId)->get();
 
         if (request()->has('kelas_id')) {
             $selectedKelasId = request()->input('kelas_id');
@@ -29,7 +37,7 @@ class SilabusController extends Controller
             }
         }
 
-        return view('guru.materi.silabus.create', compact('kelas', 'tahun_kurikulum_id'));
+        return view('guru.materi.silabus.create', compact('kelas', 'tahunKurikulum', 'users'));
     }
 
     public function store(Request $request)
@@ -40,17 +48,23 @@ class SilabusController extends Controller
             'deskripsi' => 'nullable|string',
         ]);
 
+        // Mendapatkan ID pengguna yang sedang login
+        $loggedInUserId = Auth::id();
+
         $kelas = Kelas::findOrFail($request->kelas_id);
         $tahun_kurikulum_id = $kelas->tahun_kurikulum_id;
 
+        // Menyiapkan data yang akan disimpan
         $input = $request->all();
         $input['tanggal_publish'] = now();
         $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
+        $input['user_id'] = $loggedInUserId; // Mengisi 'user_id' dengan ID pengguna yang sedang login
 
         Silabus::create($input);
 
         return redirect()->route('silabus.index')->with('success', 'Silabus berhasil ditambahkan.');
     }
+
 
     public function show(string $id)
     {
@@ -62,9 +76,12 @@ class SilabusController extends Controller
     {
         $silabus = Silabus::findOrFail($id);
         $kelas = Kelas::all();
+        $tahunKurikulum = TahunKurikulum::all(); // Menambahkan ini untuk mendapatkan semua data tahun kurikulum
+        $loggedInUserId = Auth::id();
 
-        return view('guru.materi.silabus.edit', compact('silabus', 'kelas'));
+        return view('guru.materi.silabus.edit', compact('silabus', 'kelas', 'tahunKurikulum')); // Menambahkan $tahunKurikulum ke dalam compact
     }
+
 
     public function update(Request $request, string $id)
     {
