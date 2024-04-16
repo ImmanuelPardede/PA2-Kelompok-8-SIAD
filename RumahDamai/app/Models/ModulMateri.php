@@ -15,7 +15,7 @@ class ModulMateri extends Model
         'nama_materi',
         'minggu_pembelajaran_id',
         'tahun_kurikulum_id',
-        'guru_id',
+        'user_id',
         'file_modul',
         'deskripsi',
     ];

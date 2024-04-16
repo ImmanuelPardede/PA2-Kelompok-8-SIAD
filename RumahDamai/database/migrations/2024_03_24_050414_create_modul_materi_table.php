@@ -14,7 +14,7 @@ class CreateModulMateriTable extends Migration
             $table->string('nama_materi');
             $table->unsignedBigInteger('minggu_pembelajaran_id');
             $table->unsignedBigInteger('tahun_kurikulum_id');
-            $table->unsignedBigInteger('guru_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('file_modul');
             $table->string('deskripsi', 2000);
             $table->timestamps();
@@ -22,7 +22,7 @@ class CreateModulMateriTable extends Migration
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
             $table->foreign('minggu_pembelajaran_id')->references('id')->on('minggu_pembelajaran')->onDelete('cascade');
             $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
-            $table->foreign('guru_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -28,7 +28,7 @@ class JadwalPembelajaranController extends Controller
             $jadwalPembelajaran->kelas_id = $modulMateri->kelas_id;
             $jadwalPembelajaran->minggu_pembelajaran_id = $modulMateri->minggu_pembelajaran_id;
             $jadwalPembelajaran->modul_materi_id = $modulMateri->id;
-            $jadwalPembelajaran->guru_id = Auth::id();
+            $jadwalPembelajaran->user_id = Auth::id();
             $jadwalPembelajaran->save();
 
             return redirect()->route('guru.JadwalPembelajaran.index')->with('success', 'Jadwal pembelajaran berhasil ditambahkan.');
@@ -43,7 +43,7 @@ class JadwalPembelajaranController extends Controller
 
         // Ambil jadwal pembelajaran yang dibuat oleh pengguna itu sendiri
         $jadwalPembelajaran = JadwalPembelajaran::with(['modulMateri', 'modulMateri.mingguPembelajaran'])
-            ->where('guru_id', $userId) // Filter berdasarkan ID pengguna
+            ->where('user_id', $userId) // Filter berdasarkan ID pengguna
             ->orderBy('created_at', 'asc')
             ->paginate(7);
 
@@ -57,7 +57,7 @@ class JadwalPembelajaranController extends Controller
             'kelas_id' => 'nullable',
             'minggu_pembelajaran_id' => 'nullable',
             'modul_materi_id' => 'nullable',
-            'guru_id' => 'nullable',
+            'user_id' => 'nullable',
             'tanggal_pembelajaran' => 'nullable|date',
             'hari_pembelajaran' => 'nullable|string',
             'jam_mulai' => 'nullable|date_format:H:i',
@@ -89,7 +89,7 @@ class JadwalPembelajaranController extends Controller
             'kelas_id' => 'nullable',
             'minggu_pembelajaran_id' => 'nullable',
             'modul_materi_id' => 'nullable',
-            'guru_id' => 'nullable',
+            'user_id' => 'nullable',
             'tanggal_pembelajaran' => 'nullable|date',
             'hari_pembelajaran' => 'nullable|string',
             'jam_mulai' => 'nullable|date_format:H:i',

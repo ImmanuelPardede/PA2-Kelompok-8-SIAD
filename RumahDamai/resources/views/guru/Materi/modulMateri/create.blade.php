@@ -42,7 +42,7 @@
                         <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
                     </div>
 
-                    <input type="hidden" name="guru_id" value="{{ auth()->user()->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" class="btn btn-success">Simpan</button>
