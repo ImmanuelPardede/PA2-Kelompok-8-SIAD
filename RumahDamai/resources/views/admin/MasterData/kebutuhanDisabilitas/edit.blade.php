@@ -20,13 +20,13 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="jenis_kebutuhan_disabilitas">Jenis Kebutuhan Disabilitas:</label>
+                <label for="jenis_kebutuhan_disabilitas">Jenis Kebutuhan Disabilitas</label>
                 <input type="text" class="form-control" name="jenis_kebutuhan_disabilitas" value="{{ old('jenis_kebutuhan_disabilitas', $jenisKebutuhanDisabilitas->jenis_kebutuhan_disabilitas) }}">
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
-                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi', $jenisKebutuhanDisabilitas->deskripsi) }}</textarea>
+                <label for="deskripsi">Deskripsi</label>
+                <textarea class="form-control" name="deskripsi">{{ old('deskripsi', $jenisKebutuhanDisabilitas->deskripsi) }}</textarea>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

@@ -19,18 +19,18 @@
             @csrf
 
             <div class="form-group">
-                <label for="kategori_disabilitas">Kategori Disabilitas:</label>
-                <input type="text" class="form-control" name="kategori_disabilitas" value="{{ old('kategori_disabilitas') }}">
+                <label for="kategori_disabilitas">Kategori Disabilitas<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="kategori_disabilitas" value="{{ old('kategori_disabilitas') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="jenis_disabilitas">Jenis Disabilitas:</label>
-                <input type="text" class="form-control" name="jenis_disabilitas" value="{{ old('jenis_disabilitas') }}">
+                <label for="jenis_disabilitas">Jenis Disabilitas<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="jenis_disabilitas" value="{{ old('jenis_disabilitas') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
-                <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                <label for="deskripsi">Deskripsi<span style="color: red">*</span></label>
+                <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

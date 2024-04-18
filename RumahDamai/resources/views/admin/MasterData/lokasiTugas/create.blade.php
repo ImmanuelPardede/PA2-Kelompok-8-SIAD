@@ -19,17 +19,17 @@
             @csrf
 
             <div class="form-group">
-                <label for="wilayah">Wilayah:</label>
+                <label for="wilayah">Wilayah<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="wilayah" value="{{ old('wilayah') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="lokasi">Lokasi:</label>
+                <label for="lokasi">Lokasi<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="lokasi" value="{{ old('lokasi') }}" required>
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
+                <label for="deskripsi">Deskripsi<span style="color: red">*</span></label>
                 <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
             </div>
 

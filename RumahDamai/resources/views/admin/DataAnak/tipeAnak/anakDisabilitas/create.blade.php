@@ -19,17 +19,17 @@
             @csrf
 
             <div class="form-group">
-                <label for="kategori_anak_disabilitas">Kategori Anak Disabilitas:</label>
+                <label for="kategori_anak_disabilitas">Kategori Anak Disabilitas<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="kategori_anak_disabilitas" value="{{ old('kategori_anak_disabilitas') }}">
             </div>
 
             <div class="form-group">
-                <label for="jenis_anak_disabilitas">Jenis Anak Disabilitas:</label>
+                <label for="jenis_anak_disabilitas">Jenis Anak Disabilitas<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="jenis_anak_disabilitas" value="{{ old('jenis_anak_disabilitas') }}">
             </div>
 
             <div class="form-group">
-                <label for="deskripsi">Deskripsi:</label>
+                <label for="deskripsi">Deskripsi</label>
                 <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
             </div>
 

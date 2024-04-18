@@ -20,23 +20,23 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="riwayat_perawatan">Riwayat Perawatan:</label>
-                <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan', $riwayatmedis->riwayat_perawatan) }}" required>
+                <label for="riwayat_perawatan">Riwayat Perawatan</label>
+                <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan', $riwayatmedis->riwayat_perawatan) }}">
             </div>
 
             <div class="form-group">
-                <label for="riwayat_perilaku">Riwayat Perilaku:</label>
-                <textarea class="form-control" name="riwayat_perilaku" required>{{ old('riwayat_perilaku', $riwayatmedis->riwayat_perilaku) }}</textarea>
+                <label for="riwayat_perilaku">Riwayat Perilaku</label>
+                <textarea class="form-control" name="riwayat_perilaku">{{ old('riwayat_perilaku', $riwayatmedis->riwayat_perilaku) }}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="deskripsi_riwayat">Deskripsi Riwayat:</label>
-                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat', $riwayatmedis->deskripsi_riwayat) }}" required>
+                <label for="deskripsi_riwayat">Deskripsi Riwayat</label>
+                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat', $riwayatmedis->deskripsi_riwayat) }}">
             </div>
 
             <div class="form-group">
-                <label for="kondisi">Kondisi:</label>
-                <textarea class="form-control" name="kondisi" required>{{ old('kondisi', $riwayatmedis->kondisi) }}</textarea>
+                <label for="kondisi">Kondisi</label>
+                <textarea class="form-control" name="kondisi">{{ old('kondisi', $riwayatmedis->kondisi) }}</textarea>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

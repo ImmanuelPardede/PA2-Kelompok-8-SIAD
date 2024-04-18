@@ -9,7 +9,7 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="anak_id">Nama Anak:</label>
+                <label for="anak_id">Nama Anak</label>
                 <select class="form-control js-example-basic-single" id="anak_id" name="anak_id">
                     <option value="" disabled>-- Anak --</option>
                     @foreach ($anak as $anaklist)
@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group">
-                <label for="agama_id">Agama:</label>
+                <label for="agama_id">Agama</label>
                 <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                     <option value="" disabled>-- Pilih Agama --</option>
                     @foreach ($agama as $agamalist)
@@ -34,53 +34,53 @@
             </div>
 
             <div class="form-group">
-                <label for="nama_ibu">Nama Ibu:</label>
+                <label for="nama_ibu">Nama Ibu</label>
                 <input type="text" class="form-control" id="nama_ibu" name="nama_ibu"
                     value="{{ $orangtuawali->nama_ibu }}">
             </div>
 
             <div class="form-group">
-                <label for="nama_ayah">Nama Ayah:</label>
+                <label for="nama_ayah">Nama Ayah</label>
                 <input type="text" class="form-control" id="nama_ayah" name="nama_ayah"
                     value="{{ $orangtuawali->nama_ayah }}">
             </div>
 
             <div class="form-group">
-                <label for="nik_ayah">NIK Ayah:</label>
+                <label for="nik_ayah">NIK Ayah</label>
                 <input type="text" class="form-control" id="nik_ayah" name="nik_ayah"
                     value="{{ $orangtuawali->nik_ayah }}">
             </div>
 
             <div class="form-group">
-                <label for="nik_ibu">NIK Ibu:</label>
+                <label for="nik_ibu">NIK Ibu</label>
                 <input type="text" class="form-control" id="nik_ibu" name="nik_ibu"
                     value="{{ $orangtuawali->nik_ibu }}">
             </div>
 
             <div class="form-group">
-                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah:</label>
+                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah"
                     value="{{ $orangtuawali->tanggal_lahir_ayah }}">
             </div>
 
             <div class="form-group">
-                <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu:</label>
+                <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu"
                     value="{{ $orangtuawali->tanggal_lahir_ibu }}">
             </div>
 
             <div class="form-group">
-                <label for="alamat_orangtua">Alamat Orangtua:</label>
+                <label for="alamat_orangtua">Alamat Orangtua</label>
                 <textarea class="form-control" id="alamat_orangtua" name="alamat_orangtua" rows="3">{{ $orangtuawali->alamat_orangtua }}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="pendidikan_ayah">Pendidikan Ayah:</label>
+                <label for="pendidikan_ayah">Pendidikan Ayah</label>
                 <textarea class="form-control" id="pendidikan_ayah" name="pendidikan_ayah" rows="3">{{ $orangtuawali->pendidikan_ayah }}</textarea>
             </div>
 
             <div class="form-group">
-                <label for="pekerjaan_ayah_id">Pekerjaan Ayah:</label>
+                <label for="pekerjaan_ayah_id">Pekerjaan Ayah</label>
                 <select class="form-control js-example-basic-single" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
                     <option value="" disabled>-- Pilih Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanlist)
@@ -92,13 +92,13 @@
             </div>
 
             <div class="form-group">
-                <label for="no_hp_ayah">No. HP Ayah:</label>
+                <label for="no_hp_ayah">No. HP Ayah</label>
                 <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah"
                     value="{{ $orangtuawali->no_hp_ayah }}">
             </div>
 
             <div class="form-group">
-                <label for="pendidikan_ibu">Pendidikan Ibu:</label>
+                <label for="pendidikan_ibu">Pendidikan Ibu</label>
                 <textarea class="form-control" id="pendidikan_ibu" name="pendidikan_ibu" rows="3">{{ $orangtuawali->pendidikan_ibu }}</textarea>
             </div>
 
@@ -145,13 +145,13 @@
             </div>
 
             <div class="form-group">
-                <label for="tanggal_lahir_wali">Tanggal Lahir Wali:</label>
+                <label for="tanggal_lahir_wali">Tanggal Lahir Wali</label>
                 <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali"
                     value="{{ $orangtuawali->tanggal_lahir_wali }}">
             </div>
 
             <div class="form-group">
-                <label for="no_hp_wali">No. HP Wali:</label>
+                <label for="no_hp_wali">No. HP Wali</label>
                 <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali"
                     value="{{ $orangtuawali->no_hp_wali }}">
             </div>

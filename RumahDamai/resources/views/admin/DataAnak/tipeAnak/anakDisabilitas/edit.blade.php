@@ -20,19 +20,19 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="anak_id">Nama Anak:</label>
+                <label for="anak_id">Nama Anak</label>
                 <input type="text" class="form-control" name="anak_id" value="{{ old('anak_id', $jenisAnakDisabilitas->anak->nama_lengkap) }}" disabled>
             </div>
 
 
             <div class="form-group">
-                <label for="kategori_anak_disabilitas">Kategori Anak Disabilitas:</label>
-                <input type="text" class="form-control" name="kategori_anak_disabilitas" value="{{ old('kategori_anak_disabilitas', $jenisAnakDisabilitas->kategori_anak_disabilitas) }}">
+                <label for="kategori_anak_disabilitas">Kategori Anak Disabilitas<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="kategori_anak_disabilitas" value="{{ old('kategori_anak_disabilitas', $jenisAnakDisabilitas->kategori_anak_disabilitas) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="jenis_anak_disabilitas">Jenis Anak Disabilitas:</label>
-                <input type="text" class="form-control" name="jenis_anak_disabilitas" value="{{ old('jenis_anak_disabilitas', $jenisAnakDisabilitas->jenis_anak_disabilitas) }}">
+                <label for="jenis_anak_disabilitas">Jenis Anak Disabilitas<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="jenis_anak_disabilitas" value="{{ old('jenis_anak_disabilitas', $jenisAnakDisabilitas->jenis_anak_disabilitas) }}" required>
             </div>
 
             <div class="form-group">

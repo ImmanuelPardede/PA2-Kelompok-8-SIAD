@@ -8,12 +8,12 @@
             <form action="{{ route('anak.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="nama_lengkap">Nama Lengkap <span style="color: red">*</label>
-                    <input type="text" class="form-control" name="nama_lengkap">
+                    <label for="nama_lengkap">Nama Lengkap <span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="nama_lengkap" required>
                 </div>
                 <div class="form-group">
-                    <label for="agama_id">Agama <span style="color: red">*</label>
-                    <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
+                    <label for="agama_id">Agama <span style="color: red">*</span></label>
+                    <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" required>
                         <option value="" disabled selected>-- Pilih Agama --</option>
                         @foreach ($agama as $agamaItem)
                             <option value="{{ $agamaItem->id }}">{{ $agamaItem->agama }}</option>
@@ -22,8 +22,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="jenis_kelamin_id">Jenis Kelamin <span style="color: red">*</label>
-                    <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id">
+                    <label for="jenis_kelamin_id">Jenis Kelamin <span style="color: red">*</span></label>
+                    <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
                         <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
                         @foreach ($jenisKelamin as $jenisKelaminItem)
                             <option value="{{ $jenisKelaminItem->id }}">{{ $jenisKelaminItem->jenis_kelamin }}</option>
@@ -31,8 +31,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="golongan_darah_id">Golongan Darah <span style="color: red">*</label>
-                    <select class="form-control js-example-basic-single " id="golongan_darah_id" name="golongan_darah_id">
+                    <label for="golongan_darah_id">Golongan Darah <span style="color: red">*</span></label>
+                    <select class="form-control js-example-basic-single " id="golongan_darah_id" name="golongan_darah_id" required>
                         <option value="" disabled selected>-- Pilih Golongan Darah --</option>
                         @foreach ($golonganDarah as $golonganDarahItem)
                             <option value="{{ $golonganDarahItem->id }}">{{ $golonganDarahItem->golongan_darah }}</option>
@@ -40,8 +40,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tipe_anak">Pilih Tipe Anak <span style="color: red">*</label>
-                    <select class="form-control js-example-basic-single" id="tipe_anak" name="tipe_anak">
+                    <label for="tipe_anak">Pilih Tipe Anak <span style="color: red">*</span></label>
+                    <select class="form-control js-example-basic-single" id="tipe_anak" name="tipe_anak" required>
                         <option value="">Pilih Tipe Anak</option>
                         <option value="disabilitas">Disabilitas</option>
                         <option value="non_disabilitas">Non Disabilitas</option>
@@ -59,15 +59,15 @@
                         @endforeach
                     </select>
                 </div>
-                
+
 
                 <div class="form-group">
                     <label for="tempat_lahir">Tempat Lahir <span style="color: red">*</label>
-                    <input type="text" class="form-control" name="tempat_lahir">
+                    <input type="text" class="form-control" name="tempat_lahir" required>
                 </div>
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir <span style="color: red">*</label>
-                    <input type="date" class="form-control" name="tanggal_lahir">
+                    <input type="date" class="form-control" name="tanggal_lahir" required>
                 </div>
                 <div class="form-group">
                     <label for="disukai">Disukai:</label>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat <span style="color: red">*</label>
-                    <input type="text" class="form-control" name="alamat">
+                    <input type="text" class="form-control" name="alamat" required>
                 </div>
                 <div class="form-group">
                     <label for="kelebihan">Kelebihan:</label>
@@ -92,7 +92,7 @@
 
                 <div class="form-group">
                     <label for="lokasi_id">Tempat Yayasan <span style="color: red">*</label>
-                    <select class="form-control js-example-basic-single" id="lokasi_id" name="lokasi_id">
+                    <select class="form-control js-example-basic-single" id="lokasi_id" name="lokasi_id" required>
                         <option value="" disabled selected>-- Pilih Lokasi --</option>
                         @foreach ($lokasiTugas as $lokasilist)
                         <option value="{{ $lokasilist->id }}">{{ $lokasilist->lokasi }}</option>
@@ -116,11 +116,11 @@
             $(document).ready(function () {
                 // Sembunyikan field "Jenis Kebutuhan Disabilitas" saat halaman pertama dimuat
                 $('#kebutuhan_disabilitas_id').hide();
-        
+
                 // Tambahkan event listener untuk memantau perubahan pada field "Pilih Tipe Anak"
                 $('#tipe_anak').change(function () {
                     var selectedValue = $(this).val();
-        
+
                     // Jika nilai yang dipilih adalah "disabilitas", maka tampilkan field "Jenis Kebutuhan Disabilitas"
                     if (selectedValue === 'disabilitas') {
                         $('#kebutuhan_disabilitas_id').show();
@@ -131,5 +131,5 @@
                 });
             });
         </script>
-        
+
 @endsection

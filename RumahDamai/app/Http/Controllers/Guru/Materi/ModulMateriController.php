@@ -22,7 +22,7 @@ class ModulMateriController extends Controller
     {
         $guruId = Auth::id();
 
-        $modulMateriList = ModulMateri::where('guru_id', $guruId)
+        $modulMateriList = ModulMateri::where('user_id', $guruId)
             ->with('mingguPembelajaran')
             ->orderBy('created_at', 'asc')
             ->paginate(7);
@@ -74,7 +74,7 @@ class ModulMateriController extends Controller
                 'kelas_id' => $request->kelas_id,
                 'nama_materi' => $request->nama_materi,
                 'deskripsi' => $request->deskripsi,
-                'guru_id' => $userId,
+                'user_id' => $userId,
                 'tahun_kurikulum_id' => $tahun_kurikulum_id,
                 'minggu_pembelajaran_id' => $request->minggu_pembelajaran_id,
                 'tanggal_publish' => now(),
@@ -170,7 +170,7 @@ class ModulMateriController extends Controller
             'kelas_id' => $modulMateri->kelas_id,
             'minggu_pembelajaran_id' => $modulMateri->minggu_pembelajaran_id,
             'modul_materi_id' => $modulMateri->id,
-            'guru_id' => $modulMateri->guru_id,
+            'user_id' => $modulMateri->user_id  ,
         ]);
 
         $jadwalPembelajaran->save();

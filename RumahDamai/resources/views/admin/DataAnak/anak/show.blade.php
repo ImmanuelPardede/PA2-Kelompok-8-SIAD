@@ -33,7 +33,8 @@
                                     </tr>
                                     <tr>
                                         <th>Kebutuhan Disabilitas</th>
-                                        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}</td>
+                                        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Tempat Lahir</th>
@@ -75,7 +76,7 @@
                                         <th>Tempat Yayasan</th>
                                         <td>{{ optional($anak->lokasiTugas)->lokasi ?? 'Data tidak tersedia' }}</td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <th>Status</th>
                                         <td>{{ $anak->status ?? 'Data tidak tersedia' }}</td>

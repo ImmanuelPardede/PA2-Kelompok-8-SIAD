@@ -20,8 +20,8 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="nama_agama">Nama Agama:</label>
-                <input type="text" class="form-control" name="agama" value="{{ old('agama', $agama->agama) }}" required>
+                <label for="nama_agama">Nama Agama</label>
+                <input type="text" class="form-control" name="agama" value="{{ old('agama', $agama->agama) }}">
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

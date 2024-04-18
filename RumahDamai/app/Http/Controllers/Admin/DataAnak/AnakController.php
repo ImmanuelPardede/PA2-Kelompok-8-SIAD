@@ -71,16 +71,16 @@ class AnakController extends Controller
        $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
        $tahun_masuk = date('y');
        $tahun_lahir = substr(date('Y', strtotime($request->tanggal_lahir)), -2);
-   
+
        $latest_anak = Anak::where('lokasi_id', $request->lokasi_id)
                           ->where('tipe_anak', $request->tipe_anak)
                           ->latest()
                           ->first();
-   
+
        $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
-   
+
        $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
-   
+
 
         $anak = Anak::create([
             'nama_lengkap' => $request->nama_lengkap,
@@ -190,7 +190,7 @@ class AnakController extends Controller
             'alamat' => 'nullable|string',
             'kelebihan' => 'nullable|string',
             'kekurangan' => 'nullable|string',
-            'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
+            'tipe_anak' => 'nullable|in:disabilitas,non_disabilitas'
         ]);
         $anak = Anak::find($id);
 
@@ -198,7 +198,7 @@ class AnakController extends Controller
             return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
-  
+
         $data = $request->except('_token', '_method', 'foto_profil');
 
 

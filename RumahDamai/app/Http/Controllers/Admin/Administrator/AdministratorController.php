@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdministratorController extends Controller
 {
-    /* ================================== - Adamin - ===================================================== */
+    /* ================================== - Admin - ===================================================== */
     public function admin()
     {
         $users = User::all();
@@ -40,40 +40,37 @@ class AdministratorController extends Controller
         $lokasi = LokasiTugas::all();
         $users = User::all();
 
-        return view('admin.administrator.create',compact('users','lokasi'));
+        return view('admin.administrator.create', compact('users', 'lokasi'));
     }
 
     public function show($id)
     {
         $pendidikan = Pendidikan::all();
-    $agama = Agama::all();
-    $jeniskelamin = JenisKelamin::all();
-    $golongandarah = GolonganDarah::all();
-    $lokasi = LokasiTugas::all();    
+        $agama = Agama::all();
+        $jeniskelamin = JenisKelamin::all();
+        $golongandarah = GolonganDarah::all();
+        $lokasi = LokasiTugas::all();
 
-        $user = User::findOrFail($id); 
-        
-      
+        $user = User::findOrFail($id);
+
+
         switch ($user->role) {
             case 0:
                 $redirectRoute = 'admin.administrator.admin';
                 break;
             case 1:
-                $redirectRoute = 'admin.administrator.guru'; 
+                $redirectRoute = 'admin.administrator.guru';
                 break;
             case 2:
-                $redirectRoute = 'admin.administrator.staff'; 
+                $redirectRoute = 'admin.administrator.staff';
                 break;
             default:
-                $redirectRoute = 'dashboard'; 
+                $redirectRoute = 'dashboard';
                 break;
         }
-    
-        return view('admin.administrator.show', compact('user', 'redirectRoute','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
-    }
-    
-    
 
+        return view('admin.administrator.show', compact('user', 'redirectRoute', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
+    }
 
     // Menyimpan akun baru
     public function store(Request $request)
@@ -82,14 +79,13 @@ class AdministratorController extends Controller
             'nama_lengkap' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'lokasi_penugasan_id' => 'nullable|string',
-            'tanggal_lahir' => 'nullable|date',
+            'lokasi_penugasan_id' => 'required|string',
+            'tanggal_lahir' => 'required|date',
             'role' => 'required|string|in:admin,guru,staff',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto harus berupa gambar dengan maksimum 2MB
         ]);
-    
+
         // Jika pengguna mengunggah foto, simpan foto yang diunggah, jika tidak, gunakan 'bodat.jpg'
-    
         $user = new User();
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
@@ -99,19 +95,16 @@ class AdministratorController extends Controller
             'staff' => 2,
             default => 0,
         };
-        
+
         // Generate NIP
         $lokasi_penugasan_id = str_pad($request->lokasi_penugasan_id ?? 0, 1, '0', STR_PAD_LEFT); // Ambil lokasi_penugasan_id atau isi 0 jika null
         $tahun_masuk = date('y');
         $tahun_lahir = substr(date('Y', strtotime($user->tanggal_lahir)), -2);
-        
         $latest_user = User::latest()->first(); // Ambil user terakhir untuk mendapatkan nomor urut terakhir
         $nomor_urut = $latest_user ? ((int) substr($latest_user->nip, -3)) + 1 : 1; // Jika tidak ada user sebelumnya, nomor urut dimulai dari 1
-        
         $user->nip = $lokasi_penugasan_id . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
-    
         $user->save();
-    
+
         switch ($user->role) {
             case 'admin':
                 $redirectRoute = 'admin.administrator.admin';
@@ -126,13 +119,9 @@ class AdministratorController extends Controller
                 $redirectRoute = 'dashboard';
                 break;
         }
-    
+
         return redirect()->route($redirectRoute)->with('success', 'Akun berhasil ditambahkan.');
     }
-    
-
-    
-
 
     public function edit(User $user)
     {
@@ -141,9 +130,8 @@ class AdministratorController extends Controller
         $jeniskelamin = JenisKelamin::all();
         $golongandarah = GolonganDarah::all();
         $lokasi = LokasiTugas::all();
-        return view('admin.administrator.edit', compact('user','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
+        return view('admin.administrator.edit', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
     }
-
 
     public function update(Request $request, User $user)
     {
@@ -162,36 +150,36 @@ class AdministratorController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'newPassword' => 'nullable|string', // Ganti validasi password
         ]);
-    
+
         // Perbarui atribut yang dapat diisi dari request
         $user->fill($request->except('foto', 'newPassword'));
-    
+
         // Perbarui password jika disertakan dalam permintaan
         if ($request->filled('newPassword')) {
             $user->password = Hash::make($request->newPassword);
         }
-    
+
         // Proses penyimpanan foto Data Diri jika ada
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
             $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
             $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
             $foto->move($lokasi_simpan, $nama_foto);
-    
+
             // Hapus foto lama jika ada
             if ($user->foto) {
-                $foto_lama = public_path('uploads/pegawai/'.$user->foto);
+                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
                 if (file_exists($foto_lama)) {
                     unlink($foto_lama);
                 }
             }
-    
+
             // Set foto baru
             $user->foto = $nama_foto;
         }
-    
+
         $user->save();
-    
+
         switch ($user->role) {
             case 'admin':
                 $redirectRoute = 'admin.administrator.admin';
@@ -206,10 +194,10 @@ class AdministratorController extends Controller
                 $redirectRoute = 'dashboard';
                 break;
         }
-    
+
         return redirect()->route($redirectRoute)->with('success', 'Akun berhasil diperbarui.');
     }
-    
+
 
 
 
@@ -217,56 +205,56 @@ class AdministratorController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        
+
         // Tentukan rute redirect berdasarkan peran pengguna yang dihapus
         switch ($user->role) {
-            case 'admin': 
+            case 'admin':
                 $redirectRoute = 'admin.administrator.admin';
                 break;
-            case 'guru': 
+            case 'guru':
                 $redirectRoute = 'admin.administrator.guru';
                 break;
-            case 'staff': 
+            case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
-            default: 
+            default:
                 $redirectRoute = 'dashboard';
                 break;
         }
-    
+
         return redirect()->route($redirectRoute)->with('success', 'Akun berhasil diperbarui.');
     }
 
 
     /* ======================================== - GURU - ===================================================== */
     public function editGuruDataDiri(User $user)
-{
-    $pendidikan = Pendidikan::all();
-    $agama = Agama::all();
-    $jeniskelamin = JenisKelamin::all();
-    $golongandarah = GolonganDarah::all();
-    $lokasi = LokasiTugas::all();
-    if(auth()->user()->id === $user->id && $user->role === 'guru') {
-        return view('guru.DataDiri.edit', compact('user','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
-    } else {
-        return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri guru lain.');
+    {
+        $pendidikan = Pendidikan::all();
+        $agama = Agama::all();
+        $jeniskelamin = JenisKelamin::all();
+        $golongandarah = GolonganDarah::all();
+        $lokasi = LokasiTugas::all();
+        if (auth()->user()->id === $user->id && $user->role === 'guru') {
+            return view('guru.DataDiri.edit', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri guru lain.');
+        }
     }
-}
 
-public function updateGuruDataDiri(Request $request, User $user)
-{
-    $request->validate([
-        'golongan_darah_id' => 'nullable|string',
-        'jenis_kelamin_id' => 'nullable|string',
-        'agama_id' => 'nullable|string',
-        'pendidikan_id' => 'nullable|string',
-        'alamat' => 'nullable|string',
-        'tanggal_masuk' => 'nullable|date',
-        'tanggal_keluar' => 'nullable|date',
-        'tempat_lahir' => 'nullable|string',
-        'tanggal_lahir' => 'nullable|date',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
+    public function updateGuruDataDiri(Request $request, User $user)
+    {
+        $request->validate([
+            'golongan_darah_id' => 'nullable|string',
+            'jenis_kelamin_id' => 'nullable|string',
+            'agama_id' => 'nullable|string',
+            'pendidikan_id' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'tanggal_masuk' => 'nullable|date',
+            'tanggal_keluar' => 'nullable|date',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
 
         $user->fill($request->except('password'));
@@ -275,52 +263,52 @@ public function updateGuruDataDiri(Request $request, User $user)
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
         }
-    
+
         // Proses penyimpanan foto Data Diri jika ada
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
             $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
             $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
             $foto->move($lokasi_simpan, $nama_foto);
-    
+
             // Hapus foto lama jika ada
             if ($user->foto) {
-                $foto_lama = public_path('uploads/pegawai/'.$user->foto);
+                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
                 if (file_exists($foto_lama)) {
                     unlink($foto_lama);
                 }
             }
-    
+
             // Set foto baru
             $user->foto = $nama_foto;
 
-        // Simpan perubahan pada model pengguna
-        $user->save();
+            // Simpan perubahan pada model pengguna
+            $user->save();
 
-        return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
-    } else {
-        return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri guru lain.');
+            return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri guru lain.');
+        }
     }
-}
 
 
 
-public function showGuruDataDiri(User $user)
-{
-    $pendidikan = Pendidikan::all();
-    $agama = Agama::all();
-    $jeniskelamin = JenisKelamin::all();
-    $golongandarah = GolonganDarah::all();
-    $lokasi = LokasiTugas::all();    
+    public function showGuruDataDiri(User $user)
+    {
+        $pendidikan = Pendidikan::all();
+        $agama = Agama::all();
+        $jeniskelamin = JenisKelamin::all();
+        $golongandarah = GolonganDarah::all();
+        $lokasi = LokasiTugas::all();
 
-    if(auth()->user()->id === $user->id && $user->role === 'guru') {
-        return view('guru.DataDiri.show', compact('user','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
-    } else {
-        return redirect()->back()->with('error', 'Anda tidak diizinkan melihat Data Diri guru lain.');
+        if (auth()->user()->id === $user->id && $user->role === 'guru') {
+            return view('guru.DataDiri.show', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan melihat Data Diri guru lain.');
+        }
     }
-}
 
-    
+
     /* ======================================== - STAFF - ===================================================== */
 
     public function editStaffDataDiri(User $user)
@@ -330,13 +318,13 @@ public function showGuruDataDiri(User $user)
         $jeniskelamin = JenisKelamin::all();
         $golongandarah = GolonganDarah::all();
         $lokasi = LokasiTugas::all();
-        if(auth()->user()->id === $user->id && $user->role === 'staff') {
-            return view('staff.DataDiri.edit', compact('user','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
+        if (auth()->user()->id === $user->id && $user->role === 'staff') {
+            return view('staff.DataDiri.edit', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
         } else {
             return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri staff lain.');
         }
     }
-    
+
     public function updateStaffDataDiri(Request $request, User $user)
     {
         $request->validate([
@@ -352,46 +340,46 @@ public function showGuruDataDiri(User $user)
             'tanggal_lahir' => 'nullable|date',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-    
-        if(auth()->user()->id === $user->id && $user->role === 'staff') {
-    
+
+        if (auth()->user()->id === $user->id && $user->role === 'staff') {
+
             $user->fill($request->except('password'));
-    
+
             // Perbarui password jika disertakan dalam permintaan
             if ($request->has('password')) {
                 $user->password = Hash::make($request->password);
             }
-        
+
             // Proses penyimpanan foto Data Diri jika ada
             if ($request->hasFile('foto')) {
                 $foto = $request->file('foto');
                 $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
                 $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
                 $foto->move($lokasi_simpan, $nama_foto);
-        
+
                 // Hapus foto lama jika ada
                 if ($user->foto) {
-                    $foto_lama = public_path('uploads/pegawai/'.$user->foto);
+                    $foto_lama = public_path('uploads/pegawai/' . $user->foto);
                     if (file_exists($foto_lama)) {
                         unlink($foto_lama);
                     }
                 }
-        
+
                 // Set foto baru
                 $user->foto = $nama_foto;
             }
-    
+
             // Simpan perubahan pada model pengguna
             $user->save();
-    
-    
+
+
             return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Data Diri anda berhasil diperbarui.');
         } else {
             return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri anda lain.');
         }
     }
-    
-    
+
+
     public function showStaffDataDiri(User $user)
     {
         $pendidikan = Pendidikan::all();
@@ -399,8 +387,8 @@ public function showGuruDataDiri(User $user)
         $jeniskelamin = JenisKelamin::all();
         $golongandarah = GolonganDarah::all();
         $lokasi = LokasiTugas::all();
-        if(auth()->user()->id === $user->id && $user->role === 'staff') {
-            return view('staff.DataDiri.show', compact('user','pendidikan','agama','jeniskelamin','golongandarah','lokasi'));
+        if (auth()->user()->id === $user->id && $user->role === 'staff') {
+            return view('staff.DataDiri.show', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
         } else {
             return redirect()->back()->with('error', 'Anda tidak diizinkan melihat Data Diri staff lain.');
         }
@@ -413,53 +401,153 @@ public function showGuruDataDiri(User $user)
     }
 
     public function resetPasswordGuru(Request $request, User $user)
-{
-    $request->validate([
-        'tanggal_lahir' => 'required|date',
-        'new_password' => 'required|string|min:8',
-        'confirm_password' => 'required|string|same:new_password',
-    ]);
+    {
+        $request->validate([
+            'tanggal_lahir' => 'required|date',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
 
-    // Validasi tanggal lahir
-    if ($request->tanggal_lahir == $user->tanggal_lahir) {
-        // Reset password
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-        return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
-    } else {
-        return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        // Validasi tanggal lahir
+        if ($request->tanggal_lahir == $user->tanggal_lahir) {
+            // Reset password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
+        } else {
+            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        }
     }
-}
 
-public function showResetPasswordStaff(User $user)
+    public function showResetPasswordStaff(User $user)
     {
         return view('staff.DataDiri.password', compact('user'));
     }
-    
+
     public function resetPasswordStaff(Request $request, User $user)
-{
-    $request->validate([
-        'tanggal_lahir' => 'required|date',
-        'new_password' => 'required|string|min:8',
-        'confirm_password' => 'required|string|same:new_password',
-    ]);
+    {
+        $request->validate([
+            'tanggal_lahir' => 'required|date',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
 
-    // Validasi tanggal lahir
-    if ($request->tanggal_lahir == $user->tanggal_lahir) {
-        // Reset password
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-        return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
-    } else {
-        return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        // Validasi tanggal lahir
+        if ($request->tanggal_lahir == $user->tanggal_lahir) {
+            // Reset password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
+        } else {
+            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        }
     }
-}
+
+    public function nonaktifkanAdmin($id)
+    {
+        $admin = User::find($id);
+        if (!$admin) {
+            return redirect()->route('admin.administrator.admin')->with('error', 'Admin tidak ditemukan.');
+        }
+
+        if ($admin->role !== 'admin') {
+            return redirect()->route('admin.administrator.admin')->with('error', 'Pengguna bukan admin.');
+        }
+
+        $admin->status = 'nonaktif';
+        $admin->tanggal_keluar = now();
+        $admin->save();
+
+        return redirect()->route('admin.administrator.admin')->with('success', 'Admin berhasil dinonaktifkan.');
+    }
+
+    public function aktifkanAdmin($id)
+    {
+        $admin = User::find($id);
+        if (!$admin) {
+            return redirect()->route('admin.administrator.admin')->with('error', 'Admin tidak ditemukan.');
+        }
+
+        if ($admin->role !== 'admin') {
+            return redirect()->route('admin.administrator.admin')->with('error', 'Pengguna bukan admin.');
+        }
+
+        $admin->status = 'aktif';
+        $admin->tanggal_keluar = null;
+        $admin->save();
+
+        return redirect()->route('admin.administrator.admin')->with('success', 'Admin berhasil diaktifkan kembali.');
+    }
+    public function nonaktifkanGuru($id)
+    {
+        $guru = User::find($id);
+        if (!$guru) {
+            return redirect()->route('admin.administrator.guru')->with('error', 'Guru tidak ditemukan.');
+        }
+
+        if ($guru->role !== 'guru') {
+            return redirect()->route('admin.administrator.guru')->with('error', 'Pengguna bukan guru.');
+        }
+
+        $guru->status = 'nonaktif';
+        $guru->tanggal_keluar = now();
+        $guru->save();
+
+        return redirect()->route('admin.administrator.guru')->with('success', 'Guru berhasil dinonaktifkan.');
+    }
+
+    public function aktifkanGuru($id)
+    {
+        $guru = User::find($id);
+        if (!$guru) {
+            return redirect()->route('admin.administrator.guru')->with('error', 'Guru tidak ditemukan.');
+        }
+
+        if ($guru->role !== 'guru') {
+            return redirect()->route('admin.administrator.guru')->with('error', 'Pengguna bukan guru.');
+        }
+
+        $guru->status = 'aktif';
+        $guru->tanggal_keluar = null;
+        $guru->save();
+
+        return redirect()->route('admin.administrator.guru')->with('success', 'Guru berhasil diaktifkan kembali.');
+    }
 
 
-    
-    
+    public function nonaktifkanStaff($id)
+    {
+        $staff = User::find($id);
+        if (!$staff) {
+            return redirect()->route('admin.administrator.staff')->with('error', 'Staff tidak ditemukan.');
+        }
 
+        if ($staff->role !== 'staff') {
+            return redirect()->route('admin.administrator.staff')->with('error', 'Pengguna bukan staff.');
+        }
 
-    
-        
+        $staff->status = 'nonaktif';
+        $staff->tanggal_keluar = now();
+        $staff->save();
+
+        return redirect()->route('admin.administrator.staff')->with('success', 'Staff berhasil dinonaktifkan.');
+    }
+
+    public function aktifkanStaff($id)
+    {
+        $pegawai = User::find($id);
+        if (!$pegawai) {
+            return redirect()->route('admin.administrator.staff')->with('error', 'Pegawai tidak ditemukan.');
+        }
+
+        if ($pegawai->role !== 'staff') {
+            return redirect()->route('admin.administrator.staff')->with('error', 'Pengguna bukan pegawai.');
+        }
+
+        $pegawai->status = 'aktif';
+        $pegawai->tanggal_keluar = null;
+        $pegawai->save();
+
+        return redirect()->route('admin.administrator.staff')->with('success', 'Pegawai berhasil diaktifkan kembali.');
+    }
 }

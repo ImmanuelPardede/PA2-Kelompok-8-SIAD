@@ -19,7 +19,7 @@
             @csrf
 
             <div class="form-group">
-                <label for="jenis_pekerjaan">Jenis Pekerjaan:</label>
+                <label for="jenis_pekerjaan">Jenis Pekerjaan</label>
                 <input type="text" class="form-control" name="jenis_pekerjaan" value="{{ old('jenis_pekerjaan') }}" required>
             </div>
 

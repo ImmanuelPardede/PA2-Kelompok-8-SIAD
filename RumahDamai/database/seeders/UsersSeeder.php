@@ -23,6 +23,15 @@ class UsersSeeder extends Seeder
             'email' => 'guru@gmail.com',
             'password' => Hash::make('password'),
             'role' => '1',
+            'lokasi_penugasan_id' => '1',
+        ]);
+
+        DB::table('users')->insert([
+            'nama_lengkap' => 'Guru2',
+            'email' => 'guru2@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => '1',
+            'lokasi_penugasan_id' => '2',
         ]);
 
         DB::table('users')->insert([
@@ -30,6 +39,15 @@ class UsersSeeder extends Seeder
             'email' => 'staff@gmail.com',
             'password' => Hash::make('password'),
             'role' => '2',
+            'lokasi_penugasan_id' => '1',
+        ]);
+
+        DB::table('users')->insert([
+            'nama_lengkap' => 'Staff2',
+            'email' => 'staff2@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => '2',
+            'lokasi_penugasan_id' => '2',
         ]);
     }
 }

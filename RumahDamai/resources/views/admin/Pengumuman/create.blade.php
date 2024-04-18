@@ -9,8 +9,8 @@
             <form method="POST" action="{{ route('pengumuman.store') }}">
                 @csrf
 
-                <div class="mb-3">
-                    <label for="judul" class="form-label">Judul</label>
+                <div class="form-group">
+                    <label for="judul">Judul<span style="color: red">*</span></label>
                     <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}" required autocomplete="judul" autofocus>
 
                     @error('judul')
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="deskripsi" class="form-label">Deskripsi</label>
+                    <label for="deskripsi" class="form-label">Deskripsi<span style="color: red">*</span></label>
                     <textarea id="summernote" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required autocomplete="deskripsi">Dear Pegawai, {{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                     <span class="invalid-feedback" role="alert">
@@ -30,8 +30,8 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="kategori" class="form-label">Kategori</label>
+                <div class="form-group">
+                    <label for="kategori">Kategori<span style="color: red">*</span></label>
                     <select id="kategori" class="js-example-basic-single form-control @error('kategori') is-invalid @enderror" name="kategori" required autocomplete="kategori">
                         <option value="">Pilih Kategori</option>
                         <option value="Akademik" {{ old('kategori') == 'Akademik' ? 'selected' : '' }}>Akademik</option>
@@ -44,7 +44,7 @@
                         <option value="Umum" {{ old('kategori') == 'Umum' ? 'selected' : '' }}>Umum</option>
                         <option value="Keuangan" {{ old('kategori') == 'Keuangan' ? 'selected' : '' }}>Keuangan</option>
                     </select>
-                    
+
                     @error('kategori')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

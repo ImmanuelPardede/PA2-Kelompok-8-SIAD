@@ -93,67 +93,67 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::put('/administrator/{user}/update', [AdministratorController::class, 'update'])->name('admin.administrator.update');
     Route::delete('/administrator/{user}/destroy', [AdministratorController::class, 'destroy'])->name('admin.administrator.destroy');
 
+    // Admin
+    Route::post('/admin/nonaktifkan/admin/{id}', [AdministratorController::class, 'nonaktifkanAdmin'])->name('admin.nonaktifkan.admin');
+    Route::post('/admin/aktifkan/admin/{id}', [AdministratorController::class, 'aktifkanAdmin'])->name('admin.aktifkan.admin');
+
+    // Guru
+    Route::post('/admin/nonaktifkan/guru/{id}', [AdministratorController::class, 'nonaktifkanGuru'])->name('admin.nonaktifkan.guru');
+    Route::post('/admin/aktifkan/guru/{id}', [AdministratorController::class, 'aktifkanGuru'])->name('admin.aktifkan.guru');
+
+    // Pegawai/Staff
+    Route::post('/admin/nonaktifkan/staff/{id}', [AdministratorController::class, 'nonaktifkanStaff'])->name('admin.nonaktifkan.staff');
+    Route::post('/admin/aktifkan/staff/{id}', [AdministratorController::class, 'aktifkanStaff'])->name('admin.aktifkan.staff');
 
     /* Raport Demo */
-/*     Route::resource('/raport', RaportController::class);
+    /*     Route::resource('/raport', RaportController::class);
     Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
  */
-
 });
 
 
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
 
-Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
-Route::get('/raport/show/{id}', [RaportController::class, 'show'])->name('raport.show');
-Route::get('/raport/create', [RaportController::class, 'create'])->name('raport.create');
-Route::post('/raport/store', [RaportController::class, 'store'])->name('raport.store');
-Route::get('/raport/edit/{id}', [RaportController::class, 'edit'])->name('raport.edit');
-Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('raport.update');
-Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
-Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
-Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
-Route::resource('/materi/modulMateri', ModulMateriController::class);
-Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
-Route::resource('/materi/silabus', SilabusController::class);
-Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
+    Route::get('/raport', [RaportController::class, 'index'])->name('raport.index');
+    Route::get('/raport/show/{id}', [RaportController::class, 'show'])->name('raport.show');
+    Route::get('/raport/create', [RaportController::class, 'create'])->name('raport.create');
+    Route::post('/raport/store', [RaportController::class, 'store'])->name('raport.store');
+    Route::get('/raport/edit/{id}', [RaportController::class, 'edit'])->name('raport.edit');
+    Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('raport.update');
+    Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
+    Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
+    Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
+    Route::resource('/materi/modulMateri', ModulMateriController::class);
+    Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
+    Route::resource('/materi/silabus', SilabusController::class);
+    Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
 
 
 
+    Route::get('/ppiA', [PPIModelAController::class, 'index'])->name('PPI.ModelA.index');
+    Route::get('/ppiA/show/{id}', [PPIModelAController::class, 'show'])->name('PPI.ModelA.show');
+    Route::get('/ppiA/create', [PPIModelAController::class, 'create'])->name('PPI.ModelA.create');
+    Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
+    
+    
 
 
-
-Route::get('/ppiA', [PPIModelAController::class, 'index'])->name('PPI.ModelA.index');
-Route::get('/ppiA/show/{id}', [PPIModelAController::class, 'show'])->name('PPI.ModelA.show');
-Route::get('/ppiA/create', [PPIModelAController::class, 'create'])->name('PPI.ModelA.create');
-Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
-
-
-
-
-
-
-Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
-Route::put('/guru/DataDiri/update/{user}', [AdministratorController::class, 'updateGuruDataDiri'])->name('guru.DataDiri.update');
-Route::get('/guru/DataDiri/show/{user}', [AdministratorController::class, 'showGuruDataDiri'])->name('guru.DataDiri.show');
-Route::get('/guru/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordGuru'])->name('guru.DataDiri.password');
-Route::post('/guru/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordGuru'])->name('guru.DataDiri.password');
-
-
-
-
+    Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
+    Route::put('/guru/DataDiri/update/{user}', [AdministratorController::class, 'updateGuruDataDiri'])->name('guru.DataDiri.update');
+    Route::get('/guru/DataDiri/show/{user}', [AdministratorController::class, 'showGuruDataDiri'])->name('guru.DataDiri.show');
+    Route::get('/guru/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordGuru'])->name('guru.DataDiri.password');
+    Route::post('/guru/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordGuru'])->name('guru.DataDiri.password');
 });
 
 // Staff Routes List
 Route::middleware(['auth', 'user-access:staff'])->group(function () {
     Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
 
-Route::get('/staff/DataDiri/edit/{user}', [AdministratorController::class, 'editStaffDataDiri'])->name('staff.DataDiri.edit');
-Route::put('/staff/DataDiri/update/{user}', [AdministratorController::class, 'updateStaffDataDiri'])->name('staff.DataDiri.update');
-Route::get('/staff/DataDiri/show/{user}', [AdministratorController::class, 'showStaffDataDiri'])->name('staff.DataDiri.show');
-Route::get('/staff/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordStaff'])->name('staff.DataDiri.password');
-Route::post('/staff/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('staff.DataDiri.password');
-
+    Route::get('/staff/DataDiri/edit/{user}', [AdministratorController::class, 'editStaffDataDiri'])->name('staff.DataDiri.edit');
+    Route::put('/staff/DataDiri/update/{user}', [AdministratorController::class, 'updateStaffDataDiri'])->name('staff.DataDiri.update');
+    Route::get('/staff/DataDiri/show/{user}', [AdministratorController::class, 'showStaffDataDiri'])->name('staff.DataDiri.show');
+    Route::get('/staff/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordStaff'])->name('staff.DataDiri.password');
+    Route::post('/staff/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('staff.DataDiri.password');
 });
 
 

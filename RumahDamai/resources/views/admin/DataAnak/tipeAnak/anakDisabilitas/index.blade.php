@@ -13,8 +13,6 @@
                         {{ session('success') }}
                     </div>
                 @endif
-
-                <a href="{{ route('anakDisabilitas.create') }}" class="btn btn-success mb-3">Tambah Jenis Anak Disabilitas</a>
             </div>
 
             <div class="table-responsive">

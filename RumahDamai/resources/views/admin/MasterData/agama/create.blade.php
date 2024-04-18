@@ -19,8 +19,8 @@
             @csrf
 
             <div class="form-group">
-                <label for="agama">Nama Agama:</label>
-                <input type="text" class="form-control" name="agama" value="{{ old('agama') }}" required>
+                <label for="agama">Nama Agama</label>
+                <input type="text" class="form-control" name="agama" value="{{ old('agama') }}">
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

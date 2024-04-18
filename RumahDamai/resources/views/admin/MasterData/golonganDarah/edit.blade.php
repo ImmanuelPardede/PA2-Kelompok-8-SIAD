@@ -20,8 +20,8 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="golongan_darah">Jenis Kelamin:</label>
-                <input type="text" class="form-control" name="golongan_darah" value="{{ old('golongan_darah', $golonganDarah->golongan_darah) }}" required>
+                <label for="golongan_darah">Jenis Kelamin</label>
+                <input type="text" class="form-control" name="golongan_darah" value="{{ old('golongan_darah', $golonganDarah->golongan_darah) }}">
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
