@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\MasterData\PenyakitController;
 use App\Http\Controllers\Admin\MasterData\SponsorshipController;
 use App\Http\Controllers\Admin\DataAnak\RiwayatMedisController;
 use App\Http\Controllers\Guru\Raport\RaportController;
+use App\Http\Controllers\Guru\PPI\PPIModelAController;
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
@@ -116,6 +117,19 @@ Route::resource('/materi/modulMateri', ModulMateriController::class);
 Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
 Route::resource('/materi/silabus', SilabusController::class);
 Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
+
+
+
+
+
+
+Route::get('/ppiA', [PPIModelAController::class, 'index'])->name('PPI.ModelA.index');
+Route::get('/ppiA/show/{id}', [PPIModelAController::class, 'show'])->name('PPI.ModelA.show');
+Route::get('/ppiA/create', [PPIModelAController::class, 'create'])->name('PPI.ModelA.create');
+Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
+
+
+
 
 
 
