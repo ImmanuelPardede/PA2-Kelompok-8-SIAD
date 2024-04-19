@@ -61,6 +61,19 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="lokasi_penugasan_id">Lokasi Penugasan</label>
+                        <select name="lokasi_penugasan_id" id="lokasi_penugasan_id" class="form-control" disabled>
+                            @foreach ($lokasiPenugasan as $lokasiPenugasan)
+                                <option value="{{ $lokasiPenugasan->id }}"
+                                    {{ isset($jadwalPembelajaran) && $jadwalPembelajaran->lokasi_penugasan_id == $lokasiPenugasan->id ? 'selected' : '' }}>
+                                    {{ $lokasiPenugasan->lokasi }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
 
                     @isset($jadwalPembelajaran)
                         @php

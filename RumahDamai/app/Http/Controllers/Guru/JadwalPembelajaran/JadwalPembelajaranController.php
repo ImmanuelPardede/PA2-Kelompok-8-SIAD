@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru\JadwalPembelajaran;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kelas;
+use App\Models\LokasiTugas;
 use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
 use App\Models\JadwalPembelajaran;
@@ -29,6 +30,7 @@ class JadwalPembelajaranController extends Controller
             $jadwalPembelajaran->minggu_pembelajaran_id = $modulMateri->minggu_pembelajaran_id;
             $jadwalPembelajaran->modul_materi_id = $modulMateri->id;
             $jadwalPembelajaran->user_id = Auth::id();
+            $jadwalPembelajaran->lokasi_penugasan_id = Auth::user()->lokasi_penugasan_id; // Perbaikan disini
             $jadwalPembelajaran->save();
 
             return redirect()->route('guru.JadwalPembelajaran.index')->with('success', 'Jadwal pembelajaran berhasil ditambahkan.');
@@ -58,6 +60,7 @@ class JadwalPembelajaranController extends Controller
             'minggu_pembelajaran_id' => 'nullable',
             'modul_materi_id' => 'nullable',
             'user_id' => 'nullable',
+            'lokasi_penugasan_id' => 'nullable',
             'tanggal_pembelajaran' => 'nullable|date',
             'hari_pembelajaran' => 'nullable|string',
             'jam_mulai' => 'nullable|date_format:H:i',
@@ -76,8 +79,9 @@ class JadwalPembelajaranController extends Controller
         $daftarKelas = Kelas::all();
         $daftarModulMateri = ModulMateri::all();
         $daftarGuru = User::all();
+        $lokasiPenugasan = LokasiTugas::all();
 
-        return view('guru.JadwalPembelajaran.edit', compact('jadwalPembelajaran', 'daftarKelas', 'daftarMingguPembelajaran', 'daftarModulMateri', 'daftarGuru'));
+        return view('guru.JadwalPembelajaran.edit', compact('jadwalPembelajaran', 'daftarKelas', 'daftarMingguPembelajaran', 'daftarModulMateri', 'daftarGuru', 'lokasiPenugasan'));
     }
 
 
@@ -90,11 +94,17 @@ class JadwalPembelajaranController extends Controller
             'minggu_pembelajaran_id' => 'nullable',
             'modul_materi_id' => 'nullable',
             'user_id' => 'nullable',
+            'lokasi_penugasan_id' => 'nullable',
             'tanggal_pembelajaran' => 'nullable|date',
             'hari_pembelajaran' => 'nullable|string',
             'jam_mulai' => 'nullable|date_format:H:i',
             'jam_selesai' => 'nullable|date_format:H:i|after:jam_mulai',
         ]);
+
+        // Tambahkan validasi untuk memeriksa apakah 'lokasi_penugasan_id' ada dalam data yang divalidasi
+        if (!array_key_exists('lokasi_penugasan_id', $validatedData)) {
+            $validatedData['lokasi_penugasan_id'] = $jadwalPembelajaran->lokasi_penugasan_id;
+        }
 
         // Hapus validasi untuk jam_mulai dan jam_selesai jika keduanya tidak diisi
         if (!$request->filled('jam_mulai') && !$request->filled('jam_selesai')) {

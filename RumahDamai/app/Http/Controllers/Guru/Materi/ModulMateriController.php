@@ -8,6 +8,7 @@ use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
@@ -166,13 +167,20 @@ class ModulMateriController extends Controller
 
     public function tambahJadwalPembelajaran(ModulMateri $modulMateri)
     {
+        // Mendapatkan informasi pengguna yang membuat ModulMateri
+        $user = Auth::user();
+        $lokasi_penugasan_id = $user->lokasi_penugasan_id ?? null; // Ubah dari 'lokasiPenugasan->id' menjadi 'lokasi_penugasan_id'
+
+        // Membuat objek JadwalPembelajaran dengan nilai lokasi_penugasan_id yang sesuai
         $jadwalPembelajaran = new JadwalPembelajaran([
             'kelas_id' => $modulMateri->kelas_id,
             'minggu_pembelajaran_id' => $modulMateri->minggu_pembelajaran_id,
             'modul_materi_id' => $modulMateri->id,
-            'user_id' => $modulMateri->user_id  ,
+            'user_id' => $user->id,
+            'lokasi_penugasan_id' => $lokasi_penugasan_id, // Menggunakan nilai lokasi_penugasan_id yang sesuai
         ]);
 
+        // Menyimpan objek JadwalPembelajaran ke database
         $jadwalPembelajaran->save();
     }
 }

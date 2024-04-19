@@ -137,15 +137,8 @@ class User extends Authenticatable
         return $this->belongsTo(Pendidikan::class, 'pendidikan_id');
     }
 
-    public function Lokasi()
+    public function lokasiPenugasan()
     {
-        return $this->belongsTo(Pendidikan::class, 'lokasi_penugasan_id');
-    }
-
-    // Di dalam model User
-    // Di dalam model User
-    public function modulMateri()
-    {
-        return $this->hasOne(ModulMateri::class);
+        return $this->belongsTo(LokasiTugas::class, 'lokasi_penugasan_id');
     }
 }

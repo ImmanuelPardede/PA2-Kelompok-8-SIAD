@@ -16,7 +16,10 @@ class CreateMingguPembelajaranTable extends Migration
             $table->string('minggu_pembelajaran');
             $table->date('tanggal_mulai');
             $table->date('tanggal_berakhir');
+            $table->unsignedBigInteger('lokasi_penugasan_id');
             $table->timestamps();
+
+            $table->foreign('lokasi_penugasan_id')->references('id')->on('lokasi_penugasan')->onDelete('cascade');
         });
     }
 
@@ -25,6 +28,11 @@ class CreateMingguPembelajaranTable extends Migration
      */
     public function down(): void
     {
+        Schema::table('minggu_pembelajaran', function (Blueprint $table) {
+            $table->dropForeign(['lokasi_penugasan_id']);
+        });
+
         Schema::dropIfExists('minggu_pembelajaran');
     }
 }
+

@@ -39,4 +39,9 @@ class ModulMateri extends Model
     {
         return $this->hasMany(JadwalPembelajaran::class);
     }
+
+    public function lokasiPenugasan()
+    {
+        return $this->belongsTo(LokasiTugas::class, 'lokasi_penugasan_id');
+    }
 }

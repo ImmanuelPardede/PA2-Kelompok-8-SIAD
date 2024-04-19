@@ -14,6 +14,7 @@ class CreateJadwalPembelajaranTable extends Migration
             $table->unsignedBigInteger('minggu_pembelajaran_id');
             $table->unsignedBigInteger('modul_materi_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('lokasi_penugasan_id');
             $table->date('tanggal_pembelajaran')->nullable();
             $table->string('hari_pembelajaran')->nullable();
             $table->time('jam_mulai')->nullable();
@@ -24,6 +25,7 @@ class CreateJadwalPembelajaranTable extends Migration
             $table->foreign('minggu_pembelajaran_id')->references('id')->on('minggu_pembelajaran')->onDelete('cascade');
             $table->foreign('modul_materi_id')->references('id')->on('modul_materi')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('lokasi_penugasan_id')->references('id')->on('lokasi_penugasan')->onDelete('cascade');
         });
     }
 

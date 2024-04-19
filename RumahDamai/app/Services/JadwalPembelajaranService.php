@@ -7,11 +7,12 @@ use Carbon\Carbon;
 
 class JadwalPembelajaranService
 {
-    public function generateCalendarData($weekDays, $startOfWeek, $endOfWeek)
+    public function generateCalendarData($weekDays, $startOfWeek, $endOfWeek, $lokasi_penugasan_id)
     {
         $calendarData = [];
         $jadwalPembelajaran = JadwalPembelajaran::with(['kelas', 'guru'])
             ->whereBetween('tanggal_pembelajaran', [$startOfWeek, $endOfWeek])
+            ->where('lokasi_penugasan_id', $lokasi_penugasan_id) // Filter berdasarkan lokasi_penugasan_id guru yang login
             ->orderBy('tanggal_pembelajaran')
             ->get();
 
