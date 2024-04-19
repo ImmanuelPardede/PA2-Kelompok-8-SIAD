@@ -1,6 +1,6 @@
 <!-- resources/views/reset_password.blade.php -->
 
-@extends('layouts.master') <!-- Anda mungkin perlu menyesuaikan dengan layout aplikasi Anda -->
+@extends('layouts.management.master')
 
 @section('content')
 <div class="container">
