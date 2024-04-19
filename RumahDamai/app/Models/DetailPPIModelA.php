@@ -25,14 +25,9 @@ class DetailPPIModelA extends Model
         return $this->belongsTo(PPI_Model_A::class, 'ppiA_id');
     }
 
-    // Definisikan relasi ke model Tujuan
-/*     public function tujuanpendek()
+    public function tujuan()
     {
-        return $this->belongsTo(TujuanPendek::class, 'tujuan_pendek_id');
+        return $this->belongsTo(Tujuan::class, 'detailppiA_id');
     }
-    public function tujuanpanjang()
-    {
-        return $this->belongsTo(TujuanPanjang::class, 'tujuan_panjang_id');
-    } */
     
 }

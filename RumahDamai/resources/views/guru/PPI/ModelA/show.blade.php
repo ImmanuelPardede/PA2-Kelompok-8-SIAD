@@ -34,16 +34,8 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $ppia->created_at }}</td>
                             <td>
-{{--                                 <a href="{{ route('raport.destroy', $ppia->id) }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $ppia->id }}').submit();">Delete</a>
-                                <form id="delete-form-{{ $ppia->id }}" action="{{ route('raport.destroy', $ppia->id) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                                <a href="{{ route('PPI.ModelA.detail', ['id' => $ppia->id]) }}" class="btn btn-info btn-sm">Detail</a>
 
-                                <a href="{{ route('raport.edit', $ppia->id) }}" class="btn btn-warning">Edit</a>
-
-                                <a href="{{ route('raport.detail', $ppia->id) }}" class="btn btn-info">Detail</a>
- --}}
                             </td>
                         </tr>
                         @endforeach

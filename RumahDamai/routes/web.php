@@ -134,7 +134,8 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/ppiA/show/{id}', [PPIModelAController::class, 'show'])->name('PPI.ModelA.show');
     Route::get('/ppiA/create', [PPIModelAController::class, 'create'])->name('PPI.ModelA.create');
     Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
-    
+    Route::get('/ppiA/detail/{id}', [PPIModelAController::class, 'detail'])->name('PPI.ModelA.detail');
+
     
 
 

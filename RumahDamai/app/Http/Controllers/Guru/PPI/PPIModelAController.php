@@ -28,16 +28,19 @@ class PPIModelAController extends Controller
     public function detail($id)
     {
         $ppiA = PPI_Model_A::findOrFail($id);
-        $detailppiA = DetailPPIModelA::where('ppiA_id', $id)->get(); // Pastikan variabel ini terdefinisi
-        return view('guru.raport.detail', compact('raport', 'detailppiA'));
+        $detailppiA = DetailPPIModelA::where('ppiA_id', $id)->get(); // Mendapatkan detail berdasarkan ppiA_id
+        $tujuan = Tujuan::where('detailppiA_id', $id)->get();
+            
+        return view('guru.PPI.modelA.detail', compact('ppiA', 'detailppiA','tujuan'));
     }
-
+    
     public function create()
     {
         $anak = Anak::all();
     
         return view('guru.PPI.modelA.create', compact('anak'));
     }
+    
     
 
     public function store(Request $request)
@@ -117,6 +120,9 @@ class PPIModelAController extends Controller
     
     }
 
+    
+
 
 
 }
+
