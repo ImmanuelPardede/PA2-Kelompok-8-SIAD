@@ -34,12 +34,11 @@ use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
+use App\Http\Controllers\visitor\VisitorsController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -75,6 +74,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 
 
+    
 
     Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
     Route::post('pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
@@ -175,3 +175,23 @@ Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class
 
 
 Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//visitors
+
+Route::get('/', [VisitorsController::class, 'home'])->name('home');
+
+
+
