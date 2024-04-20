@@ -34,7 +34,9 @@ use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
-use App\Http\Controllers\visitor\VisitorsController;
+use App\Http\Controllers\Admin\Visitor\CarouselItemController;
+use App\Http\Controllers\Admin\Visitor\HistoryController;
+use App\Http\Controllers\Visitor\VisitorsController;
 
 
 
@@ -109,6 +111,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     /*     Route::resource('/raport', RaportController::class);
     Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
  */
+
+
+
+
+ /* Visitor */
+ Route::resource('carousel', CarouselItemController::class);
+ Route::resource('history', HistoryController::class);
+
+
 });
 
 

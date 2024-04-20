@@ -29,7 +29,7 @@
                     <i class="bi-telephone me-2"></i>
 
                     <a href="tel: 305-240-9671" class="site-footer-link">
-                        305-240-9671
+                        081262945602
                     </a>
                 </p>
 
@@ -37,13 +37,16 @@
                     <i class="bi-envelope me-2"></i>
 
                     <a href="mailto:info@yourgmail.com" class="site-footer-link">
-                        donate@charity.org
+                        1687210113
+BNI a.n Pendidikan Anak Rumah Damai
+
                     </a>
                 </p>
 
                 <p class="text-white d-flex mt-3">
                     <i class="bi-geo-alt me-2"></i>
-                    Akershusstranda 20, 0150 Oslo, Norway
+                    Desa Lumban Silintong, Kecamatan
+                    Balige, Kabupaten Toba.
                 </p>
 
                 <a href="#" class="custom-btn btn mt-3">Get Direction</a>

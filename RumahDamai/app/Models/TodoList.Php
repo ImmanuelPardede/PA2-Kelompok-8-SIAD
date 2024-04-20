@@ -9,8 +9,8 @@ class TodoList extends Model
 {
     use HasFactory;
 
-    protected $table = 'todo_lists'; 
-    protected $fillable = ['tugas', 'user_id', 'status']; // Tambahkan status ke dalam fillable
+    protected $table = 'todo_lists';
+    protected $fillable = ['tugas', 'user_id', 'status'];
 
     
 }

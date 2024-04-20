@@ -5,14 +5,14 @@
             <div class="col-lg-8 col-12 d-flex flex-wrap">
                 <p class="d-flex me-4 mb-0">
                     <i class="bi-geo-alt me-2"></i>
-                    Akershusstranda 20, 0150 Oslo, Norway
-                </p>
+                    Desa Lumban Silintong, Kecamatan
+                    Balige, Kabupaten Toba.                </p>
 
                 <p class="d-flex mb-0">
                     <i class="bi-envelope me-2"></i>
 
                     <a href="mailto:info@company.com">
-                        info@company.com
+                        yparumahdamai@gmail.com
                     </a>
                 </p>
             </div>
@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="index.html">
             <img src="{{ asset('skydash/images/logo.png')}}" class="logo img-fluid" alt="Yayasan Rumah Damai">
             <span>
-                Yayasan Rumah Damai
+                Yayasan Pendidikan Anak Rumah Damai
                 <small>Sistem  Informasi  Administrasi</small>
             </span>
         </a>

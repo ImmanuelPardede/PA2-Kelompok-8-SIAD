@@ -64,5 +64,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MingguPembelajaranSeeder::class,
         ]);
+        $this->call([
+            CarouselSeeder::class,
+        ]);
+        $this->call([
+            HistorySeeder::class,
+        ]);
     }
 }

@@ -1,4 +1,14 @@
 <!-- partial:partials/_sidebar.html -->
+<style>
+    .sidebar hr {
+        border-top: 1px solid #ddd; /* Warna dan gaya garis */
+        margin: 10px 0; /* Jarak di atas dan di bawah garis */
+    }
+    .sidebar .menu-title {
+        margin-left: 10px;
+    }
+</style>
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
@@ -125,9 +135,34 @@
                         </ul>
                     </div>
                 </li>
+
+<hr>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
+                        aria-controls="succes">
+                        <i class="mdi mdi-cellphone-link"></i>
+                        <span class="menu-title">Visitor</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="succes">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('carousel.index') }}"> Carousel - Home
+                                </a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link"
+                                href="{{ route('history.index') }}"> History - Home
+                            </a>
+                        </ul>
+                    </div>
+                </li>
+                
             @endif
         @endauth
 
+
+        
         @auth
             @if (auth()->user()->role === 'guru')
                 <li class="nav-item">
@@ -289,6 +324,9 @@
             </a>
         </li> --}}
     </ul>
+
+
+    
 </nav>
 
 
