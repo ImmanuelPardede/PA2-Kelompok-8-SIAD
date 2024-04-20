@@ -29,7 +29,6 @@
                 <input type="text" class="form-control" id="tahun" name="tahun" required>
                 <small id="tahunHelp" class="form-text text-muted"></small>
             </div>
-
             <div class="form-group">
                 <label for="area">Area<span style="color: red">*</span></label>
                 <input type="text" class="form-control" name="area[]" required>
@@ -47,10 +46,7 @@
                 <textarea class="form-control" name="naratif[]" required></textarea>
             </div>
 
-
-
             <a href="#" class="addraport btn btn-primary" style="float: right">Tambah Detail</a>
-
             <div class="raport"></div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -78,7 +74,6 @@
             $(this).parent().remove();
         });
     </script>
-
 
     <script>
         document.getElementById('tahun').addEventListener('input', function() {

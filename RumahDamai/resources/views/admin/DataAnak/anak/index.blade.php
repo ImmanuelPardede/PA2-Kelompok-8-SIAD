@@ -33,18 +33,18 @@
                                     <td>{{ $anak->nama_lengkap }}</td>
                                     <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
                                     <td>{{ $anak->status }}</td>
-
                                     <td>
                                         <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
                                         <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
-
                                         </form>
-                                        <form action="{{ route('anak.destroy', $anak->id) }}" method="post"
-                                            style="display:inline;" class="d-inline">
+                                        <form method="POST" id="deleteForm{{ $anak->id }}" class="d-inline"
+                                            action="{{ route('anak.destroy', $anak->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $anak->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

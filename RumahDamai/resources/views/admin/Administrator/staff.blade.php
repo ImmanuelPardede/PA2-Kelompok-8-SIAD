@@ -38,12 +38,14 @@
                                                 class="btn btn-sm btn-info">Detail</a> <!-- Ubah "Show" menjadi "Detail" -->
                                             <a href="{{ route('admin.administrator.edit', $user->id) }}"
                                                 class="btn btn-sm btn-primary">Edit</a>
-                                            <form action="{{ route('admin.administrator.destroy', $user->id) }}"
-                                                method="POST" style="display: inline-block;">
+                                            <form method="POST" id="deleteForm{{ $user->id }}" class="d-inline"
+                                                action="{{ route('admin.administrator.destroy', $user->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Hapus</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="handleDeleteConfirmation('deleteForm{{ $user->id }}')">
+                                                    Hapus
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

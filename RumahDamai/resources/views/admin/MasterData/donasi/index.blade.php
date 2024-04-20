@@ -32,10 +32,14 @@
                                 <td>
                                     <a href="{{ route('donasi.show', $donasi->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('donasi.edit', $donasi->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('donasi.destroy', $donasi->id) }}" method="post" style="display:inline;">
+                                    <form method="POST" id="deleteForm{{ $donasi->id }}" class="d-inline"
+                                        action="{{ route('donasi.destroy', $donasi->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="handleDeleteConfirmation('deleteForm{{ $donasi->id }}')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

@@ -38,7 +38,9 @@ class ModulMateriController extends Controller
     public function create()
     {
         $kelas = Kelas::all();
-        $mingguPembelajaran = MingguPembelajaran::all(); // Tambahkan data MingguPembelajaran
+
+        // Ubah cara load data MingguPembelajaran berdasarkan lokasi_penugasan_id
+        $mingguPembelajaran = MingguPembelajaran::where('lokasi_penugasan_id', auth()->user()->lokasi_penugasan_id)->get();
 
         $tahun_kurikulum_id = null;
 
@@ -53,6 +55,7 @@ class ModulMateriController extends Controller
 
         return view('guru.materi.modulMateri.create', compact('kelas', 'mingguPembelajaran', 'tahun_kurikulum_id'));
     }
+
 
     public function store(Request $request)
     {
@@ -111,10 +114,13 @@ class ModulMateriController extends Controller
     {
         $modulMateri = ModulMateri::findOrFail($id);
         $kelas = Kelas::all(); // Mengambil data kelas untuk dropdown
-        $mingguPembelajaran = MingguPembelajaran::all();
+
+        // Ubah cara load data MingguPembelajaran berdasarkan lokasi_penugasan_id
+        $mingguPembelajaran = MingguPembelajaran::where('lokasi_penugasan_id', auth()->user()->lokasi_penugasan_id)->get();
 
         return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas', 'mingguPembelajaran'));
     }
+
 
     public function update(Request $request, string $id)
     {

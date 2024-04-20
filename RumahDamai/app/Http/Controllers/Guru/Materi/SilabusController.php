@@ -46,6 +46,13 @@ class SilabusController extends Controller
             'kelas_id' => 'required|exists:kelas,id',
             'nama_silabus' => 'nullable|string',
             'deskripsi' => 'nullable|string',
+
+            'hasil_kursus' => 'nullable|string',
+            'tipe_pembelajaran' => 'nullable|string',
+            'penilaian' => 'nullable|string',
+            'konten_kursus' => 'nullable|string',
+            'buku_pegangan_dan_referensi' => 'nullable|string',
+            'alat' => 'nullable|string',
         ]);
 
         $loggedInUserId = Auth::id();
@@ -86,6 +93,12 @@ class SilabusController extends Controller
         $request->validate([
             'nama_silabus' => 'nullable|string',
             'deskripsi' => 'nullable|string',
+            'hasil_kursus' => 'nullable|string',
+            'tipe_pembelajaran' => 'nullable|string',
+            'penilaian' => 'nullable|string',
+            'konten_kursus' => 'nullable|string',
+            'buku_pegangan_dan_referensi' => 'nullable|string',
+            'alat' => 'nullable|string',
         ]);
 
         $silabus = Silabus::findOrFail($id);

@@ -138,7 +138,8 @@
                         </div>
                         <div class="add-items d-flex mb-0 mt-2">
                             <input type="text" class="form-control todo-list-input" placeholder="Tambahkan">
-                            <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+                            <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
+                                    class="icon-circle-plus"></i></button>
                         </div>
                     </div>
                 </div>

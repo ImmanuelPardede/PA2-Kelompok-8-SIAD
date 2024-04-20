@@ -32,10 +32,14 @@
                                 <td>
                                     <a href="{{ route('sponsorship.show', $sponsorship->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('sponsorship.edit', $sponsorship->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="post" style="display:inline;">
+                                    <form method="POST" id="deleteForm{{ $sponsorship->id }}" class="d-inline"
+                                        action="{{ route('sponsorship.destroy', $sponsorship->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="handleDeleteConfirmation('deleteForm{{ $sponsorship->id }}')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

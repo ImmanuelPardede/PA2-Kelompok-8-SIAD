@@ -30593,3 +30593,64 @@ div.tagsinput span.tag a {
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+/* SweetAlert2 Custom Styles */
+.swal2-popup.custom-dialog-class {
+    border-radius: 10px; /* Lebih bulat untuk tampilan yang lebih halus */
+    width: 400px; /* Lebar pop-up */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Efek bayangan yang lebih halus */
+}
+
+.swal2-popup {
+    padding: 3%; /* Atur padding pada konten pop-up */
+}
+
+.swal2-title {
+    font-size: 24px; /* Ukuran teks judul */
+    color: #333; /* Warna teks judul */
+    margin-bottom: 10px;
+}
+
+.swal2-content {
+    font-size: 18px; /* Ukuran teks konten */
+    color: #555; /* Warna teks konten */
+    margin-bottom: 20px;
+}
+
+.swal2-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.swal2-confirm, .swal2-cancel {
+    padding: 10px 25px;
+    font-size: 14px; /* Ukuran teks tombol */
+    border-radius: 5px; /* Lebih bulat untuk tampilan yang lebih halus */
+    font-weight: bold; /* Ketebalan teks tombol */
+    text-transform: uppercase; /* Mengubah teks menjadi huruf kapital */
+    cursor: pointer; /* Mengubah kursor menjadi tanda untuk menunjukkan interaktifitas */
+}
+
+/* Tombol Konfirmasi */
+.swal2-confirm {
+    background-color: #28a745; /* Warna latar belakang hijau untuk tombol konfirmasi */
+    border-color: #28a745; /* Warna garis pinggir hijau untuk tombol konfirmasi */
+    color: #fff; /* Warna teks putih untuk tombol konfirmasi */
+    transition: background-color 0.3s ease; /* Efek transisi hover */
+}
+
+.swal2-confirm:hover {
+    background-color: #218838; /* Warna latar belakang hijau yang lebih gelap saat tombol dihover */
+}
+
+/* Tombol Batal */
+.swal2-cancel {
+    background-color: #dc3545; /* Warna latar belakang merah untuk tombol batal */
+    border-color: #dc3545; /* Warna garis pinggir merah untuk tombol batal */
+    color: #fff; /* Warna teks putih untuk tombol batal */
+    transition: background-color 0.3s ease; /* Efek transisi hover */
+}
+
+.swal2-cancel:hover {
+    background-color: #c82333; /* Warna latar belakang merah yang lebih gelap saat tombol dihover */
+}

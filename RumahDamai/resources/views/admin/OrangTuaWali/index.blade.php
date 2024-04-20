@@ -31,12 +31,14 @@
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('orangTuaWali.edit', $orangtuawali->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}" method="post"
-                                            class="d-inline">
+                                        <form method="POST" id="deleteForm{{ $orangtuawali->id }}" class="d-inline"
+                                            action="{{ route('orangTuaWali.destroy', $orangtuawali->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $orangtuawali->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

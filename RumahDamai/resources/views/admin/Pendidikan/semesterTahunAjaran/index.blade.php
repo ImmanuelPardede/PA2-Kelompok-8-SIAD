@@ -29,10 +29,14 @@
                                 <td>{{ $semesterTahunAjaran->semester_tahun_ajaran }}</td>
                                 <td>
                                     <a href="{{ route('semesterTahunAjaran.edit', $semesterTahunAjaran->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('semesterTahunAjaran.destroy', $semesterTahunAjaran->id) }}" method="post" style="display:inline;">
+                                    <form method="POST" id="deleteForm{{ $semesterTahunAjaran->id }}" class="d-inline"
+                                        action="{{ route('semesterTahunAjaran.destroy', $semesterTahunAjaran->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="number" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="handleDeleteConfirmation('deleteForm{{ $semesterTahunAjaran->id }}')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
