@@ -19,19 +19,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($anak as $key => $data)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $data->nama_lengkap }}</td>
-                                <td>{{ $data->status }}</td>
-                                <td><a href="{{ route('PPI.ModelA.show', $data->id) }}" class="btn btn-primary">Show</a></td>
-                            </tr>
+                            @foreach ($anak as $key => $data)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $data->nama_lengkap }}</td>
+                                    <td>{{ $data->status }}</td>
+                                    <td><a href="{{ route('PPI.ModelA.show', $data->id) }}" class="btn btn-primary">Show</a>
+                                    </td>
+                                </tr>
                             @endforeach
 
                             @if ($anak->isEmpty())
-                            <tr>
-                                <td colspan="4">Tidak ada Data Anak.</td>
-                            </tr>
+                                <tr>
+                                    <td colspan="4">Tidak ada Data Anak.</td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>

@@ -40,36 +40,36 @@
                     </thead>
                     <tbody>
                         @php
-                        $prevArea = null;
-                        $nomorTampil = 0;
+                            $prevArea = null;
+                            $nomorTampil = 0;
                         @endphp
                         @foreach ($detailraports as $index => $detailraport)
                             <tr>
                                 @if ($detailraport->area !== $prevArea)
                                     @php
-                                    $nomorTampil++;
+                                        $nomorTampil++;
                                     @endphp
                                     <td>{{ $nomorTampil }}</td>
                                 @else
                                     <td></td>
                                 @endif
-                    
+
                                 <td style="font-weight: bold;">
                                     @if ($detailraport->area !== $prevArea)
                                         {{ $detailraport->area }}
                                         @php
-                                        $prevArea = $detailraport->area;
+                                            $prevArea = $detailraport->area;
                                         @endphp
                                     @endif
                                 </td>
-                                
+
                                 <td>{{ $detailraport->kemampuan }}</td>
                                 <td>{{ $detailraport->kelas_kemampuan }}</td>
                                 <td>
                                     @if (str_word_count($detailraport->naratif) > 6)
                                         @php
-                                        $words = explode(' ', $detailraport->naratif);
-                                        $chunked = array_chunk($words, 6);
+                                            $words = explode(' ', $detailraport->naratif);
+                                            $chunked = array_chunk($words, 6);
                                         @endphp
                                         @foreach ($chunked as $chunk)
                                             {{ implode(' ', $chunk) }}<br>
@@ -77,7 +77,7 @@
                                     @else
                                         {{ $detailraport->naratif }}
                                     @endif
-                                </td>                
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -87,5 +87,4 @@
             <a href="{{ route('raport.index') }}" class="btn btn-primary">Back</a>
         </div>
     </div>
-    
 @endsection

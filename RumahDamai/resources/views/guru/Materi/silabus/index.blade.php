@@ -31,12 +31,14 @@
                                         <a href="{{ route('silabus.show', $silabus->id) }}"
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('silabus.edit', $silabus->id) }}" class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('silabus.destroy', $silabus->id) }}" method="post"
-                                            style="display:inline;">
+                                        <form method="POST" id="deleteForm{{ $silabus->id }}" class="d-inline"
+                                            action="{{ route('silabus.destroy', $silabus->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $silabus->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

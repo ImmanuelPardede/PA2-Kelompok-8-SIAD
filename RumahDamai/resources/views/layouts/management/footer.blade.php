@@ -54,7 +54,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs5.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="{{asset('skydash/js/utama/sweetalert.min.js')}}"></script>
 
 </body>
 

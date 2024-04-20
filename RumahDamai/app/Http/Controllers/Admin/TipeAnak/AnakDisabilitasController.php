@@ -77,11 +77,11 @@ class AnakDisabilitasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        $jenisAnakDisabilitas = AnakDisabilitas::findOrFail($id);
-        $jenisAnakDisabilitas->delete();
+    // public function destroy(string $id)
+    // {
+    //     $jenisAnakDisabilitas = AnakDisabilitas::findOrFail($id);
+    //     $jenisAnakDisabilitas->delete();
 
-        return redirect()->route('anakDisabilitas.index')->with('success', 'Jenis Anak Disabilitas berhasil dihapus.');
-    }
+    //     return redirect()->route('anakDisabilitas.index')->with('success', 'Jenis Anak Disabilitas berhasil dihapus.');
+    // }
 }

@@ -32,12 +32,14 @@
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('dataDonatur.edit', $donatur->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('dataDonatur.destroy', $donatur->id) }}" method="post"
-                                            class="d-inline">
+                                        <form method="POST" id="deleteForm{{ $donatur->id }}" class="d-inline"
+                                            action="{{ route('dataDonatur.destroy', $donatur->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $donatur->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

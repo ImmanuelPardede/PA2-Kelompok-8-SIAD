@@ -34,12 +34,14 @@
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('modulMateri.edit', $modulMateri->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('modulMateri.destroy', $modulMateri->id) }}" method="post"
-                                            class="d-inline">
+                                        <form method="POST" id="deleteForm{{ $modulMateri->id }}" class="d-inline"
+                                            action="{{ route('modulMateri.destroy', $modulMateri->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $modulMateri->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

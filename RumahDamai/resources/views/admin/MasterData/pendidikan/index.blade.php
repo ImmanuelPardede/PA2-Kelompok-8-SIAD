@@ -31,10 +31,14 @@
                                 <td>{{ $pendidikan->tingkat_pendidikan }}</td>
                                 <td>
                                     <a href="{{ route('pendidikan.edit', $pendidikan->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('pendidikan.destroy', $pendidikan->id) }}" method="post" style="display:inline;">
+                                    <form method="POST" id="deleteForm{{ $pendidikan->id }}" class="d-inline"
+                                        action="{{ route('pendidikan.destroy', $pendidikan->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="handleDeleteConfirmation('deleteForm{{ $pendidikan->id }}')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

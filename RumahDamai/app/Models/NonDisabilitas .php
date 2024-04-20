@@ -11,8 +11,4 @@ class NonDisabilitas extends Model
 
     protected $table = 'non_disabilitas';
     protected $fillable = ['kategori_non_disabilitas', 'jenis_non_disabilitas','deskripsi'];
-
-    // public function anakDisabilitas(){
-    //     return $this->belongsToMany(AnakDisabilitas::class, 'disabilitas_id');
-    // }
 }

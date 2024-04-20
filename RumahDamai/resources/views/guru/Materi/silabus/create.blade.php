@@ -59,11 +59,11 @@
 
                     <div class="form-group">
                         <label for="alat">Alat</label>
-                        <textarea class="form-control" id="alat" name="alat" required>{{ old('alat') }}</textarea>
+                        <textarea class="form-control" id="alat" name="alat">{{ old('alat') }}</textarea>
                     </div>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
-        <button type="submit" class="btn btn-success">Simpan</button>
     </div>
 @endsection

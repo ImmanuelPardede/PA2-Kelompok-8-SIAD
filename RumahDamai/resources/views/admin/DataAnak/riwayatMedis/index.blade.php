@@ -32,12 +32,14 @@
                                             class="btn btn-info">Detail</a>
                                         <a href="{{ route('riwayatMedis.edit', $riwayatMedis->id) }}"
                                             class="btn btn-warning">Edit</a>
-                                        <form action="{{ route('riwayatMedis.destroy', $riwayatMedis->id) }}" method="post"
-                                            style="display:inline;">
+                                        <form method="POST" id="deleteForm{{ $riwayatMedis->id }}" class="d-inline"
+                                            action="{{ route('riwayatMedis.destroy', $riwayatMedis->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $riwayatMedis->id }}')">
+                                                Hapus
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

@@ -34,10 +34,14 @@
                                 <td>
                                     <a href="{{ route('lokasiTugas.show', $lokasi->id) }}" class="btn btn-info">Detail</a>
                                     <a href="{{ route('lokasiTugas.edit', $lokasi->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('lokasiTugas.destroy', $lokasi->id) }}" method="post" style="display:inline;">
+                                    <form method="POST" id="deleteForm{{ $lokasi->id }}" class="d-inline"
+                                        action="{{ route('lokasiTugas.destroy', $lokasi->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="handleDeleteConfirmation('deleteForm{{ $lokasi->id }}')">
+                                            Hapus
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
