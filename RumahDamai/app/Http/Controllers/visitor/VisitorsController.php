@@ -39,5 +39,24 @@ class VisitorsController extends Controller
         $totalProgram = DetailProgram::count();
         return view('visitor.program', compact('programs','detailPrograms','totalProgram'));
     }
+
+    public function fasilitasi()
+    {
+        return view('visitor.fasilitas');
+    }
     
+    public function news()
+    {
+        return view('visitor.berita');
+    }
+
+    public function gallery()
+    {
+        return view('visitor.galeri');
+    }
+
+    public function contact()
+    {
+        return view('visitor.contact');
+    }
 }

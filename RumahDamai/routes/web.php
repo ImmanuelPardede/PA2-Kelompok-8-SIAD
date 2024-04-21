@@ -211,6 +211,11 @@ Route::get('/', [VisitorsController::class, 'home'])->name('home');
 Route::get('/aboutus', [VisitorsController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/programrm', [VisitorsController::class, 'programrm'])->name('programrm');
 
+Route::get('/fasilitasi', [VisitorsController::class, 'fasilitasi'])->name('fasilitasi');
+Route::get('/news', [VisitorsController::class, 'news'])->name('news');
+Route::get('/gallery', [VisitorsController::class, 'gallery'])->name('gallery');
+Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
+
 
 
 
