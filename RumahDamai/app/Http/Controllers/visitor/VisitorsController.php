@@ -5,9 +5,11 @@ namespace App\Http\Controllers\visitor;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Anak;
+use App\Models\Berita;
 use App\Models\CarouselItem;
 use App\Models\DetailProgram;
 use App\Models\FoundationHistory;
+use App\Models\KategoriBerita;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -47,8 +49,30 @@ class VisitorsController extends Controller
     
     public function news()
     {
-        return view('visitor.berita');
+        $berita = Berita::all();
+        $kategori = KategoriBerita::all();
+        return view('visitor.berita', compact('berita','kategori'));
     }
+
+    public function show($id)
+    {
+        // Mengambil data berita berdasarkan ID
+        $berita = Berita::find($id);
+    
+        // Jika berita tidak ditemukan
+        if (!$berita) {
+            abort(404); // Mengembalikan response 404 Not Found
+        }
+    
+        // Mengambil berita terbaru (kecuali berita utama yang sedang ditampilkan)
+        $recentNews = Berita::all();
+    
+        $kategori = KategoriBerita::all();
+
+        // Mengirim data berita dan recent news ke halaman detail berita
+        return view('visitor.detailberita', compact('berita', 'recentNews','kategori'));
+    }
+    
 
     public function gallery()
     {

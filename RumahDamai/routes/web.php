@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\KategoriBeritaController;
 use App\Http\Controllers\Admin\Pendidikan\MingguPembelajaranController;
 use App\Http\Controllers\Admin\Pendidikan\SemesterTahunAjaranController;
 use App\Http\Controllers\Admin\Pendidikan\TahunKurikulumController;
@@ -35,14 +36,12 @@ use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
 use App\Http\Controllers\Admin\Visitor\AboutController;
+use App\Http\Controllers\Admin\Visitor\BeritaController;
 use App\Http\Controllers\Admin\Visitor\CarouselItemController;
 use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Visitor\VisitorsController;
-
-
-
-
+use App\Models\KategoriBerita;
 
 Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -66,9 +65,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/sponsorship', SponsorshipController::class);
     Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/disabilitas', DisabilitasController::class);
+    Route::resource('/masterdata/penyakit', PenyakitController::class);
+    Route::resource('/masterdata/kategoriBerita', KategoriBeritaController::class);
+
+
+
     Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
     Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
-    Route::resource('/masterdata/penyakit', PenyakitController::class);
     Route::resource('/pendidikan/tahunKurikulum', TahunKurikulumController::class);
     Route::resource('/pendidikan/kelas', KelasController::class);
 
@@ -122,6 +125,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
  Route::resource('history', HistoryController::class);
  Route::resource('about', AboutController::class);
  Route::resource('program', ProgramController::class);
+ Route::resource('berita', BeritaController::class);
+
 
 
 
@@ -213,6 +218,7 @@ Route::get('/programrm', [VisitorsController::class, 'programrm'])->name('progra
 
 Route::get('/fasilitasi', [VisitorsController::class, 'fasilitasi'])->name('fasilitasi');
 Route::get('/news', [VisitorsController::class, 'news'])->name('news');
+Route::get('/news/{id}', [VisitorsController::class, 'show'])->name('news.detail');
 Route::get('/gallery', [VisitorsController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 

@@ -79,6 +79,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DetailProgramSeeder::class,
         ]);
-        
+        $this->call([
+            KategoriBeritaSeeder::class,
+        ]);
     }
 }

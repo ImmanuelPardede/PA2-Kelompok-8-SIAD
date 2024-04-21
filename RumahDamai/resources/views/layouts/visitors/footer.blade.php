@@ -9,11 +9,17 @@
                 <h5 class="site-footer-title mb-3">Akses Cepat</h5>
 
                 <ul class="footer-menu">
-                    <li class="footer-menu-item"><a href="/login" class="footer-menu-link">SIAD</a></li>
+                    <li class="footer-menu-item">
+                        @if (Auth::check())
+                            <a href="/dashboard" class="footer-menu-link">SIAD</a>
+                        @else
+                            <a href="/login" class="footer-menu-link">SIAD</a>
+                        @endif
+                    </li>
+                    
+                    <li class="footer-menu-item"><a href="/aboutus" class="footer-menu-link">Tentang Kami</a></li>
 
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Tentang Kami</a></li>
-
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">Program Kami</a></li>
+                    <li class="footer-menu-item"><a href="/programrm" class="footer-menu-link">Program Kami</a></li>
 
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQ</a></li>
 

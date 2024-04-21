@@ -131,7 +131,9 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('penyakit.index') }}">Jenis
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
-                                    Sponsorship</a>
+                                    Sponsorship</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('kategoriBerita.index') }}">Kategori
+                                    Berita</a></li>        
                         </ul>
                     </div>
                 </li>
@@ -184,6 +186,21 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('program.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false" aria-controls="berita">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Berita</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="berita">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('berita.index') }}">Content</a>
                             </li>
                         </ul>
                     </div>
