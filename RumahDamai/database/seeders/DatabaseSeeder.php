@@ -70,5 +70,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             HistorySeeder::class,
         ]);
+        $this->call([
+            AboutSeeder::class,
+        ]);
+        $this->call([
+            ProgramSeeder::class,
+        ]);
+        $this->call([
+            DetailProgramSeeder::class,
+        ]);
+        
     }
 }

@@ -36,8 +36,8 @@ class HistoryController extends Controller
     // Validasi input form
     $validatedData = $request->validate([
         'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'sejarah_singkat' => 'required|string|max:255',
-        'tujuan_utama' => 'required|string|max:255',
+        'sejarah_singkat' => 'required|string',
+        'tujuan_utama' => 'required|string',
         'dibangun' => 'required|date',
     ]);
 
@@ -95,7 +95,7 @@ class HistoryController extends Controller
         $request->validate([
             'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Hanya terima file gambar dengan ekstensi tertentu (jpeg, png, jpg, gif) dan maksimal ukuran 2MB
             'sejarah_singkat' => 'required|string',
-            'tujuan_utama' => 'required|string|max:255',
+            'tujuan_utama' => 'required|string',
             'dibangun' => 'required|date',
         ]);
     

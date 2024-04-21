@@ -141,22 +141,54 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
                         aria-controls="succes">
-                        <i class="mdi mdi-cellphone-link"></i>
-                        <span class="menu-title">Visitor</span>
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Home</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="succes">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('carousel.index') }}"> Carousel - Home
+                                    href="{{ route('carousel.index') }}"> Carousel
                                 </a>
                             </li>
                             <li class="nav-item"> <a class="nav-link"
-                                href="{{ route('history.index') }}"> History - Home
+                                href="{{ route('history.index') }}"> History
                             </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false" aria-controls="about">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">About</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="about">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('about.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false" aria-controls="program">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Program</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="program">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('program.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
                 
             @endif
         @endauth

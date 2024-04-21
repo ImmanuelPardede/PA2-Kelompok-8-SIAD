@@ -122,6 +122,7 @@ h2 {
 }
 
 h3 {
+  color: var(--secondary-color);
   font-size: var(--h3-font-size);
 }
 
@@ -679,13 +680,17 @@ strong {
 .about-image {
   border-radius: var(--border-radius-medium);
   display: block;
-  width: 350px;
+  width: 700px;
   height: 400px;
   object-fit: cover;
 }
 
 .custom-text-block {
   padding: 60px 40px;
+}
+
+.custom-text-block-custom {
+  padding: 40px 60px;
 }
 
 
@@ -783,7 +788,7 @@ strong {
   NEWS         
 -----------------------------------------*/
 .news-detail-header-section {
-  background-image: url('../images/news/close-up-volunteer-oganizing-stuff-donation.jpg');
+  background-image: url('../images/dummy/dummy1.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -1653,3 +1658,10 @@ blockquote::before {
   }
 }
 
+
+.custom-text-box-costum {
+  background: var(--section-bg-color);
+  border-radius: var(--border-radius-medium);
+  margin-bottom: 24px;
+  padding: 40px;
+}

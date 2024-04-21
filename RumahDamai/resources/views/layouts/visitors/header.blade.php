@@ -16,15 +16,8 @@
     <link href="{{ asset('kind/css/bootstrap-icons.css')}}" rel="stylesheet">
 
     <link href="{{ asset('kind/css/style.css')}}" rel="stylesheet">
-    <!--
 
-
-
-TemplateMo 581 Kind Heart Charity
-
-https://templatemo.com/tm-581-kind-heart-charity
-
--->
+    <link rel="shortcut icon" href="{{ asset('skydash/images/logo.png')}}" />
 
 </head>
 

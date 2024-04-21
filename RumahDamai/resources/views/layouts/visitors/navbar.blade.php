@@ -63,15 +63,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#top">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_2">About</a>
+                    <a class="nav-link" href="/aboutus">About</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link click-scroll" href="#section_3">Program</a>
+                    <a class="nav-link" href="/programrm">Program</a>
                 </li>
 
                 <li class="nav-item">

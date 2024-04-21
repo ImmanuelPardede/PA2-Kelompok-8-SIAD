@@ -34,8 +34,10 @@ use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
+use App\Http\Controllers\Admin\Visitor\AboutController;
 use App\Http\Controllers\Admin\Visitor\CarouselItemController;
 use App\Http\Controllers\Admin\Visitor\HistoryController;
+use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Visitor\VisitorsController;
 
 
@@ -118,6 +120,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
  /* Visitor */
  Route::resource('carousel', CarouselItemController::class);
  Route::resource('history', HistoryController::class);
+ Route::resource('about', AboutController::class);
+ Route::resource('program', ProgramController::class);
+
 
 
 });
@@ -203,6 +208,9 @@ Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.in
 //visitors
 
 Route::get('/', [VisitorsController::class, 'home'])->name('home');
+Route::get('/aboutus', [VisitorsController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/programrm', [VisitorsController::class, 'programrm'])->name('programrm');
+
 
 
 
