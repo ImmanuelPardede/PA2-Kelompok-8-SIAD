@@ -5,6 +5,8 @@ namespace App\Http\Controllers\visitor;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Anak;
+use App\Models\AnakDisabilitas;
+use App\Models\AnakNonDisabilitas;
 use App\Models\Berita;
 use App\Models\CarouselItem;
 use App\Models\DetailProgram;
@@ -21,10 +23,12 @@ class VisitorsController extends Controller
         $carousel = CarouselItem::all();
         $history = FoundationHistory::all();
         $totalAnak = Anak::count(); 
-
-        
-
-        return view('visitor.home', compact('carousel','history','totalAnak'));
+        $berita = Berita::all();
+        $totalProgram = DetailProgram::count();
+        $kategori = KategoriBerita::all();
+        $anaktepi = AnakDisabilitas::count();
+        $anakdisabilitas = AnakNonDisabilitas::count();
+        return view('visitor.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori','anaktepi','anakdisabilitas'));
 
     }
 

@@ -153,6 +153,103 @@
     </div>
 </section>
 
+<section class="news-section section-padding" id="section_5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 mb-5">
+                <h2>Berita Terkini</h2>
+            </div>
+
+            @if($berita->isEmpty())
+                <div class="col-12">
+                    <h1><strong>Tidak Ada Berita!!</strong>. Admin masih ngantuk, tolong sadarkan</h1>
+                </div>
+            @else
+                <div class="col-lg-7 col-12">
+                    <div class="news-block">
+                        @foreach($berita as $item)
+                            <div class="news-block-top">
+                                <a href="{{ route('news.detail', ['id' => $item->id]) }}">
+                                    <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="">
+                                </a>
+
+                                <div class="news-category-block">
+                                    <a href="{{ route('news.detail', ['id' => $item->id]) }}" class="category-block-link">
+                                        {{$item->kategori->kategori }}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="news-block-info">
+                                <div class="d-flex mt-2">
+                                    <div class="news-block-date">
+                                        <p>
+                                            <i class="bi-calendar4 custom-icon me-1"></i>
+                                            {{$item->created_at }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="news-block-title mb-2">
+                                    <h4><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{$item->judul }}</a></h4>
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-12 mx-auto">
+                    <form class="custom-form search-form" action="#" method="post" role="form">
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <button type="submit" class="form-control">
+                            <i class="bi-search"></i>
+                        </button>
+                    </form>
+
+                    <h5 class="mt-5 mb-3">Berita Lainnya</h5>
+                    @foreach($berita as $item)
+                        <div class="news-block news-block-two-col d-flex mt-4">
+                            <div class="news-block-two-col-image-wrap">
+                                <a href="{{ route('news.detail', ['id' => $item->id]) }}">
+                                    <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="">
+                                </a>
+                            </div>
+
+                            <div class="news-block-two-col-info">
+                                <div class="news-block-title mb-2">
+                                    <h6><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{$item->judul}}</a></h6>
+                                </div>
+
+                                <div class="news-block-date">
+                                    <p>
+                                        <i class="bi-calendar4 custom-icon me-1"></i>
+                                        {{$item->created_at }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    <div class="tags-block">
+                        <h5 class="mb-3">Kategori</h5>
+                        @foreach($kategori as $item)
+                            @php
+                                $jumlah_berita = $berita->where('kategori_id', $item->id)->count();
+                            @endphp
+                            <a href="#" class="tags-block-link">
+                                {{ $item->kategori }}
+                                <span class="badge">{{ $jumlah_berita }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+</section>
+
+
 
 
 <section class="contact-section section-padding" id="section_6">
@@ -167,6 +264,7 @@
                         <div class="d-flex flex-column justify-content-center ">
                             <p class="mb-0">Lumban Silintong, Balige</p>
                             <p class="mb-0"><strong>Anak Dipesisir Danau Toba</strong></p>
+                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{$anaktepi}}</strong></p>
                         </div>
                     </div>
 
@@ -257,6 +355,7 @@
                         <div class="d-flex flex-column justify-content-center ">
                             <p class="mb-0">Sawah Lamo, Andam Dewi, Tapteng</p>
                             <p class="mb-0"><strong>Anak Berkebutuhan Khusus</strong></p>
+                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{$anakdisabilitas}}</strong></p>
                         </div>
                     </div>
 

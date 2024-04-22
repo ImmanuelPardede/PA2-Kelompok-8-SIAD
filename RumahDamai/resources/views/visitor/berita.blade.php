@@ -18,88 +18,88 @@
 
 <section class="news-section section-padding">
     <div class="container">
-
         <div class="row">
-
-            <div class="col-lg-7 col-12">
-                @foreach($berita as $item)
-                <div class="news-block">
-                    <div class="news-block-top">
-                        <a href="{{ route('news.detail', ['id' => $item->id]) }}">
-                            <img src="{{ asset($item->img_berita) }}"
-                                class="news-image img-fluid" alt="">
-                        </a>
-
-                        <div class="news-category-block">
-                            <a href="{{ route('news.detail', ['id' => $item->id]) }}" class="category-block-link">
-                                {{$item->kategori->kategori }}
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="news-block-info">
-                        <div class="d-flex mt-2">
-                            <div class="news-block-date">
-                                <p>
-                                    <i class="bi-calendar4 custom-icon me-1"></i>
-                                    {{$item->created_at }}
-                                </p>
-                            </div>
-
-                            <div class="news-block-author mx-5">
-                                <p>
-                                    <i class="bi-person custom-icon me-1"></i>
-                                    By Admin
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="news-block-title mb-2">
-                            <h4><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{$item->judul }}</a></h4>
-                        </div>
-
-                        <div class="news-block-body">
-                            <p>{!! Illuminate\Support\Str::words($item->deskripsi,15,'...')!!}</p>
-                        </div>
-                    </div>
+            @if($berita->isEmpty())
+                <div class="col-12">
+                    <h1><strong>Tidak Ada Berita!!</strong>. Admin masih ngantuk, tolong sadarkan</h1>
                 </div>
-            @endforeach
-            </div>
+            @else
+                <div class="col-lg-7 col-12">
+                    @foreach($berita as $item)
+                    <div class="news-block">
+                        <div class="news-block-top">
+                            <a href="{{ route('news.detail', ['id' => $item->id]) }}">
+                                <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="">
+                            </a>
+
+                            <div class="news-category-block">
+                                <a href="{{ route('news.detail', ['id' => $item->id]) }}" class="category-block-link">
+                                    {{ $item->kategori->kategori }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="news-block-info">
+                            <div class="d-flex mt-2">
+                                <div class="news-block-date">
+                                    <p>
+                                        <i class="bi-calendar4 custom-icon me-1"></i>
+                                        {{ $item->created_at }}
+                                    </p>
+                                </div>
+
+                                <div class="news-block-author mx-5">
+                                    <p>
+                                        <i class="bi-person custom-icon me-1"></i>
+                                        By Admin
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="news-block-title mb-2">
+                                <h4><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{ $item->judul }}</a></h4>
+                            </div>
+
+                            <div class="news-block-body">
+                                <p>{!! Illuminate\Support\Str::words($item->deskripsi, 15, '...') !!}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            @endif
 
             <div class="col-lg-4 col-12 mx-auto mt-4 mt-lg-0">
                 <form class="custom-form search-form" action="#" method="post" role="form">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-
                     <button type="submit" class="form-control">
                         <i class="bi-search"></i>
                     </button>
                 </form>
 
                 <h5 class="mt-5 mb-3">Recent news</h5>
-                @foreach($berita as $item)
-
-                <div class="news-block news-block-two-col d-flex mt-4">
-
-                    <div class="news-block-two-col-image-wrap">
-                        <a href="{{ route('news.detail', ['id' => $item->id]) }}">
-                            <img src="{{ asset($item->img_berita) }}"
-                                class="news-image img-fluid" alt="">
-                        </a>
-                    </div>
-                    <div class="news-block-two-col-info">
-                        <div class="news-block-title mb-2">
-                            <h6><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{$item->judul }}</a>
-                            </h6>
+                @if(!$berita->isEmpty())
+                    @foreach($berita as $item)
+                    <div class="news-block news-block-two-col d-flex mt-4">
+                        <div class="news-block-two-col-image-wrap">
+                            <a href="{{ route('news.detail', ['id' => $item->id]) }}">
+                                <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="">
+                            </a>
                         </div>
-                        <div class="news-block-date">
-                            <p>
-                                <i class="bi-calendar4 custom-icon me-1"></i>
-                                {{$item->created_at }}                            </p>
+                        <div class="news-block-two-col-info">
+                            <div class="news-block-title mb-2">
+                                <h6><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{ $item->judul }}</a></h6>
+                            </div>
+                            <div class="news-block-date">
+                                <p>
+                                    <i class="bi-calendar4 custom-icon me-1"></i>
+                                    {{ $item->created_at }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endforeach
-            
+                    @endforeach
+                @endif
 
                 <div class="tags-block">
                     <h5 class="mb-3">Kategori</h5>
@@ -114,10 +114,9 @@
                         </a>
                     @endforeach
                 </div>
-                
             </div>
         </div>
-
     </div>
 </section>
+
 @endsection
