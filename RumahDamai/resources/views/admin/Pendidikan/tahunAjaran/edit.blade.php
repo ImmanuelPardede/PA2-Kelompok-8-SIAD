@@ -20,11 +20,13 @@
 
             <div class="form-group">
                 <label for="tahun_ajaran">Tahun Kurikulum</label>
-                <input type="year" class="form-control" name="tahun_ajaran" value="{{ old('tahun_ajaran', $tahunAjaran->tahun_ajaran) }}">
+                <input type="year" class="form-control" name="tahun_ajaran"
+                    value="{{ old('tahun_ajaran', $tahunAjaran->tahun_ajaran) }}">
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
     </div>
 @endsection

@@ -84,7 +84,8 @@
                 <select class="form-control js-example-basic-single" id="pekerjaan_ayah_id" name="pekerjaan_ayah_id">
                     <option value="" disabled>-- Pilih Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanlist)
-                        <option value="{{ $pekerjaanlist->id }}" {{ ($orangtuawali->pekerjaan_ayah_id == $pekerjaanlist->id) && !old('pekerjaan_ayah_id') ? 'selected' : '' }}>
+                        <option value="{{ $pekerjaanlist->id }}"
+                            {{ $orangtuawali->pekerjaan_ayah_id == $pekerjaanlist->id && !old('pekerjaan_ayah_id') ? 'selected' : '' }}>
                             {{ $pekerjaanlist->jenis_pekerjaan }}
                         </option>
                     @endforeach
@@ -107,7 +108,8 @@
                 <select class="form-control js-example-basic-single" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
                     <option value="" disabled>-- Pilih Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanlist)
-                        <option value="{{ $pekerjaanlist->id }}" {{ ($orangtuawali->pekerjaan_ibu_id == $pekerjaanlist->id) && !old('pekerjaan_ibu_id') ? 'selected' : '' }}>
+                        <option value="{{ $pekerjaanlist->id }}"
+                            {{ $orangtuawali->pekerjaan_ibu_id == $pekerjaanlist->id && !old('pekerjaan_ibu_id') ? 'selected' : '' }}>
                             {{ $pekerjaanlist->jenis_pekerjaan }}
                         </option>
                     @endforeach
@@ -137,7 +139,8 @@
                 <select class="form-control js-example-basic-single" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
                     <option value="" disabled>-- Pilih Pekerjaan --</option>
                     @foreach ($pekerjaan as $pekerjaanlist)
-                        <option value="{{ $pekerjaanlist->id }}" {{ ($orangtuawali->pekerjaan_wali_id == $pekerjaanlist->id) && !old('pekerjaan_wali_id') ? 'selected' : '' }}>
+                        <option value="{{ $pekerjaanlist->id }}"
+                            {{ $orangtuawali->pekerjaan_wali_id == $pekerjaanlist->id && !old('pekerjaan_wali_id') ? 'selected' : '' }}>
                             {{ $pekerjaanlist->jenis_pekerjaan }}
                         </option>
                     @endforeach
@@ -157,7 +160,8 @@
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
     </div>
 @endsection

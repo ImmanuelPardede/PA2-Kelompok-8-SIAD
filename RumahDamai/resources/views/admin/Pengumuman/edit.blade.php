@@ -37,8 +37,9 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">Update Pengumuman</button>
                                     <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali</a>
+                                    <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                                        onclick="handleUpdatedConfirmation(event)">Perbarui Pengumuman</button>
                                 </div>
                             </div>
                         </form>

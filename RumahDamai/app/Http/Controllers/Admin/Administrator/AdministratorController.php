@@ -198,9 +198,6 @@ class AdministratorController extends Controller
         return redirect()->route($redirectRoute)->with('success', 'Akun berhasil diperbarui.');
     }
 
-
-
-
     // Menghapus akun
     public function destroy(User $user)
     {

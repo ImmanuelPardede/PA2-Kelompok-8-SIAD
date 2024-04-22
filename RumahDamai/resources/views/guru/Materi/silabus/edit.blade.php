@@ -23,7 +23,9 @@
                 <label for="tahun_kurikulum_id">Tahun Kurikulum</label>
                 <select class="form-control" id="tahun_kurikulum_id" name="tahun_kurikulum_id">
                     @foreach ($tahunKurikulum as $tahun)
-                        <option value="{{ $tahun->id }}" {{ $silabus->tahun_kurikulum_id == $tahun->id ? 'selected' : '' }}>{{ $tahun->tahun_kurikulum }}</option>
+                        <option value="{{ $tahun->id }}"
+                            {{ $silabus->tahun_kurikulum_id == $tahun->id ? 'selected' : '' }}>{{ $tahun->tahun_kurikulum }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -32,7 +34,8 @@
                 <label for="kelas_id">Nama Kelas</label>
                 <select class="form-control" id="kelas_id" name="kelas_id">
                     @foreach ($kelas as $kelasItem)
-                        <option value="{{ $kelasItem->id }}" {{ $silabus->kelas_id == $kelasItem->id ? 'selected' : '' }}>{{ $kelasItem->nama_kelas }}</option>
+                        <option value="{{ $kelasItem->id }}" {{ $silabus->kelas_id == $kelasItem->id ? 'selected' : '' }}>
+                            {{ $kelasItem->nama_kelas }}</option>
                     @endforeach
                 </select>
             </div>
@@ -73,7 +76,8 @@
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
     </div>
 @endsection

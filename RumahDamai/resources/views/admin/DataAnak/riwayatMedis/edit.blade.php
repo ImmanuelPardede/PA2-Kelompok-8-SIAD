@@ -21,7 +21,8 @@
 
             <div class="form-group">
                 <label for="riwayat_perawatan">Riwayat Perawatan</label>
-                <input type="text" class="form-control" name="riwayat_perawatan" value="{{ old('riwayat_perawatan', $riwayatmedis->riwayat_perawatan) }}">
+                <input type="text" class="form-control" name="riwayat_perawatan"
+                    value="{{ old('riwayat_perawatan', $riwayatmedis->riwayat_perawatan) }}">
             </div>
 
             <div class="form-group">
@@ -31,7 +32,8 @@
 
             <div class="form-group">
                 <label for="deskripsi_riwayat">Deskripsi Riwayat</label>
-                <input type="text" class="form-control" name="deskripsi_riwayat" value="{{ old('deskripsi_riwayat', $riwayatmedis->deskripsi_riwayat) }}">
+                <input type="text" class="form-control" name="deskripsi_riwayat"
+                    value="{{ old('deskripsi_riwayat', $riwayatmedis->deskripsi_riwayat) }}">
             </div>
 
             <div class="form-group">
@@ -40,7 +42,8 @@
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
     </div>
 @endsection

@@ -50,8 +50,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/DataAnak/anak', AnakController::class);
     Route::patch('/anak/{id}/aktifkan', [AnakController::class, 'aktifkan'])->name('anak.aktifkan');
     Route::patch('/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('anak.nonaktifkan');
-    Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
+
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
+    Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
+
     Route::resource('/masterdata/agama', AgamaController::class);
     Route::resource('/masterdata/jenisKelamin', JenisKelaminController::class);
     Route::resource('/masterdata/golonganDarah', GolonganDarahController::class);
@@ -60,21 +62,18 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/pendidikan', PendidikanController::class);
     Route::resource('/masterdata/pekerjaan', PekerjaanController::class);
     Route::resource('/masterdata/sponsorship', SponsorshipController::class);
-    Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/disabilitas', DisabilitasController::class);
-    Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
-    Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
+    Route::resource('/masterdata/donasi', DonasiController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
+
+    Route::resource('/TipeAnak/anakNonDisabilitas', AnakNonDisabilitasController::class);
+    Route::resource('/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
+
     Route::resource('/pendidikan/tahunKurikulum', TahunKurikulumController::class);
     Route::resource('/pendidikan/kelas', KelasController::class);
-
     Route::resource('/pendidikan/tahunAjaran', TahunAjaranController::class);
     Route::resource('/pendidikan/semesterTahunAjaran', SemesterTahunAjaranController::class);
     Route::resource('/pendidikan/mingguPembelajaran', MingguPembelajaranController::class);
-
-
-
-    
 
     Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
     Route::post('pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
@@ -136,7 +135,7 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
     Route::get('/ppiA/detail/{id}', [PPIModelAController::class, 'detail'])->name('PPI.ModelA.detail');
 
-    
+
 
 
     Route::get('/guru/DataDiri/edit/{user}', [AdministratorController::class, 'editGuruDataDiri'])->name('guru.DataDiri.edit');
