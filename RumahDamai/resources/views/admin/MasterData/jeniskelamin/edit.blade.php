@@ -21,11 +21,13 @@
 
             <div class="form-group">
                 <label for="jenis_kelamin">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jenis_kelamin" value="{{ old('jenis_kelamin', $jenisKelamin->jenis_kelamin) }}">
+                <input type="text" class="form-control" name="jenis_kelamin"
+                    value="{{ old('jenis_kelamin', $jenisKelamin->jenis_kelamin) }}">
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
     </div>
 @endsection

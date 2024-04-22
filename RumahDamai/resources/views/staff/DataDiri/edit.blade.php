@@ -119,8 +119,8 @@
                         @endif
                     </div>
 
-
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                        onclick="handleUpdatedConfirmation(event)">Perbarui</button>
                 </form>
             </div>
         </div>

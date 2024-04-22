@@ -159,7 +159,11 @@
                     @endif
 
                     <div class="form-group d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary mr-2">Perbarui</button>
+                        <div>
+                            <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                        </div>
                         <button class="btn btn-danger" type="button" id="change-password" data-toggle="modal"
                             data-target="#passwordModal">Ganti Password</button>
                     </div>

@@ -52,14 +52,16 @@
                 <select class="form-control" id="semester_tahun_ajaran_id" name="semester_tahun_ajaran_id">
                     <option value="" disabled>-- Pilih Semester Tahun Ajaran --</option>
                     @foreach ($semesterTahunAjaran as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == $kelas->semester_tahun_ajaran_id ? 'selected' : '' }}>
+                        <option value="{{ $item->id }}"
+                            {{ $item->id == $kelas->semester_tahun_ajaran_id ? 'selected' : '' }}>
                             {{ $item->semester_tahun_ajaran }}</option>
                     @endforeach
                 </select>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-            <button type="submit" class="btn btn-warning">Update</button>
+            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
+                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
         </form>
 
     </div>
