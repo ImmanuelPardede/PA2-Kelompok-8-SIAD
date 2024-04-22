@@ -78,10 +78,5 @@ class Anak extends Model
         return $this->belongsTo(LokasiTugas::class, 'lokasi_id');
     }
 
-    public function todoLists()
-    {
-        return $this->hasMany(TodoList::class);
-    }
-
     
 }

@@ -1,4 +1,14 @@
 <!-- partial:partials/_sidebar.html -->
+<style>
+    .sidebar hr {
+        border-top: 1px solid #ddd; /* Warna dan gaya garis */
+        margin: 10px 0; /* Jarak di atas dan di bawah garis */
+    }
+    .sidebar .menu-title {
+        margin-left: 10px;
+    }
+</style>
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
@@ -121,13 +131,87 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('penyakit.index') }}">Jenis
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
-                                    Sponsorship</a>
+                                    Sponsorship</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('kategoriBerita.index') }}">Kategori
+                                    Berita</a></li>        
                         </ul>
                     </div>
                 </li>
+
+<hr>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
+                        aria-controls="succes">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Home</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="succes">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('carousel.index') }}"> Carousel
+                                </a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link"
+                                href="{{ route('history.index') }}"> History
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false" aria-controls="about">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">About</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="about">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('about.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false" aria-controls="program">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Program</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="program">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('program.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false" aria-controls="berita">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Berita</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="berita">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('berita.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                
             @endif
         @endauth
 
+
+        
         @auth
             @if (auth()->user()->role === 'guru')
                 <li class="nav-item">
@@ -289,6 +373,9 @@
             </a>
         </li> --}}
     </ul>
+
+
+    
 </nav>
 
 
