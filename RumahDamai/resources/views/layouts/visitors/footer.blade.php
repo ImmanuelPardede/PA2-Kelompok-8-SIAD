@@ -6,14 +6,14 @@
             </div>
             
             <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <h5 class="site-footer-title mb-3">Akses Cepat</h5>
+                <h5 class="site-footer-title mb-3 text-white"><strong>Akses Cepat</strong></h5>
 
                 <ul class="footer-menu">
                     <li class="footer-menu-item">
                         @if (Auth::check())
-                            <a href="/dashboard" class="footer-menu-link">SIAD</a>
+                            <a href="/dashboard" class="footer-menu-link" target="_blank">SIAD</a>
                         @else
-                            <a href="/login" class="footer-menu-link">SIAD</a>
+                            <a href="/login" class="footer-menu-link" target="_blank">SIAD</a>
                         @endif
                     </li>
                     
@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mx-auto">
-                <h5 class="site-footer-title mb-3">Contact Infomation</h5>
+                <h5 class="site-footer-title mb-3 text-white"><strong>Contact Infomation</strong></h5>
 
                 <p class="text-white d-flex mb-2">
                     <i class="bi-telephone me-2"></i>
@@ -41,7 +41,7 @@
                 <p class="text-white d-flex">
                     <i class="bi-envelope me-2"></i>
 
-                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                    <a href="#" class="site-footer-link">
                         1687210113
 BNI a.n Pendidikan Anak Rumah Damai
 
@@ -65,32 +65,22 @@ BNI a.n Pendidikan Anak Rumah Damai
 
                 <div class="col-lg-6 col-md-7 col-12">
                     <p class="copyright-text mb-0">Copyright © 2024 <a href="#">G-08 of PA 2</a> D3TI22.
-                        <a href="https://templatemo.com" target="_blank">Institut Teknologi Del</a><br>
+                        <a href="https://del.ac.id" target="_blank">Institut Teknologi Del</a><br>
                         Dibuat dengan penuh <i class="bi bi-heart-fill text-danger"></i>
                     </p>
                 </div>
 
                 <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
                     <ul class="social-icon">
+
                         <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-twitter"></a>
+                            <a href="https://www.instagram.com/yparumahdamai/" target="_blank" class="social-icon-link bi-instagram"></a>
                         </li>
 
                         <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-facebook"></a>
-                        </li>
+                            <a href="https://wa.me/6281262945602" class="social-icon-link bi-whatsapp" target="_blank"></a>
+                        </li>                    
 
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-linkedin"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="https://youtube.com/templatemo" class="social-icon-link bi-youtube"></a>
-                        </li>
                     </ul>
                 </div>
 

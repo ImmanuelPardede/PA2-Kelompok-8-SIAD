@@ -3,41 +3,25 @@
         <div class="row">
 
             <div class="col-lg-8 col-12 d-flex flex-wrap">
-                <p class="d-flex me-4 mb-0">
-                    <i class="bi-geo-alt me-2"></i>
-                    Desa Lumban Silintong, Kecamatan
-                    Balige, Kabupaten Toba.                </p>
-
                 <p class="d-flex mb-0">
                     <i class="bi-envelope me-2"></i>
 
-                    <a href="mailto:info@company.com">
+                    <a href="mailto:yparumahdamai@gmail.com">
                         yparumahdamai@gmail.com
                     </a>
+                    
                 </p>
             </div>
 
             <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                 <ul class="social-icon">
                     <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-twitter"></a>
+                        <a href="https://www.instagram.com/yparumahdamai/" target="_blank" class="social-icon-link bi-instagram"></a>
                     </li>
 
                     <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-facebook"></a>
-                    </li>
-
-                    <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-instagram"></a>
-                    </li>
-
-                    <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-youtube"></a>
-                    </li>
-
-                    <li class="social-icon-item">
-                        <a href="#" class="social-icon-link bi-whatsapp"></a>
-                    </li>
+                        <a href="https://wa.me/6281262945602" class="social-icon-link bi-whatsapp" target="_blank"></a>
+                    </li>                    
                 </ul>
             </div>
 
@@ -47,7 +31,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/">
             <img src="{{ asset('skydash/images/logo.png')}}" class="logo img-fluid" alt="Yayasan Rumah Damai">
             <span>
                 Yayasan Pendidikan Anak Rumah Damai

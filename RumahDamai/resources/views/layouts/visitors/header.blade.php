@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Yayasan Rumah Damai</title>
+    <title>YPA Rumah Damai</title>
 
     <!-- CSS FILES -->
     <link href="{{ asset('kind/css/bootstrap.min.css')}}" rel="stylesheet">
