@@ -10,6 +10,7 @@ use App\Models\AnakNonDisabilitas;
 use App\Models\Berita;
 use App\Models\CarouselItem;
 use App\Models\DetailProgram;
+use App\Models\Fasilitas;
 use App\Models\FoundationHistory;
 use App\Models\KategoriBerita;
 use App\Models\Program;
@@ -48,7 +49,9 @@ class VisitorsController extends Controller
 
     public function fasilitasi()
     {
-        return view('visitor.fasilitas');
+        $fasilitas = Fasilitas::all();
+        $detailfasilitas = Fasilitas::all();
+        return view('visitor.fasilitas',compact('fasilitas','detailfasilitas'));
     }
     
     public function news()

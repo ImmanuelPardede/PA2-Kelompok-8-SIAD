@@ -258,7 +258,7 @@
 
             <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
                 <div class="contact-info-wrap">
-                    <h2>Rumah Dame</h2>
+                    <h2>Rumah Damai</h2>
 
                     <div class="contact-image-wrap d-flex flex-wrap">
                         <div class="d-flex flex-column justify-content-center ">
@@ -349,7 +349,7 @@
 
             <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
                 <div class="contact-info-wrap">
-                    <h2>Rumah Dame</h2>
+                    <h2>Rumah Damai</h2>
 
                     <div class="contact-image-wrap d-flex flex-wrap">
                         <div class="d-flex flex-column justify-content-center ">

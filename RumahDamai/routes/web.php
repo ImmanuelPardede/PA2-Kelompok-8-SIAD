@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\Todolist\TodoListController;
 use App\Http\Controllers\Admin\Visitor\AboutController;
 use App\Http\Controllers\Admin\Visitor\BeritaController;
 use App\Http\Controllers\Admin\Visitor\CarouselItemController;
+use App\Http\Controllers\Admin\Visitor\FasilitasController;
 use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Visitor\VisitorsController;
@@ -123,11 +124,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 
  /* Visitor */
- Route::resource('carousel', CarouselItemController::class);
- Route::resource('history', HistoryController::class);
- Route::resource('about', AboutController::class);
- Route::resource('program', ProgramController::class);
- Route::resource('berita', BeritaController::class);
+    Route::resource('carousel', CarouselItemController::class);
+    Route::resource('history', HistoryController::class);
+    Route::resource('about', AboutController::class);
+    Route::resource('program', ProgramController::class);
+    Route::resource('berita', BeritaController::class);
+    Route::resource('fasilitas', FasilitasController::class);
+
 
 
 
@@ -181,23 +184,21 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
 });
 
 
-Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
-Route::post('/mark-as-read', [PengumumanController::class, 'markAsRead'])->name('mark-as-read');
+/* Bisa diakses bersamaan  */
+    Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+    Route::post('/mark-as-read', [PengumumanController::class, 'markAsRead'])->name('mark-as-read');
 
+    Route::get('/dashboard', [TodoListController::class, 'index'])->name('dashboard');
+    Route::post('/todo/store', [TodoListController::class, 'store'])->name('todo.store');
+    Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.destroy');
+    Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
 
-Route::get('/dashboard', [TodoListController::class, 'index'])->name('dashboard');
-Route::post('/todo/store', [TodoListController::class, 'store'])->name('todo.store');
-Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.destroy');
-Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
+    Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index'])->name('jadwalPembelajaran.index');
+    Route::post('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'store'])->name('jadwalPembelajaran.store');
+    Route::put('/jadwalPembelajaran/update/{id}', [JadwalPembelajaranController::class, 'update'])->name('jadwalPembelajaran.update');
+    Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwalPembelajaran.edit');
 
-
-Route::get('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'index'])->name('jadwalPembelajaran.index');
-Route::post('/jadwalPembelajaran', [JadwalPembelajaranController::class, 'store'])->name('jadwalPembelajaran.store');
-Route::put('/jadwalPembelajaran/update/{id}', [JadwalPembelajaranController::class, 'update'])->name('jadwalPembelajaran.update');
-Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwalPembelajaran.edit');
-
-
-Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
+    Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
 
 
 

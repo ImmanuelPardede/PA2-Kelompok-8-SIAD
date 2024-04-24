@@ -205,6 +205,21 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#fasilitas" aria-expanded="false" aria-controls="fasilitas">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Fasilitas</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="fasilitas">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('fasilitas.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 
                 
             @endif
