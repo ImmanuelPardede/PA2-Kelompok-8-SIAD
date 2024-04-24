@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             @if($berita->isEmpty())
-                <div class="col-12">
+                <div class="col-8">
                     <h1><strong>Tidak Ada Berita!!</strong>. Admin masih ngantuk, tolong sadarkan</h1>
                 </div>
             @else
@@ -77,7 +77,7 @@
                     </button>
                 </form>
 
-                <h5 class="mt-5 mb-3">Recent news</h5>
+                <h5 class="mt-5 mb-3">Berita Lainnya</h5>
                 @if(!$berita->isEmpty())
                     @foreach($berita as $item)
                     <div class="news-block news-block-two-col d-flex mt-4">
