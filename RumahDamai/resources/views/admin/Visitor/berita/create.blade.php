@@ -12,7 +12,8 @@
 
                 <div class="form-group">
                     <label for="judul">Judul<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" name="judul" required>
+                    <input type="text" class="form-control" name="judul" required  id="judulInput">
+                    <small class="text-muted" id="wordCountInfo">Maksimal 10 kata.</small>
                 </div>
 
                 <div class="form-group">
@@ -65,6 +66,30 @@
             .catch(error => {
                 console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
             });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var judulInput = document.getElementById('judulInput');
+
+        judulInput.addEventListener('input', function() {
+            var judul = judulInput.value.trim();
+            var wordCount = judul.split(/\s+/).length;
+
+            if (wordCount > 10) {
+                // Jika jumlah kata melebihi 10, potong judul hingga 10 kata
+                var words = judul.split(/\s+/).slice(0, 10);
+                var truncatedJudul = words.join(' ');
+                judulInput.value = truncatedJudul;
+
+                // Tampilkan pesan informasi kepada pengguna
+                document.getElementById('wordCountInfo').textContent = 'Maksimal 10 kata. Melebihi batas, judul dipotong.';
+            } else {
+                // Tampilkan pesan informasi standar
+                document.getElementById('wordCountInfo').textContent = 'Maksimal 10 kata.';
+            }
+        });
     });
 </script>
 @endsection

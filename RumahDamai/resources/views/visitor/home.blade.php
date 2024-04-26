@@ -167,7 +167,11 @@
             @else
                 <div class="col-lg-7 col-12">
                     <div class="news-block">
-                        @foreach($berita as $item)
+
+                        @php
+                        $beritas = $berita->sortByDesc('created_at')->take(2);
+                    @endphp
+                        @foreach($beritas as $item)
                             <div class="news-block-top">
                                 <a href="{{ route('news.detail', ['id' => $item->id]) }}">
                                     <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="">
@@ -237,7 +241,7 @@
                             @php
                                 $jumlah_berita = $berita->where('kategori_id', $item->id)->count();
                             @endphp
-                            <a href="#" class="tags-block-link">
+                            <a class="tags-block-link" disabled>
                                 {{ $item->kategori }}
                                 <span class="badge">{{ $jumlah_berita }}</span>
                             </a>

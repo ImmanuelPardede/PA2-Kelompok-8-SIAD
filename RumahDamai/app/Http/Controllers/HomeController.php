@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pengumuman;
 use App\Models\Anak;
+use App\Models\Donatur;
 use App\Models\TodoList;
 use App\Models\LokasiTugas;
-
-
+use App\Models\ModulMateri;
 
 class HomeController extends Controller
 {
@@ -33,9 +33,11 @@ class HomeController extends Controller
             $pengumumans = Pengumuman::orderBy('created_at', 'desc')->get();
             $totalPegawai = User::count();
             $totalanak = Anak::count();
+            $totalmateri = ModulMateri::count();
             $todolist = TodoList::all();
-            
-            return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist'));
+            $totoldonatur = Donatur::count();
+
+            return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','totalmateri','totoldonatur'));
         }
     
 

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 
 use App\Models\Anak;
-
+use App\Models\Donatur;
+use App\Models\ModulMateri;
 use Illuminate\Http\Request;
 
 class TodoListController extends Controller 
@@ -25,8 +26,10 @@ class TodoListController extends Controller
         $todolist = TodoList::all();
         $user = User::all();
         $lokasi = LokasiTugas::all();
+        $totalmateri = ModulMateri::count();
+        $totoldonatur = Donatur::count();
         
-        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','user','lokasi'));
+        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','user','lokasi', 'totalmateri','totoldonatur'));
     }
     
     public function store(Request $request)

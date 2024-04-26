@@ -103,7 +103,7 @@
         <div class="card card-light-blue">
           <div class="card-body">
             <p class="mb-4">Materi</p>
-            <p class="fs-30 mb-2">34040</p>
+            <p class="fs-30 mb-2">{{ $totalmateri }}</p>
             <p>Terdata, Sejak Dibuat Sistem Ini</p>
           </div>
         </div>
@@ -112,7 +112,7 @@
         <div class="card card-light-danger">
           <div class="card-body">
             <p class="mb-4">Donatur Dalam Angkah</p>
-            <p class="fs-30 mb-2">47033</p>
+            <p class="fs-30 mb-2">{{ $totoldonatur }}</p>
             <p>Terdata, Sejak Dibuat Sistem Ini</p>
           </div>
         </div>

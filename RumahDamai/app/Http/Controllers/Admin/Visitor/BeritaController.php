@@ -141,11 +141,20 @@ class BeritaController extends Controller
     }
     
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Temukan CarouselItem berdasarkan ID
+        $berita = Berita::findOrFail($id);
+    
+        if ($berita->img_berita) {
+            if (file_exists(public_path($berita->img_berita))) {
+                unlink(public_path($berita->img_berita));
+        }
+        $berita->delete();
+    
+        return redirect()->route('berita.index')->with('success', 'Carousel item deleted successfully.');
+    }
+    
+    
     }
 }
