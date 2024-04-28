@@ -87,6 +87,7 @@ body {
 }
 
 
+
 /*---------------------------------------
   TYPOGRAPHY               
 -----------------------------------------*/
@@ -796,6 +797,22 @@ strong {
   padding-top: 150px;
   padding-bottom: 150px;
 }
+
+.news-block-date p,
+.news-block-author p,
+.news-block-comment p {
+    font-size: 16px; /* Ubah ukuran teks sesuai kebutuhan */
+}
+
+.img-with-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.img-with-shadow:hover {
+  transform: translateY(-4px);
+}
+
 
 .news-block-top {
   border-radius: var(--border-radius-medium);

@@ -220,6 +220,21 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#galeri" aria-expanded="false" aria-controls="galeri">
+                        <i class="mdi mdi-web"></i>
+                        <span class="menu-title">Galeri</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="galeri">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('galeri.index') }}">Content</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 
                 
             @endif

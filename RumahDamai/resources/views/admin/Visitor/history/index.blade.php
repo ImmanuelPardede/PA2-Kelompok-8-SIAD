@@ -23,7 +23,6 @@
                 <table class="table mt-3 table-hover">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Image</th>
                             <th>Sejarah Singkat</th>
                             <th>Tujuan Utama</th>
@@ -34,7 +33,6 @@
                     <tbody>
                         @if ($history)
                             <tr>
-                                <td>{{ $history->id }}</td>
                                 <td>
                                     <img src="{{ $history->gambar }}" alt="Foundation Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                                 </td>

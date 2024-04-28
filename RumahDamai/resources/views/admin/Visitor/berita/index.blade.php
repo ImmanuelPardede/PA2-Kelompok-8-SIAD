@@ -20,7 +20,7 @@
                 <table class="table mt-3">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Image</th>
                             <th>Judul</th>
                             <th>Kategori</th>
@@ -28,10 +28,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($berita as $beritaItem)
+                        @foreach($berita as $index => $beritaItem)
                         <tr>
-                            <td>{{ $beritaItem->id }}</td>
-                            <td>
+                            <td>{{ $index +1}}</td>
+                            <td style="max-width: 200px;">
                                 <img src="{{ asset($beritaItem->img_berita) }}" alt="berita Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                             </td>
                             <td>{{$beritaItem->judul }}</td>

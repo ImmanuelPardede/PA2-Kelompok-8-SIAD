@@ -21,7 +21,7 @@
                 <table class="table mt-3 ">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Image</th>
                             <th>Caption</th>
                             <th>Subcaption</th>
@@ -29,9 +29,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($carouselItems as $item)
+                        @foreach($carouselItems as $index => $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td>
                                 <img src="{{ $item->image_url }}" alt="Carousel Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                             </td>

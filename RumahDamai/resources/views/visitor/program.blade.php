@@ -34,9 +34,9 @@
             </div>
 
     @foreach ($programs as $index => $program)
-            <div class="col-lg-6 col-md-5 col-12">
+            <div class="col-lg-6 col-md-5 col-12 ">
                 <img src="{!! $program->img_program !!}"
-                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid cursor-pointer img-with-shadow" alt="">
             </div>
             @endforeach
 
@@ -51,7 +51,7 @@
             @foreach ($detailPrograms as $index => $detail)
 
             <div class="col-lg-4 col-12">
-                <div class="custom-text-box">
+                <div class="custom-text-box cursor-pointer img-with-shadow">
                     <h4 class="mb-2">{{ $detail->jenis_program }}</h4>
                     <p class="mb-0">{{ $detail->deskripsi }}</p>
                 </div>
@@ -72,7 +72,7 @@
             <div class="row justify-content-center"> <!-- Memusatkan baris -->
 
             <div class="col-lg-8 col-12">
-                <div class="custom-text-box-costum">
+                <div class="custom-text-box-costum cursor-pointer img-with-shadow">
                     @foreach ($programs as $index => $program)
 
                     <p class="mb-2 ">{!! $program->kelas !!}</p>

@@ -98,11 +98,11 @@
             @foreach($history as $item)
             <div class="col-lg-6 col-12 mb-5 mb-lg-0">
                 <img src="{{ asset($item->gambar) }}"
-                    class="custom-text-box-image img-fluid" alt="">
+                    class="custom-text-box-image img-fluid cursor-pointer img-with-shadow" alt="">
             </div>
 
             <div class="col-lg-6 col-12">
-                <div class="custom-text-box">
+                <div class="custom-text-box cursor-pointer img-with-shadow">
                     <h2 class="mb-2">Singkatnya,</h2>
 
                     <h5 class="mb-3">Yayasan Pendidikan Anak Rumah Damai</h5>
@@ -111,8 +111,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="custom-text-box mb-lg-0">
+                    <div class="col-lg-6 col-md-6 col-12 ">
+                        <div class="custom-text-box mb-lg-0 cursor-pointer img-with-shadow">
                             <h5 class="mb-3">Tujuan Utama Kami</h5>
 
                             <p>{{ $item->tujuan_utama }}</p>
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-12">
-                        <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0">
+                        <div class="custom-text-box d-flex flex-wrap d-lg-block mb-lg-0 cursor-pointer img-with-shadow">
                             <div class="counter-thumb">
                                 <div class="d-flex">
                                     @php
@@ -260,7 +260,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
+            <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0 ">
                 <div class="contact-info-wrap">
                     <h2>Rumah Damai</h2>
 
@@ -317,7 +317,7 @@
 </style>
 
             <div class="col-lg-5 col-12 mx-auto">
-                <div class="custom-form contact-form">
+                <div class="custom-form contact-form cursor-pointer img-with-shadow">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d31891.808995458618!2d99.02334569240283!3d2.345348277141445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e6!4m0!4m3!3m2!1d2.3487009057448573!2d99.04222710238747!5e0!3m2!1sid!2sid!4v1713616037570!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -345,7 +345,7 @@
 
 </style>
             <div class="col-lg-5 col-12 mx-auto">
-                <div class="custom-form contact-form">
+                <div class="custom-form contact-form cursor-pointer img-with-shadow">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7974.615583109242!2d98.37969714021001!3d2.032667991796157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x302fb1452f5800a3%3A0x5372da394b48ff8b!2sSawah%20Lamo%2C%20Kec.%20Andam%20Dewi%2C%20Kabupaten%20Tapanuli%20Tengah%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1713617406871!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
             </div>
 

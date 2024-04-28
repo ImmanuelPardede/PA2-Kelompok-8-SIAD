@@ -20,16 +20,16 @@
                 <table class="table mt-3">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Image</th>
                             <th>Kelas</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($program as $programItem)
+                        @foreach($program as $index => $programItem)
                         <tr>
-                            <td>{{ $programItem->id }}</td>
+                            <td>{{ $index +1 }}</td>
                             <td>
                                 <img src="{{ asset($programItem->img_program) }}" alt="Program Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                             </td>

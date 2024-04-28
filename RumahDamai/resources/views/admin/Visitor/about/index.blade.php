@@ -21,16 +21,16 @@
                 <table class="table mt-3 ">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Latar Belakang</th>
                             <th>Wilayah I</th>
                             <th>Wilayah II</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($abouts as $item)
+                        @foreach($abouts as $index => $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            <td>{{ $index +1 }}</td>
                             <td>{{ \Illuminate\Support\Str::words($item->latar_belakang,3,'...') }}</td>
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah1,3,'...') }}</td>
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah2,3,'...') }}</td>

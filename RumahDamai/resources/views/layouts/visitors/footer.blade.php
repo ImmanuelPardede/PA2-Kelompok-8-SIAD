@@ -61,7 +61,7 @@ BNI a.n Pendidikan Anak Rumah Damai
 
     <div class="site-footer-bottom">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-between">
 
                 <div class="col-lg-6 col-md-7 col-12">
                     <p class="copyright-text mb-0">Copyright © 2024 <a href="#">G-08 of PA 2</a> D3TI22.
@@ -69,27 +69,29 @@ BNI a.n Pendidikan Anak Rumah Damai
                         Dibuat dengan penuh <i class="bi bi-heart-fill text-danger"></i>
                     </p>
                 </div>
-
-                <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+            
+                <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-end align-items-center">
                     <ul class="social-icon">
-
+            
                         <li class="social-icon-item">
                             <a href="https://www.instagram.com/yparumahdamai/" target="_blank" class="social-icon-link bi-instagram"></a>
                         </li>
-
+            
                         <li class="social-icon-item">
                             <a href="https://wa.me/6281262945602" class="social-icon-link bi-whatsapp" target="_blank"></a>
                         </li>                    
-
+            
                     </ul>
                 </div>
-
+            
             </div>
+            
         </div>
     </div>
 </footer>
 
 <!-- JAVASCRIPT FILES -->
+
 <script src="{{ asset('kind/js/jquery.min.js')}}"></script>
 <script src="{{ asset('kind/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('kind/js/jquery.sticky.js')}}"></script>

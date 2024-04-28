@@ -34,14 +34,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($fasilitas as $item)
+                        @foreach($fasilitas as $index => $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>
+                            <td>{{ $index + 1 }}</td>
+                            <td style="max-width: 200px;">
                                 @if ($item->detailFasilitas->isNotEmpty())
-                                @foreach ($item->detailFasilitas as $detail)
-                                    <img src="{{ asset($detail->img_fasilitas) }}" alt="Fasilitas Image" class="img-fluid" style="border-radius: initial; width: 25%; height: auto; max-width: 100%;">
-                                @endforeach
+                                <?php $detail = $item->detailFasilitas->first(); ?>
+                                <img src="{{ asset($detail->img_fasilitas) }}" alt="Fasilitas Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                             @else
                                 <p>No Image</p>
                             @endif

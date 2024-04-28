@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\Visitor\AboutController;
 use App\Http\Controllers\Admin\Visitor\BeritaController;
 use App\Http\Controllers\Admin\Visitor\CarouselItemController;
 use App\Http\Controllers\Admin\Visitor\FasilitasController;
+use App\Http\Controllers\Admin\Visitor\GaleriController;
 use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Visitor\VisitorsController;
@@ -119,6 +120,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     /*     Route::resource('/raport', RaportController::class);
     Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
  */
+Route::delete('/galeri/delete-image/{id}', [GaleriController::class,'deleteImage'])->name('galeri.deleteImage');
+Route::delete('/faslitas/delete-image/{id}', [FasilitasController::class,'deleteImage'])->name('fasilitas.deleteImage');
 
 
 
@@ -130,6 +133,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('program', ProgramController::class);
     Route::resource('berita', BeritaController::class);
     Route::resource('fasilitas', FasilitasController::class);
+    Route::resource('galeri', GaleriController::class);
+    
 
 
 
@@ -223,6 +228,8 @@ Route::get('/fasilitasi', [VisitorsController::class, 'fasilitasi'])->name('fasi
 Route::get('/news', [VisitorsController::class, 'news'])->name('news');
 Route::get('/news/{id}', [VisitorsController::class, 'show'])->name('news.detail');
 Route::get('/gallery', [VisitorsController::class, 'gallery'])->name('gallery');
+Route::get('/gallery{id}', [VisitorsController::class, 'detailgallery'])->name('gallery.detail');
+
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 
 

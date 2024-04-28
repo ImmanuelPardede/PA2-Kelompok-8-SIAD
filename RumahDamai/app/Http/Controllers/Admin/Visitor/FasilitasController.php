@@ -118,6 +118,24 @@ public function store(Request $request)
             }
         }
     }
+        // Proses untuk setiap file new_img_galeri yang diunggah
+        if ($request->hasFile('new_img_fasilitas')) {
+            foreach ($request->file('new_img_fasilitas') as $img_fasilitas) {
+                if ($img_fasilitas->isValid()) {
+                    $slug = Str::slug(pathinfo($img_fasilitas->getClientOriginalName(), PATHINFO_FILENAME));
+                    $new_gambar = time() . '_' . $slug . '.' . $img_fasilitas->getClientOriginalExtension();
+    
+                    // Pindahkan new_img_fasilitas ke direktori yang diinginkan
+                    $img_fasilitas->move('uploads/visitor/fasilitas/', $new_gambar);
+    
+                    // Buat instance Detailfasilitas dan simpan data terkait
+                    $detailfasilitas = new DetailFasilitas;
+                    $detailfasilitas->fasilitas_id = $fasilitas->id;
+                    $detailfasilitas->img_fasilitas = 'uploads/visitor/fasilitas/' . $new_gambar;
+                    $detailfasilitas->save();
+                }
+            }
+        }
 
     return redirect()->route('fasilitas.index')->with('success', 'Fasilitas updated successfully.');
 }
@@ -136,6 +154,14 @@ public function store(Request $request)
         
         return redirect()->route('fasilitas.index')->with('success', 'fasilitas deleted successfully.');
 
+    }
+
+    public function deleteImage($id)
+    {
+        $detailFasilitas = DetailFasilitas::findOrFail($id);
+        $detailFasilitas->delete();
+    
+        return redirect()->back()->with('success', 'Gambar berhasil dihapus');
     }
 
 

@@ -20,8 +20,8 @@
     <div class="container">
         <div class="row">
             @foreach($fasilitas as $item)
-            <div class="col-lg-6 col-md-5 col-12">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="col-lg-6 col-md-5 col-12 ">
+                <div id="carouselExampleIndicators" class="carousel slide cursor-pointer img-with-shadow" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($item->detailFasilitas->slice(0, 3) as $index => $detailFasilitas)
                             <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-lg-6 col-md-7 col-12">
-                    <div class="custom-text-box-costum">
+                    <div class="custom-text-box-costum cursor-pointer img-with-shadow">
                         <h3 class="mb-0">Fasilitas Rumah Damai</h3>
                         <p>{!! $item->fasilitas !!}</p>
                     </div>

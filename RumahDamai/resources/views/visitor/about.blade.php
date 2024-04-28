@@ -25,7 +25,7 @@
 
             <div class="col-lg-6 col-md-5 col-12">
                 <img src="{{ asset($item->img_yayasan) }}"
-                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid cursor-pointer img-with-shadow" alt="">
             </div>
 
             <div class="col-lg-6 col-md-7 col-12">
@@ -46,14 +46,14 @@
         <div class="row">
 
             <div class="col-lg-6 col-12">
-                <div class="custom-text-box">
+                <div class="custom-text-box cursor-pointer img-with-shadow">
                     <h4 class="mb-2">Visi</h4>
                     <p class="mb-0">{{ $item->visi }}</p>
                 </div>
             </div>
 
             <div class="col-lg-6 col-12">
-                <div class="custom-text-box">
+                <div class="custom-text-box cursor-pointer img-with-shadow">
                     <h4 class="mb-2">Misi</h4>
                     <p class="mb-0">{!! $item->misi !!}</p>
                 </div>
@@ -79,7 +79,7 @@
                             <p>D{{ $item->wilayah1 }}</p>
 
                             <img src="{{ asset($item->img_wilayah2) }}"
-                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid cursor-pointer img-with-shadow" alt="">
                         </div>
                     </div>
 
@@ -91,7 +91,7 @@
                                 </p>
 
                             <img src="{{ asset($item->img_wilayah1) }}"
-                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid" alt="">
+                    class="about-image ms-lg-auto bg-light shadow-lg img-fluid cursor-pointer img-with-shadow" alt="">
                         </div>
                     </div>
                 </div>
