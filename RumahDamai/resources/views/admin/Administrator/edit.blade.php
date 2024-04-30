@@ -127,11 +127,24 @@
                         <input type="text" name="lulusan" id="lulusan" class="form-control"
                             value="{{ $user->lulusan }}">
                     </div>
-                    <div class="form-group">
-                        <label for="pengalaman">Pengalaman</label>
-                        <input type="text" name="pengalaman" id="pengalaman" class="form-control"
-                            value="{{ $user->pengalaman }}">
-                    </div>
+
+
+
+
+                    
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <div class="mb-3">
+        <label for="pengalaman" class="form-label">pengalaman</label>
+        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required autocomplete="pengalaman">
+            {{ old('pengalaman') }}
+            {{ $user->pengalaman }}
+        </textarea>
+        @error('pengalaman')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
 
 
 
@@ -216,4 +229,17 @@
         </div>
     </div>
 
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
+    </script>
 @endsection

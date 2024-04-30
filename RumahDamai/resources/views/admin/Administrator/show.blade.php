@@ -82,7 +82,7 @@
                                     </tr>
                                     <tr>
                                         <th>Pengalaman</th>
-                                        <td>{{ $user->pengalaman ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $user->pengalaman ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
 
 

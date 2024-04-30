@@ -79,6 +79,8 @@ class AdministratorController extends Controller
             'nama_lengkap' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'pengalaman' => 'required',
+            'no_telepon' => 'required',
             'lokasi_penugasan_id' => 'required|string',
             'role' => 'required|string|in:admin,guru,staff',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto harus berupa gambar dengan maksimum 2MB

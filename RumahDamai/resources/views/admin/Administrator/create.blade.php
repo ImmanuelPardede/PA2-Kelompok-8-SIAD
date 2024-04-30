@@ -35,14 +35,36 @@
                         <label for="password">Password <span style="color: red">*</span></label>
                         <input type="password" name="password" id="password" class="form-control" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="role">Role <span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" name="role" id="role" required>
                             <option value="" disabled selected>-- Pilih Role Pekerjaan --</option>
-                            <option value="admin" {{ request('role') === 'staff' ? 'selected' : '' }}>Admin</option>
+                            <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="guru" {{ request('role') === 'guru' ? 'selected' : '' }}>Guru</option>
                             <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
                         </select>
+                    </div>
+
+                    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+                    <div class="mb-3">
+                        <label for="pengalaman" class="form-label">pengalaman<span style="color: red">*</span></label>
+                        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required autocomplete="pengalaman">
+                            {{ old('pengalaman') }}
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </textarea>
+                        @error('pengalaman')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="tel" name="no_telepon" id="no_telepon" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -65,5 +87,19 @@
             </div>
         </div>
     </div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        ClassicEditor
+            .create(document.querySelector('#editor1'), {
+                // Konfigurasi CKEditor 5 untuk textarea pertama
+            })
+            .catch(error => {
+                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+            });
+    });
+</script>
     
 @endsection
