@@ -38,6 +38,7 @@
                             <option value="0" {{ $user->role == 'admin' ? 'selected' : '' }}>admin</option>
                             <option value="1" {{ $user->role == 'guru' ? 'selected' : '' }}>guru</option>
                             <option value="2" {{ $user->role == 'staff' ? 'selected' : '' }}>staff</option>
+                            <option value="3" {{ $user->role == 'direktur' ? 'selected' : '' }}>direktur</option>
                         </select>
                     </div>
 

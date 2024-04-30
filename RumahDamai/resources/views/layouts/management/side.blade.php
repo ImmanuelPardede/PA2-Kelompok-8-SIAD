@@ -39,6 +39,8 @@
                                     href="{{ route('admin.administrator.guru') }}">Guru</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.administrator.staff') }}">Staff</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>        
                         </ul>
                     </div>
                 </li>

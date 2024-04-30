@@ -111,8 +111,7 @@
                     <div class="col-md-4">
                         <div class="image-frame">
                             @if ($user->foto)
-                                <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
-                                    class="img-fluid rounded">
+                                <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user" class="img-fluid rounded">
                             @else
                                 <p>Tidak ada foto profil.</p>
                             @endif
@@ -167,6 +166,8 @@
                 @endif
 
                 <!-- Nonaktifkan atau Aktifkan Pegawai -->
+                <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary">Generate PDF</a>
+
                 @if ($user->role === 'staff')
                     @if ($user->status === 'aktif')
                         <form action="{{ route('admin.nonaktifkan.staff', $user->id) }}" method="POST"

@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use TCPDF;
+
 
 class AdministratorController extends Controller
 {
@@ -33,6 +37,12 @@ class AdministratorController extends Controller
     {
         $users = User::all();
         return view('admin.administrator.staff', compact('users'));
+    }
+
+    public function direktur()
+    {
+        $users = User::all();
+        return view('admin.administrator.direktur', compact('users'));
     }
 
     public function create()
@@ -64,6 +74,9 @@ class AdministratorController extends Controller
             case 2:
                 $redirectRoute = 'admin.administrator.staff';
                 break;
+                case 3:
+                    $redirectRoute = 'admin.administrator.direktur';
+                    break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -72,7 +85,6 @@ class AdministratorController extends Controller
         return view('admin.administrator.show', compact('user', 'redirectRoute', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
     }
 
-    // Menyimpan akun baru
     public function store(Request $request)
     {
         $request->validate([
@@ -94,6 +106,7 @@ class AdministratorController extends Controller
             'admin' => 0,
             'guru' => 1,
             'staff' => 2,
+            'direktur' => 3,
             default => 0,
         };
 
@@ -116,6 +129,9 @@ class AdministratorController extends Controller
             case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
+                case 'direktur':
+                    $redirectRoute = 'admin.administrator.direktur';
+                    break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -196,6 +212,9 @@ class AdministratorController extends Controller
             case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
+                case 'direktur':
+                    $redirectRoute = 'admin.administrator.direktur';
+                    break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -220,6 +239,9 @@ class AdministratorController extends Controller
             case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
+            case 'direktur':
+                $redirectRoute = 'admin.administrator.direktur';
+                break;    
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -675,4 +697,48 @@ public function editDirekturDataDiri(User $user)
 
         return redirect()->route('admin.administrator.staff')->with('success', 'Pegawai berhasil diaktifkan kembali.');
     }
+
+
+    public function generatePDF($id)
+    {
+        $user = User::findOrFail($id);
+    
+        // Load view content into a variable
+        $pdfView = view('admin.administrator.pdf', compact('user'))->render();
+    
+        // Setup Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+    
+        // Instantiate Dompdf with options
+        $dompdf = new Dompdf($options);
+    
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($pdfView);
+    
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+    
+        // Create stream context to disable SSL verification
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ]);
+    
+        // Set stream context for Dompdf
+        $dompdf->setHttpContext($context);
+    
+        // Render PDF (optional: save to file)
+        $dompdf->render();
+    
+        // Output PDF to browser
+        return $dompdf->stream('user_profile.pdf');
+    }
+
+
 }

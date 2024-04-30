@@ -91,12 +91,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/administrator/admin', [AdministratorController::class, 'admin'])->name('admin.administrator.admin');
     Route::get('/administrator/guru', [AdministratorController::class, 'guru'])->name('admin.administrator.guru');
     Route::get('/administrator/staff', [AdministratorController::class, 'staff'])->name('admin.administrator.staff');
+    Route::get('/administrator/direktur', [AdministratorController::class, 'direktur'])->name('admin.administrator.direktur');
     Route::get('/administrator/create', [AdministratorController::class, 'create'])->name('admin.administrator.create');
     Route::get('/administrator/{id}', [AdministratorController::class, 'show'])->name('admin.administrator.show');
     Route::post('/administrator/store', [AdministratorController::class, 'store'])->name('admin.administrator.store');
     Route::get('/administrator/{user}/edit', [AdministratorController::class, 'edit'])->name('admin.administrator.edit');
     Route::put('/administrator/{user}/update', [AdministratorController::class, 'update'])->name('admin.administrator.update');
     Route::delete('/administrator/{user}/destroy', [AdministratorController::class, 'destroy'])->name('admin.administrator.destroy');
+    Route::get('/administrator/{id}/pdf', [AdministratorController::class, 'generatePDF'])->name('user.pdf');
+/*     Route::get('/administrator/{id}/pdf', [AdministratorController::class, 'exportUserProfilePdf'])->name('user.pdf');
+ */
 
     // Admin
     Route::post('/admin/nonaktifkan/admin/{id}', [AdministratorController::class, 'nonaktifkanAdmin'])->name('admin.nonaktifkan.admin');

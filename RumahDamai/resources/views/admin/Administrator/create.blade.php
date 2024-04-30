@@ -43,6 +43,7 @@
                             <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="guru" {{ request('role') === 'guru' ? 'selected' : '' }}>Guru</option>
                             <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
+                            <option value="direktur" {{ request('role') === 'direktur' ? 'selected' : '' }}>Direktur</option>
                         </select>
                     </div>
 
