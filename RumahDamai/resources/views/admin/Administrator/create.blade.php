@@ -37,12 +37,11 @@
                     </div>
                     <div class="form-group">
                         <label for="role">Role <span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" name="role" id="role"
-                            class="form-control" required>
+                        <select class="form-control js-example-basic-single" name="role" id="role" required>
                             <option value="" disabled selected>-- Pilih Role Pekerjaan --</option>
-                            <option value="admin">Admin</option>
-                            <option value="guru">Guru</option>
-                            <option value="staff">Staff</option>
+                            <option value="admin" {{ request('role') === 'staff' ? 'selected' : '' }}>Admin</option>
+                            <option value="guru" {{ request('role') === 'guru' ? 'selected' : '' }}>Guru</option>
+                            <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -70,4 +69,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

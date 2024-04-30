@@ -11,7 +11,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('admin.administrator.create') }}" class="btn btn-success mb-3">Tambah Guru</a>
+                    <a href="{{ route('admin.administrator.create', ['role' => 'guru']) }}" class="btn btn-success mb-3">Tambah Guru</a>
                 </div>
 
                 <div class="table-responsive">
@@ -59,4 +59,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -98,8 +98,8 @@
 
       Settings
     </a>
-    @elseif(auth()->user()->role == 'admin')
-    <a class="dropdown-item">
+@elseif(auth()->user()->role == 'direktur')
+    <a class="dropdown-item" href="{{ route('direktur.DataDiri.password', ['user' => auth()->user()->id]) }}">
       <i class="ti-settings text-primary"></i>
 
       Settings

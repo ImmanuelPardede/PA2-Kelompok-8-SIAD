@@ -189,6 +189,18 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
 });
 
 
+
+
+Route::middleware(['auth', 'user-access:direktur'])->group(function () {
+
+    Route::get('/direktur/DataDiri/edit/{user}', [AdministratorController::class, 'editDirekturDataDiri'])->name('direktur.DataDiri.edit');
+    Route::put('/direktur/DataDiri/update/{user}', [AdministratorController::class, 'updateDirekturDataDiri'])->name('direktur.DataDiri.update');
+    Route::get('/direktur/DataDiri/show/{user}', [AdministratorController::class, 'showDirekturDataDiri'])->name('direktur.DataDiri.show');
+    Route::get('/direktur/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordStaff'])->name('direktur.DataDiri.password');
+    Route::post('/direktur/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('direktur.DataDiri.password');
+});
+
+
 /* Bisa diakses bersamaan  */
     Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
     Route::post('/mark-as-read', [PengumumanController::class, 'markAsRead'])->name('mark-as-read');

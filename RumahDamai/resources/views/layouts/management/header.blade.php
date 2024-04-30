@@ -28,16 +28,12 @@
   <link rel="shortcut icon" href="{{ asset('skydash/images/logo.png')}}" />
 
 
-  <link rel="stylesheet" href="{{ asset('skydash/vendors/css/bootstrap.min.css')}}">
 
   <link rel="stylesheet" href="{{ asset('skydash/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{ asset('skydash/vendors/css/vendor.bundle.base.css')}}">
 
   <link rel="stylesheet" href="{{ asset('skydash/vendors/mdi/css/materialdesignicons.min.css') }}" />
-
-  <link rel="stylesheet" href="{{ asset('materialdesignicons.min.css') }}" />
-
 
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 

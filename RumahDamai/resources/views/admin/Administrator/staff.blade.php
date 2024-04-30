@@ -11,7 +11,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('admin.administrator.create') }}" class="btn btn-success mb-3">Tambah Staff</a>
+                    <a href="{{ route('admin.administrator.create', ['role' => 'staff']) }}" class="btn btn-success mb-3">Tambah Staff</a>
                 </div>
 
                 <div class="table-responsive">

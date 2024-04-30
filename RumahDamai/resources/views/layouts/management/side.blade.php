@@ -344,6 +344,27 @@
 
 
 
+        @auth
+            @if (auth()->user()->role === 'direktur')
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
+                        aria-controls="error">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">Data Induk</span>
+                    </a>
+                    <div class="collapse" id="error">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri
+                                </a></li>
+                        </ul>
+                    </div>
+                </li>
+
+            @endif
+        @endauth
+
+
         {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="icon-bar-graph menu-icon"></i>
