@@ -1,6 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\Administrator\AdministratorController;
+use App\Http\Controllers\Admin\Pendidikan\MingguPembelajaranController;
+use App\Http\Controllers\Admin\Pendidikan\SemesterTahunAjaranController;
+use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
+use App\Http\Controllers\Admin\Visitor\AboutController;
+use App\Http\Controllers\Admin\Visitor\BeritaController;
+use App\Http\Controllers\Admin\Visitor\CarouselItemController;
+use App\Http\Controllers\Admin\Visitor\FasilitasController;
+use App\Http\Controllers\Admin\Visitor\GaleriController;
+use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\JadwalController;
+use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\KalenderController;
 use Illuminate\Support\Facades\Route;
@@ -16,15 +27,6 @@ Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
-    Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
-    Route::post('pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
-    Route::get('pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
-    Route::put('pengumuman/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
-    Route::delete('pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
-});
-
-
 /*
 |--------------------------------------------------------------------------
 | Pengumuman
@@ -32,6 +34,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 */
 Route::get('pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 Route::post('/mark-as-read', [PengumumanController::class, 'markAsRead'])->name('mark-as-read');
+Route::get('admin/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
+Route::post('admin/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
+Route::get('admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+Route::put('admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+Route::delete('admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
 
 
 /*
@@ -81,8 +88,12 @@ Route::get('/gallery{id}', [VisitorsController::class, 'detailgallery'])->name('
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 
 
-
 require __DIR__ . '/admin.php';
 require __DIR__ . '/staff.php';
 require __DIR__ . '/guru.php';
 require __DIR__ . '/direktur.php';
+
+
+Route::fallback(function () {
+    return view('error.404');
+});

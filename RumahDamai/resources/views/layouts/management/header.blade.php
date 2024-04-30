@@ -8,6 +8,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>SIAD Rumah Damai</title>
+
+  <link rel="stylesheet" href="{{ asset('kind/css/loading.css')}}">
+
+
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('skydash/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css')}}">
@@ -26,8 +30,6 @@
   <link rel="stylesheet" href="{{ asset('skydash/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('skydash/images/logo.png')}}" />
-
-
 
   <link rel="stylesheet" href="{{ asset('skydash/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{ asset('skydash/vendors/ti-icons/css/themify-icons.css')}}">
