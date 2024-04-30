@@ -16,15 +16,13 @@
     </section>
 
 
-    <section class="contact-section section-padding" id="section_6">
+    <section class="section-padding section-bg" id="section_2">
         <div class="container">
             <div class="content">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Kalender</h4>
-                            </div>
+                    <div class="col-lg-12 col-12">
+                        <div class="custom-text-box cursor-pointer img-with-shadow">
+                            <h4 class="mb-2">Kalender</h4>
 
                             <div class="card-body">
                                 @if (session('status'))
@@ -35,7 +33,7 @@
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-fixed">
-                                        <thead class="bg-primary text-white">
+                                        <thead class="site-header text-white ">
                                             <tr>
                                                 <th width="125">Time</th>
                                                 @foreach ($weekDays as $day)
