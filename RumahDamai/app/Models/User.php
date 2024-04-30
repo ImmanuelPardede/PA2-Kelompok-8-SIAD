@@ -30,6 +30,11 @@ class User extends Authenticatable
         'agama_id',
         'pendidikan_id',
         'alamat',
+
+        'no_telepon',
+        'lulusan',
+        'pengalaman',
+
         'tanggal_masuk',
         'tanggal_keluar',
         'tempat_lahir',

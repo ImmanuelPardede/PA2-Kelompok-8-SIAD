@@ -26,7 +26,7 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="nama_lengkap">Nama Lengkap:</label>
+                        <label for="nama_lengkap">Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
                             value="{{ $user->nama_lengkap }}">
                     </div>
@@ -42,19 +42,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label for="email">Email</label>
                         <input type="email" name="email" id="email" class="form-control"
                             value="{{ $user->email }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="nip">NIP:</label>
+                        <label for="nip">NIP</label>
                         <input type="text" name="nip" id="nip" class="form-control"
-                            value="{{ $user->nip }}">
+                            value="{{ $user->nip }}" disabled>
                     </div>
 
                     <div class="form-group">
-                        <label for="golongan_darah_id">Golongan Darah:</label>
+                        <label for="golongan_darah_id">Golongan Darah</label>
                         <select class="form-control js-example-basic-single" id="golongan_darah_id"
                             name="golongan_darah_id">
                             <option value="" disabled selected>-- Pilih Golongan Darah --</option>
@@ -69,7 +69,7 @@
 
                     <!-- Tambahkan bagian ini untuk jenis kelamin -->
                     <div class="form-group">
-                        <label for="jenis_kelamin_id">Jenis Kelamin:</label>
+                        <label for="jenis_kelamin_id">Jenis Kelamin</label>
                         <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id">
                             <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
                             @foreach ($jeniskelamin as $kelaminlist)
@@ -83,7 +83,7 @@
 
                     <!-- Tambahkan bagian ini untuk agama -->
                     <div class="form-group">
-                        <label for="agama_id">Agama:</label>
+                        <label for="agama_id">Agama</label>
                         <select class="form-control js-example-basic-single" id="agama_id" name="agama_id">
                             <option value="" disabled selected>-- Pilih Agama --</option>
                             @foreach ($agama as $agamalist)
@@ -97,7 +97,7 @@
 
                     <!-- Tambahkan bagian ini untuk pendidikan -->
                     <div class="form-group">
-                        <label for="pendidikan_id">Pendidikan:</label>
+                        <label for="pendidikan_id">Pendidikan</label>
                         <select class="form-control js-example-basic-single" id="pendidikan_id" name="pendidikan_id">
                             <option value="" disabled selected>-- Pilih Pendidikan --</option>
                             @foreach ($pendidikan as $pendidikanlist)
@@ -110,25 +110,45 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="alamat">Alamat:</label>
+                        <label for="alamat">Alamat</label>
                         <input type="text" name="alamat" id="alamat" class="form-control"
                             value="{{ $user->alamat }}">
                     </div>
 
+
+
                     <div class="form-group">
-                        <label for="tempat_lahir">Tempat Lahir:</label>
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="tel" name="no_telepon" id="no_telepon" class="form-control"
+                            value="{{ $user->no_telepon }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="lulusan">Lulusan</label>
+                        <input type="text" name="lulusan" id="lulusan" class="form-control"
+                            value="{{ $user->lulusan }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pengalaman">Pengalaman</label>
+                        <input type="text" name="pengalaman" id="pengalaman" class="form-control"
+                            value="{{ $user->pengalaman }}">
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="tempat_lahir">Tempat Lahir</label>
                         <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
                             value="{{ $user->tempat_lahir }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_lahir">Tanggal Lahir:</label>
+                        <label for="tanggal_lahir">Tanggal Lahir</label>
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
                             value="{{ $user->tanggal_lahir }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="lokasi_penugasan_id">Lokasi Penugasan:</label>
+                        <label for="lokasi_penugasan_id">Lokasi Penugasan</label>
                         <select class="form-control js-example-basic-single" id="lokasi_penugasan_id"
                             name="lokasi_penugasan_id">
                             <option value="" disabled selected>-- Pilih Lokasi Penugasan --</option>
@@ -142,13 +162,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_keluar">Tanggal Keluar:</label>
-                        <input type="date" name="tanggal_keluar" id="tanggal_keluar" class="form-control"
-                            value="{{ $user->tanggal_keluar }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="foto">Foto Profil Baru:</label>
+                        <label for="foto">Foto Profil Baru</label>
                         <input type="file" class="form-control" id="foto" name="foto">
                     </div>
 
@@ -188,7 +202,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="newPassword">Password Baru:</label>
+                            <label for="newPassword">Password Baru</label>
                             <input type="password" name="newPassword" id="newPassword" class="form-control"
                                 placeholder="Masukkan password baru">
                         </div>

@@ -86,6 +86,26 @@
                             value="{{ $user->alamat }}">
                     </div>
 
+
+
+                    <div class="form-group">
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="text" name="no_telepon" id="no_telepon" class="form-control"
+                            value="{{ $user->no_telepon }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="lulusan">Lulusan</label>
+                        <input type="text" name="lulusan" id="lulusan" class="form-control"
+                            value="{{ $user->lulusan }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pengalaman">Pengalaman</label>
+                        <input type="text" name="pengalaman" id="pengalaman" class="form-control"
+                            value="{{ $user->pengalaman }}">
+                    </div>
+
+
+
                     <div class="form-group">
                         <label for="tempat_lahir">Tempat Lahir:</label>
                         <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
