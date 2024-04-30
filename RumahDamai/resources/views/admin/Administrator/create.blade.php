@@ -45,10 +45,6 @@
                             <option value="staff">Staff</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="tanggal_lahir">Tanggal Lahir <span style="color: red">*</span></label>
-                        <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
-                    </div>
 
                     <div class="form-group">
                         <label for="lokasi_penugasan_id">Lokasi Penugasan <span style="color: red">*</span></label>

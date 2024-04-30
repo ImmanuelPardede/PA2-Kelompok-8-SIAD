@@ -5,14 +5,14 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="card-title">Tahun Ajaran</h1>
+                <h1 class="card-title">Semester Tahun Ajaran</h1>
                 <!-- Tampilkan notifikasi jika ada -->
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('semesterTahunAjaran.create') }}" class="btn btn-success mb-3">Tambah Tahun Ajaran</a>
+                <a href="{{ route('semesterTahunAjaran.create') }}" class="btn btn-success mb-3">Tambah Semester Ajaran</a>
             </div>
 
             <div class="table-responsive">

@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-
 @extends('layouts.management.master')
-=======
-@extends('layouts.master')
->>>>>>> Stashed changes
 
 @section('content')
     <div class="container">
@@ -78,6 +73,22 @@
                                         <th>Alamat</th>
                                         <td>{{ $user->alamat ?? 'Data tidak tersedia' }}</td>
                                     </tr>
+
+
+                                    <tr>
+                                        <th>No Telepon</th>
+                                        <td>{{ $user->no_telepon ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lulusan</th>
+                                        <td>{{ $user->lulusan ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pengalaman</th>
+                                        <td>{{ $user->pengalaman ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+
+
                                     <tr>
                                         <th>Mulai Kerja</th>
                                         <td>{{ $user->tanggal_masuk ?? 'Data tidak tersedia' }}</td>

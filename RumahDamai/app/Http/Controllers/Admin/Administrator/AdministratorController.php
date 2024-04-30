@@ -80,7 +80,6 @@ class AdministratorController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'lokasi_penugasan_id' => 'required|string',
-            'tanggal_lahir' => 'required|date',
             'role' => 'required|string|in:admin,guru,staff',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto harus berupa gambar dengan maksimum 2MB
         ]);
@@ -142,6 +141,11 @@ class AdministratorController extends Controller
             'agama_id' => 'nullable|string',
             'pendidikan_id' => 'nullable|string',
             'alamat' => 'nullable|string',
+
+            'no_telepon' => 'nullable|string|size:12',
+            'lulusan' => 'nullable|string',
+            'pengalaman' => 'nullable|string',
+
             'tanggal_masuk' => 'nullable|date',
             'tanggal_keluar' => 'nullable|date',
             'tempat_lahir' => 'nullable|string',
@@ -246,6 +250,11 @@ class AdministratorController extends Controller
             'agama_id' => 'nullable|string',
             'pendidikan_id' => 'nullable|string',
             'alamat' => 'nullable|string',
+
+            'no_telepon' => 'nullable|integer',
+            'lulusan' => 'nullable|string',
+            'pengalaman' => 'nullable|string',
+
             'tanggal_masuk' => 'nullable|date',
             'tanggal_keluar' => 'nullable|date',
             'tempat_lahir' => 'nullable|string',
@@ -331,6 +340,11 @@ class AdministratorController extends Controller
             'agama_id' => 'nullable|string',
             'pendidikan_id' => 'nullable|string',
             'alamat' => 'nullable|string',
+
+            'no_telepon' => 'nullable|integer',
+            'lulusan' => 'nullable|string',
+            'pengalaman' => 'nullable|string',
+
             'tanggal_masuk' => 'nullable|date',
             'tanggal_keluar' => 'nullable|date',
             'tempat_lahir' => 'nullable|string',
