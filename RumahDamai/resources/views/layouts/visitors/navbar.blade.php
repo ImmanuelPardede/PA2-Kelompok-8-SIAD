@@ -9,7 +9,7 @@
                     <a href="mailto:yparumahdamai@gmail.com">
                         yparumahdamai@gmail.com
                     </a>
-                    
+
                 </p>
             </div>
 
@@ -21,7 +21,7 @@
 
                     <li class="social-icon-item">
                         <a href="https://wa.me/6281262945602" class="social-icon-link bi-whatsapp" target="_blank"></a>
-                    </li>                    
+                    </li>
                 </ul>
             </div>
 
@@ -66,14 +66,16 @@
                     <a class="nav-link" href="/news">News</a>
                 </li>
 
-                
-
                 <li class="nav-item">
                     <a class="nav-link" href="/gallery">Galery</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+
                 <li class="nav-item ms-3">
-                    <a class="nav-link custom-btn custom-border-btn btn" href="/contact">Contact</a>
+                    <a class="nav-link custom-btn custom-border-btn btn" href="/jadwal">Jadwal</a>
                 </li>
             </ul>
         </div>

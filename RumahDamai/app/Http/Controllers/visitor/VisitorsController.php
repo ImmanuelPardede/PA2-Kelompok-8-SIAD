@@ -27,7 +27,7 @@ class VisitorsController extends Controller
     {
         $carousel = CarouselItem::all();
         $history = FoundationHistory::all();
-        $totalAnak = Anak::count(); 
+        $totalAnak = Anak::count();
         $berita = Berita::all();
         $totalProgram = DetailProgram::count();
         $kategori = KategoriBerita::all();
@@ -57,7 +57,7 @@ class VisitorsController extends Controller
         $detailfasilitas = Fasilitas::all();
         return view('visitor.fasilitas',compact('fasilitas','detailfasilitas'));
     }
-    
+
     public function news()
     {
         $berita = Berita::all();
@@ -79,7 +79,7 @@ class VisitorsController extends Controller
         // Mengirim data berita dan recent news ke halaman detail berita
         return view('visitor.detailberita', compact('berita', 'recentNews','kategori'));
     }
-    
+
 
     public function gallery()
     {
