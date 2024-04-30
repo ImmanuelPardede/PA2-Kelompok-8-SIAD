@@ -87,12 +87,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/pendidikan/semesterTahunAjaran', SemesterTahunAjaranController::class);
     Route::resource('/pendidikan/mingguPembelajaran', MingguPembelajaranController::class);
 
-    Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
-    Route::post('pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
-    Route::get('pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
-    Route::put('pengumuman/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
-    Route::delete('pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
-
 
     Route::get('/administrator/admin', [AdministratorController::class, 'admin'])->name('admin.administrator.admin');
     Route::get('/administrator/guru', [AdministratorController::class, 'guru'])->name('admin.administrator.guru');
@@ -198,6 +192,7 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::get('/direktur/DataDiri/show/{user}', [AdministratorController::class, 'showDirekturDataDiri'])->name('direktur.DataDiri.show');
     Route::get('/direktur/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordStaff'])->name('direktur.DataDiri.password');
     Route::post('/direktur/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('direktur.DataDiri.password');
+
 });
 
 
@@ -243,6 +238,24 @@ Route::get('/gallery', [VisitorsController::class, 'gallery'])->name('gallery');
 Route::get('/gallery{id}', [VisitorsController::class, 'detailgallery'])->name('gallery.detail');
 
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
+
+
+
+
+
+Route::fallback(function () {
+    return view('error.404');
+});
+
+
+
+
+
+    Route::get('admin/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
+    Route::post('admin/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
+    Route::get('admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+    Route::put('admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+    Route::delete('admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
 
 
 

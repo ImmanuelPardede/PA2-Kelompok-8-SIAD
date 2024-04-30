@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Buat Pengumuman</h2>
-                <form method="POST" action="{{ route('pengumuman.store') }}">
+                <form method="POST" action="{{ route('admin.pengumuman.store') }}">
                     @csrf
 
                     <div class="form-group">

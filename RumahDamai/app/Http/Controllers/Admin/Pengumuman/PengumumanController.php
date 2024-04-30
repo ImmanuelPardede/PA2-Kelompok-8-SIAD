@@ -22,14 +22,14 @@ class PengumumanController extends Controller
         // Mengirimkan data pengumuman ke view 'dashboard'
         return view('dashboard', compact('pengumumans'));
     }
-
     public function create()
     {
-        // Hanya admin yang boleh membuat pengumuman
-        if (Auth::user()->role == 'admin') {
+        // Periksa apakah pengguna memiliki peran admin atau direktur
+        if (Auth::user()->role == 'admin' || Auth::user()->role == 'direktur') {
             return view('admin.pengumuman.create');
         } else {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki izin untuk membuat pengumuman.');
+            // Redirect atau tampilkan pesan kesalahan jika pengguna tidak memiliki akses
+            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki HAK untuk membuat pengumuman !.');
         }
     }
 

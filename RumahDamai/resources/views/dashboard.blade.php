@@ -62,11 +62,18 @@
 
 
           
-                  @if (session('success'))
-          <div class="alert alert-success">
-              {{ session('success') }}
-          </div>
-      @endif
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
         </div>
         <div class="col-12 col-xl-4">
          <div class="justify-content-end d-flex">
@@ -284,9 +291,17 @@
 
             <div class="mb-3 ml-auto">
 
-              <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
+              <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
             </div>
           @endif
+
+          @if(Auth::user()->role == 'direktur')
+
+          <div class="mb-3 ml-auto">
+
+            <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Create Pengumuman</a>
+          </div>
+        @endif
         </div>
 
             <div class="table-responsive">
@@ -317,15 +332,33 @@
                         </td>
                         
 
-                                                    @if(Auth::user()->role == 'admin')
+                          @if(Auth::user()->role == 'admin')
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Aksi
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('pengumuman.edit', ['id' => $pengumuman->id]) }}">Edit</a>
-                                        <form action="{{ route('pengumuman.destroy', ['id' => $pengumuman->id]) }}" method="POST">
+                                        <a class="dropdown-item" href="{{ route('admin.pengumuman.edit', ['id' => $pengumuman->id]) }}">Edit</a>
+                                        <form action="{{ route('admin.pengumuman.destroy', ['id' => $pengumuman->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                            @endif
+
+                            @if(Auth::user()->role == 'direktur')
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Aksi
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{ route('admin.pengumuman.edit', ['id' => $pengumuman->id]) }}">Edit</a>
+                                        <form action="{{ route('admin.pengumuman.destroy', ['id' => $pengumuman->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item">Hapus</button>

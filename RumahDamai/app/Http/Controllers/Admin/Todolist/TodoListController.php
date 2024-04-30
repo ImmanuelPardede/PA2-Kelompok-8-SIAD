@@ -20,7 +20,7 @@ class TodoListController extends Controller
 
     public function index()
     {
-        $pengumumans = Pengumuman::orderBy('created_at', 'desc')->get();
+        $pengumumans = Pengumuman::orderBy('created_at', 'desc')->take(5)->get();
         $totalPegawai = User::count();
         $totalanak = Anak::count();
         $todolist = TodoList::all();
