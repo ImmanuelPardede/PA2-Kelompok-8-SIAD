@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rumah Damai</title>
     <style>
         .atasan {
             margin-top: 10px; /* Ubah nilai margin-top sesuai kebutuhan */
@@ -52,82 +52,81 @@
             <img src="data:image/png;base64,{{ base64_encode(file_get_contents('uploads/logo/logo.png')) }}" alt="">
             <div class="konten" style="text-align: center;">
                 <h2>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</h2>
-                <h3>@if($user->lokasi_penugasan_id == 1)Lumban Silintong @elseif ($user->lokasi_penugasan_id == 2) Andam Dewi @endif</h3>
-                <h4>@if ($user->lokasi_penugasan_id == 1)Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
-                    @elseif ($user->lokasi_penugasan_id == 2)Sawah Lamo, Andam Dewi 22651, Kabupaten Tapanuli Tengah, Sumatra Utara, Indonesia
+                <h3>@if($anak->lokasi_id == 1)Lumban Silintong @elseif ($anak->lokasi_id == 2) Andam Dewi @endif</h3>
+                <h4>@if ($anak->lokasi_id == 1)Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
+                    @elseif ($anak->lokasi_id == 2)Sawah Lamo, Andam Dewi 22651, Tapanuli Tengah, Sumatra Utara, Indonesia
+                    </p>
                         @else
                         Data Alamat Tidak Tersedia
                     @endif</h4>
             </div>
         </div>
+    </header>
+
         <hr class="garis1">
 
-        <h3 style="text-align: center">Data Diri Pegawai</h3>
+        <h3 style="text-align: center">Data Anak</h3>
         <table>
             <tr>
                 <th>Nama</th>
-                <td>{{ $user->nama_lengkap }}</td>
+                <td>{{ $anak->nama_lengkap }}</td>
             </tr>
             <tr>
-                <th>Email</th>
-                <td>{{ $user->email }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ $user->status }}</td>
-            </tr>
-            <tr>
-                <th>Nomor Indup Pegawai (NIP)</th>
-                <td>{{ $user->nip }}</td>
-            </tr>
-            <tr>
-                <th>Golongan Darah</th>
-                <td>{{ $user->golonganDarah->golongan_darah }}</td>
-            </tr>
-            <tr>
-                <th>Jenis Kelamin</th>
-                <td>{{ $user->jenisKelamin->jenis_kelamin }}</td>
+                <th>Nomor Induk Anak (INA)</th>
+                <td>{{ $anak->nia }}</td>
             </tr>
             <tr>
                 <th>Agama</th>
-                <td>{{ $user->agama->agama }}</td>
+                <td>{{ $anak->agama->agama }}</td>
             </tr>
             <tr>
-                <th>Pendidikan</th>
-                <td>{{ $user->pendidikan->tingkat_pendidikan }}</td>
+                <th>Jenis Kelamin</th>
+                <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
+            </tr>
+            <tr>
+                <th>Golongan Darah</th>
+                <td>{{ $anak->golonganDarah->golongan_darah }}</td>
+            </tr>
+            <tr>
+                <th>Tempat,Tanggal Lahir</th>
+                <td>{{ $anak->tempat_lahir}}, {{ $anak->tanggal_lahir}}</td>
+            </tr>
+            <tr>
+                <th>Alamat</th>
+                <td>{{ $anak->alamat }}</td>
+            </tr>
+            <tr>
+                <th>Masuk</th>
+                <td>{{ $anak->tanggal_masuk }}</td>
             </tr>
             
             <tr>
-                <th>Alamat</th>
-                <td>{{ $user->alamat }}</td>
+                <th>Status</th>
+                <td>{{ $anak->status }}</td>
             </tr>
             <tr>
-                <th>No Telephon</th>
-                <td>{{ $user->no_telepon }}</td>
+                <th>Disukai</th>
+                <td>{!!$anak->disukai!!}</td>
             </tr>
             <tr>
-                <th>Pengalaman</th>
-                <td>{!! $user->pengalaman !!}</td>
+                <th>Tidak Disukai</th>
+                <td>{!!$anak->tidak_disukai!!}</td>
             </tr>
             <tr>
-                <th>Tanggal Masuk</th>
-                <td>{{ $user->tanggal_masuk }}</td>
+                <th>Kelebihan</th>
+                <td>{!!$anak->kelebihan!!}</td>
             </tr>
             <tr>
-                <th>Lokasi Penugasan</th>
-                <td>{{ $user->lokasiPenugasan->lokasi }}</td>
+                <th>Kekurangan</th>
+                <td>{!!$anak->kekurangan!!}</td>
             </tr>
             <tr>
                 <th>Foto</th>
                 <td style="text-align: center">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents('uploads/pegawai/' . $user->foto)) }}" style="width: 150px; height: 170px; border: 1px solid #000;">
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents($anak->foto_profil)) }}" style="width: 150px; height: 170px; border: 1px solid #000;">
                 </td>
             </tr>
-            
-            
             <!-- Tambahkan baris tambahan sesuai kebutuhan -->
         </table>
-
-    </header>
 </body>
 </html>

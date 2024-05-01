@@ -35,9 +35,9 @@
                                         <td>{{ $user->role }}</td>
                                         <td>
                                             <a href="{{ route('admin.administrator.show', $user->id) }}"
-                                                class="btn btn-sm btn-info">Detail</a> <!-- Ubah "Show" menjadi "Detail" -->
+                                                class="btn btn-info">Detail</a> <!-- Ubah "Show" menjadi "Detail" -->
                                             <a href="{{ route('admin.administrator.edit', $user->id) }}"
-                                                class="btn btn-sm btn-primary">Edit</a>
+                                                class="btn btn-primary">Edit</a>
                                             <form method="POST" id="deleteForm{{ $user->id }}" class="d-inline"
                                                 action="{{ route('admin.administrator.destroy', $user->id) }}">
                                                 @csrf

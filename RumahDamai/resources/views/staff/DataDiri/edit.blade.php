@@ -86,9 +86,6 @@
                             value="{{ $user->alamat }}">
                     </div>
 
-
-
-
                     <div class="form-group">
                         <label for="no_telepon">No Telepon</label>
                         <input type="text" name="no_telepon" id="no_telepon" class="form-control"

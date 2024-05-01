@@ -74,7 +74,7 @@ class AdministratorController extends Controller
             case 2:
                 $redirectRoute = 'admin.administrator.staff';
                 break;
-                case 3:
+            case 3:
                     $redirectRoute = 'admin.administrator.direktur';
                     break;
             default:
@@ -94,7 +94,7 @@ class AdministratorController extends Controller
             'pengalaman' => 'required',
             'no_telepon' => 'required',
             'lokasi_penugasan_id' => 'required|string',
-            'role' => 'required|string|in:admin,guru,staff',
+            'role' => 'required|string|in:admin,guru,staff,direktur',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto harus berupa gambar dengan maksimum 2MB
         ]);
 
@@ -696,6 +696,42 @@ public function editDirekturDataDiri(User $user)
         $pegawai->save();
 
         return redirect()->route('admin.administrator.staff')->with('success', 'Pegawai berhasil diaktifkan kembali.');
+    }
+
+    public function nonaktifkanDirektur($id)
+    {
+        $direktur = User::find($id);
+        if (!$direktur) {
+            return redirect()->route('admin.administrator.direktur')->with('error', 'direktur tidak ditemukan.');
+        }
+
+        if ($direktur->role !== 'direktur') {
+            return redirect()->route('admin.administrator.direktur')->with('error', 'Pengguna bukan direktur.');
+        }
+
+        $direktur->status = 'nonaktif';
+        $direktur->tanggal_keluar = now();
+        $direktur->save();
+
+        return redirect()->route('admin.administrator.direktur')->with('success', 'direktur berhasil dinonaktifkan.');
+    }
+
+    public function aktifkanDirektur($id)
+    {
+        $direktur = User::find($id);
+        if (!$direktur) {
+            return redirect()->route('admin.administrator.direktur')->with('error', 'direktur tidak ditemukan.');
+        }
+
+        if ($direktur->role !== 'direktur') {
+            return redirect()->route('admin.administrator.direktur')->with('error', 'Pengguna bukan direktur.');
+        }
+
+        $direktur->status = 'aktif';
+        $direktur->tanggal_keluar = null;
+        $direktur->save();
+
+        return redirect()->route('admin.administrator.direktur')->with('success', 'direktur berhasil diaktifkan kembali.');
     }
 
 
