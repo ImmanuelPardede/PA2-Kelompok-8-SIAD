@@ -9,7 +9,6 @@
 
   <title>SIAD Rumah Damai</title>
 
-  <link rel="stylesheet" href="{{ asset('kind/css/loading.css')}}">
 
 
   <!-- plugins:css -->
