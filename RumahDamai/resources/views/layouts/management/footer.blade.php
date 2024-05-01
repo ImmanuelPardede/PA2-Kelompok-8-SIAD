@@ -46,8 +46,8 @@
 <script src="{{ asset('skydash/js/utama/popper.min.js')}}"></script>
 
 <script src="{{ asset('skydash/vendors/select2/select2.min.js')}}"></script>
+<script src="{{ asset('skydash/js/select2.js')}}"></script>
 
-<script src="{{ asset('skydash/js/chart.js')}}"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>

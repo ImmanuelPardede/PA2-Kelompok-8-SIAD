@@ -19,6 +19,8 @@
                         </ul>
                     </div>
                 @endif
+                <div class="row">
+                    <div class="col-md-8">
 
                 <form action="{{ route('admin.administrator.update', $user->id) }}" method="POST"
                     enctype="multipart/form-data">
@@ -38,6 +40,7 @@
                             <option value="0" {{ $user->role == 'admin' ? 'selected' : '' }}>admin</option>
                             <option value="1" {{ $user->role == 'guru' ? 'selected' : '' }}>guru</option>
                             <option value="2" {{ $user->role == 'staff' ? 'selected' : '' }}>staff</option>
+                            <option value="3" {{ $user->role == 'direktur' ? 'selected' : '' }}>direktur</option>
                         </select>
                     </div>
 
@@ -179,11 +182,7 @@
                         <input type="file" class="form-control" id="foto" name="foto">
                     </div>
 
-                    @if ($user->foto)
-                        <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil">
-                    @else
-                        <p>Foto Profil tidak tersedia</p>
-                    @endif
+
 
                     <div class="form-group d-flex justify-content-between">
                         <div>
@@ -194,7 +193,15 @@
                         <button class="btn btn-danger" type="button" id="change-password" data-toggle="modal"
                             data-target="#passwordModal">Ganti Password</button>
                     </div>
-
+                </div>
+                <div class="col-md-4">
+                    @if ($user->foto)
+                        <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil" class="img-fluid rounded">
+                    @else
+                        <p>Foto Profil tidak tersedia</p>
+                    @endif
+                </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -230,7 +237,15 @@
     </div>
 
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             ClassicEditor

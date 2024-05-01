@@ -26,9 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger('pendidikan_id')->nullable();
             $table->string('alamat')->nullable();
 
-            $table->bigInteger('no_telepon')->nullable();
+            $table->string('no_telepon', 12)->nullable();
             $table->string('lulusan')->nullable();
-            $table->string('pengalaman')->nullable();
+            $table->string('pengalaman', 2000)->nullable();
 
 
             $table->timestamp('tanggal_masuk')->useCurrent();

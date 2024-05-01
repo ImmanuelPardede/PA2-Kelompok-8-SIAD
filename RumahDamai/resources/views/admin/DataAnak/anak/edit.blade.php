@@ -6,21 +6,12 @@
             <div class="card-body">
                 <h2 class="card-title">Edit Anak</h2>
 
-                <p><strong>Foto Profil:</strong></p>
-                @if ($anak->foto_profil)
-                    <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil">
-                @else
-                    <p>Tidak ada foto profil.</p>
-                @endif
+<div class="row">
+                <div class="col-md-8">
 
                 <form action="{{ route('anak.update', $anak->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
-                    <div class="form-group">
-                        <label for="foto_profil">Foto Profil Baru:</label>
-                        <input type="file" class="form-control" id="foto_profil" name="foto_profil">
-                    </div>
 
                     <div class="form-group">
                         <label for="nama_lengkap">Nama Lengkap:</label>
@@ -104,49 +95,127 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_masuk">Tanggal Masuk:</label>
-                        <input type="date" class="form-control" id="tanggal_masuk" name="tanggal_masuk"
-                            value="{{ $anak->tanggal_masuk }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tanggal_keluar">Tanggal Keluar:</label>
-                        <input type="date" class="form-control" id="tanggal_keluar" name="tanggal_keluar"
-                            value="{{ $anak->tanggal_keluar }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="disukai">Disukai:</label>
-                        <input type="text" class="form-control" id="disukai" name="disukai"
-                            value="{{ $anak->disukai }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tidak_disukai">Tidak Disukai:</label>
-                        <input type="text" class="form-control" id="tidak_disukai" name="tidak_disukai"
-                            value="{{ $anak->tidak_disukai }}">
-                    </div>
-
-                    <div class="form-group">
                         <label for="alamat">Alamat:</label>
                         <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $anak->alamat }}</textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="kelebihan">Kelebihan:</label>
-                        <textarea class="form-control" id="kelebihan" name="kelebihan" rows="3">{{ $anak->kelebihan }}</textarea>
-                    </div>
+                    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
-                    <div class="form-group">
-                        <label for="kekurangan">Kekurangan:</label>
-                        <textarea class="form-control" id="kekurangan" name="kekurangan" rows="3">{{ $anak->kekurangan }}</textarea>
-                    </div>
+                <div class="mb-3">
+                    <label for="disukai" class="form-label">Disukai<span style="color: red">*</span></label>
+                    <textarea id="editor1" class="form-control @error('disukai') is-invalid @enderror" name="disukai" required autocomplete="disukai">
+                        {{ $anak->disukai }}
+                        {{ old('disukai') }}
+                    </textarea>
+                    @error('disukai')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
 
+                <div class="mb-3">
+                    <label for="tidak_disukai" class="form-label">Tidak Disukai<span style="color: red">*</span></label>
+                    <textarea id="editor2" class="form-control @error('tidak_disukai') is-invalid @enderror" name="tidak_disukai" required autocomplete="tidak_disukai">
+                        {{ $anak->tidak_disukai }}
+                        {{ old('tidak_disukai') }}
+                    </textarea>
+                    @error('tidak_disukai')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="kelebihan" class="form-label">Kelebihan<span style="color: red">*</span></label>
+                    <textarea id="editor3" class="form-control @error('kelebihan') is-invalid @enderror" name="kelebihan" required autocomplete="kelebihan">
+                        {{ $anak->kelebihan }}
+                        {{ old('kelebihan') }}
+                    </textarea>
+                    @error('kelebihan')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="kekurangan" class="form-label">Kekurangan<span style="color: red">*</span></label>
+                    <textarea id="editor4" class="form-control @error('kekurangan') is-invalid @enderror" name="kekurangan" required autocomplete="kekurangan">
+                        {{ $anak->kekurangan }}
+                        {{ old('kekurangan') }}
+                    </textarea>
+                    @error('kekurangan')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                    
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" id="submitButton" class="btn btn-primary mr-2"
                         onclick="handleUpdatedConfirmation(event)">Perbarui</button>
-                </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="image-frame">
+                        @if ($anak->foto_profil)
+                            <img src="{{ asset($anak->foto_profil) }}" class="img-fluid" alt="Foto Profil">
+                        @else
+                            <p>Tidak ada foto profil.</p>
+                        @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="foto_profil">Foto Profil Baru:</label>
+                                <input type="file" class="form-control" id="foto_profil" name="foto_profil">
+                            </div>
+                        </div>
+                        
+    
+                </div>
+            </form>
+
             </div>
         </div>
     </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+    
+            ClassicEditor
+                .create(document.querySelector('#editor2'), {
+                    // Konfigurasi CKEditor 5 untuk textarea kedua
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+    
+                ClassicEditor
+                .create(document.querySelector('#editor3'), {
+                    // Konfigurasi CKEditor 5 untuk textarea kedua
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+    
+                ClassicEditor
+                .create(document.querySelector('#editor4'), {
+                    // Konfigurasi CKEditor 5 untuk textarea kedua
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
+    </script>
+
 @endsection

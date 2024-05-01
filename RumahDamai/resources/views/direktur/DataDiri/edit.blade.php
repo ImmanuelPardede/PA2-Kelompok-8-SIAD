@@ -5,6 +5,8 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title">Edit Profil Anda</h1>
+                <div class="row">
+                    <div class="col-8">
                 <form action="{{ route('direktur.DataDiri.update', ['user' => $user->id]) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -87,6 +89,35 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="tel" name="no_telepon" id="no_telepon" class="form-control"
+                            value="{{ $user->no_telepon }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="lulusan">Lulusan</label>
+                        <input type="text" name="lulusan" id="lulusan" class="form-control"
+                            value="{{ $user->lulusan }}">
+                    </div>
+
+
+
+
+                    
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <div class="mb-3">
+        <label for="pengalaman" class="form-label">pengalaman</label>
+        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required autocomplete="pengalaman">
+            {{ old('pengalaman') }}
+            {{ $user->pengalaman }}
+        </textarea>
+        @error('pengalaman')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+    </div>
+
+                    <div class="form-group">
                         <label for="tempat_lahir">Tempat Lahir:</label>
                         <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
                             value="{{ $user->tempat_lahir }}">
@@ -97,32 +128,38 @@
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
                             value="{{ $user->tanggal_lahir }}">
                     </div>
-                    <div class="form-group">
-                        <label for="foto">Foto Profil Baru</label>
-                        <input type="file" name="foto" class="file-upload-default" id="fotoInput">
-                        <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" id="fotoName" disabled
-                                placeholder="Upload Image">
-                            <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button"
-                                    onclick="document.getElementById('fotoInput').click()">Upload</button>
-                            </span>
-                        </div>
-                    </div>
+                    
 
-                    <div class="image-frame">
-                        @if ($user->foto)
-                            <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
-                                class="img-fluid rounded">
-                        @else
-                            <p>Tidak ada foto profil.</p>
-                        @endif
-                    </div>
+                    
 
 
                     <button type="submit" id="submitButton" class="btn btn-primary mr-2"
                         onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                    </div>
+                    <div class="col-4">
+                        <div class="image-frame">
+                            @if ($user->foto)
+                                <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
+                                    class="img-fluid rounded">
+                            @else
+                                <p>Tidak ada foto profil.</p>
+                            @endif
+                            <div class="form-group">
+                                <label for="foto">Foto Profil Baru?</label>
+                                <input type="file" name="foto" class="file-upload-default" id="fotoInput">
+                                <div class="input-group col-xs-12">
+                                    <input type="text" class="form-control file-upload-info" id="fotoName" disabled
+                                        placeholder="Upload Image">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-primary" type="button"
+                                            onclick="document.getElementById('fotoInput').click()">Upload</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
@@ -134,4 +171,17 @@
             document.getElementById('fotoName').value = fileName;
         });
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        ClassicEditor
+            .create(document.querySelector('#editor1'), {
+                // Konfigurasi CKEditor 5 untuk textarea pertama
+            })
+            .catch(error => {
+                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+            });
+    });
+</script>
+
 @endsection

@@ -17,6 +17,8 @@ use App\Models\JenisKelamin;
 use App\Models\Penyakit;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class AnakController extends Controller
 {
@@ -65,6 +67,9 @@ class AnakController extends Controller
             'kekurangan' => 'nullable|string',
             'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
         ]);
+
+        try {
+
 
        // Generate NIA
        $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
@@ -132,7 +137,10 @@ class AnakController extends Controller
             $anak->save();
         }
 
-        return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
+            return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
+                } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
+        }
     }
 
 
@@ -296,4 +304,48 @@ class AnakController extends Controller
             return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
+
+    public function generatePDF($id)
+    {
+        $anak = Anak::findOrFail($id);
+    
+        // Load view content into a variable
+        $pdfView = view('admin.DataAnak.anak.pdf', compact('anak'))->render();
+    
+        // Setup Dompdf options
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isRemoteEnabled', true);
+    
+        // Instantiate Dompdf with options
+        $dompdf = new Dompdf($options);
+    
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($pdfView);
+    
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+    
+        // Create stream context to disable SSL verification
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ]);
+    
+        // Set stream context for Dompdf
+        $dompdf->setHttpContext($context);
+    
+        // Render PDF (optional: save to file)
+        $dompdf->render();
+    
+        // Get child's name for PDF filename
+        $filename = 'anak_profile_' . str_replace(' ', '_', $anak->nama_lengkap) . '.pdf';
+
+    // Output PDF to browser
+    return $dompdf->stream($filename);
+}
 }

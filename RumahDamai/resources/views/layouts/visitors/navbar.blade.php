@@ -34,7 +34,7 @@
         <a class="navbar-brand" href="/">
             <img src="{{ asset('skydash/images/logo.png')}}" class="logo img-fluid" alt="Yayasan Rumah Damai">
             <span>
-                Yayasan Pendidikan Anak Rumah Damai
+                YPA Rumah Damai
                 <small>Sistem  Informasi  Administrasi</small>
             </span>
         </a>
@@ -47,11 +47,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/">Beranda</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/aboutus">About</a>
+                    <a class="nav-link" href="/aboutus">Tentang</a>
                 </li>
 
                 <li class="nav-item">
@@ -59,23 +59,23 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/fasilitasi">Facilities</a>
+                    <a class="nav-link" href="/fasilitasi">Fasilitas</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/news">News</a>
+                    <a class="nav-link" href="/news">Berita</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/gallery">Galery</a>
+                    <a class="nav-link" href="/gallery">Galeri</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link" href="/jadwal">Jadwal</a>
                 </li>
 
                 <li class="nav-item ms-3">
-                    <a class="nav-link custom-btn custom-border-btn btn" href="/jadwal">Jadwal</a>
+                    <a class="nav-link custom-btn custom-border-btn btn" href="/contact">Hubungi</a>
                 </li>
             </ul>
         </div>

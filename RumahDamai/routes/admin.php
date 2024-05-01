@@ -47,6 +47,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::patch('/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('anak.nonaktifkan');
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
+    Route::get('/anak/{id}/pdf', [AnakController::class, 'generatePDF'])->name('anak.pdf');
+
 
 
     /*
@@ -143,6 +145,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     */
     Route::post('/admin/nonaktifkan/staff/{id}', [AdministratorController::class, 'nonaktifkanStaff'])->name('admin.nonaktifkan.staff');
     Route::post('/admin/aktifkan/staff/{id}', [AdministratorController::class, 'aktifkanStaff'])->name('admin.aktifkan.staff');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Status Direktur
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/admin/nonaktifkan/direktur/{id}', [AdministratorController::class, 'nonaktifkanDirektur'])->name('admin.nonaktifkan.direktur');
+    Route::post('/admin/aktifkan/direktur/{id}', [AdministratorController::class, 'aktifkanDirektur'])->name('admin.aktifkan.direktur');
 
 
     /*

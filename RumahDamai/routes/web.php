@@ -52,13 +52,38 @@ Route::put('/jadwalPembelajaran/update/{id}', [JadwalPembelajaranController::cla
 Route::get('/jadwalPembelajaran/{id}/edit', [JadwalPembelajaranController::class, 'edit'])->name('jadwalPembelajaran.edit');
 
 
-/*
-|--------------------------------------------------------------------------
-| Jadwal dan Kalender
-|--------------------------------------------------------------------------
-*/
-Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
-Route::get('/jadwal', [JadwalController::class, 'index'])->name('visitor.jadwal');
+    Route::get('/administrator/admin', [AdministratorController::class, 'admin'])->name('admin.administrator.admin');
+    Route::get('/administrator/guru', [AdministratorController::class, 'guru'])->name('admin.administrator.guru');
+    Route::get('/administrator/staff', [AdministratorController::class, 'staff'])->name('admin.administrator.staff');
+    Route::get('/administrator/direktur', [AdministratorController::class, 'direktur'])->name('admin.administrator.direktur');
+    Route::get('/administrator/create', [AdministratorController::class, 'create'])->name('admin.administrator.create');
+    Route::get('/administrator/{id}', [AdministratorController::class, 'show'])->name('admin.administrator.show');
+    Route::post('/administrator/store', [AdministratorController::class, 'store'])->name('admin.administrator.store');
+    Route::get('/administrator/{user}/edit', [AdministratorController::class, 'edit'])->name('admin.administrator.edit');
+    Route::put('/administrator/{user}/update', [AdministratorController::class, 'update'])->name('admin.administrator.update');
+    Route::delete('/administrator/{user}/destroy', [AdministratorController::class, 'destroy'])->name('admin.administrator.destroy');
+    Route::get('/administrator/{id}/pdf', [AdministratorController::class, 'generatePDF'])->name('user.pdf');
+/*     Route::get('/administrator/{id}/pdf', [AdministratorController::class, 'exportUserProfilePdf'])->name('user.pdf');
+ */
+
+    // Admin
+    Route::post('/admin/nonaktifkan/admin/{id}', [AdministratorController::class, 'nonaktifkanAdmin'])->name('admin.nonaktifkan.admin');
+    Route::post('/admin/aktifkan/admin/{id}', [AdministratorController::class, 'aktifkanAdmin'])->name('admin.aktifkan.admin');
+
+    // Guru
+    Route::post('/admin/nonaktifkan/guru/{id}', [AdministratorController::class, 'nonaktifkanGuru'])->name('admin.nonaktifkan.guru');
+    Route::post('/admin/aktifkan/guru/{id}', [AdministratorController::class, 'aktifkanGuru'])->name('admin.aktifkan.guru');
+
+    // Pegawai/Staff
+    Route::post('/admin/nonaktifkan/staff/{id}', [AdministratorController::class, 'nonaktifkanStaff'])->name('admin.nonaktifkan.staff');
+    Route::post('/admin/aktifkan/staff/{id}', [AdministratorController::class, 'aktifkanStaff'])->name('admin.aktifkan.staff');
+
+    /* Raport Demo */
+    /*     Route::resource('/raport', RaportController::class);
+    Route::get('raport/{id}/pdf', 'App\Http\Controllers\Raport\RaportController@pdf')->name('raport.pdf');
+ */
+Route::delete('/galeri/delete-image/{id}', [GaleriController::class,'deleteImage'])->name('galeri.deleteImage');
+Route::delete('/faslitas/delete-image/{id}', [FasilitasController::class,'deleteImage'])->name('fasilitas.deleteImage');
 
 
 /*
@@ -75,6 +100,10 @@ Route::get('/news/{id}', [VisitorsController::class, 'show'])->name('news.detail
 Route::get('/gallery', [VisitorsController::class, 'gallery'])->name('gallery');
 Route::get('/gallery{id}', [VisitorsController::class, 'detailgallery'])->name('gallery.detail');
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
+
+
+Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('visitor.jadwal');
 
 
 require __DIR__ . '/admin.php';

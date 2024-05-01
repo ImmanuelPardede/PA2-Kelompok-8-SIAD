@@ -5,13 +5,18 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="card-title">Daftar Akun Guru</h1>
+                    <h1 class="card-title">Daftar Akun Direktur</h1>
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('admin.administrator.create', ['role' => 'guru']) }}" class="btn btn-success mb-3">Tambah Guru</a>
+                    @php
+                        $direkturCount = $users->where('role', 'direktur')->count();
+                    @endphp
+                    @if ($direkturCount === 0)
+                        <a href="{{ route('admin.administrator.create', ['role' => 'direktur']) }}" class="btn btn-success mb-3">Tambah Direktur</a>
+                    @endif
                 </div>
 
                 <div class="table-responsive">
@@ -27,7 +32,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users->where('role', 'guru') as $user)
+                                @foreach ($users->where('role', 'direktur') as $user)
                                     <tr>
                                         <td>{{ $user->nama_lengkap }}</td>
                                         <td>{{ $user->email }}</td>
@@ -35,9 +40,9 @@
                                         <td>{{ $user->role }}</td>
                                         <td>
                                             <a href="{{ route('admin.administrator.show', $user->id) }}"
-                                                class="btn btn-info">Detail</a> <!-- Ubah "Show" menjadi "Detail" -->
+                                                class="btn btn-info">Detail</a>
                                             <a href="{{ route('admin.administrator.edit', $user->id) }}"
-                                                class="btn btn-primary">Edit</a>
+                                                class="btn btn-warning">Edit</a>
                                             <form method="POST" id="deleteForm{{ $user->id }}" class="d-inline"
                                                 action="{{ route('admin.administrator.destroy', $user->id) }}">
                                                 @csrf
@@ -59,5 +64,4 @@
             </div>
         </div>
     </div>
-
 @endsection

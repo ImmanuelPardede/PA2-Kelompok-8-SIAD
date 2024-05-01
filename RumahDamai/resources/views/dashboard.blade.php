@@ -47,9 +47,10 @@
                     <li>{{ $field }}</li>
                 @endforeach
             </ul>
-            @if(Auth::user()->role === 'guru' || Auth::user()->role === 'staff')
-                <a href="{{ Auth::user()->role === 'guru' ? route('guru.DataDiri.edit', ['user' => Auth::user()]) : route('staff.DataDiri.edit', ['user' => Auth::user()]) }}" class="mt-2">Edit Data Diri</a>
-            @endif
+            @if(Auth::user()->role === 'guru' || Auth::user()->role === 'staff' || Auth::user()->role === 'direktur' )
+            <a href="{{ Auth::user()->role === 'guru' ? route('guru.DataDiri.edit', ['user' => Auth::user()]) : (Auth::user()->role === 'staff' ? route('staff.DataDiri.edit', ['user' => Auth::user()]) : route('direktur.DataDiri.edit', ['user' => Auth::user()])) }}" class="mt-2">Edit Data Diri</a>
+        @endif
+        
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

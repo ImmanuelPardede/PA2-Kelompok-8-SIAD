@@ -53,24 +53,24 @@
                                         <td>{{ $anak->tanggal_keluar ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Disukai</th>
-                                        <td>{{ $anak->disukai ?? 'Data tidak tersedia' }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tidak Disukai</th>
-                                        <td>{{ $anak->tidak_disukai ?? 'Data tidak tersedia' }}</td>
-                                    </tr>
-                                    <tr>
                                         <th>Alamat</th>
                                         <td>{{ $anak->alamat ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                     <tr>
+                                        <th>Disukai</th>
+                                        <td>{!! $anak->disukai ?? 'Data tidak tersedia' !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tidak Disukai</th>
+                                        <td>{!! $anak->tidak_disukai ?? 'Data tidak tersedia' !!}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Kelebihan</th>
-                                        <td>{{ $anak->kelebihan ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $anak->kelebihan ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Kekurangan</th>
-                                        <td>{{ $anak->kekurangan ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $anak->kekurangan ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Tempat Yayasan</th>
@@ -101,6 +101,7 @@
                                     onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
                             </form>
                         @endif
+                        <a href="{{ route('anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate PDF</a>
                     </div>
                     <div class="col-md-4">
                         <div class="image-frame">
