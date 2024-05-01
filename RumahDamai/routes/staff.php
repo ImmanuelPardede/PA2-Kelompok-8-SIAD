@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
 

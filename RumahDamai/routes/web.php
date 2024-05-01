@@ -1,17 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\Administrator\AdministratorController;
-use App\Http\Controllers\Admin\Pendidikan\MingguPembelajaranController;
-use App\Http\Controllers\Admin\Pendidikan\SemesterTahunAjaranController;
-use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
-use App\Http\Controllers\Admin\Visitor\AboutController;
-use App\Http\Controllers\Admin\Visitor\BeritaController;
-use App\Http\Controllers\Admin\Visitor\CarouselItemController;
-use App\Http\Controllers\Admin\Visitor\FasilitasController;
-use App\Http\Controllers\Admin\Visitor\GaleriController;
-use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\JadwalController;
-use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\KalenderController;
 use Illuminate\Support\Facades\Route;

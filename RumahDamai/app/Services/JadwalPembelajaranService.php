@@ -12,7 +12,7 @@ class JadwalPembelajaranService
         $calendarData = [];
         $jadwalPembelajaran = JadwalPembelajaran::with(['kelas', 'guru'])
             ->whereBetween('tanggal_pembelajaran', [$startOfWeek, $endOfWeek])
-            ->where('lokasi_penugasan_id', $lokasi_penugasan_id) 
+            ->where('lokasi_penugasan_id', $lokasi_penugasan_id)
             ->orderBy('tanggal_pembelajaran')
             ->get();
 
@@ -81,16 +81,22 @@ class JadwalPembelajaranService
 
             foreach ($timeRange as $time) {
                 $timeText = $time['start'] . ' - ' . $time['end'];
+                $lokasiPenugasanId = $jadwal->lokasi_penugasan_id;
 
-                if (!isset($calendarData[$timeText])) {
-                    $calendarData[$timeText] = array_fill_keys($weekDays, null);
+                if (!isset($calendarData[$lokasiPenugasanId])) {
+                    $calendarData[$lokasiPenugasanId] = [];
+                }
+
+                if (!isset($calendarData[$lokasiPenugasanId][$timeText])) {
+                    $calendarData[$lokasiPenugasanId][$timeText] = array_fill_keys($weekDays, null);
                 }
 
                 foreach ($weekDays as $day) {
-                    if ($calendarData[$timeText][$day] === null) {
+                    if ($calendarData[$lokasiPenugasanId][$timeText][$day] === null) {
                         $jadwalHariIni = $jadwalPembelajaran
                             ->where('hari_pembelajaran', $day)
                             ->where('jam_mulai', $time['start'])
+                            ->where('lokasi_penugasan_id', $lokasiPenugasanId)
                             ->first();
 
                         $rowData = [
@@ -115,7 +121,7 @@ class JadwalPembelajaranService
                             ];
                         }
 
-                        $calendarData[$timeText][$day] = $rowData;
+                        $calendarData[$lokasiPenugasanId][$timeText][$day] = $rowData;
                     }
                 }
             }
