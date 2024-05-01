@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Visitor\JadwalController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\KalenderController;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
+use App\Http\Controllers\Admin\Visitor\FasilitasController;
+use App\Http\Controllers\Admin\Visitor\GaleriController;
 use App\Http\Controllers\Visitor\VisitorsController;
 
 

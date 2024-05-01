@@ -43,6 +43,7 @@
                             <option value="3" {{ $user->role == 'direktur' ? 'selected' : '' }}>direktur</option>
                         </select>
                     </div>
+                    
 
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -237,9 +238,6 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();

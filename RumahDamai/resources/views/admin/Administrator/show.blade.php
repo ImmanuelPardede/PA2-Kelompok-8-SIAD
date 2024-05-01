@@ -133,14 +133,14 @@
                         <form action="{{ route('admin.nonaktifkan.admin', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger mt-3"
                                 onclick="return confirm('Yakin ingin menonaktifkan admin ini?')">Nonaktifkan Admin</button>
                         </form>
                     @else
                         <form action="{{ route('admin.aktifkan.admin', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" class="btn btn-success mt-3"
                                 onclick="return confirm('Yakin ingin mengaktifkan admin ini?')">Aktifkan Admin</button>
                         </form>
                     @endif
@@ -152,28 +152,28 @@
                         <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger mt-3"
                                 onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan Guru</button>
                         </form>
                     @else
                         <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" class="btn btn-success mt-3"
                                 onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan Guru</button>
                         </form>
                     @endif
                 @endif
 
                 <!-- Nonaktifkan atau Aktifkan Pegawai -->
-                <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary">Generate PDF</a>
+                <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary mt-3">Generate PDF</a>
 
                 @if ($user->role === 'staff')
                     @if ($user->status === 'aktif')
                         <form action="{{ route('admin.nonaktifkan.staff', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger mt-3"
                                 onclick="return confirm('Yakin ingin menonaktifkan pegawai ini?')">Nonaktifkan
                                 Pegawai</button>
                         </form>
@@ -181,7 +181,7 @@
                         <form action="{{ route('admin.aktifkan.staff', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" class="btn btn-success mt-3"
                                 onclick="return confirm('Yakin ingin mengaktifkan pegawai ini?')">Aktifkan Pegawai</button>
                         </form>
                     @endif
@@ -192,7 +192,7 @@
                         <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger mt-3"
                                 onclick="return confirm('Yakin ingin menonaktifkan pegawai ini?')">Nonaktifkan
                                 Pegawai</button>
                         </form>
@@ -200,7 +200,7 @@
                         <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-success"
+                            <button type="submit" class="btn btn-success mt-3"
                                 onclick="return confirm('Yakin ingin mengaktifkan pegawai ini?')">Aktifkan Pegawai</button>
                         </form>
                     @endif
@@ -211,7 +211,7 @@
                     <form action="{{ route('admin.nonaktifkan.direktur', $user->id) }}" method="POST"
                         style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-danger"
+                        <button type="submit" class="btn btn-danger mt-3"
                             onclick="return confirm('Yakin ingin menonaktifkan pegawai ini?')">Nonaktifkan
                             Pegawai</button>
                     </form>
@@ -219,7 +219,7 @@
                     <form action="{{ route('admin.aktifkan.direktur', $user->id) }}" method="POST"
                         style="display:inline;">
                         @csrf
-                        <button type="submit" class="btn btn-success"
+                        <button type="submit" class="btn btn-success mt-3"
                             onclick="return confirm('Yakin ingin mengaktifkan pegawai ini?')">Aktifkan Pegawai</button>
                     </form>
                 @endif

@@ -32,15 +32,10 @@ class LoginController extends Controller
     if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password'], 'status' => 'aktif'))) {
         $user = auth()->user();
 
-        if ($user->role == 'admin') {
-            return redirect()->route('dashboard');
-        } elseif ($user->role == 'guru') {
-            return redirect()->route('dashboard');
-        } elseif ($user->role == 'staff') {
-            return redirect()->route('dashboard');
-        } elseif ($user->role == 'direktur') {
-            return redirect()->route('dashboard');
-        }
+        if ($user->role == 'admin' || $user->role == 'guru' || $user->role == 'staff' || $user->role == 'direktur') {
+        return redirect()->route('dashboard');
+    }
+    
     }
 
     // Jika auth()->attempt mengembalikan false, tandai bahwa ada kesalahan
