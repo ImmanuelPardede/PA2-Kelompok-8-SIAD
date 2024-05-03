@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TodoList;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pengumuman;
 use App\Models\Anak;
 use App\Models\Donatur;
-use App\Models\TodoList;
 use App\Models\LokasiTugas;
 use App\Models\ModulMateri;
 
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
             return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','totalmateri','totoldonatur'));
         }
-    
+
 
 
      public function adminHome()
