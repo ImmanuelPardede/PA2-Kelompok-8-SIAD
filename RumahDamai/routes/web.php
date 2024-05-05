@@ -74,8 +74,8 @@ Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 
 Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
 Route::get('/jadwal', [JadwalController::class, 'index'])->name('visitor.jadwal');
-Route::get('/tampilchart', [ChartAnakController::class, 'index']);
-
+Route::get('/chart', [ChartAnakController::class, 'index']);
+Route::get('/chart-data', [ChartAnakController::class, 'chartData']);
 
 
 

@@ -4,20 +4,43 @@ namespace App\Http\Controllers\Chart;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anak;
+use Illuminate\Http\Request;
 
 class ChartAnakController extends Controller
 {
     public function index()
     {
-        $totalAnakStatus = $this->json_status();
-        $json_tipeanak = $this->json_tipe_anak();
-
-        return view('chart.chartAnak.index', compact('totalAnakStatus', 'json_tipeanak'));
+        return view('dashboard');
     }
+
+    public function chartData()
+    {
+        $currentYear = date('Y');
+        $chartData = [
+            'data' => [['Bulan', 'Aktif', 'Tidak Aktif']],
+            'title' => 'Data Anak ' . $currentYear,
+        ];
+
+        for ($month = 1; $month <= 12; $month++) {
+            $aktif = Anak::whereYear('tanggal_masuk', $currentYear)
+                ->whereMonth('tanggal_masuk', $month)
+                ->where('status', 'Aktif')
+                ->count();
+
+            $tidakAktif = Anak::whereYear('tanggal_masuk', $currentYear)
+                ->whereMonth('tanggal_masuk', $month)
+                ->where('status', '!=', 'Aktif')
+                ->count();
+
+            $chartData['data'][] = [date("F", mktime(0, 0, 0, $month, 1)), $aktif, $tidakAktif];
+        }
+
+        return response()->json($chartData);
+    }
+
 
     public function json_status()
     {
-        // Mengambil jumlah anak berdasarkan status aktif dan nonaktif
         $aktif = Anak::where('status', 'Aktif')->count();
         $tidakAktif = Anak::where('status', '!=', 'Aktif')->count();
 
@@ -25,24 +48,6 @@ class ChartAnakController extends Controller
             'aktif' => $aktif,
             'tidak_aktif' => $tidakAktif,
         ];
-
-        return $data;
-    }
-
-
-
-    public function json_tipe_anak()
-    {
-        // Mengambil jumlah anak berdasarkan tipe (disabilitas dan non-disabilitas)
-        $query = Anak::selectRaw('tipe_anak, COUNT(*) as total')
-            ->groupBy('tipe_anak')
-            ->get();
-
-        $data = [];
-        foreach ($query as $row) {
-            $data['tipe_anak'][] = $row->tipe_anak;
-            $data['total'][] = $row->total;
-        }
 
         return $data;
     }
