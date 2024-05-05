@@ -451,9 +451,9 @@
         </div>
 
         <div id="chart-container">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="card chart-card">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
                         <div class="card-body">
                             <div class="chart-header d-flex justify-content-between align-items-center">
                                 <h3 class="card-title">Grafik Data Anak</h3>
@@ -478,6 +478,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
