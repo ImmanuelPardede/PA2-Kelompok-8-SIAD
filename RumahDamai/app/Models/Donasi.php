@@ -10,9 +10,10 @@ class Donasi extends Model
     use HasFactory;
 
     protected $table = 'donasi';
-    protected $fillable = ['jenis_donasi','deskripsi'];
+    protected $fillable = ['jenis_donasi', 'deskripsi'];
 
-    public function anak(){
+    public function donatur()
+    {
         return $this->belongsToMany(Donatur::class, 'donatur_donasi', 'donasi_id', 'donatur_id');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Staff\DataSponsor\SponsorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Staff\DataDonatur\DonaturController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
@@ -13,6 +14,14 @@ Route::middleware(['auth', 'user-access:staff'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::resource('/DataDonatur/dataDonatur', DonaturController::class);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sponsors
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('/DataSponsor/dataSponsor', SponsorController::class);
 
 
     /*

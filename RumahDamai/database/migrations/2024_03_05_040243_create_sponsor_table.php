@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('donatur', function (Blueprint $table) {
+        Schema::create('sponsor', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_donatur');
-            $table->string('email_donatur')->unique();
-            $table->date('tanggal_donatur');
-            $table->string('no_hp_donatur');
+            $table->string('nama_sponsor');
+            $table->string('email_sponsor')->unique();
+            $table->date('tanggal_sponsor');
+            $table->string('no_telepon_sponsor');
             $table->string('deskripsi');
-            $table->bigInteger  ('jumlah_donasi');
-            $table->string('foto_donatur');
+            $table->bigInteger  ('jumlah_sponsor');
+            $table->string('foto_sponsor');
             $table->timestamps();
 
         });
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('donasi');
+        Schema::dropIfExists('sponsorship');
     }
 };
 

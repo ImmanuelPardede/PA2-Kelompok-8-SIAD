@@ -23,13 +23,27 @@
                 <input type="text" class="form-control" id="email_donatur" name="email_donatur" required>
             </div>
             <div class="form-group">
+                <label for="tanggal_donatur">Tanggal Donasi<span style="color: red">*</span></label>
+                <input type="date" class="form-control" id="tanggal_donatur" name="tanggal_donatur" required>
+            </div>
+            <div class="form-group">
                 <label for="no_hp_donatur">No. Hp Donatur<span style="color: red">*</span></label>
                 <input type="text" class="form-control" id="no_hp_donatur" name="no_hp_donatur" required>
             </div>
             <div class="form-group">
-                <label for="jumlah_donasi">Jumlah Donasi<span style="color: red">*</span></label>
-                <input type="text" class="form-control" id="jumlah_donasi" name="jumlah_donasi" required> <!-- Changed to number type -->
+                <label for="deskripsi">Deskripsi<span style="color: red">*</span></label>
+                <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
             </div>
+            <div class="form-group">
+                <label for="jumlah_donasi">Jumlah Donasi<span style="color: red">*</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" style="height: 86%;">Rp</span>
+                    </div>
+                    <input type="number" class="form-control" id="jumlah_donasi" name="jumlah_donasi" required>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="foto_donatur">Foto Donatur<span style="color: red">*</span></label>
                 <input type="file" class="form-control" name="foto_donatur" required>

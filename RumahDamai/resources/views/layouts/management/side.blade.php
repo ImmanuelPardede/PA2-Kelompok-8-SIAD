@@ -1,9 +1,12 @@
 <!-- partial:partials/_sidebar.html -->
 <style>
     .sidebar hr {
-        border-top: 1px solid #ddd; /* Warna dan gaya garis */
-        margin: 10px 0; /* Jarak di atas dan di bawah garis */
+        border-top: 1px solid #ddd;
+        /* Warna dan gaya garis */
+        margin: 10px 0;
+        /* Jarak di atas dan di bawah garis */
     }
+
     .sidebar .menu-title {
         margin-left: 10px;
     }
@@ -40,7 +43,7 @@
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.administrator.staff') }}">Staff</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>        
+                                    href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>
                         </ul>
                     </div>
                 </li>
@@ -134,13 +137,14 @@
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
                                     Sponsorship</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('kategoriBerita.index') }}">Kategori
-                                    Berita</a></li>        
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('kategoriBerita.index') }}">Kategori
+                                    Berita</a></li>
                         </ul>
                     </div>
                 </li>
 
-<hr>
+                <hr>
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
@@ -151,20 +155,19 @@
                     </a>
                     <div class="collapse" id="succes">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('carousel.index') }}"> Carousel
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('carousel.index') }}"> Carousel
                                 </a>
                             </li>
-                            <li class="nav-item"> <a class="nav-link"
-                                href="{{ route('history.index') }}"> History
-                            </a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('history.index') }}"> History
+                                </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false" aria-controls="about">
+                    <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false"
+                        aria-controls="about">
                         <i class="mdi mdi-web"></i>
                         <span class="menu-title">About</span>
                         <i class="menu-arrow"></i>
@@ -179,7 +182,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false" aria-controls="program">
+                    <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false"
+                        aria-controls="program">
                         <i class="mdi mdi-web"></i>
                         <span class="menu-title">Program</span>
                         <i class="menu-arrow"></i>
@@ -194,7 +198,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false" aria-controls="berita">
+                    <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false"
+                        aria-controls="berita">
                         <i class="mdi mdi-web"></i>
                         <span class="menu-title">Berita</span>
                         <i class="menu-arrow"></i>
@@ -209,7 +214,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#fasilitas" aria-expanded="false" aria-controls="fasilitas">
+                    <a class="nav-link" data-toggle="collapse" href="#fasilitas" aria-expanded="false"
+                        aria-controls="fasilitas">
                         <i class="mdi mdi-web"></i>
                         <span class="menu-title">Fasilitas</span>
                         <i class="menu-arrow"></i>
@@ -224,7 +230,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#galeri" aria-expanded="false" aria-controls="galeri">
+                    <a class="nav-link" data-toggle="collapse" href="#galeri" aria-expanded="false"
+                        aria-controls="galeri">
                         <i class="mdi mdi-web"></i>
                         <span class="menu-title">Galeri</span>
                         <i class="menu-arrow"></i>
@@ -237,13 +244,11 @@
                         </ul>
                     </div>
                 </li>
-                
-                
             @endif
         @endauth
 
 
-        
+
         @auth
             @if (auth()->user()->role === 'guru')
                 <li class="nav-item">
@@ -276,19 +281,21 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+                    <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
+                        aria-controls="icons">
                         <i class="icon-contract menu-icon"></i>
                         <span class="menu-title">PPI</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="icons">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('PPI.ModelA.index') }}">PPI A</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('PPI.ModelA.index') }}">PPI A</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
 
-                
+
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
@@ -337,10 +344,11 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('dataDonatur.index') }}">Donatur</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('dataSponsor.index') }}">Sponsor</a></li>
                         </ul>
                     </div>
                 </li>
-            
             @endif
         @endauth
 
@@ -357,12 +365,12 @@
                     <div class="collapse" id="error">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri
+                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data
+                                    Diri
                                 </a></li>
                         </ul>
                     </div>
                 </li>
-
             @endif
         @endauth
 
@@ -428,7 +436,7 @@
     </ul>
 
 
-    
+
 </nav>
 
 

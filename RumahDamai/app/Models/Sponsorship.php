@@ -10,9 +10,10 @@ class Sponsorship extends Model
     use HasFactory;
 
     protected $table = 'sponsorship';
-    protected $fillable = ['id','jenis_sponsorship','deskripsi'];
+    protected $fillable = ['jenis_sponsorship','deskripsi'];
 
-    public function user(){
-        return $this->hasMany(User::class);
+    public function sponsor()
+    {
+        return $this->belongsToMany(Sponsor::class, 'sponsor_sponsorship', 'sponsor_id', 'sponsorship_id');
     }
 }
