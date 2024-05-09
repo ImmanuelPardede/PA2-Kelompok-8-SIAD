@@ -59,9 +59,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="{{ asset('skydash/js/utama/sweetalert.min.js') }}"></script>
-<script src="{{ asset('skydash/js/utama/charts.min.js') }}"></script>
+<script src="{{ asset('skydash/js/utama/chartsAnak.min.js') }}"></script>
+<script src="{{ asset('skydash/js/utama/chartsPendukung.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script src="{{ asset('skydash/js/utama/html2canvas.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 
 

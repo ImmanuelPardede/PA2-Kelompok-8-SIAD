@@ -122,7 +122,7 @@
                     <div class="col-md-3 mb-4 stretch-card transparent">
                         <div class="card card-light-danger">
                             <div class="card-body">
-                                <p class="mb-4">Donatur Dalam Angkah</p>
+                                <p class="mb-4">Donatur Dalam Angka</p>
                                 <p class="fs-30 mb-2">{{ $totoldonatur }}</p>
                                 <p>Terdata, Sejak Dibuat Sistem Ini</p>
                             </div>
@@ -450,7 +450,8 @@
             </div>
         </div>
 
-        <div id="chart-container">
+        <!-- Blok Grafik Data Anak -->
+        <div id="chart-container-anak">
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
@@ -459,25 +460,66 @@
                                 <h3 class="card-title">Grafik Data Anak</h3>
                                 <!-- Dropdown untuk export chart -->
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="exportDropdownAnak" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         Export
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="exportDropdown">
-                                        <a class="dropdown-item" href="#" onclick="exportChart('jpg')">Export as JPG</a>
-                                        <a class="dropdown-item" href="#" onclick="exportChart('png')">Export as PNG</a>
-                                        <a class="dropdown-item" href="#" onclick="exportChart('pdf')">Export as PDF</a>
+                                    <div class="dropdown-menu" aria-labelledby="exportDropdownAnak">
+                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('jpg')">Export
+                                            as JPG</a>
+                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('png')">Export
+                                            as PNG</a>
+                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('pdf')">Export
+                                            as PDF</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- Container untuk chart diagram kolom -->
-                            <div id="column-chart" class="google-chart"></div>
+                            <div id="column-chart-anak" class="google-chart"></div>
                             <!-- Container untuk chart diagram lingkaran -->
-                            <div id="pie-chart" class="google-chart"></div>
+                            <div id="pie-chart-anak" class="google-chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Blok Grafik Data Pendukung -->
+        <div id="chart-container-pendukung">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="chart-header d-flex justify-content-between align-items-center">
+                                <h3 class="card-title">Grafik Data Pendukung</h3>
+                                <!-- Dropdown untuk export chart -->
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        id="exportDropdownPendukung" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Export
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="exportDropdownPendukung">
+                                        <a class="dropdown-item" href="#"
+                                            onclick="exportChartPendukung('jpg')">Export as JPG</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="exportChartPendukung('png')">Export as PNG</a>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="exportChartPendukung('pdf')">Export as PDF</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Container untuk chart diagram kolom -->
+                            <div id="column-chart-pendukung" class="google-chart"></div>
+                            <!-- Container untuk chart diagram lingkaran -->
+                            <div id="pie-chart-pendukung" class="google-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     </div>
 

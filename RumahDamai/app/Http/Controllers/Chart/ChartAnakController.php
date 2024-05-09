@@ -13,7 +13,7 @@ class ChartAnakController extends Controller
         return view('dashboard');
     }
 
-    public function chartData()
+    public function chartDataAnak()
     {
         $currentYear = date('Y');
         $chartData = [

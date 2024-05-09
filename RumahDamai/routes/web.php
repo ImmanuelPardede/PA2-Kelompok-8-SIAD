@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
 use App\Http\Controllers\Admin\Visitor\JadwalController;
 use App\Http\Controllers\Chart\ChartAnakController;
+use App\Http\Controllers\Chart\ChartPendukungController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
 use App\Http\Controllers\KalenderController;
 use Illuminate\Support\Facades\Route;
@@ -72,10 +73,25 @@ Route::get('/gallery{id}', [VisitorsController::class, 'detailgallery'])->name('
 Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 
 
+/*
+|--------------------------------------------------------------------------
+| Jadwal And Calendar
+|--------------------------------------------------------------------------
+*/
 Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
 Route::get('/jadwal', [JadwalController::class, 'index'])->name('visitor.jadwal');
-Route::get('/chart', [ChartAnakController::class, 'index']);
-Route::get('/chart-data', [ChartAnakController::class, 'chartData']);
+
+
+/*
+|--------------------------------------------------------------------------
+| Charts
+|--------------------------------------------------------------------------
+*/
+Route::get('/chart-anak', [ChartAnakController::class, 'index']);
+Route::get('/chart-data-anak', [ChartAnakController::class, 'chartDataAnak']);
+Route::get('/chart-pendukung', [ChartPendukungController::class, 'index']);
+Route::get('/chart-data-pendukung', [ChartPendukungController::class, 'chartDataPendukung']);
+
 
 
 
