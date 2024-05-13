@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\DataAnak;
 
+use App\Exports\ExportAnak;
 use App\Http\Controllers\Controller;
 use App\Models\AnakDisabilitas;
 use App\Models\AnakNonDisabilitas;
@@ -19,6 +20,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AnakController extends Controller
 {
@@ -347,5 +349,10 @@ class AnakController extends Controller
 
     // Output PDF to browser
     return $dompdf->stream($filename);
+}
+
+public function exportExcel()
+{
+    return Excel::download(new ExportAnak, 'anak.xlsx');
 }
 }

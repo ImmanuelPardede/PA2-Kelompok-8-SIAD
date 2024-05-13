@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Administrator;
 
+use App\Exports\ExportPegawai;
 use App\Http\Controllers\Controller;
 use App\Models\Agama;
 use App\Models\GolonganDarah;
@@ -15,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Maatwebsite\Excel\Facades\Excel;
 use TCPDF;
 
 
@@ -776,5 +778,15 @@ public function editDirekturDataDiri(User $user)
         return $dompdf->stream('user_profile.pdf');
     }
 
+    public function all()
+    {
+        $users = User::all();
+        return view('admin.administrator.all', compact('users'));
+    }
 
+    public function export_excel()
+    {
+        return Excel::download(new ExportPegawai, 'pegawaiYPArumahdamai.xlsx');
+    }
+    
 }

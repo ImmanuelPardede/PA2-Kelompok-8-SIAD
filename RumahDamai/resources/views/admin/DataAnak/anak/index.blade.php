@@ -12,8 +12,12 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('anak.create') }}" class="btn btn-success mb-3">Tambah Anak</a>
+                    <div>
+                        <a href="{{ route('anak.export.excel') }}" class="btn btn-primary">Export to Excel</a>
+                        <a href="{{ route('anak.create') }}" class="btn btn-success ml-2">Tambah Anak</a>
+                    </div>
                 </div>
+                
 
                 <div class="table-responsive">
                     <table class="table mt-3 table-hover">
