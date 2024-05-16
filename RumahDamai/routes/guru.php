@@ -21,7 +21,7 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/raport/create', [RaportController::class, 'create'])->name('raport.create');
     Route::post('/raport/store', [RaportController::class, 'store'])->name('raport.store');
     Route::get('/raport/edit/{id}', [RaportController::class, 'edit'])->name('raport.edit');
-    Route::put('/raport/update/{id}', [RaportController::class, 'update'])->name('raport.update');
+    Route::put('/raport/update', [RaportController::class, 'update'])->name('raport.update');
     Route::delete('/raport/destroy/{id}', [RaportController::class, 'destroy'])->name('raport.destroy');
     Route::get('/raport/detail/{id}', [RaportController::class, 'detail'])->name('raport.detail');
     Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');

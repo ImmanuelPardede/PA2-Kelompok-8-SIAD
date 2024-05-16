@@ -24,8 +24,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tahun</th>
-                                <th>Periode Bulan</th>
+                                <th>Semester</th>
+                                <th>Periode Tahun</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -33,8 +33,8 @@
                             @foreach ($raports as $key => $raport)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $raport->tahun }}</td>
-                                    <td>{{ $raport->periode_bulan }}</td>
+                                    <td>{{ $raport->semester->semester_tahun_ajaran }}</td>
+                                    <td>{{ $raport->tahunajaran->tahun_ajaran }}</td>
                                     <td>
                                         <form method="POST" id="deleteForm{{ $raport->id }}" class="d-inline"
                                             action="{{ route('raport.destroy', $raport->id) }}">
