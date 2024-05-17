@@ -308,25 +308,25 @@ class AnakController extends Controller
     public function generatePDF($id)
     {
         $anak = Anak::findOrFail($id);
-    
+
         // Load view content into a variable
         $pdfView = view('admin.DataAnak.anak.pdf', compact('anak'))->render();
-    
+
         // Setup Dompdf options
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $options->set('isRemoteEnabled', true);
-    
+
         // Instantiate Dompdf with options
         $dompdf = new Dompdf($options);
-    
+
         // Load HTML content into Dompdf
         $dompdf->loadHtml($pdfView);
-    
+
         // Set paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-    
+
         // Create stream context to disable SSL verification
         $context = stream_context_create([
             'ssl' => [
@@ -335,13 +335,13 @@ class AnakController extends Controller
                 'allow_self_signed' => true,
             ],
         ]);
-    
+
         // Set stream context for Dompdf
         $dompdf->setHttpContext($context);
-    
+
         // Render PDF (optional: save to file)
         $dompdf->render();
-    
+
         // Get child's name for PDF filename
         $filename = 'anak_profile_' . str_replace(' ', '_', $anak->nama_lengkap) . '.pdf';
 

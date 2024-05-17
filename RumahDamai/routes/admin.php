@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\Visitor\HistoryController;
 use App\Http\Controllers\Admin\Visitor\ProgramController;
 use App\Http\Controllers\Admin\Pendidikan\TahunAjaranController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
+use App\Http\Controllers\Admin\DataAnak\LatarBelakangController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
 
 
@@ -48,6 +49,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::get('/anak/{id}/pdf', [AnakController::class, 'generatePDF'])->name('anak.pdf');
+    Route::resource('latarBelakang', LatarBelakangController::class);
+    Route::resource('/DataAnak/latar-belakang', LatarBelakangController::class);
+    Route::get('/latarBelakang/{id}/pdf', [AnakController::class, 'generatePDF'])->name('latarBelakang.pdf');
 
 
 

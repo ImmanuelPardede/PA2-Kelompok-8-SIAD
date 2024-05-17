@@ -34,6 +34,13 @@ class UsersSeeder extends Seeder
             'role' => '2',
             'lokasi_penugasan_id' => '1',
         ]);
-        
+
+        DB::table('users')->insert([
+            'nama_lengkap' => 'Direktur',
+            'email' => 'direktur@gmail.com',
+            'password' => Hash::make('password'),
+            'role' => '3',
+            'lokasi_penugasan_id' => '1',
+        ]);
     }
 }

@@ -75,8 +75,8 @@ class AdministratorController extends Controller
                 $redirectRoute = 'admin.administrator.staff';
                 break;
             case 3:
-                    $redirectRoute = 'admin.administrator.direktur';
-                    break;
+                $redirectRoute = 'admin.administrator.direktur';
+                break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -129,9 +129,9 @@ class AdministratorController extends Controller
             case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
-                case 'direktur':
-                    $redirectRoute = 'admin.administrator.direktur';
-                    break;
+            case 'direktur':
+                $redirectRoute = 'admin.administrator.direktur';
+                break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -212,9 +212,9 @@ class AdministratorController extends Controller
             case 'staff':
                 $redirectRoute = 'admin.administrator.staff';
                 break;
-                case 'direktur':
-                    $redirectRoute = 'admin.administrator.direktur';
-                    break;
+            case 'direktur':
+                $redirectRoute = 'admin.administrator.direktur';
+                break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -241,7 +241,7 @@ class AdministratorController extends Controller
                 break;
             case 'direktur':
                 $redirectRoute = 'admin.administrator.direktur';
-                break;    
+                break;
             default:
                 $redirectRoute = 'dashboard';
                 break;
@@ -429,9 +429,9 @@ class AdministratorController extends Controller
         }
     }
 
-/*==============================================================================================================================  */
+    /*==============================================================================================================================  */
 
-public function editDirekturDataDiri(User $user)
+    public function editDirekturDataDiri(User $user)
     {
         $pendidikan = Pendidikan::all();
         $agama = Agama::all();
@@ -586,7 +586,7 @@ public function editDirekturDataDiri(User $user)
         }
     }
 
-    
+
 
 
 
@@ -738,25 +738,25 @@ public function editDirekturDataDiri(User $user)
     public function generatePDF($id)
     {
         $user = User::findOrFail($id);
-    
+
         // Load view content into a variable
         $pdfView = view('admin.administrator.pdf', compact('user'))->render();
-    
+
         // Setup Dompdf options
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
         $options->set('isRemoteEnabled', true);
-    
+
         // Instantiate Dompdf with options
         $dompdf = new Dompdf($options);
-    
+
         // Load HTML content into Dompdf
         $dompdf->loadHtml($pdfView);
-    
+
         // Set paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-    
+
         // Create stream context to disable SSL verification
         $context = stream_context_create([
             'ssl' => [
@@ -765,16 +765,14 @@ public function editDirekturDataDiri(User $user)
                 'allow_self_signed' => true,
             ],
         ]);
-    
+
         // Set stream context for Dompdf
         $dompdf->setHttpContext($context);
-    
+
         // Render PDF (optional: save to file)
         $dompdf->render();
-    
+
         // Output PDF to browser
         return $dompdf->stream('user_profile.pdf');
     }
-
-
 }

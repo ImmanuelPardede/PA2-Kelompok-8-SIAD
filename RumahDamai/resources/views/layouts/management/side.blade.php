@@ -59,6 +59,7 @@
                     <div class="collapse" id="form-elements">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('latarBelakang.index') }}">Latar Belakang</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat

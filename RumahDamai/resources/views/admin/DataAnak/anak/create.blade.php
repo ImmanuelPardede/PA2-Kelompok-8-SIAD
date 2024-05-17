@@ -23,7 +23,7 @@
                         {{ session('error') }}
                     </div>
             @endif
-            
+
             <form action="{{ route('anak.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -49,7 +49,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="golongan_darah_id">Golongan Darah <span style="color: red">*</span></label>
                     <select class="form-control js-example-basic-single" id="golongan_darah_id" name="golongan_darah_id" required>
@@ -59,7 +59,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="tipe_anak">Pilih Tipe Anak <span style="color: red">*</span></label>
                     <select class="form-control js-example-basic-single" id="tipe_anak" name="tipe_anak" required>
@@ -68,7 +68,7 @@
                         <option value="non_disabilitas" {{ old('tipe_anak') == 'non_disabilitas' ? 'selected' : '' }}>Non Disabilitas</option>
                     </select>
                 </div>
-                
+
 
                 <div class="form-group" id="kebutuhan_disabilitas_id" >
                     <label for="kebutuhan_disabilitas_id">Jenis Kebutuhan Disabilitas</label>
@@ -103,7 +103,6 @@
                     <label for="disukai" class="form-label">Disukai<span style="color: red">*</span></label>
                     <textarea id="editor1" class="form-control @error('disukai') is-invalid @enderror" name="disukai" required autocomplete="disukai">
                         <ul>
-                            <li>..</li>
                         </ul>
                         {{ old('disukai') }}
                     </textarea>
@@ -118,7 +117,6 @@
                     <label for="tidak_disukai" class="form-label">Tidak Disukai<span style="color: red">*</span></label>
                     <textarea id="editor2" class="form-control @error('tidak_disukai') is-invalid @enderror" name="tidak_disukai" required autocomplete="tidak_disukai">
                         <ul>
-                            <li>..</li>
                         </ul>
                         {{ old('tidak_disukai') }}
                     </textarea>
@@ -133,7 +131,6 @@
                     <label for="kelebihan" class="form-label">Kelebihan<span style="color: red">*</span></label>
                     <textarea id="editor3" class="form-control @error('kelebihan') is-invalid @enderror" name="kelebihan" required autocomplete="kelebihan">
                         <ul>
-                            <li>..</li>
                         </ul>
                         {{ old('kelebihan') }}
                     </textarea>
@@ -148,7 +145,6 @@
                     <label for="kekurangan" class="form-label">Kekurangan<span style="color: red">*</span></label>
                     <textarea id="editor4" class="form-control @error('kekurangan') is-invalid @enderror" name="kekurangan" required autocomplete="kekurangan">
                         <ul>
-                            <li>..</li>
                         </ul>
                         {{ old('kekurangan') }}
                     </textarea>
@@ -168,7 +164,7 @@
                         @endforeach
                     </select>
                 </div>
-                
+
 
                 <div class="form-group">
                     <label for="foto_profil">Foto Profil:</label>
