@@ -3,16 +3,27 @@
 @section('content')
 <div class="container">
     <h2>Create Raport</h2>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('raport.store') }}" method="POST">
         @csrf
+        <input type="hidden" name="anak_id" value="{{ $anak->id }}">
         <div class="form-group">
-            <label for="anak_id">Nama Anak <span style="color: red">*</span></label>
-            <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
-                <option value="" disabled selected>-- Nama Anak --</option>
-                @foreach ($anak as $anakItem)
-                    <option value="{{ $anakItem->id }}">{{ $anakItem->nama_lengkap }}</option>
-                @endforeach
-            </select>
+            <label for="anak_nama">Nama Anak</label>
+            <input type="text" class="form-control" id="anak_nama" value="{{ $anak->nama_lengkap }}" disabled>
         </div>
 
         <div class="form-group">
@@ -49,10 +60,90 @@
 
         <div class="form-group">
             <label for="grade">Grade <span style="color: red">*</span></label>
-            <input type="text" class="form-control" id="grade" name="grade[]" required>
-            <small id="grade" class="form-text text-muted"></small>
+            <div class="input-group">
+                <select class="form-control js-example-basic-single" id="grade" name="grade[]" required>
+                    <option value="" disabled selected>-- Select Grade --</option>
+                    <option value="A">A</option>
+                    <option value="AB">AB</option>
+                    <option value="B">B</option>
+                    <option value="BC">BC</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-danger" type="button" id="toggleTableBtn">!</button>
+                </div>
+            </div>
+            <small id="grade-table" class="form-text text-muted" style="display: none;">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Grade</th>
+                                <th>Range</th>
+                                <th>Skala</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A</td>
+                                <td>79,5 &lt; 100</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>AB</td>
+                                <td>72 &lt; 79,5</td>
+                                <td>3,5</td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td>64,5 &lt; 72</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>BC</td>
+                                <td>57 &lt; 64,5</td>
+                                <td>2,5</td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td>49,5 &lt; 57</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td>34 &lt; 49,5</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>E</td>
+                                <td>0 &lt; 34</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </small>
         </div>
-
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var toggleTableBtn = document.getElementById('toggleTableBtn');
+                var gradeTable = document.getElementById('grade-table');
+                
+                toggleTableBtn.addEventListener('click', function () {
+                    if (gradeTable.style.display === 'none') {
+                        gradeTable.style.display = 'block';
+                    } else {
+                        gradeTable.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+        
+        
+        
 
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
@@ -75,13 +166,15 @@
 
 
 
+        <div class="raport"></div>
 
 
 
         <a href="#" class="addraport btn btn-primary" style="float: right">Tambah Detail</a>
-        <div class="raport"></div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kemabali</a>
+
     </form>
 </div>
 
@@ -111,9 +204,19 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="grade">Grade <span style="color: red">*</span></label>
-                    <input type="text" class="form-control" name="grade[]" required>
-                </div>
+            <label for="grade">Grade <span style="color: red">*</span></label>
+            <select class="form-control js-example-basic-single" id="grade" name="grade[]" required>
+                    <option value="" disabled selected>-- Select Grade --</option>
+                    <option value="A">A</option>
+                    <option value="AB">AB</option>
+                    <option value="B">B</option>
+                    <option value="BC">BC</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                </select>
+            <small id="grade" class="form-text text-muted"></small>
+        </div>
                 <div class="form-group">
                     <label for="keterangan_${index}" class="form-label">Keterangan<span style="color: red">*</span></label>
                     <textarea id="keterangan_${index}" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan[]" required autocomplete="keterangan">

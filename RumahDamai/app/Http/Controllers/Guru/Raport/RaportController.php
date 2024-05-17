@@ -29,8 +29,9 @@ class RaportController extends Controller
     {
         $anak = Anak::all();
         $raports = Raport::where('anak_id', $id)->get();
-        return view('guru.raport.show', compact('raports','anak'));
+        return view('guru.raport.show', compact('raports', 'anak', 'id'));
     }
+
 
     public function detail($id)
     {
@@ -38,18 +39,17 @@ class RaportController extends Controller
         $detailraports = DetailRaport::where('raport_id', $id)->get(); // Pastikan variabel ini terdefinisi
         return view('guru.raport.detail', compact('raport', 'detailraports'));
     }
-        
 
-    public function create()
+    public function create($anak_id)
     {
-        $anak = Anak::all();
+        $anak = Anak::findOrFail($anak_id);
         $semester = SemesterTahunAjaran::all();
         $tahunajaran = TahunAjaran::all();
         $matapelajaran = Kelas::all();
-
-        return view('guru.raport.create', compact('anak','semester','tahunajaran','matapelajaran'));    
+        $raport = Raport::where('anak_id', $anak_id)->get();
+        return view('guru.raport.create', compact('anak', 'semester', 'tahunajaran', 'matapelajaran', 'raport', 'anak_id'));
     }
-
+    
 
         public function store(Request $request)
     {  
@@ -62,6 +62,16 @@ class RaportController extends Controller
             'grade' => 'required',
             'keterangan' => 'required',
         ]);
+
+            // Check if there is already a report for the same year and semester
+    $existingReport = Raport::where('anak_id', $request->input('anak_id'))
+    ->where('tahun_ajaran_id', $request->input('tahun_ajaran_id'))
+    ->where('semester_id', $request->input('semester_id'))
+    ->exists();
+
+if ($existingReport) {
+    return back()->withErrors(['Raport untuk tahun ajaran dan semester yang sama sudah ada.']);
+}
 
         // Inspect the request data
 
@@ -92,7 +102,7 @@ class RaportController extends Controller
 
         $anakId = $request->input('anak_id');
 
-        return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport created successfully.');
+        return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport berhasil ditambahkan.');
     }
 
 
@@ -101,7 +111,7 @@ class RaportController extends Controller
     public function edit($id)
     {
         $raport = Raport::findOrFail($id);
-        $anak = Anak::all();
+        $anak = Anak::find($raport->anak_id); // Fetch the specific Anak related to the raport
         $semester = SemesterTahunAjaran::all();
         $tahunajaran = TahunAjaran::all();
         $matapelajaran = Kelas::all();
@@ -109,6 +119,7 @@ class RaportController extends Controller
     
         return view('guru.raport.edit', compact('raport', 'anak', 'semester', 'tahunajaran', 'matapelajaran', 'detailraports'));    
     }
+    
     
     
     public function update(Request $request, $id)
@@ -134,6 +145,8 @@ class RaportController extends Controller
         $matepelajaran = $request->input('mata_pelajaran_id');
         $grades = $request->input('grade');
         $keterangans = $request->input('keterangan');
+
+        $existingIds = DetailRaport::where('raport_id', $raport->id)->pluck('id')->toArray();
     
         foreach ($matepelajaran as $key => $matepelajarans) {
             $data2 = [
@@ -143,32 +156,42 @@ class RaportController extends Controller
                 'keterangan' => $keterangans[$key],
             ];
         
-            // Perbaikan: Menggunakan ID detail raport dari $key dan mengirimkan data yang diperbarui
-            $detail = DetailRaport::findOrFail($key);
-            $detail->update($data2); // Memperbarui detail raport dengan data yang diberikan
+            if(isset($existingIds[$key])){
+                DetailRaport::where('id',$existingIds[$key])->update($data2);
+                unset($existingIds[$key]);
+            } else {
+                DetailRaport::create($data2);
+            }
         }
-        
+
+        if (!empty($existingIds)) {
+            DetailRaport::whereIn('id', $existingIds)->delete();
+        }
     
         $anakId = $raport->anak_id;
         
-        return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport updated successfully.');
+        return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport berhasil di ubah.');
     }
     
 
     
 
 
-public function destroy($id)
-{
-    // Hapus terlebih dahulu semua detailraports terkait
-    DetailRaport::where('raport_id', $id)->delete();
-
-    // Kemudian hapus Raport
-    $raport = Raport::findOrFail($id);
-    $raport->delete();
-
-    return redirect()->route('raport.index')->with('success', 'Raport deleted successfully.');
-}
+    public function destroy($id)
+    {
+        // Ambil informasi anak terkait dengan raport yang akan dihapus
+        $raport = Raport::findOrFail($id);
+        $anakId = $raport->anak_id;
+    
+        // Hapus terlebih dahulu semua detailraports terkait
+        DetailRaport::where('raport_id', $id)->delete();
+    
+        // Kemudian hapus Raport
+        $raport->delete();
+    
+        return redirect()->route('raport.show', ['id' => $anakId])->with('success', 'Raport berhasil dihapus.');
+    }
+    
 
 
 public function pdf($id)

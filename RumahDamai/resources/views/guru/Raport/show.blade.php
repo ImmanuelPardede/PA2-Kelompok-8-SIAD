@@ -8,6 +8,13 @@
                     <h1 class="card-title">Data Anak Didik</h1>
                 </div>
 
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+        
+
                 <div class="table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
@@ -16,7 +23,7 @@
                             @endif
                         </div>
                         <div>
-                            <a href="{{ route('raport.create') }}" class="btn btn-success">Create Raport</a>
+                            <a href="{{ route('raport.create', ['anak_id' => $id]) }}" class="btn btn-success">Create Raport</a>
                         </div>
                     </div>
 

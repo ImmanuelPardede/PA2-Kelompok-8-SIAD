@@ -49,14 +49,14 @@
                                 <td style="text-align: center;">{{ $loop->iteration }}</td>
                                 <td>{{ $detailraport->matapelajaran->nama_kelas }}</td>
                                 <td style="text-align: center;">{{ $detailraport->grade }}</td>
-                                <td>{!! $detailraport->keterangan !!}</td>
+                                <td style="white-space: pre-line;">{!! $detailraport->keterangan !!}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <a href="{{ route('raport.pdf', $raport->id) }}" class="btn btn-success">Download PDF</a>
-            <a href="{{ route('raport.index') }}" class="btn btn-primary">Back</a>
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Kemabali</a>
         </div>
     </div>
 @endsection
