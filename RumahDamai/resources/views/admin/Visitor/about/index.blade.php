@@ -35,12 +35,12 @@
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah1,3,'...') }}</td>
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah2,3,'...') }}</td>
                             <td>
-                                <a href="{{ route('about.show', $item->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                <a href="{{ route('about.edit', $item->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('about.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('about.edit', $item->id) }}" class="btn btn-info">Edit</a>
                                 <form action="{{ route('about.destroy', $item->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
                                 
                             </td>

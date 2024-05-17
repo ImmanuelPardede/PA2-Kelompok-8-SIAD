@@ -146,7 +146,7 @@
                             @if (Auth::user()->role == 'admin')
                                 <div class="mb-3 ml-auto">
 
-                                    <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Create
+                                    <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Buat
                                         Pengumuman</a>
                                 </div>
                             @endif
@@ -154,7 +154,7 @@
                             @if (Auth::user()->role == 'direktur')
                                 <div class="mb-3 ml-auto">
 
-                                    <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Create
+                                    <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Buat
                                         Pengumuman</a>
                                 </div>
                             @endif

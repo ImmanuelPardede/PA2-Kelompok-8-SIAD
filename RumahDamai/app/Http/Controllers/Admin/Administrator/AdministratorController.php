@@ -778,11 +778,21 @@ public function editDirekturDataDiri(User $user)
         return $dompdf->stream('user_profile.pdf');
     }
 
-    public function all()
-    {
+    public function all(Request $request)
+{
+    $search = $request->input('search');
+    
+    // If search query is present, filter users by nama_lengkap column
+    if ($search) {
+        $users = User::where('nama_lengkap', 'LIKE', "%$search%")->get();
+    } else {
+        // If no search query, fetch all users
         $users = User::all();
-        return view('admin.administrator.all', compact('users'));
     }
+
+    return view('admin.administrator.all', compact('users'));
+}
+
 
     public function export_excel()
     {

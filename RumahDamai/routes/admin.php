@@ -49,10 +49,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::get('/anak/{id}/pdf', [AnakController::class, 'generatePDF'])->name('anak.pdf');
     Route::get('/anak/export/excel', [AnakController::class, 'exportExcel'])->name('anak.export.excel');
-
-
-
-
     /*
     |--------------------------------------------------------------------------
     | Master Data

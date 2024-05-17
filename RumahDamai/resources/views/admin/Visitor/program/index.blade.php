@@ -35,12 +35,12 @@
                             </td>
                             <td>{!! $programItem->kelas !!}</td>
                             <td>
-                                <a href="{{ route('program.show', $programItem->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                <a href="{{ route('program.edit', $programItem->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('program.show', $programItem->id) }}" class="btn btn-primary ">Detail</a>
+                                <a href="{{ route('program.edit', $programItem->id) }}" class="btn btn-info ">Edit</a>
                                 <form action="{{ route('program.destroy', $programItem->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger " onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>

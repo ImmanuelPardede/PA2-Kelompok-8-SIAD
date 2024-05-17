@@ -5,17 +5,29 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="card-title">Data Anak</h1>
+                    <h1 class="display-5 font-weight-bold text-left">Data Anak</h1>
                     <!-- Tampilkan notifikasi jika ada -->
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div>
-                        <a href="{{ route('anak.export.excel') }}" class="btn btn-primary">Export to Excel</a>
-                        <a href="{{ route('anak.create') }}" class="btn btn-success ml-2">Tambah Anak</a>
+                    <div class="d-flex">
+                        <a href="{{ route('anak.create') }}" class="btn btn-success">Tambah Anak</a>
                     </div>
+                </div>
+
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('anak.export.excel') }}" class="btn btn-primary mr-auto">Export to Excel</a>
+                    <form action="{{ route('anak.index') }}" method="GET" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" name="search" id="search" class="form-control typeahead" placeholder="Cari Nama Anak" aria-label="Cari Nama Anak" value="{{ request('search') ?? '' }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-primary" type="submit">Cari</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 
 
@@ -40,15 +52,10 @@
                                     <td>
                                         <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
                                         <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
-                                        </form>
-                                        <form method="POST" id="deleteForm{{ $anak->id }}" class="d-inline"
-                                            action="{{ route('anak.destroy', $anak->id) }}">
+                                        <form method="POST" id="deleteForm{{ $anak->id }}" class="d-inline" action="{{ route('anak.destroy', $anak->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-danger"
-                                                onclick="handleDeleteConfirmation('deleteForm{{ $anak->id }}')">
-                                                Hapus
-                                            </button>
+                                            <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $anak->id }}')">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>

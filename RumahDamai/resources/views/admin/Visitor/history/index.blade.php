@@ -40,12 +40,12 @@
                                 <td>{{ \Illuminate\Support\Str::words($history->tujuan_utama, 3, '...') }}</td>
                                 <td>{{ $history->dibangun }}</td>
                                 <td>
-                                    <a href="{{ route('history.show', $history->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                    <a href="{{ route('history.edit', $history->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{ route('history.show', $history->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ route('history.edit', $history->id) }}" class="btn btn-info">Edit</a>
                                     <form action="{{ route('history.destroy', $history->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

@@ -22,7 +22,7 @@
         </li>
         <li class="nav-item">
             <a href="{{ route('kalender.index') }}" class="nav-link">
-                <i class="icon-grid menu-icon"></i>
+                <i class="mdi mdi-calendar menu-icon"></i>
                 <span class="menu-title">Kalender</span>
             </a>
         </li>
@@ -30,7 +30,7 @@
             @if (auth()->user()->role === 'admin')
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                        <i class="icon-layout menu-icon"></i>
+                        <i class="mdi mdi-account menu-icon"></i>
                         <span class="menu-title">Kepegawaian</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -55,7 +55,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                         aria-controls="form-elements">
-                        <i class="icon-columns menu-icon"></i>
+                        <i class="mdi mdi-human-child menu-icon"></i>
                         <span class="menu-title">Data Anak</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -72,7 +72,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                        <i class="icon-grid-2 menu-icon"></i>
+                        <i class="mdi mdi-account-supervisor-circle menu-icon"></i>
                         <span class="menu-title">Tipe Anak</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -89,7 +89,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-                        <i class="mdi mdi-account menu-icon"></i>
+                        <i class="mdi mdi-school menu-icon"></i>
                         <span class="menu-title">Pendidikan</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -112,7 +112,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                         aria-controls="ui-basic">
-                        <i class="icon-layout menu-icon"></i>
+                        <i class="mdi mdi-database menu-icon"></i>
                         <span class="menu-title">Master Data</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -152,7 +152,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
                         aria-controls="succes">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-home"></i>
                         <span class="menu-title">Home</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -171,7 +171,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false"
                         aria-controls="about">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-information"></i>
                         <span class="menu-title">About</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -187,7 +187,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false"
                         aria-controls="program">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-format-list-bulleted"></i>
                         <span class="menu-title">Program</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -203,7 +203,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false"
                         aria-controls="berita">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-newspaper"></i>
                         <span class="menu-title">Berita</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -219,7 +219,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#fasilitas" aria-expanded="false"
                         aria-controls="fasilitas">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-factory"></i>
                         <span class="menu-title">Fasilitas</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -235,7 +235,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#galeri" aria-expanded="false"
                         aria-controls="galeri">
-                        <i class="mdi mdi-web"></i>
+                        <i class="mdi mdi-image menu-icon"></i>
                         <span class="menu-title">Galeri</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -271,14 +271,14 @@
 
                 <li class="nav-item">
                     <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
-                        <i class="icon-grid menu-icon"></i>
+                        <i class="mdi mdi-calendar-clock menu-icon"></i>
                         <span class="menu-title">Jadwal</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('raport.index') }}">
-                        <i class="icon-paper menu-icon"></i>
+                        <i class="mdi mdi-file-document menu-icon"></i>
                         <span class="menu-title">Raport Anak</span>
                     </a>
                 </li>
@@ -286,7 +286,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
                         aria-controls="icons">
-                        <i class="icon-contract menu-icon"></i>
+                        <i class="mdi mdi-file menu-icon"></i>
                         <span class="menu-title">PPI</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -303,7 +303,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
                         aria-controls="tables">
-                        <i class="icon-grid-2 menu-icon"></i>
+                        <i class="mdi mdi-book menu-icon"></i>
                         <span class="menu-title">Materi</span>
                         <i class="menu-arrow"></i>
                     </a>
@@ -339,7 +339,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
                         aria-controls="tables">
-                        <i class="icon-grid-2 menu-icon"></i>
+                        <i class="mdi mdi-gift menu-icon"></i>
                         <span class="menu-title">Pendukung</span>
                         <i class="menu-arrow"></i>
                     </a>
