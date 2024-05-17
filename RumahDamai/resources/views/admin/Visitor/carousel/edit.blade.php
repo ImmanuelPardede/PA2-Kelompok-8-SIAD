@@ -5,6 +5,7 @@
     <div class="card">
         <div class="card-body">
             <h1 class="card-title">Edit Carousel Item</h1>
+            <h1 class="display-5 font-weight-bold text-left">Edit Data Carousel</h1>
 
             <!-- Form untuk mengupdate carousel item -->
             <form method="POST" action="{{ route('carousel.update', $carousel->id) }}" enctype="multipart/form-data">
@@ -13,7 +14,7 @@
 
                 <!-- Input untuk caption -->
                 <div class="mb-3">
-                    <label for="caption" class="form-label">Caption</label>
+                    <label for="caption" class="form-label">Judul</label>
                     <input type="text" class="form-control" id="caption" name="caption" value="{{ $carousel->caption }}" placeholder="Enter caption" maxlength="50">
                 </div>
 

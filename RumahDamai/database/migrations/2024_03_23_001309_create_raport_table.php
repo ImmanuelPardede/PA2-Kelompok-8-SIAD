@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('raport', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anak_id');
-            $table->string('periode_bulan')->nullable(); 
-            $table->string('tahun', 4)->nullable(); 
+            $table->unsignedBigInteger('tahun_ajaran_id'); 
+            $table->unsignedBigInteger('semester_id',); 
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak');
+            $table->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
+            $table->foreign('semester_id')->references('id')->on('semester_tahun_ajaran');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         
     }

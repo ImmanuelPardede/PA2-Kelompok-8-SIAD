@@ -7,14 +7,14 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="card-title">Carousel Items</h1>
+                <h1 class="card-title">Carousel</h1>
                 <!-- Tampilkan notifikasi jika ada -->
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('carousel.create') }}" class="btn btn-success mb-3">Add New Carousel Item</a>
+                <a href="{{ route('carousel.create') }}" class="btn btn-success mb-3">Tambah Carousel</a>
             </div>
 
             <div class="table-responsive">
@@ -22,10 +22,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Image</th>
-                            <th>Caption</th>
-                            <th>Subcaption</th>
-                            <th>Actions</th>
+                            <th>Gambar</th>
+                            <th>Judul</th>
+                            <th>SubJudul</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,12 +38,12 @@
                             <td>{{ $item->caption }}</td>
                             <td>{{ $item->subcaption }}</td>
                             <td>
-                                <a href="{{ route('carousel.show', $item->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                <a href="{{ route('carousel.edit', $item->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('carousel.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('carousel.edit', $item->id) }}" class="btn btn-info">Edit</a>
                                 <form action="{{ route('carousel.destroy', $item->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
                                 
                             </td>

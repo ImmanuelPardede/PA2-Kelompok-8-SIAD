@@ -164,7 +164,6 @@ class ProgramController extends Controller
     return redirect()->route('program.index')->with('success', 'Program berhasil diperbarui.');
 }
     /**
-     * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {

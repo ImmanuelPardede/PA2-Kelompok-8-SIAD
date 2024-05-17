@@ -55,6 +55,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
 
 
+    Route::get('/anak/export/excel', [AnakController::class, 'exportExcel'])->name('anak.export.excel');
     /*
     |--------------------------------------------------------------------------
     | Master Data
@@ -113,6 +114,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     | Users
     |--------------------------------------------------------------------------
     */
+    Route::get('/administrator/all', [AdministratorController::class, 'all'])->name('admin.administrator.all');
     Route::get('/administrator/admin', [AdministratorController::class, 'admin'])->name('admin.administrator.admin');
     Route::get('/administrator/guru', [AdministratorController::class, 'guru'])->name('admin.administrator.guru');
     Route::get('/administrator/staff', [AdministratorController::class, 'staff'])->name('admin.administrator.staff');
@@ -124,6 +126,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::put('/administrator/{user}/update', [AdministratorController::class, 'update'])->name('admin.administrator.update');
     Route::delete('/administrator/{user}/destroy', [AdministratorController::class, 'destroy'])->name('admin.administrator.destroy');
     Route::get('/administrator/{id}/pdf', [AdministratorController::class, 'generatePDF'])->name('user.pdf');
+    Route::get('/administrator/export/excel', [AdministratorController::class, 'export_excel'])->name('export.excel');
 
 
     /*

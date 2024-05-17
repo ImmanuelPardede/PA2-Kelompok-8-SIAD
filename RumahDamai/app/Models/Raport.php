@@ -13,13 +13,10 @@ class Raport extends Model
 
     protected $fillable = [
 
-        'periode_bulan',
-        'tahun',
-        'area',
+        'tahun_ajaran_id',
+        'semester_id',
         'anak_id',
-        'kemampuan',
-        'kelas_kemampuan',
-        'naratif',
+        'user_id',
     ];
 
     public function anak()
@@ -27,5 +24,19 @@ class Raport extends Model
         return $this->belongsTo(Anak::class, 'anak_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function tahunajaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(SemesterTahunAjaran::class, 'semester_id');
+    }
 
 }

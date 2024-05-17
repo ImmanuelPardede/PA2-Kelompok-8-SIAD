@@ -47,9 +47,17 @@
             text-align: left;
         }
 
-        .atasan{
-  margin-top: 20px;
-}
+        .atasan {
+            margin-top: 10px; /* Ubah nilai margin-top sesuai kebutuhan */
+            margin-bottom: 10px; /* Ubah nilai margin-bottom sesuai kebutuhan */
+            text-align: center;
+        }
+
+        .atasan img {
+            margin-right: 20px; /* Jarak antara gambar dan teks */
+            width: 75px;
+        }
+
 .yayasan {
     font-size: 24px;
     font-size: 3vw;
@@ -64,52 +72,49 @@
 #tls{
  text-align:right; 
 }
+
+#camat{
+    text-align:right;
+    margin-right: 80px;
+  }
+  #nama-camat{
+    margin-top:100px;
+    margin-right: 85px;
+    text-align:right;
+  }
     </style>
 </head>
 <body>
     <header>
         <div class="atasan">
-            <h1 class="yayasan"><strong>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</strong></h1>
-            <h2 class="yayasan"><strong>LAPORAN HASIL BELAJAR SISWA</strong></h2>
-            <h5 class="yayasan"><strong>@if ($anak->lokasi_id == 1)Desa Lumban Silintong, Kecamatan
-                Balige, Kabupaten Toba
-                @elseif ($anak->lokasi_id == 2)
-                Desa Sawah Lamo, Kecamatan Andam
-                Dewi
-                Kabupaten Tapanuli Tengah.
-                    @else
-                    Data Alamat Tidak Tersedia
-                @endif
-            </strong></h5>
-
+            <div class="konten" style="text-align: center;">
+                <h2>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</h2>
+                <h3>@if($anak->lokasi_id == 1)Lumban Silintong @elseif ($anak->lokasi_id == 2) Andam Dewi @endif</h3>
+                <h4>@if ($anak->lokasi_id == 1)Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
+                    @elseif ($anak->lokasi_id == 2)Sawah Lamo, Andam Dewi 22651, Kabupaten Tapanuli Tengah, Sumatra Utara, Indonesia
+                        @else
+                        Data Alamat Tidak Tersedia
+                    @endif</h4>
             </div>
         </div>
       </header>
       <hr class="garis1"/>
-
+      <h4 style="text-align: center">Laporan Hasil Belajar Siswa</h4>
         <div class="row">
             <div class="col">
-                <div id="tgl-srt" class="col-md-6">
-                    <p id="tls">PPI No   :   01</p>
-                      
-                  </div>
                 <table class="no-border-table"> <!-- Add custom class to the table -->
-                    <tbody>
+                    <tbody style="font-size: 12px;">
                         <tr>
-                            <td>Periode Bulan</td>
-                            <td>: {{ $raport->periode_bulan }} {{ $raport->tahun }}</td>
+                            <td>Nomor Induk Anak</td>
+                            <td>: {{ $raport->anak->nia }}</td>
                         </tr>
                         <tr>
                             <td>Nama</td>
                             <td>: {{ $raport->anak->nama_lengkap }}</td>
                         </tr>
                         <tr>
-                            <td>NIA</td>
-                            <td>: {{ $raport->anak->nia }}</td>
-                        </tr>
-                        <tr>
-                            <td>Kelas Kronologis:</td>
-                            <td></td>
+                            <td>T.A</td>
+                            <td>: {{ $raport->tahunajaran->tahun_ajaran }}/ {{ $raport->semester->semester_tahun_ajaran }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -120,14 +125,10 @@
                 <table class="">
                     <thead>
                         <tr>
-                            <td rowspan="2" style="width: 50px ;font-weight: bold; background-color: #ccc;">No</td>
-                            <td rowspan="2"style="width: 70px ;font-weight: bold;background-color: #ccc;">Area</td>
-                            <td rowspan="2"style="width: 150px ;font-weight: bold;background-color: #ccc;">Kemampuan yang dipelajari</td>
-                            <td colspan="2" style="width: 300px">Hasil Yang Dicapai</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px ;font-weight: bold;background-color: #ccc;">Kelas kemampuan</td>
-                            <td style="font-weight: bold;background-color: #ccc;">Naratif</td>
+                            <td style="width: 50px  ;font-weight: bold; background-color: #ccc; font-size: 13px;">No</td>
+                            <td style="width: 300px ;font-weight: bold; background-color: #ccc; font-size: 13px;">Mata Pelajaran</td>
+                            <td style="width: 250px ;font-weight: bold; background-color: #ccc; font-size: 13px;">Kemampuan yang dipelajari</td>
+                            <td style="width: 350px ;font-weight: bold; background-color: #ccc; font-size: 13px;">Hasil Yang Dicapai</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,30 +139,28 @@
 
                         @foreach($detailraports as $index => $detail)
                         <tr>
-                            @if ($detail->area !== $prevArea)
-                            @php
-                            $nomorTampil++;
-                            @endphp
-                            <td>{{ $nomorTampil }}</td>
-                        @else
-                            <td></td>
-                        @endif
-                            <td style="font-weight: bold;">
-                                @if ($detail->area !== $prevArea)
-                                    {{ $detail->area }}
-                                    @php
-                                    $prevArea = $detail->area;
-                                    @endphp
-                                @endif
+                            <td style="font-weight: bold; font-size: 12px;">{{ $loop->iteration }}</td>
+                            <td style="font-weight: bold; font-size: 12px;"> <!-- Added font-size: 12px -->
+                                {{ $detail->matapelajaran->nama_kelas }}
                             </td>
-                                <td style="font-weight: bold;">{{ $detail->kemampuan }}</td>
-                            <td>{{ $detail->kelas_kemampuan }}</td>
-                            <td style="text-align: left;">{{ $detail->naratif }}</td>
+                            <td style="font-weight: bold; font-size: 12px;"> <!-- Added font-size: 12px -->
+                                {{ $detail->grade }}
+                            </td>
+                            <td style="text-align: left; font-size: 12px;"> <!-- Added font-size: 12px -->
+                                {!! $detail->keterangan !!}
+                            </td>
                         </tr>
+                        
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            <div class="col-md-4">
+                <p id="camat" style="font-size: 12px;"><strong>Guru Rumah Damai</strong></p>
+                <div id="nama-camat" style="font-size: 12px;"><strong><u>{{ $raport->user->nama_lengkap }}</u></strong><br />
+              NIP. {{ $raport->user->nip }}</div>
+              </div>
+              </div>
     </div>
 </body>
 </html>

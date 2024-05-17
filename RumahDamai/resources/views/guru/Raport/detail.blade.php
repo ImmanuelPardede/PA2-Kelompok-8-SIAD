@@ -14,14 +14,20 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            <div class="col-sm-4"><strong>Periode Bulan</strong></div>
-                            <div class="col-sm-10 bg-secondary">{{ $raport->periode_bulan }}</div>
+                            <div class="col-sm-4"><strong>NIA</strong></div>
+                            <div class="col-sm-10 bg-secondary">{{ $raport->anak->nia }}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-sm-4"><strong>Tahun</strong></div>
-                            <div class="col-sm-10 bg-secondary">{{ $raport->tahun }}</div>
+                            <div class="col-sm-10 bg-secondary">{{ $raport->tahunajaran->tahun_ajaran }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-4"><strong>Semester</strong></div>
+                            <div class="col-sm-10 bg-secondary">{{ $raport->semester->semester_tahun_ajaran }}</div>
                         </div>
                     </div>
                 </div>
@@ -32,59 +38,25 @@
                     <thead>
                         <tr>
                             <th style="text-align: center;">No</th>
-                            <th style="text-align: center;">Area</th>
-                            <th style="text-align: center;">Kemampuan yang dipelajari</th>
-                            <th style="text-align: center;">Kelas Kemampuan</th>
-                            <th style="text-align: center;">Naratif</th>
+                            <th style="text-align: center;">Mata Pelajaran</th>
+                            <th style="text-align: center;">Grade</th>
+                            <th style="text-align: center;">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $prevArea = null;
-                            $nomorTampil = 0;
-                        @endphp
                         @foreach ($detailraports as $index => $detailraport)
                             <tr>
-                                @if ($detailraport->area !== $prevArea)
-                                    @php
-                                        $nomorTampil++;
-                                    @endphp
-                                    <td>{{ $nomorTampil }}</td>
-                                @else
-                                    <td></td>
-                                @endif
-
-                                <td style="font-weight: bold;">
-                                    @if ($detailraport->area !== $prevArea)
-                                        {{ $detailraport->area }}
-                                        @php
-                                            $prevArea = $detailraport->area;
-                                        @endphp
-                                    @endif
-                                </td>
-
-                                <td>{{ $detailraport->kemampuan }}</td>
-                                <td>{{ $detailraport->kelas_kemampuan }}</td>
-                                <td>
-                                    @if (str_word_count($detailraport->naratif) > 6)
-                                        @php
-                                            $words = explode(' ', $detailraport->naratif);
-                                            $chunked = array_chunk($words, 6);
-                                        @endphp
-                                        @foreach ($chunked as $chunk)
-                                            {{ implode(' ', $chunk) }}<br>
-                                        @endforeach
-                                    @else
-                                        {{ $detailraport->naratif }}
-                                    @endif
-                                </td>
+                                <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                <td>{{ $detailraport->matapelajaran->nama_kelas }}</td>
+                                <td style="text-align: center;">{{ $detailraport->grade }}</td>
+                                <td style="white-space: pre-line;">{!! $detailraport->keterangan !!}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
             <a href="{{ route('raport.pdf', $raport->id) }}" class="btn btn-success">Download PDF</a>
-            <a href="{{ route('raport.index') }}" class="btn btn-primary">Back</a>
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Kemabali</a>
         </div>
     </div>
 @endsection

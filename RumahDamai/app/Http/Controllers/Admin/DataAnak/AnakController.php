@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\DataAnak;
 
+use App\Exports\ExportAnak;
 use App\Http\Controllers\Controller;
 use App\Models\AnakDisabilitas;
 use App\Models\AnakNonDisabilitas;
@@ -19,15 +20,28 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AnakController extends Controller
 {
 
-    public function index()
-    {
+// In your AnakController.php
+
+public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    if ($search) {
+        $anakList = Anak::where('nama_lengkap', 'like', "%{$search}%")
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(7);
+    } else {
         $anakList = Anak::orderBy('created_at', 'desc')->paginate(7);
-        return view('admin.DataAnak.Anak.index', compact('anakList'));
     }
+
+    return view('admin.DataAnak.Anak.index', compact('anakList'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -347,5 +361,10 @@ class AnakController extends Controller
 
     // Output PDF to browser
     return $dompdf->stream($filename);
+}
+
+public function exportExcel()
+{
+    return Excel::download(new ExportAnak, 'anak.xlsx');
 }
 }

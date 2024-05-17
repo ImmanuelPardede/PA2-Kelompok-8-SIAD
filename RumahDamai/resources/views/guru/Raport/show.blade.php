@@ -8,6 +8,13 @@
                     <h1 class="card-title">Data Anak Didik</h1>
                 </div>
 
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+        
+
                 <div class="table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
@@ -16,7 +23,7 @@
                             @endif
                         </div>
                         <div>
-                            <a href="{{ route('raport.create') }}" class="btn btn-success">Create Raport</a>
+                            <a href="{{ route('raport.create', ['anak_id' => $id]) }}" class="btn btn-success">Create Raport</a>
                         </div>
                     </div>
 
@@ -24,8 +31,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tahun</th>
-                                <th>Periode Bulan</th>
+                                <th>Semester</th>
+                                <th>Periode Tahun</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -33,8 +40,8 @@
                             @foreach ($raports as $key => $raport)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $raport->tahun }}</td>
-                                    <td>{{ $raport->periode_bulan }}</td>
+                                    <td>{{ $raport->semester->semester_tahun_ajaran }}</td>
+                                    <td>{{ $raport->tahunajaran->tahun_ajaran }}</td>
                                     <td>
                                         <form method="POST" id="deleteForm{{ $raport->id }}" class="d-inline"
                                             action="{{ route('raport.destroy', $raport->id) }}">

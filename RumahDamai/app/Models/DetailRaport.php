@@ -13,14 +13,20 @@ class DetailRaport extends Model
 
     protected $fillable = [
         'raport_id',
-        'area',
-        'kemampuan',
-        'kelas_kemampuan',
-        'naratif',
+        'mata_pelajaran_id',
+        'grade',
+        'keterangan',
     ];
 
     public function raport()
     {
         return $this->belongsTo(Raport::class);
     }
+
+    public function matapelajaran()
+    {
+        return $this->belongsTo(Kelas::class, 'mata_pelajaran_id');
+
+    }
+    
 }
