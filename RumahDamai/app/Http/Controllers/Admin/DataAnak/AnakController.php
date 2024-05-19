@@ -25,22 +25,22 @@ use Maatwebsite\Excel\Facades\Excel;
 class AnakController extends Controller
 {
 
-// In your AnakController.php
+    // In your AnakController.php
 
-public function index(Request $request)
-{
-    $search = $request->input('search');
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
 
-    if ($search) {
-        $anakList = Anak::where('nama_lengkap', 'like', "%{$search}%")
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(7);
-    } else {
-        $anakList = Anak::orderBy('created_at', 'desc')->paginate(7);
+        if ($search) {
+            $anakList = Anak::where('nama_lengkap', 'like', "%{$search}%")
+                ->orderBy('created_at', 'desc')
+                ->paginate(7);
+        } else {
+            $anakList = Anak::orderBy('created_at', 'desc')->paginate(7);
+        }
+
+        return view('admin.DataAnak.Anak.index', compact('anakList'));
     }
-
-    return view('admin.DataAnak.Anak.index', compact('anakList'));
-}
 
 
     /**
@@ -54,7 +54,7 @@ public function index(Request $request)
         $golonganDarah = GolonganDarah::all();
         $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
-        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas'));
+        return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit', 'lokasiTugas'));
     }
 
     /**
@@ -85,74 +85,74 @@ public function index(Request $request)
         try {
 
 
-       // Generate NIA
-       $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
-       $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
-       $tahun_masuk = date('y');
-       $tahun_lahir = substr(date('Y', strtotime($request->tanggal_lahir)), -2);
+            // Generate NIA
+            $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
+            $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
+            $tahun_masuk = date('y');
+            $tahun_lahir = substr(date('Y', strtotime($request->tanggal_lahir)), -2);
 
-       $latest_anak = Anak::where('lokasi_id', $request->lokasi_id)
-                          ->where('tipe_anak', $request->tipe_anak)
-                          ->latest()
-                          ->first();
+            $latest_anak = Anak::where('lokasi_id', $request->lokasi_id)
+                ->where('tipe_anak', $request->tipe_anak)
+                ->latest()
+                ->first();
 
-       $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
+            $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
 
-       $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
-
-
-        $anak = Anak::create([
-            'nama_lengkap' => $request->nama_lengkap,
-            'agama_id' => $request->agama_id,
-            'jenis_kelamin_id' => $request->jenis_kelamin_id,
-            'golongan_darah_id' => $request->golongan_darah_id,
-            'kebutuhan_disabilitas_id' => $request->kebutuhan_disabilitas_id,
-            'penyakit_id' => $request->penyakit_id,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'disukai' => $request->disukai,
-            'tidak_disukai' => $request->tidak_disukai,
-            'alamat' => $request->alamat,
-            'kelebihan' => $request->kelebihan,
-            'kekurangan' => $request->kekurangan,
-            'status' => 'aktif',
-            'lokasi_id' => $request->lokasi_id,
-            'tanggal_masuk' => now(),
-            'tipe_anak' => $request->tipe_anak,
-            'nia' => $nia, // Simpan NIA yang baru diambil
-        ]);
+            $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
 
 
-        if ($request->tipe_anak == 'disabilitas') {
-            AnakDisabilitas::create([
-                'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
-                'nama_lengkap' => $anak->nama_lengkap,
-                'tipe_anak' => 'disabilitas',
+            $anak = Anak::create([
+                'nama_lengkap' => $request->nama_lengkap,
+                'agama_id' => $request->agama_id,
+                'jenis_kelamin_id' => $request->jenis_kelamin_id,
+                'golongan_darah_id' => $request->golongan_darah_id,
+                'kebutuhan_disabilitas_id' => $request->kebutuhan_disabilitas_id,
+                'penyakit_id' => $request->penyakit_id,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'disukai' => $request->disukai,
+                'tidak_disukai' => $request->tidak_disukai,
+                'alamat' => $request->alamat,
+                'kelebihan' => $request->kelebihan,
+                'kekurangan' => $request->kekurangan,
+                'status' => 'aktif',
+                'lokasi_id' => $request->lokasi_id,
+                'tanggal_masuk' => now(),
+                'tipe_anak' => $request->tipe_anak,
+                'nia' => $nia, // Simpan NIA yang baru diambil
             ]);
-        } elseif ($request->tipe_anak == 'non_disabilitas') {
-            AnakNonDisabilitas::create([
-                'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
-                'nama_lengkap' => $anak->nama_lengkap,
-                'tipe_anak' => 'non_disabilitas',
-            ]);
-        }
 
-        // Mengelola upload foto profil
-        if ($request->hasFile('foto_profil')) {
-            $gambar = $request->file('foto_profil');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-            // Pindahkan gambar ke direktori yang diinginkan
-            $gambar->move('uploads/anak/', $new_gambar);
+            if ($request->tipe_anak == 'disabilitas') {
+                AnakDisabilitas::create([
+                    'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
+                    'nama_lengkap' => $anak->nama_lengkap,
+                    'tipe_anak' => 'disabilitas',
+                ]);
+            } elseif ($request->tipe_anak == 'non_disabilitas') {
+                AnakNonDisabilitas::create([
+                    'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
+                    'nama_lengkap' => $anak->nama_lengkap,
+                    'tipe_anak' => 'non_disabilitas',
+                ]);
+            }
 
-            // Update path gambar pada entitas anak yang ada
-            $anak->foto_profil = 'uploads/anak/' . $new_gambar;
-            $anak->save();
-        }
+            // Mengelola upload foto profil
+            if ($request->hasFile('foto_profil')) {
+                $gambar = $request->file('foto_profil');
+                $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+                $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
+
+                // Pindahkan gambar ke direktori yang diinginkan
+                $gambar->move('uploads/anak/', $new_gambar);
+
+                // Update path gambar pada entitas anak yang ada
+                $anak->foto_profil = 'uploads/anak/' . $new_gambar;
+                $anak->save();
+            }
 
             return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
-                } catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
         }
     }
@@ -163,7 +163,7 @@ public function index(Request $request)
      */
     public function show(string $id)
     {
-        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas')->find($id);
+        $anak = Anak::with('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit', 'lokasiTugas')->find($id);
         $penyakit = $anak->penyakit;
 
         return view('admin.DataAnak.Anak.show', compact('anak', 'penyakit'));
@@ -187,7 +187,7 @@ public function index(Request $request)
             return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
-        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit','lokasiTugas'));
+        return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit', 'lokasiTugas'));
     }
 
     /**
@@ -359,12 +359,12 @@ public function index(Request $request)
         // Get child's name for PDF filename
         $filename = 'anak_profile_' . str_replace(' ', '_', $anak->nama_lengkap) . '.pdf';
 
-    // Output PDF to browser
-    return $dompdf->stream($filename);
-}
+        // Output PDF to browser
+        return $dompdf->stream($filename);
+    }
 
-public function exportExcel()
-{
-    return Excel::download(new ExportAnak, 'anak.xlsx');
-}
+    public function exportExcel()
+    {
+        return Excel::download(new ExportAnak, 'anak.xlsx');
+    }
 }

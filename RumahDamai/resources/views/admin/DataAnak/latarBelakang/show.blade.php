@@ -37,14 +37,17 @@
                                                                 <img src="{{ asset('uploads/gambar_latar_belakang/' . $gambar->nama) }}" alt="Gambar Latar Belakang" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
                                                             </div>
                                                         </div>
-                                                        @if($latarBelakang->deskripsi)
-                                                            @php
-                                                                $deskripsiArray = json_decode($latarBelakang->deskripsi, true);
-                                                                $deskripsiSatuNilai = $deskripsiArray[$index] ?? ''; // Ambil nilai sesuai indeks gambar
-                                                            @endphp
-                                                            <p class="ml-3"><strong>Deskripsi:</strong> {{ $deskripsiSatuNilai }}</p>
-                                                        @endif
                                                     </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Deskripsi</th>
+                                                <td>
+                                                    @if(isset($latarBelakang->deskripsiLatarBelakang[$index]->deskripsi))
+                                                        <p>{{ $latarBelakang->deskripsiLatarBelakang[$index]->deskripsi }}</p>
+                                                    @else
+                                                        <p>Data tidak tersedia</p>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -59,6 +62,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                        <a href="{{ route('anak.pdf', ['id' => $latarBelakang->id]) }}" class="btn btn-primary">Generate PDF</a>
                     </div>
                 </div>
             </div>

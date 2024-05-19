@@ -7,30 +7,6 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h1 class="card-title">Data Anak Didik</h1>
                 </div>
-<<<<<<< Updated upstream
-                
-                <table class="table mt-3 table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Dibuat</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($ppiA as $key => $ppia)
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $ppia->created_at }}</td>
-                            <td>
-                                <a href="{{ route('PPI.ModelA.detail', ['id' => $ppia->id]) }}" class="btn btn-info btn-sm">Detail</a>
-
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-=======
 
                 <div class="table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -74,7 +50,6 @@
                         </tbody>
                     </table>
                 </div>
->>>>>>> Stashed changes
             </div>
         </div>
     </div>

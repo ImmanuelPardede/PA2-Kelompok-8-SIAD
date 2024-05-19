@@ -153,7 +153,7 @@
                     @enderror
                 </div>
 
-                    
+
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" id="submitButton" class="btn btn-primary mr-2"
                         onclick="handleUpdatedConfirmation(event)">Perbarui</button>
@@ -171,8 +171,8 @@
                                 <input type="file" class="form-control" id="foto_profil" name="foto_profil">
                             </div>
                         </div>
-                        
-    
+
+
                 </div>
             </form>
 
@@ -191,7 +191,7 @@
                 .catch(error => {
                     console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
                 });
-    
+
             ClassicEditor
                 .create(document.querySelector('#editor2'), {
                     // Konfigurasi CKEditor 5 untuk textarea kedua
@@ -199,7 +199,7 @@
                 .catch(error => {
                     console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
                 });
-    
+
                 ClassicEditor
                 .create(document.querySelector('#editor3'), {
                     // Konfigurasi CKEditor 5 untuk textarea kedua
@@ -207,7 +207,7 @@
                 .catch(error => {
                     console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
                 });
-    
+
                 ClassicEditor
                 .create(document.querySelector('#editor4'), {
                     // Konfigurasi CKEditor 5 untuk textarea kedua

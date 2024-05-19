@@ -52,6 +52,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('latarBelakang', LatarBelakangController::class);
     Route::resource('/DataAnak/latar-belakang', LatarBelakangController::class);
     Route::get('/latarBelakang/{id}/pdf', [AnakController::class, 'generatePDF'])->name('latarBelakang.pdf');
+    Route::get('anak/pdf/{id}', [LatarBelakangController::class, 'generatePDF'])->name('anak.pdf');
+    Route::get('/admin/data-anak/latar-belakang/{id}/pdf', [App\Http\Controllers\Admin\DataAnak\LatarBelakangController::class, 'generatePDF'])->name('anak.pdf');
+
+
 
 
 

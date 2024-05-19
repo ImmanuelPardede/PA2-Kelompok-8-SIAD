@@ -21,10 +21,14 @@ class LatarBelakang extends Model
     {
         return $this->belongsTo(Anak::class, 'anak_id', 'id');
     }
-    
+
     public function gambarLatarBelakang()
     {
         return $this->hasMany(GambarLatarBelakang::class, 'latar_belakang_id');
     }
 
+    public function deskripsiLatarBelakang()
+    {
+        return $this->hasMany(DeskripsiLatarBelakang::class, 'latar_belakang_id', 'id');
+    }
 }

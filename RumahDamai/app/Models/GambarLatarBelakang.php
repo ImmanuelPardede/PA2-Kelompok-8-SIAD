@@ -10,7 +10,7 @@ class GambarLatarBelakang extends Model
     use HasFactory;
 
     protected $table = 'gambar_latar_belakang';
-    protected $fillable = ['url', 'latar_belakang_id'];
+    protected $fillable = ['url', 'nama', 'latar_belakang_id'];
 
     public function item()
     {

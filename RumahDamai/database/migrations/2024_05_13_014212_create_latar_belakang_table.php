@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('usia');
             $table->string('kelas');
             $table->date('tanggal');
-            $table->text('deskripsi');
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak')->onDelete('cascade');
