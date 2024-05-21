@@ -36,7 +36,7 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_galeri.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi setiap file img_fasilitas
+            'img_galeri.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:15000', // Validasi setiap file img_fasilitas
             'judul' => 'required|string',
             'waktu' => 'required|date',
             'lokasi' => 'required|string',
@@ -102,7 +102,7 @@ class GaleriController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'img_galeri.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Ubah required menjadi opsional
+        'img_galeri.*' => 'image|mimes:jpeg,png,jpg,gif|max:15000', // Ubah required menjadi opsional
         'judul' => 'required|string',
         'waktu' => 'required|date',
         'lokasi' => 'required|string',
