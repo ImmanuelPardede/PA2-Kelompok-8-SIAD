@@ -15,7 +15,7 @@
                     </div>
                 @endif
 
-                @if ($fasilitas)
+                @if ($fasilitas->isEmpty())
                 <a href="{{ route('fasilitas.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
                 @endif
 
@@ -45,7 +45,13 @@
                                 <p>No Image</p>
                             @endif
                             </td>
-                            <td>{!! $item->fasilitas !!}</td>
+                            <td>
+                                @if (strlen($item->fasilitas) > 100)
+                                    {!! substr($item->fasilitas, 0, 100) !!}...
+                                @else
+                                    {!! $item->fasilitas !!}
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('fasilitas.show', $item->id) }}" class="btn btn-primary">Detail</a>
                                 <a href="{{ route('fasilitas.edit', $item->id) }}" class="btn btn-info">Edit</a>

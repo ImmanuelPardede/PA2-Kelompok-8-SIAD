@@ -35,7 +35,7 @@ class HistoryController extends Controller
 {
     // Validasi input form
     $validatedData = $request->validate([
-        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
         'sejarah_singkat' => 'required|string',
         'tujuan_utama' => 'required|string',
         'dibangun' => 'required|date',
@@ -93,7 +93,7 @@ class HistoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Hanya terima file gambar dengan ekstensi tertentu (jpeg, png, jpg, gif) dan maksimal ukuran 2MB
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif|max:3000', // Hanya terima file gambar dengan ekstensi tertentu (jpeg, png, jpg, gif) dan maksimal ukuran 2MB
             'sejarah_singkat' => 'required|string',
             'tujuan_utama' => 'required|string',
             'dibangun' => 'required|date',

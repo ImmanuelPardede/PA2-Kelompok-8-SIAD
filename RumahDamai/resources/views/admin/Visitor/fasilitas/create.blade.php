@@ -10,7 +10,7 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="img_fasilitas" class="form-label">Images (Max 3)</label>
+                    <label for="img_fasilitas" class="form-label">Images</label>
                     <input type="file" class="form-control" id="img_fasilitas" name="img_fasilitas[]" accept="image/*" multiple required>
                 </div>
                 
@@ -37,15 +37,6 @@
 </div>
 
 
-<script>
-    document.getElementById('img_fasilitas').addEventListener('change', function() {
-        var files = this.files;
-        if (files.length > 3) {
-            alert('You can only upload a maximum of 3 images.');
-            this.value = ''; // Reset the input field
-        }
-    });
-</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

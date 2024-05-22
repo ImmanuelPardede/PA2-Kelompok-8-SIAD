@@ -36,7 +36,7 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_berita' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'img_berita' => 'required|image|mimes:jpeg,png,jpg|max:3000',
             'kategori_id' => 'required',
             'judul' => 'required',
             'deskripsi' => 'required',

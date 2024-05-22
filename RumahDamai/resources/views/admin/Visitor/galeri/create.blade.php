@@ -10,23 +10,23 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="img_galeri" class="form-label">Images (Max 15)</label>
+                    <label for="img_galeri" class="form-label">Images</label>
                     <input type="file" class="form-control" id="img_galeri" name="img_galeri[]" accept="image/*" multiple required>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="judul" class="form-label">judul (Max 15 characters)</label>
-                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter judul" maxlength="15">
+                    <label for="judul" class="form-label">judul</label>
+                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter judul">
                 </div>
 
                 <div class="mb-3">
-                    <label for="waktu" class="form-label">waktu (Max 15 characters)</label>
-                    <input type="date" class="form-control" id="waktu" name="waktu" placeholder="Enter waktu" maxlength="15">
+                    <label for="waktu" class="form-label">waktu</label>
+                    <input type="date" class="form-control" id="waktu" name="waktu" placeholder="Enter waktu">
                 </div>
 
                 <div class="mb-3">
-                    <label for="lokasi" class="form-label">lokasi (Max 15 characters)</label>
-                    <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Enter lokasi" maxlength="15">
+                    <label for="lokasi" class="form-label">lokasi</label>
+                    <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Enter lokasi" >
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add galeri Item</button>

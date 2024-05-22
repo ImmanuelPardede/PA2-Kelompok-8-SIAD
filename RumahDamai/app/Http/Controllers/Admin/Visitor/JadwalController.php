@@ -35,6 +35,6 @@ class JadwalController extends Controller
         // Menghasilkan data kalender sesuai dengan minggu pembelajaran aktif
         $calendarData = $jadwalPembelajaranService->generateJadwalData($weekDays, $startOfWeek, $endOfWeek);
 
-        return view('visitor.jadwal', compact('weekDays', 'calendarData'));
+        return view('visitor.jadwal.jadwal', compact('weekDays', 'calendarData'));
     }
 }

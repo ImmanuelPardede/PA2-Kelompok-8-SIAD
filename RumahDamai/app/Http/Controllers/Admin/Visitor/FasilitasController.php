@@ -31,7 +31,7 @@ class FasilitasController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'img_fasilitas.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi setiap file img_fasilitas
+        'img_fasilitas.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:15000', // Validasi setiap file img_fasilitas
         'fasilitas' => 'required|string',
     ]);
 
@@ -93,7 +93,7 @@ public function store(Request $request)
     public function update(Request $request, $id)
 {
     $request->validate([
-        'img_fasilitas.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi setiap file img_fasilitas
+        'img_fasilitas.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:15000', // Validasi setiap file img_fasilitas
         'fasilitas' => 'required|string',
     ]);
 

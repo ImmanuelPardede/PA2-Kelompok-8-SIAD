@@ -14,8 +14,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if ($abouts->isEmpty())
                 <a href="{{ route('about.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
-            </div>
+            @endif
+        
+        </div>
 
             <div class="table-responsive">
                 <table class="table mt-3 ">

@@ -34,7 +34,13 @@
                             <td style="max-width: 200px;">
                                 <img src="{{ asset($beritaItem->img_berita) }}" alt="berita Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                             </td>
-                            <td>{{$beritaItem->judul }}</td>
+                            <td style="word-wrap: break-word;">
+                                @if (strlen($beritaItem->judul) > 60)
+                                    {{ substr($beritaItem->judul, 0, 60) }}...
+                                @else
+                                    {{ $beritaItem->judul }}
+                                @endif
+                            </td>                                                        
                             <td>{{$beritaItem->kategori->kategori }}</td>
                             <td>
                                 <a href="{{ route('berita.show', $beritaItem->id) }}" class="btn btn-primary ">Detail</a>

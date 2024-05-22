@@ -14,8 +14,16 @@ class ProgramSeeder extends Seeder
     public function run(): void
     {
         DB::table('program')->insert([
-            'img_program' => 'uploads/visitor/program/dummy1.jpg',
-            'kelas' => '<ul><li>Kelas Spritualitas</li><li>Kelas Karya Seni dan Budaya</li><li>Kelas Bahasa Inggris</li><li>Kelas Musik Tradisional</li><li>Kelas Futsal</li><li>Pendampingan Anak Berkebutuhan Khusus</li></ul>',
+            'img_program' => 'uploads/visitor/program/dummy3.jpg',
+            'kelas' => '<ol>
+            <li>Kelas Spritualitas</li>
+            <li>Kelas Karya Seni dan Budaya</li>
+            <li>Kelas Bahasa Inggris</li>
+            <li>Kelas Musik Tradisional</li>
+            <li>Kelas Futsal</li>
+            <li>Pendampingan Anak Berkebutuhan Khusus</li>
+        </ol>
+        ',
         ]);
     }
 }
