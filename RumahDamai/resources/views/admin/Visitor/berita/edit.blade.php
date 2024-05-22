@@ -57,7 +57,8 @@
                     <img src="{{ asset($berita->img_berita) }}" alt="Current Image" style="max-width: 200px; height: auto;">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
+                <button type="submit" id="submitButton" class="btn btn-success mr-2" onclick="handleUpdatedConfirmation(event)">Ubah</button>
             </form>
         </div>
     </div>

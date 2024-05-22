@@ -179,8 +179,7 @@ class AboutController extends Controller
 
         $abouts->delete();
 
-        return redirect()->route('about.index')
-        ->with('success', 'Carousel item deleted successfully.');
+        return redirect()->route('about.index')->with('success', 'Carousel item deleted successfully.');
     }
 
    

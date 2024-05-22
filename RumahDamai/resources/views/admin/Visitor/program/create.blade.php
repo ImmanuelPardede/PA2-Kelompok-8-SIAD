@@ -7,15 +7,16 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="card-title">Tambah Program Baru</div>
+                <div class="card-title text-left">Form Menambah Program Yayasan</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('program.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
-                            <label for="img_program">Gambar Program</label>
+                            <label for="img_program">Gambar<span style="color: red">*</span></label>
                             <input type="file" class="form-control @error('img_program') is-invalid @enderror" id="img_program" name="img_program" required>
+                            <small class="text-muted" id="wordCountInfo">Gambar Tidak Boleh Lebih Dari 1.</small>
                             @error('img_program')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -25,7 +26,7 @@
 
                         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
                         <div class="form-group">
-                            <label for="kelas" class="form-label">Kelas<span style="color: red">*</span></label>
+                            <label for="kelas" class="form-label">Kelas Yang Terdapat Di Yayasan<span style="color: red">*</span></label>
                             <textarea id="editor1" class="form-control @error('kelas') is-invalid @enderror" name="kelas" required autocomplete="kelas">
                                 <ul>
                                     <li>..</li>
@@ -40,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="jenis_program">Jenis Program</label>
+                            <label for="jenis_program">Jenis Program Yayasan<span style="color: red">*</span></label>
                             <input type="text" class="form-control @error('jenis_program[]') is-invalid @enderror" id="jenis_program" name="jenis_program[]" required>
                             @error('jenis_program[]')
                                 <span class="invalid-feedback" role="alert">
@@ -50,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
+                            <label for="deskripsi">Deskripsi Program<span style="color: red">*</span></label>
                             <textarea class="form-control @error('deskripsi[]') is-invalid @enderror" id="deskripsi" name="deskripsi[]" rows="4" required></textarea>
                             @error('deskripsi[]')
                                 <span class="invalid-feedback" role="alert">
@@ -59,7 +60,7 @@
                             @enderror
                         </div>
 
-                        <a href="#" class="addprogram btn btn-primary" style="float: right">Tambah Detail</a>
+                        <a href="#" class="addprogram btn btn-primary" style="float: right">Tambah Program</a>
                         <div class="raport"></div>
             
 

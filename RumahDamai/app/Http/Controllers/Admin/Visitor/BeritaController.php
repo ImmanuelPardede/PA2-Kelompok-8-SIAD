@@ -76,7 +76,11 @@ class BeritaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Ambil data berita berdasarkan ID
+        $berita = Berita::findOrFail($id);
+    
+        // Tampilkan view show berita dengan menyertakan data berita
+        return view('admin.visitor.berita.show', compact('berita'));
     }
 
     /**

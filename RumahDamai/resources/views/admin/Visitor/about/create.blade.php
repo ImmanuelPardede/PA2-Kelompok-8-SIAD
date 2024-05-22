@@ -2,18 +2,17 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Create About Data</div>
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title text-left">Form Menambah Tentang Yayasan</div>
 
-                <div class="card-body">
                     <form method="POST" action="{{ route('about.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Input for img_yayasan -->
                         <div class="form-group">
-                            <label for="img_yayasan">Image Yayasan</label>
+                            <label for="img_yayasan">Gambar Yayasan <span style="color: red">*</span></label>
                             <input id="img_yayasan" type="file" class="form-control @error('img_yayasan') is-invalid @enderror" name="img_yayasan" required accept="image/*">
                             @error('img_yayasan')
                                 <span class="invalid-feedback" role="alert">
@@ -24,7 +23,7 @@
 
                         <!-- Input for latar_belakang -->
                         <div class="form-group">
-                            <label for="latar_belakang">Latar Belakang</label>
+                            <label for="latar_belakang">Latar Belakang Yayasan <span style="color: red">*</span></label>
                             <textarea id="latar_belakang" class="form-control @error('latar_belakang') is-invalid @enderror" name="latar_belakang" rows="4">{{ old('latar_belakang') }}</textarea>
                             @error('latar_belakang')
                                 <span class="invalid-feedback" role="alert">
@@ -35,13 +34,9 @@
 
 
 
-
-
-
-
                         <!-- Input for visi -->
                         <div class="form-group">
-                            <label for="visi">Visi</label>
+                            <label for="visi">Visi <span style="color: red">*</span></label>
                             <textarea id="visi" class="form-control @error('visi') is-invalid @enderror" name="visi" rows="4">{{ old('visi') }}</textarea>
                             @error('visi')
                                 <span class="invalid-feedback" role="alert">
@@ -67,9 +62,11 @@
                         </div>
                         <!-- Input for misi -->
 
+<hr>
+
                         <!-- Input for wilayah1 -->
                         <div class="form-group">
-                            <label for="wilayah1">Wilayah 1</label>
+                            <label for="wilayah1">Deskripsi Wilayah 1 <span style="color: red">*</span></label>
                             <input id="wilayah1" type="text" class="form-control @error('wilayah1') is-invalid @enderror" name="wilayah1" value="{{ old('wilayah1') }}">
                             @error('wilayah1')
                                 <span class="invalid-feedback" role="alert">
@@ -80,7 +77,7 @@
 
                         <!-- Input for img_wilayah1 -->
                         <div class="form-group">
-                            <label for="img_wilayah1">Image Wilayah 1</label>
+                            <label for="img_wilayah1">Gambar Wilayah 1 <span style="color: red">*</span></label>
                             <input id="img_wilayah1" type="file" class="form-control @error('img_wilayah1') is-invalid @enderror" name="img_wilayah1" required accept="image/*">
                             @error('img_wilayah1')
                                 <span class="invalid-feedback" role="alert">
@@ -89,9 +86,10 @@
                             @enderror
                         </div>
 
+                        <hr>
                         <!-- Input for wilayah2 -->
                         <div class="form-group">
-                            <label for="wilayah2">Wilayah 2</label>
+                            <label for="wilayah2">Deskripsi Wilayah 2 <span style="color: red">*</span></label>
                             <input id="wilayah2" type="text" class="form-control @error('wilayah2') is-invalid @enderror" name="wilayah2" value="{{ old('wilayah2') }}">
                             @error('wilayah2')
                                 <span class="invalid-feedback" role="alert">
@@ -102,7 +100,7 @@
 
                         <!-- Input for img_wilayah2 -->
                         <div class="form-group">
-                            <label for="img_wilayah2">Image Wilayah 2</label>
+                            <label for="img_wilayah2">Gambar Wilayah 2 <span style="color: red">*</span></label>
                             <input id="img_wilayah2" type="file" class="form-control @error('img_wilayah2') is-invalid @enderror" name="img_wilayah2" required accept="image/*">
                             @error('img_wilayah2')
                                 <span class="invalid-feedback" role="alert">
@@ -111,12 +109,11 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection
 

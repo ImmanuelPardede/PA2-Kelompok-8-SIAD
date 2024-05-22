@@ -4,32 +4,33 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title">Add New galeri Item</h1>
+            <h1 class="card-title text-left">Form Menambah Galeri</h1>
 
             <form method="POST" action="{{ route('galeri.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
-                    <label for="img_galeri" class="form-label">Images</label>
+                    <label for="img_galeri" class="form-label">Gambar<span style="color: red">*</span></label>
                     <input type="file" class="form-control" id="img_galeri" name="img_galeri[]" accept="image/*" multiple required>
+                    <small class="text-muted" id="wordCountInfo">Maksimal 10 Gambar.</small>
                 </div>
                 
                 <div class="mb-3">
-                    <label for="judul" class="form-label">judul</label>
+                    <label for="judul" class="form-label">Kegitan<span style="color: red">*</span></label>
                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter judul">
                 </div>
 
                 <div class="mb-3">
-                    <label for="waktu" class="form-label">waktu</label>
+                    <label for="waktu" class="form-label">Waktu<span style="color: red">*</span></label>
                     <input type="date" class="form-control" id="waktu" name="waktu" placeholder="Enter waktu">
                 </div>
 
                 <div class="mb-3">
-                    <label for="lokasi" class="form-label">lokasi</label>
+                    <label for="lokasi" class="form-label">Lokasi Kegiatan<span style="color: red">*</span></label>
                     <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Enter lokasi" >
                 </div>
 
-                <button type="submit" class="btn btn-primary">Add galeri Item</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
     </div>

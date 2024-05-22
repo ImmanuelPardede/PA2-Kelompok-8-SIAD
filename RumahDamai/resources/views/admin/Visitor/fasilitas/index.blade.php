@@ -27,13 +27,18 @@
                 <table class="table mt-3 ">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th class="text-center">Image</th>
+                            <th>No</th>
+                            <th class="text-center">Gambar</th>
                             <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($fasilitas->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center">Data tidak ada.</td>
+                        </tr>
+                        @else
                         @foreach($fasilitas as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td>
@@ -55,15 +60,15 @@
                             <td>
                                 <a href="{{ route('fasilitas.show', $item->id) }}" class="btn btn-primary">Detail</a>
                                 <a href="{{ route('fasilitas.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('fasilitas.destroy', $item->id) }}" method="POST" style="display: inline-block;">
+                                <form action="{{ route('fasilitas.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
+                                    <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Hapus</button>
                                 </form>
-                                
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -13,7 +13,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('berita.create') }}" class="btn btn-success mb-3">Tambahkan Berita</a>
+                <a href="{{ route('berita.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
             </div>
 
             <div class="table-responsive">
@@ -21,13 +21,18 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Image</th>
+                            <th>Gambar</th>
                             <th>Judul</th>
                             <th>Kategori</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($berita->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center">Data tidak ada.</td>
+                        </tr>
+                        @else
                         @foreach($berita as $index => $beritaItem)
                         <tr>
                             <td>{{ $index +1}}</td>
@@ -45,14 +50,16 @@
                             <td>
                                 <a href="{{ route('berita.show', $beritaItem->id) }}" class="btn btn-primary ">Detail</a>
                                 <a href="{{ route('berita.edit', $beritaItem->id) }}" class="btn btn-info ">Edit</a>
-                                <form action="{{ route('berita.destroy', $beritaItem->id) }}" method="POST" style="display: inline-block;">
+                                <form action="{{ route('berita.destroy', $beritaItem->id) }}" id="deleteForm{{ $beritaItem->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger " onclick="return confirm('Are you sure?')">Hapus</button>
+                                    <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $beritaItem->id }}')">Hapus</button>
                                 </form>
+
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
