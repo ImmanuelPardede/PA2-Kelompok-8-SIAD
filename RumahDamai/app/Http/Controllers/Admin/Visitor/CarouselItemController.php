@@ -35,7 +35,7 @@ class CarouselItemController extends Controller
     {
         // Validasi data yang diterima dari form
         $request->validate([
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk file gambar
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000', // Validasi untuk file gambar
             'caption' => 'nullable|string',
             'subcaption' => 'nullable|string',
         ]);
@@ -100,7 +100,7 @@ class CarouselItemController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg|max:3000',
         'caption' => 'nullable|string',
         'subcaption' => 'nullable|string',
     ]);

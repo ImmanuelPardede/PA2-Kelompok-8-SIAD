@@ -3,17 +3,15 @@
 @section('content')
 
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Tambah Anak</h2>
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+            <div class="card-title text-left">Form Menambah Berita</div>
             <form action="{{ route('berita.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
-
                 <div class="form-group">
                     <label for="judul">Judul<span style="color: red">*</span></label>
                     <input type="text" class="form-control" name="judul" required  id="judulInput">
-                    <small class="text-muted" id="wordCountInfo">Maksimal 10 kata.</small>
                 </div>
 
                 <div class="form-group">
@@ -48,9 +46,10 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
+    </div>
     </div>
 </div>
 

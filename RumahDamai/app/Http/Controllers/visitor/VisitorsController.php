@@ -33,14 +33,14 @@ class VisitorsController extends Controller
         $kategori = KategoriBerita::all();
         $anaktepi = AnakDisabilitas::count();
         $anakdisabilitas = AnakNonDisabilitas::count();
-        return view('visitor.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori','anaktepi','anakdisabilitas'));
+        return view('visitor.home.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori','anaktepi','anakdisabilitas'));
 
     }
 
     public function aboutUs()
     {
         $abouts = About::all();
-        return view('visitor.about', compact('abouts'));
+        return view('visitor.tentang.about', compact('abouts'));
     }
 
     public function programrm()
@@ -48,21 +48,21 @@ class VisitorsController extends Controller
         $programs = Program::all();
         $detailPrograms = DetailProgram::all();
         $totalProgram = DetailProgram::count();
-        return view('visitor.program', compact('programs','detailPrograms','totalProgram'));
+        return view('visitor.program.program', compact('programs','detailPrograms','totalProgram'));
     }
 
     public function fasilitasi()
     {
         $fasilitas = Fasilitas::all();
         $detailfasilitas = Fasilitas::all();
-        return view('visitor.fasilitas',compact('fasilitas','detailfasilitas'));
+        return view('visitor.fasilitas.fasilitas',compact('fasilitas','detailfasilitas'));
     }
 
     public function news()
     {
         $berita = Berita::all();
         $kategori = KategoriBerita::all();
-        return view('visitor.berita', compact('berita','kategori'));
+        return view('visitor.berita.berita', compact('berita','kategori'));
     }
 
     public function show($id)
@@ -77,7 +77,7 @@ class VisitorsController extends Controller
         $recentNews = Berita::all();
         $kategori = KategoriBerita::all();
         // Mengirim data berita dan recent news ke halaman detail berita
-        return view('visitor.detailberita', compact('berita', 'recentNews','kategori'));
+        return view('visitor.berita.detailberita', compact('berita', 'recentNews','kategori'));
     }
 
 
@@ -85,14 +85,14 @@ class VisitorsController extends Controller
     {
         $galeri = Galeri::all();
         $detailgaleriCounts = DetailGaleri::groupBy('galeri_id')->pluck(DB::raw('count(*) as total'), 'galeri_id');
-        return view('visitor.galeri', compact('galeri','detailgaleriCounts'));
+        return view('visitor.galeri.galeri', compact('galeri','detailgaleriCounts'));
     }
 
     public function detailgallery($id)
     {
         $galeri = Galeri::find($id);
         $detailgaleriCounts = DetailGaleri::groupBy('galeri_id')->pluck(DB::raw('count(*) as total'), 'galeri_id');
-        return view('visitor.detailgaleri', compact('galeri','detailgaleriCounts'));
+        return view('visitor.galeri.detailgaleri', compact('galeri','detailgaleriCounts'));
     }
 
 
@@ -100,6 +100,6 @@ class VisitorsController extends Controller
 
     public function contact()
     {
-        return view('visitor.contact');
+        return view('visitor.hubungi.contact');
     }
 }

@@ -35,9 +35,9 @@ class AboutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'img_yayasan' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'img_wilayah1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'img_wilayah2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img_yayasan' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'img_wilayah1' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'img_wilayah2' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
             'latar_belakang' => 'nullable|string',
             'visi' => 'nullable|string',
             'misi' => 'nullable|string',
@@ -120,9 +120,9 @@ class AboutController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'img_yayasan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'img_wilayah1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'img_wilayah2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'img_yayasan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'img_wilayah1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'img_wilayah2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3000',
             'latar_belakang' => 'nullable|string',
             'visi' => 'nullable|string',
             'misi' => 'nullable|string',
@@ -179,8 +179,7 @@ class AboutController extends Controller
 
         $abouts->delete();
 
-        return redirect()->route('about.index')
-        ->with('success', 'Carousel item deleted successfully.');
+        return redirect()->route('about.index')->with('success', 'Carousel item deleted successfully.');
     }
 
    

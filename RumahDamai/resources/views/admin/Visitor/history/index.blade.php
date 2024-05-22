@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="card-title">Foundation History</h1>
+                <h1 class="card-title">Sejarah Singkat Yayasan</h1>
                 <!-- Tampilkan notifikasi jika ada -->
                 @if (session('success'))
                     <div class="alert alert-success">
@@ -15,7 +15,7 @@
 
                 <!-- Tampilkan tombol "Add New Foundation History" hanya jika tidak ada data -->
                 @if (!$history)
-                    <a href="{{ route('history.create') }}" class="btn btn-success mb-3">Add New Foundation History</a>
+                    <a href="{{ route('history.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
                 @endif
             </div>
 
@@ -23,11 +23,11 @@
                 <table class="table mt-3 table-hover">
                     <thead>
                         <tr>
-                            <th>Image</th>
+                            <th>Gambar</th>
                             <th>Sejarah Singkat</th>
                             <th>Tujuan Utama</th>
                             <th>Dibangun</th>
-                            <th>Actions</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,16 +42,16 @@
                                 <td>
                                     <a href="{{ route('history.show', $history->id) }}" class="btn btn-primary">Detail</a>
                                     <a href="{{ route('history.edit', $history->id) }}" class="btn btn-info">Edit</a>
-                                    <form action="{{ route('history.destroy', $history->id) }}" method="POST" style="display: inline-block;">
+                                    <form action="{{ route('history.destroy', $history->id) }}" id="deleteForm{{ $history->id }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
+                                        <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $history->id }}')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
                         @else
                             <tr>
-                                <td colspan="6">No foundation history found.</td>
+                                <td colspan="6" class="text-center">Data Tidak Ada.</td>
                             </tr>
                         @endif
                     </tbody>

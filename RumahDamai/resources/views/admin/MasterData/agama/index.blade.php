@@ -33,8 +33,7 @@
                                             action="{{ route('agama.destroy', $agama->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-danger"
-                                                onclick="handleDeleteConfirmation('deleteForm{{ $agama->id }}')">
+                                            <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $agama->id }}')">
                                                 Hapus
                                             </button>
                                         </form>

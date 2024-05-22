@@ -71,7 +71,8 @@
                         <div class="raport"></div>
 
                         <!-- Tombol Simpan -->
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
+                        <button type="submit" id="submitButton" class="btn btn-success mr-2" onclick="handleUpdatedConfirmation(event)">Ubah</button>
                     </form>
                 </div>
             </div>

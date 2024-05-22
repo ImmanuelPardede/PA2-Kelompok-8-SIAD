@@ -4,14 +4,15 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title">Add New fasilitas Item</h1>
+            <h1 class="card-title text-left">Form Menambah Fasilitas</h1>
 
             <form method="POST" action="{{ route('fasilitas.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
-                    <label for="img_fasilitas" class="form-label">Images (Max 3)</label>
+                    <label for="img_fasilitas" class="form-label">Gambar<span style="color: red">*</span></label>
                     <input type="file" class="form-control" id="img_fasilitas" name="img_fasilitas[]" accept="image/*" multiple required>
+                    <small class="text-muted" id="wordCountInfo">Maksimal 10 Gambar.</small>
                 </div>
                 
                 <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
@@ -30,22 +31,13 @@
                     @enderror
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Add fasilitas Item</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
     </div>
 </div>
 
 
-<script>
-    document.getElementById('img_fasilitas').addEventListener('change', function() {
-        var files = this.files;
-        if (files.length > 3) {
-            alert('You can only upload a maximum of 3 images.');
-            this.value = ''; // Reset the input field
-        }
-    });
-</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

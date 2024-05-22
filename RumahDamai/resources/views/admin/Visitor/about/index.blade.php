@@ -14,8 +14,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if ($abouts->isEmpty())
                 <a href="{{ route('about.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
-            </div>
+            @endif
+        
+        </div>
 
             <div class="table-responsive">
                 <table class="table mt-3 ">
@@ -28,6 +31,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($abouts->isEmpty())
+                            <tr>
+                                <td colspan="4" class="text-center">Data tidak ada.</td>
+                            </tr>
+                        @else
                         @foreach($abouts as $index => $item)
                         <tr>
                             <td>{{ $index +1 }}</td>
@@ -37,15 +45,18 @@
                             <td>
                                 <a href="{{ route('about.show', $item->id) }}" class="btn btn-primary">Detail</a>
                                 <a href="{{ route('about.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('about.destroy', $item->id) }}" method="POST" style="display: inline-block;">
+                                <form action="{{ route('about.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Delete</button>
+
                                 </form>
+
                                 
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

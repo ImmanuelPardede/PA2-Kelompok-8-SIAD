@@ -42,6 +42,6 @@ class JadwalController extends Controller
         // Menentukan lokasi penugasan yang dipilih
         $lokasiPenugasanId = $request->input('lokasi_id', $lokasiPenugasan->first()->id ?? null);
 
-        return view('visitor.jadwal', compact('weekDays', 'calendarData', 'lokasiPenugasan', 'lokasiPenugasanId'));
+        return view('visitor.jadwal.jadwal', compact('weekDays', 'calendarData', 'lokasiPenugasan', 'lokasiPenugasanId'));
     }
 }

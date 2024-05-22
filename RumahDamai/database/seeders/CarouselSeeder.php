@@ -20,5 +20,11 @@ class CarouselSeeder extends Seeder
                 'caption' => 'Selamat Datang',
                 'subcaption' => 'Sistem Informasi Yayasan Pendidikan Anak Rumah Damai',
             ]);
+
+            DB::table('carousel_items')->insert([
+                'image_url' => 'uploads/visitor/carousel/dummy2.jpg',
+                'caption' => 'Yosua 1:9',
+                'subcaption' => 'Tetaplah kuat dan berani.',
+            ]);
 }
 }

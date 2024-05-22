@@ -1,37 +1,14 @@
 @extends('layouts.management.master')
 
 @section('content')
-<style>
-    .image-container {
-        text-align: center;
-    }
 
-    .image-frame {
-        display: inline-block;
-        max-width: 60%;
-        max-height: auto;
-    }
-
-    .small-text {
-        font-size: smaller;
-    }
-</style>
     <div class="container">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Anak</h4>
-                <div class="image-container">
-                    <div class="image-frame">
-                        @if ($anak->foto_profil)
-                            <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil Anak"
-                                class="img-fluid rounded">
-                        @else
-                            <p>Tidak ada foto profil.</p>
-                        @endif
-                    </div>
-                </div>
+               
                 <div class="row">
-                    <div class="col-sm">
+                    <div class="col-md-8">
                         <div class="table-responsive">
                             <table class="table" style="max-width: 100%;">
                                 <tbody>
@@ -109,8 +86,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-sm">
-                            <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                             @if ($anak->status === 'aktif')
                                 <form action="{{ route('anak.nonaktifkan', $anak->id) }}" method="post"
                                     style="display:inline;">
@@ -129,10 +106,29 @@
                                 </form>
                             @endif
                             <a href="{{ route('anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate PDF</a>
+
+                        
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="image-container">
+                            <div class="image-frame">
+                                @if ($anak->foto_profil)
+                                    <img src="{{ asset($anak->foto_profil) }}" alt="Foto Profil Anak"
+                                        class="img-fluid rounded">
+                                @else
+                                    <p>Tidak ada foto profil.</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
+                    </div>
                 </div>
+        </div>
             </div>
         </div>
     </div>
+
+
+
 @endsection

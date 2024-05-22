@@ -6,8 +6,8 @@
             <div class="card-body">
                 <h2 class="card-title">Edit Anak</h2>
 
-<div class="row">
-                <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-8">
 
                 <form action="{{ route('anak.update', $anak->id) }}" method="post" enctype="multipart/form-data">
                     @csrf

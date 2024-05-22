@@ -58,8 +58,9 @@
 
 
                 <!-- Tombol untuk submit form -->
-                <button type="submit" class="btn btn-primary">Update galeri Item</button>
-                <button type="button" class="btn btn-success" id="addImageButton">Tambah Gambar</button>
+                <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
+                <button type="submit" id="submitButton" class="btn btn-success mr-2" onclick="handleUpdatedConfirmation(event)">Ubah</button>
+                <button type="button" class="btn btn-primary" id="addImageButton" style="float: right">Tambah Gambar</button>
 
             </form>
         </div>
