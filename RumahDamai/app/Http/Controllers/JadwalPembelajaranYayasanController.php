@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
-class KalenderController extends Controller
+class JadwalPembelajaranYayasanController extends Controller
 {
     public function index(Request $request, JadwalPembelajaranService $jadwalPembelajaranService)
     {
@@ -44,6 +44,6 @@ class KalenderController extends Controller
         // Menghasilkan data kalender sesuai dengan minggu pembelajaran aktif
         $calendarData = $jadwalPembelajaranService->generateCalendarData($weekDays, $startOfWeek, $endOfWeek, $lokasi_penugasan_id);
 
-        return view('guru.kalender.index', compact('weekDays', 'calendarData'));
+        return view('guru.JadwalPembelajaranYayasan.index', compact('weekDays', 'calendarData'));
     }
 }

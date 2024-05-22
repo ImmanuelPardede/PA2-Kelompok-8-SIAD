@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Edit Jadwal Pembelajaran</h2>
+                <h2 class="card-title">Atur Jadwal Pembelajaran</h2>
                 <form
                     action="{{ isset($jadwalPembelajaran) ? route('jadwalPembelajaran.update', $jadwalPembelajaran->id) : route('jadwalPembelajaran.store') }}"
                     method="POST">
@@ -73,8 +73,6 @@
                         </select>
                     </div>
 
-
-
                     @isset($jadwalPembelajaran)
                         @php
                             $start = \Carbon\Carbon::parse($jadwalPembelajaran->mingguPembelajaran->tanggal_mulai);
@@ -87,14 +85,15 @@
                             <input type="date" name="tanggal_pembelajaran" id="tanggal_pembelajaran" class="form-control"
                                 value="{{ old('tanggal_pembelajaran', $jadwalPembelajaran->tanggal_pembelajaran) }}"
                                 min="{{ $start->format('Y-m-d') }}" max="{{ $end->format('Y-m-d') }}"
-                                onchange="updateHariPembelajaran()">
+                                onchange="updateHariPembelajaran(this.value)">
                         </div>
                     @endisset
 
                     <div class="form-group">
                         <label for="hari_pembelajaran">Hari Pembelajaran</label>
                         <input type="text" name="hari_pembelajaran" id="hari_pembelajaran" class="form-control"
-                            value="{{ isset($jadwalPembelajaran) ? $jadwalPembelajaran->hari_pembelajaran : '' }}" readonly>
+                            value="{{ isset($jadwalPembelajaran) ? $jadwalPembelajaran->hari_pembelajaran : '' }}"
+                            readonly>
                     </div>
 
                     <script>
@@ -124,3 +123,17 @@
         </div>
     </div>
 @endsection
+<script>
+    function updateHariPembelajaran(tanggalPembelajaran) {
+        var date = new Date(tanggalPembelajaran);
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var hariPembelajaran = days[date.getDay()];
+        document.getElementById('hari_pembelajaran').value = hariPembelajaran;
+    }
+
+    // Panggil fungsi updateHariPembelajaran saat halaman dimuat untuk pertama kali
+    document.addEventListener('DOMContentLoaded', function() {
+        var tanggalPembelajaran = document.getElementById('tanggal_pembelajaran').value;
+        updateHariPembelajaran(tanggalPembelajaran);
+    });
+</script>

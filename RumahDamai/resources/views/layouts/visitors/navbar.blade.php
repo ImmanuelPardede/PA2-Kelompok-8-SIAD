@@ -16,7 +16,8 @@
             <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
                 <ul class="social-icon">
                     <li class="social-icon-item">
-                        <a href="https://www.instagram.com/yparumahdamai/" target="_blank" class="social-icon-link bi-instagram"></a>
+                        <a href="https://www.instagram.com/yparumahdamai/" target="_blank"
+                            class="social-icon-link bi-instagram"></a>
                     </li>
 
                     <li class="social-icon-item">
@@ -32,10 +33,10 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="{{ asset('skydash/images/logo.png')}}" class="logo img-fluid" alt="Yayasan Rumah Damai">
+            <img src="{{ asset('skydash/images/logo.png') }}" class="logo img-fluid" alt="Yayasan Rumah Damai">
             <span>
                 YPA Rumah Damai
-                <small>Sistem  Informasi  Administrasi</small>
+                <small>Sistem Informasi Administrasi</small>
             </span>
         </a>
 

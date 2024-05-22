@@ -21,9 +21,9 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('kalender.index') }}" class="nav-link">
+            <a href="{{ route('JadwalPembelajaranYayasan.index') }}" class="nav-link">
                 <i class="mdi mdi-calendar menu-icon"></i>
-                <span class="menu-title">Kalender</span>
+                <span class="menu-title">Jadwal Pembelajaran</span>
             </a>
         </li>
         @auth
@@ -46,7 +46,7 @@
                                     href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('admin.administrator.all') }}">All</a></li>
-    
+
                         </ul>
                     </div>
                 </li>
@@ -273,7 +273,7 @@
                 <li class="nav-item">
                     <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
                         <i class="mdi mdi-calendar-clock menu-icon"></i>
-                        <span class="menu-title">Jadwal</span>
+                        <span class="menu-title">Atur Jadwal Belajar</span>
                     </a>
                 </li>
 
