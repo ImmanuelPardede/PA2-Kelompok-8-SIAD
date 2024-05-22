@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\Visitor\JadwalController;
 use App\Http\Controllers\Chart\ChartAnakController;
 use App\Http\Controllers\Chart\ChartPendukungController;
 use App\Http\Controllers\Guru\jadwalPembelajaran\JadwalPembelajaranController;
-use App\Http\Controllers\KalenderController;
+use App\Http\Controllers\JadwalPembelajaranYayasanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -78,7 +78,7 @@ Route::get('/contact', [VisitorsController::class, 'contact'])->name('contact');
 | Jadwal And Calendar
 |--------------------------------------------------------------------------
 */
-Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
+Route::get('/jadwalyayasan', [JadwalPembelajaranYayasanController::class, 'index'])->name('JadwalPembelajaranYayasan.index');
 Route::get('/jadwal', [JadwalController::class, 'index'])->name('visitor.jadwal');
 
 

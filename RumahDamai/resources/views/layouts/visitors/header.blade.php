@@ -11,13 +11,13 @@
     <title>YPA Rumah Damai</title>
 
     <!-- CSS FILES -->
-    <link href="{{ asset('kind/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('kind/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('kind/css/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('kind/css/bootstrap-icons.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('kind/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('kind/css/style.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{{ asset('skydash/images/logo.png')}}" />
+    <link rel="shortcut icon" href="{{ asset('skydash/images/logo.png') }}" />
 
 </head>
 

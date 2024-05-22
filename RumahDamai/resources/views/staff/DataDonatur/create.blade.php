@@ -38,7 +38,7 @@
                 <label for="jumlah_donasi">Jumlah Donasi<span style="color: red">*</span></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="height: 86%;">Rp</span>
+                        <span class="input-group-text" style="height: 100%;">Rp</span>
                     </div>
                     <input type="number" class="form-control" id="jumlah_donasi" name="jumlah_donasi" required>
                 </div>

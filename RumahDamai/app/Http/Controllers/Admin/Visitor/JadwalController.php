@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Visitor;
 
 use App\Http\Controllers\Controller;
 use App\Models\MingguPembelajaran;
+use App\Models\LokasiTugas;
 use App\Services\JadwalPembelajaranService;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -35,6 +36,12 @@ class JadwalController extends Controller
         // Menghasilkan data kalender sesuai dengan minggu pembelajaran aktif
         $calendarData = $jadwalPembelajaranService->generateJadwalData($weekDays, $startOfWeek, $endOfWeek);
 
-        return view('visitor.jadwal', compact('weekDays', 'calendarData'));
+        // Mendapatkan daftar lokasi penugasan
+        $lokasiPenugasan = LokasiTugas::all();
+
+        // Menentukan lokasi penugasan yang dipilih
+        $lokasiPenugasanId = $request->input('lokasi_id', $lokasiPenugasan->first()->id ?? null);
+
+        return view('visitor.jadwal', compact('weekDays', 'calendarData', 'lokasiPenugasan', 'lokasiPenugasanId'));
     }
 }
