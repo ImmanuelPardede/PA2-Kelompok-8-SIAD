@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('PPI_Model_A', function (Blueprint $table) {
+        Schema::create('ppi_model_a', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anak_id');
 
             $table->foreign('anak_id')->references('id')->on('anak');
             $table->timestamps();
-
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('PPI_Model_A');
+        Schema::dropIfExists('ppi_model_a');
     }
 };

@@ -18,12 +18,12 @@
                 <div class="table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
-                            @if ($raports->isNotEmpty())
-                                <p>{{ $raports->first()->anak->nama_lengkap }}</p>
+                            @if ($ppiA->isNotEmpty())
+                                <p>{{ $ppiA->first()->anak->nama_lengkap }}</p>
                             @endif
                         </div>
                         <div>
-                            <a href="{{ route('raport.create', ['anak_id' => $id]) }}" class="btn btn-success">Buatkan Raport</a>
+                            <a href="{{ route('ppiA.create', ['anak_id' => $id]) }}" class="btn btn-success">Buatkan PPI</a>
                         </div>
                     </div>
 
@@ -31,30 +31,28 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Semester</th>
-                                <th>Periode Tahun</th>
+                                <th>Dibuat</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($raports as $key => $raport)
+                            @foreach ($ppiA as $key => $ppi)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $raport->semester->semester_tahun_ajaran }}</td>
-                                    <td>{{ $raport->tahunajaran->tahun_ajaran }}</td>
+                                    <td>{{ $ppi->created_at }}</td>
                                     <td>
-                                        <form method="POST" id="deleteForm{{ $raport->id }}" class="d-inline"
-                                            action="{{ route('raport.destroy', $raport->id) }}">
+                                        <form method="POST" id="deleteForm{{ $ppi->id }}" class="d-inline"
+                                            action="{{ route('ppiA.destroy', $ppi->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"
-                                                onclick="handleDeleteConfirmation('deleteForm{{ $raport->id }}')">
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $ppi->id }}')">
                                                 Hapus
                                             </button>
                                         </form>
 
-                                        <a href="{{ route('raport.edit', $raport->id) }}" class="btn btn-warning">Edit</a>
-                                        <a href="{{ route('raport.detail', $raport->id) }}" class="btn btn-info">Detail</a>
+                                        <a href="{{ route('ppiA.edit', $ppi->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('ppiA.detail', $ppi->id) }}" class="btn btn-info">Detail</a>
                                     </td>
                                 </tr>
                             @endforeach

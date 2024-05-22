@@ -6,8 +6,7 @@ use App\Http\Controllers\Guru\PPI\PPIModelAController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use App\Http\Controllers\Guru\Materi\SilabusController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
-
-
+use App\Http\Controllers\Guru\PPI\ModelA\PPIAController;
 
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
 
@@ -27,6 +26,23 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 
 
+        /*
+    |--------------------------------------------------------------------------
+    | PPI MODEL A
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/ppiA', [PPIAController::class, 'index'])->name('ppiA.index');
+    Route::get('/ppiA/show/{id}', [PPIAController::class, 'show'])->name('ppiA.show');
+    Route::get('/ppiA/create/{anak_id}', [PPIAController::class, 'create'])->name('ppiA.create');
+    Route::post('/ppiA/store', [PPIAController::class, 'store'])->name('ppiA.store');
+    Route::get('/ppiA/edit/{id}', [PPIAController::class, 'edit'])->name('ppiA.edit');
+    Route::put('/ppiA/{id}', [PPIAController::class, 'update'])->name('ppiA.update');
+    Route::delete('/ppiA/destroy/{id}', [PPIAController::class, 'destroy'])->name('ppiA.destroy');
+    Route::get('/ppiA/detail/{id}', [PPIAController::class, 'detail'])->name('ppiA.detail');
+    Route::get('/ppiA/pdf/{id}', [PPIAController::class, 'pdf'])->name('ppiA.pdf');
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Modul Materi
@@ -37,17 +53,6 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::resource('/materi/silabus', SilabusController::class);
     Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | PPI A
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/ppiA', [PPIModelAController::class, 'index'])->name('PPI.ModelA.index');
-    Route::get('/ppiA/show/{id}', [PPIModelAController::class, 'show'])->name('PPI.ModelA.show');
-    Route::get('/ppiA/create', [PPIModelAController::class, 'create'])->name('PPI.ModelA.create');
-    Route::post('/ppiA/store', [PPIModelAController::class, 'store'])->name('PPI.ModelA.store');
-    Route::get('/ppiA/detail/{id}', [PPIModelAController::class, 'detail'])->name('PPI.ModelA.detail');
 
 
     /*

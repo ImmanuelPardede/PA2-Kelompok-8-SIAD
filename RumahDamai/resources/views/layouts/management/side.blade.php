@@ -293,7 +293,7 @@
                     </a>
                     <div class="collapse" id="icons">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('PPI.ModelA.index') }}">PPI A</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiA.index') }}">PPI A</a>
                             </li>
                         </ul>
                     </div>

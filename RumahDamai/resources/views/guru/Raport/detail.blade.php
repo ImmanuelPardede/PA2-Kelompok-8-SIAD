@@ -56,7 +56,7 @@
                 </table>
             </div>
             <a href="{{ route('raport.pdf', $raport->id) }}" class="btn btn-success">Download PDF</a>
-            <a href="{{ url()->previous() }}" class="btn btn-primary">Kemabali</a>
+            <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
         </div>
     </div>
 @endsection
