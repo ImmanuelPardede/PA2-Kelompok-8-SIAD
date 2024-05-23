@@ -269,59 +269,56 @@ class AdministratorController extends Controller
     }
 
     public function updateGuruDataDiri(Request $request, User $user)
-    {
-        $request->validate([
-            'golongan_darah_id' => 'nullable|string',
-            'jenis_kelamin_id' => 'nullable|string',
-            'agama_id' => 'nullable|string',
-            'pendidikan_id' => 'nullable|string',
-            'alamat' => 'nullable|string',
+{
+    // Validasi data
+    $validatedData = $request->validate([
+        'golongan_darah_id' => 'nullable|string',
+        'jenis_kelamin_id' => 'nullable|string',
+        'agama_id' => 'nullable|string',
+        'pendidikan_id' => 'nullable|string',
+        'alamat' => 'nullable|string',
+        'no_telepon' => 'nullable|string|size:12',
+        'lulusan' => 'nullable|string',
+        'pengalaman' => 'nullable|string',
+        'tempat_lahir' => 'nullable|string',
+        'tanggal_lahir' => 'nullable|date',
+        'lokasi_penugasan_id' => 'nullable|string',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
 
-            'no_telepon' => 'nullable|integer',
-            'lulusan' => 'nullable|string',
-            'pengalaman' => 'nullable|string',
+    // Mengisi data yang divalidasi ke model User
+    $user->fill($validatedData);
 
-            'tanggal_masuk' => 'nullable|date',
-            'tanggal_keluar' => 'nullable|date',
-            'tempat_lahir' => 'nullable|string',
-            'tanggal_lahir' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-
-        $user->fill($request->except('password'));
-
-        // Perbarui password jika disertakan dalam permintaan
-        if ($request->has('password')) {
-            $user->password = Hash::make($request->password);
-        }
-
-        // Proses penyimpanan foto Data Diri jika ada
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
-            $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
-            $foto->move($lokasi_simpan, $nama_foto);
-
-            // Hapus foto lama jika ada
-            if ($user->foto) {
-                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
-                if (file_exists($foto_lama)) {
-                    unlink($foto_lama);
-                }
-            }
-
-            // Set foto baru
-            $user->foto = $nama_foto;
-
-            // Simpan perubahan pada model pengguna
-            $user->save();
-
-            return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
-        } else {
-            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri guru lain.');
-        }
+    // Perbarui password jika disertakan dalam permintaan
+    if ($request->has('password')) {
+        $user->password = Hash::make($request->password);
     }
+
+    // Proses penyimpanan foto Data Diri jika ada
+    if ($request->hasFile('foto')) {
+        $foto = $request->file('foto');
+        $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
+        $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
+        $foto->move($lokasi_simpan, $nama_foto);
+
+        // Hapus foto lama jika ada
+        if ($user->foto) {
+            $foto_lama = public_path('uploads/pegawai/' . $user->foto);
+            if (file_exists($foto_lama)) {
+                unlink($foto_lama);
+            }
+        }
+
+        // Set foto baru
+        $user->foto = $nama_foto;
+    }
+
+    // Simpan perubahan pada model pengguna
+    $user->save();
+
+    return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
+}
+
 
 
 
@@ -359,33 +356,29 @@ class AdministratorController extends Controller
 
     public function updateStaffDataDiri(Request $request, User $user)
     {
-        $request->validate([
-            'nama_lengkap' => 'required|string',
+        $validatedData = $request->validate([
             'golongan_darah_id' => 'nullable|string',
             'jenis_kelamin_id' => 'nullable|string',
             'agama_id' => 'nullable|string',
             'pendidikan_id' => 'nullable|string',
             'alamat' => 'nullable|string',
-
-            'no_telepon' => 'nullable|integer',
+            'no_telepon' => 'nullable|string|size:12',
             'lulusan' => 'nullable|string',
             'pengalaman' => 'nullable|string',
-
-            'tanggal_masuk' => 'nullable|date',
-            'tanggal_keluar' => 'nullable|date',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
+            'lokasi_penugasan_id' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        if (auth()->user()->id === $user->id && $user->role === 'staff') {
+        // Mengisi data yang divalidasi ke model User
+        $user->fill($validatedData);
 
-            $user->fill($request->except('password'));
 
-            // Perbarui password jika disertakan dalam permintaan
-            if ($request->has('password')) {
-                $user->password = Hash::make($request->password);
-            }
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        
 
             // Proses penyimpanan foto Data Diri jika ada
             if ($request->hasFile('foto')) {
@@ -393,7 +386,7 @@ class AdministratorController extends Controller
                 $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
                 $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
                 $foto->move($lokasi_simpan, $nama_foto);
-
+        
                 // Hapus foto lama jika ada
                 if ($user->foto) {
                     $foto_lama = public_path('uploads/pegawai/' . $user->foto);
@@ -401,6 +394,7 @@ class AdministratorController extends Controller
                         unlink($foto_lama);
                     }
                 }
+        
 
                 // Set foto baru
                 $user->foto = $nama_foto;
@@ -411,9 +405,7 @@ class AdministratorController extends Controller
 
 
             return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Data Diri anda berhasil diperbarui.');
-        } else {
-            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri anda lain.');
-        }
+        
     }
 
 

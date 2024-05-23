@@ -123,7 +123,7 @@
 
                     <div class="form-group">
                         <label for="no_telepon">No Telepon</label>
-                        <input type="tel" name="no_telepon" id="no_telepon" class="form-control"
+                        <input type="tel" name="no_telepon" id="no_telepon" maxlength="12" class="form-control"
                             value="{{ $user->no_telepon }}">
                     </div>
                     <div class="form-group">

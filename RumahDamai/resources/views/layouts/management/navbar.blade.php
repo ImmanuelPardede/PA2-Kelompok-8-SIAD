@@ -80,7 +80,7 @@
                             <!-- Ganti teks statis dengan nama lengkap pengguna yang terautentikasi -->
                             <!-- Jika pengguna terautentikasi dan memiliki foto profil -->
                             @if (Auth::check() && Auth::user()->foto)
-                                <img src="{{ asset('uploads/pegawai/' . Auth::user()->foto) }}" alt="">
+                            <img src="{{ asset('uploads/pegawai/' . Auth::user()->foto) }}" alt="Foto Profil" style="object-fit: cover;">
                             @else
                                 <!-- Jika pengguna belum terautentikasi atau tidak memiliki foto profil -->
                                 <img src="{{ asset('uploads/default/bodat.jpg') }}" alt="Default Photo">

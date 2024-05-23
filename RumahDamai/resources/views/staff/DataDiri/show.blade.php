@@ -10,7 +10,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <p class="card-description">{{ $user->nama_lengkap }} {{ $user->nip }}</p>
+                <p class="card-description">{{ $user->nama_lengkap }} {{ $user->nip }} <span class="text-success">{{ $user->status }}</span></p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">
@@ -85,7 +85,7 @@
                                     </tr>
                                     <tr>
                                         <th>Pengalaman</th>
-                                        <td>{{ $user->pengalaman ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $user->pengalaman ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
 
 
