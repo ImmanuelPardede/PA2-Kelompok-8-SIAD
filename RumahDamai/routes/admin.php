@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\KodeLaporanController;
+use App\Http\Controllers\Admin\Pendidikan\FormatLaporanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DataAnak\AnakController;
 use App\Http\Controllers\Admin\MasterData\KebutuhanDisabilitasController;
@@ -54,12 +56,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/latarBelakang/{id}/pdf', [AnakController::class, 'generatePDF'])->name('latarBelakang.pdf');
     Route::get('anak/pdf/{id}', [LatarBelakangController::class, 'generatePDF'])->name('anak.pdf');
     Route::get('/admin/data-anak/latar-belakang/{id}/pdf', [App\Http\Controllers\Admin\DataAnak\LatarBelakangController::class, 'generatePDF'])->name('anak.pdf');
-
-
-
-
-
     Route::get('/anak/export/excel', [AnakController::class, 'exportExcel'])->name('anak.export.excel');
+
+
     /*
     |--------------------------------------------------------------------------
     | Master Data
@@ -78,6 +77,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/masterdata/penyakit', PenyakitController::class);
     Route::resource('/masterdata/kategoriBerita', KategoriBeritaController::class);
     Route::resource('/masterdata/penyakit', PenyakitController::class);
+    Route::resource('/masterdata/kodeLaporan', KodeLaporanController::class);
 
 
     /*
@@ -99,6 +99,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/pendidikan/tahunAjaran', TahunAjaranController::class);
     Route::resource('/pendidikan/semesterTahunAjaran', SemesterTahunAjaranController::class);
     Route::resource('/pendidikan/mingguPembelajaran', MingguPembelajaranController::class);
+    Route::resource('/pendidikan/formatLaporan', FormatLaporanController::class);
+    Route::get('/formatLaporan/download/{id}', [FormatLaporanController::class, 'download'])->name('formatLaporan.download');
 
 
     /*

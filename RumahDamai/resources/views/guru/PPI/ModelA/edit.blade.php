@@ -1,4 +1,4 @@
-@extends('layouts.management.master')
+modelB@extends('layouts.management.master')
 
 @section('content')
 <div class="container">
@@ -8,10 +8,10 @@
         @method('PUT') <!-- Add this line for PUT method -->
 
         <input type="hidden" name="anak_id" value="{{ $anak->id }}">
-    
-        
+
+
         @foreach($detailppi as $key => $ppi)
-            
+
 
         <div class="mb-3">
             <label for="level_komunikasi" class="form-label">Level Komunikasi<span style="color: red">*</span></label>

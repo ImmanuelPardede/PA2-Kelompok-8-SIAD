@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guru\PPI\ModelB\PPIBController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Guru\Raport\RaportController;
 use App\Http\Controllers\Guru\PPI\PPIModelAController;
@@ -26,7 +27,7 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/raport/pdf/{id}', [RaportController::class, 'pdf'])->name('raport.pdf');
 
 
-        /*
+    /*
     |--------------------------------------------------------------------------
     | PPI MODEL A
     |--------------------------------------------------------------------------
@@ -40,6 +41,24 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::delete('/ppiA/destroy/{id}', [PPIAController::class, 'destroy'])->name('ppiA.destroy');
     Route::get('/ppiA/detail/{id}', [PPIAController::class, 'detail'])->name('ppiA.detail');
     Route::get('/ppiA/pdf/{id}', [PPIAController::class, 'pdf'])->name('ppiA.pdf');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PPI MODEL B
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/ppiB', [PPIBController::class, 'index'])->name('ppiB.index');
+    Route::get('/ppiB/show/{id}', [PPIBController::class, 'show'])->name('ppiB.show');
+    Route::get('/ppiB/create', [PPIBController::class, 'create'])->name('ppiB.create');
+    Route::post('/ppiB/store', [PPIBController::class, 'store'])->name('ppiB.store');
+    Route::get('/ppiB/edit/{id}', [PPIBController::class, 'edit'])->name('ppiB.edit');
+    Route::put('/ppiB/{id}', [PPIBController::class, 'update'])->name('ppiB.update');
+    Route::delete('/ppiB/destroy/{id}', [PPIBController::class, 'destroy'])->name('ppiB.destroy');
+    Route::get('/ppiB/detail/{id}', [PPIBController::class, 'detail'])->name('ppiB.detail');
+    Route::get('/ppiB/downloadPpiB/{id}', [PPIBController::class, 'downloadPpiB'])->name('ppiB.downloadPpiB');
+    Route::get('/get-format-laporan', [PPIBController::class, 'getFormatLaporan'])->name('get-format-laporan');
+    Route::get('/download-format-laporan/{id}', [PPIBController::class, 'downloadFormatLaporan'])->name('downloadFormatLaporan');
 
 
 

@@ -5,18 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PpiModelA extends Model
+class PpiModelB extends Model
 {
     use HasFactory;
 
-    protected $table = 'ppi_model_a'; // Menentukan nama tabel yang digunakan
-
+    protected $table = 'ppi_model_b';
     protected $fillable = [
         'anak_id',
+        'user_id',
+        'file_ppi_b',
+        'deskripsi',
     ];
 
     public function anak()
     {
         return $this->belongsTo(Anak::class, 'anak_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

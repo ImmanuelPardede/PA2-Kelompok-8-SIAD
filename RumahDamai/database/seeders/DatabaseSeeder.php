@@ -82,5 +82,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KategoriBeritaSeeder::class,
         ]);
+        $this->call([
+            KodeLaporanSeeder::class,
+        ]);
     }
 }

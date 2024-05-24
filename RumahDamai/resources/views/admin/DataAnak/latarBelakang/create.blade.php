@@ -61,10 +61,17 @@
                     </div>
                     <div class="form-group mb-3" id="deskripsi_group_1">
                         <label for="deskripsi_1" class="form-label">Deskripsi<span style="color: red">*</span></label>
-                        <textarea id="deskripsi_1" class="form-control" name="deskripsi[]" required autocomplete="deskripsi"></textarea>
-                        <span class="invalid-feedback" role="alert" id="deskripsi-error-1" style="display: none;">
-                            <strong></strong>
-                        </span>
+                        <textarea id="deskripsi_1" class="form-control" name="deskripsi[]" required autocomplete="deskripsi">
+                            {{ old('deskripsi') }}
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
 
@@ -78,6 +85,7 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 <script>
     let counter = 1;
 

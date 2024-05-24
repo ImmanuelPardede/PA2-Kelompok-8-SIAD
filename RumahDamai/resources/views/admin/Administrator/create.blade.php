@@ -35,7 +35,7 @@
                         <label for="password">Password <span style="color: red">*</span></label>
                         <input type="password" name="password" id="password" class="form-control" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="role">Role <span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" name="role" id="role" required>
@@ -43,23 +43,24 @@
                             <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                             <option value="guru" {{ request('role') === 'guru' ? 'selected' : '' }}>Guru</option>
                             <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staff</option>
-                            <option value="direktur" {{ request('role') === 'direktur' ? 'selected' : '' }}>Direktur</option>
+                            <option value="direktur" {{ request('role') === 'direktur' ? 'selected' : '' }}>Direktur
+                            </option>
                         </select>
                     </div>
 
-                    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
                     <div class="mb-3">
                         <label for="pengalaman" class="form-label">pengalaman<span style="color: red">*</span></label>
-                        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required autocomplete="pengalaman">
+                        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required
+                            autocomplete="pengalaman">
                             {{ old('pengalaman') }}
                             <ul>
                                 <li></li>
                             </ul>
                         </textarea>
                         @error('pengalaman')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
 
@@ -78,9 +79,6 @@
                             @endforeach
                         </select>
                     </div>
-
-
-
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
@@ -89,18 +87,18 @@
         </div>
     </div>
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
+    </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        ClassicEditor
-            .create(document.querySelector('#editor1'), {
-                // Konfigurasi CKEditor 5 untuk textarea pertama
-            })
-            .catch(error => {
-                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
-            });
-    });
-</script>
-    
 @endsection

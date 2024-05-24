@@ -149,6 +149,10 @@ class ModulMateriController extends Controller
     public function destroy(string $id)
     {
         $modulMateri = ModulMateri::find($id); // Mengubah $modulmateri menjadi $modulMateri
+        if ($modulMateri->file_modul) {
+            Storage::disk('public')->delete('documents/' . $modulMateri->file_modul);
+        }
+
         $modulMateri->delete();
 
         return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil dihapus.');
@@ -168,7 +172,7 @@ class ModulMateriController extends Controller
             return redirect()->back()->with('error', 'File Modul tidak ditemukan.');
         }
 
-        return new BinaryFileResponse($filePath);
+        return response()->download($filePath, $modulMateri->file_modul);
     }
 
     public function tambahJadwalPembelajaran(ModulMateri $modulMateri)

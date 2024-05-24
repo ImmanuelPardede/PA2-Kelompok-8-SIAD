@@ -44,8 +44,8 @@
                                     href="{{ route('admin.administrator.staff') }}">Staff</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('admin.administrator.all') }}">All</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.administrator.all') }}">All</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -62,7 +62,8 @@
                     <div class="collapse" id="form-elements">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('anak.index') }}">Anak</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('latarBelakang.index') }}">Latar Belakang</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('latarBelakang.index') }}">Latar
+                                    Belakang</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('orangTuaWali.index') }}">Orangtua/Wali</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('riwayatMedis.index') }}">Riwayat
@@ -105,6 +106,9 @@
                                     href="{{ route('semesterTahunAjaran.index') }}">Semester Ajaran</a>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('mingguPembelajaran.index') }}">
                                     Pembelajaran</a>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('formatLaporan.index') }}">Format
+                                    Laporan</a></li>
+
                         </ul>
                     </div>
                 </li>
@@ -142,8 +146,9 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('sponsorship.index') }}">Jenis
                                     Sponsorship</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('kategoriBerita.index') }}">Kategori
-                                    Berita</a></li>
+                                    href="{{ route('kategoriBerita.index') }}">Kategori Berita</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('kodeLaporan.index') }}">Kode Laporan</a></li>
                         </ul>
                     </div>
                 </li>
@@ -293,8 +298,8 @@
                     </a>
                     <div class="collapse" id="icons">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiA.index') }}">PPI A</a>
-                            </li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiA.index') }}">PPI A</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiB.index') }}">PPI B</a></li>
                         </ul>
                     </div>
                 </li>
