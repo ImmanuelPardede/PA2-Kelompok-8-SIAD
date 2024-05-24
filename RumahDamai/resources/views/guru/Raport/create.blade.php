@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h2>Create Raport</h2>
+    <div class="card">
+        <div class="card-body">
+    <h2 class="card-title">Create Raport</h2>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -176,6 +178,8 @@
         <a href="{{ url()->previous() }}" class="btn btn-primary">Kemabali</a>
 
     </form>
+</div>
+</div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

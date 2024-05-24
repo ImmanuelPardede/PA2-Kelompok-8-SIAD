@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h2>Tambah Data Orang Tua/Wali</h2>
+        <div class="card">
+            <div class="card-body">
+            <h2 class="card-title">Tambah Data Orang Tua/Wali</h2>
         <form action="{{ route('orangTuaWali.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -125,5 +127,7 @@
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
+    </div>
+</div>
     </div>
 @endsection

@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Diri</h4>
-                <p class="card-description">{{ $user->nama_lengkap}} {{ $user->nip}}</p>
+                <p class="card-description">{{ $user->nama_lengkap}} {{ $user->nip}} <span class="text-success">{{ $user->status }}</span></p>
                 @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -26,7 +26,7 @@
                                             <th>Email</th>
                                             <td>{{ $user->email ?? 'Data tidak tersedia' }}</td>
                                         </tr>
-                                        <tr>
+                                    <tr>
                                         <th>NIP</th>
                                         <td>{{ $user->nip ?? 'Data tidak tersedia' }}</td>
                                     </tr>
@@ -78,7 +78,7 @@
                                     </tr>
                                     <tr>
                                         <th>Pengalaman</th>
-                                        <td>{{ $user->pengalaman ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $user->pengalaman ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
 
 
