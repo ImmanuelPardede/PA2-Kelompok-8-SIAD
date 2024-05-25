@@ -32,11 +32,13 @@
                                         <th class="small-text">Golongan Darah</th>
                                         <td>{{ $anak->golonganDarah->golongan_darah ?? 'Data tidak tersedia' }}</td>
                                     </tr>
-                                    <tr>
-                                        <th class="small-text">Kebutuhan Disabilitas</th>
-                                        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}
-                                        </td>
-                                    </tr>
+                                    @if($anak->tipe_anak == 'disabilitas')
+    <tr>
+        <th class="small-text">Kebutuhan Disabilitas</th>
+        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}</td>
+    </tr>
+@endif
+
                                     <tr>
                                         <th class="small-text">Tempat Lahir</th>
                                         <td>{{ $anak->tempat_lahir ?? 'Data tidak tersedia' }}</td>

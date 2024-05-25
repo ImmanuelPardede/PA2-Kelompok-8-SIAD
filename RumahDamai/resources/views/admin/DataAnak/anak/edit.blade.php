@@ -58,10 +58,11 @@
                         </select>
                     </div>
 
+                    @if($anak->tipe_anak == 'disabilitas')
                     <div class="form-group">
                         <label for="kebutuhan_disabilitas_id">Kebutuhan Disabilitas:</label>
                         <select class="form-control" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id" required>
-                            <option value="" disabled>-- Pilih Kebutuhan Disabilitas --</option>
+                            <option value="" disabled selected>-- Pilih Kebutuhan Disabilitas --</option>
                             @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitaslist)
                                 <option value="{{ $kebutuhanDisabilitaslist->id }}"
                                     {{ $anak->kebutuhan_disabilitas_id == $kebutuhanDisabilitaslist->id ? 'selected' : '' }}>
@@ -70,6 +71,8 @@
                             @endforeach
                         </select>
                     </div>
+                @endif
+                
 
                     <div class="form-group">
                         <label for="tipe_anak">Jenis Anak:</label>
@@ -82,17 +85,24 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="tempat_lahir">Tempat Lahir:</label>
-                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                            value="{{ $anak->tempat_lahir }}" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tempat_lahir">Tempat Lahir:</label>
+                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                    value="{{ $anak->tempat_lahir }}" required>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tanggal_lahir">Tanggal Lahir:</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                    value="{{ $anak->tanggal_lahir }}" required>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="tanggal_lahir">Tanggal Lahir:</label>
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
-                            value="{{ $anak->tanggal_lahir }}" required>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label for="alamat">Alamat:</label>

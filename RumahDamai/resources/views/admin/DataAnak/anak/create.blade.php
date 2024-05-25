@@ -82,16 +82,23 @@
                     </select>
                 </div>
 
-
+                <div class="row">
+                    <div class="col-md-6">                
                 <div class="form-group">
                     <label for="tempat_lahir">Tempat Lahir <span style="color: red">*</label>
                     <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
                 </div>
+                    </div>
+
+                    <div class="col-md-6">                
+
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir <span style="color: red">*</label>
                     <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
                 </div>
-
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <label for="alamat">Alamat <span style="color: red">*</label>
                     <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" required>

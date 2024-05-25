@@ -2,50 +2,58 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Pengumuman</div>
-
                     <div class="card-body">
+                    <div class="card-title text-left">Edit Pengumuman</div>
+
                         <form action="{{ route('pengumuman.update', ['id' => $pengumuman->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
-                            <div class="form-group row">
-                                <label for="judul" class="col-md-4 col-form-label text-md-right">Judul</label>
-                                <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="judul">Judul</label>
                                     <input id="judul" type="text" class="form-control" name="judul"
                                         value="{{ $pengumuman->judul }}" autofocus>
-                                </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="deskripsi" class="col-md-4 col-form-label text-md-right">Deskripsi</label>
-                                <div class="col-md-6">
-                                    <textarea id="deskripsi" cl ass="form-control" name="deskripsi">{{ $pengumuman->deskripsi }}</textarea>
-                                </div>
-                            </div>
+                            <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
-                            <div class="form-group row">
-                                <label for="kategori" class="col-md-4 col-form-label text-md-right">Kategori</label>
-                                <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea id="editor1" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required autocomplete="deskripsi">{{ old('deskripsi', $pengumuman->deskripsi) }}</textarea>
+                                @error('deskripsi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            
+
+
+                            <div class="form-group">
+                                <label for="kategori">Kategori</label>
                                     <input id="kategori" type="text" class="form-control" name="kategori"
                                         value="{{ $pengumuman->kategori }}">
-                                </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
                                     <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali</a>
                                     <button type="submit" id="submitButton" class="btn btn-primary mr-2"
                                         onclick="handleUpdatedConfirmation(event)">Perbarui Pengumuman</button>
-                                </div>
-                            </div>
                         </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
+    </script>
 @endsection

@@ -25,35 +25,115 @@
                     @endforeach
                 </select>
             </div>
+
+            <hr>
+            <div style="text-align: left; position: relative; top: -10px;">
+                <span style="background-color: grey;">Data Diri Ibu</span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">                
             <div class="form-group">
                 <label for="nama_ibu">Nama Ibu</label>
                 <input type="text" class="form-control" id="nama_ibu" name="nama_ibu">
             </div>
-            <div class="form-group">
-                <label for="nama_ayah">Nama Ayah</label>
-                <input type="text" class="form-control" id="nama_ayah" name="nama_ayah">
-            </div>
-            <div class="form-group">
-                <label for="nik_ayah">NIK Ayah</label>
-                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah">
-            </div>
+                </div>
+
+                <div class="col-md-6">                
+
             <div class="form-group">
                 <label for="nik_ibu">NIK Ibu</label>
                 <input type="text" class="form-control" id="nik_ibu" name="nik_ibu">
             </div>
-            <div class="form-group">
-                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
-                <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah">
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">                
             <div class="form-group">
                 <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu">
             </div>
+                </div>
+
+                <div class="col-md-6">                
+
             <div class="form-group">
-                <label for="alamat_orangtua">Alamat Orangtua</label>
-                <input type="text" class="form-control" id="alamat_orangtua" name="alamat_orangtua">
+                <label for="no_hp_ibu">No. HP Ibu</label>
+                <input type="text" class="form-control" id="no_hp_ibu" name="no_hp_ibu">
+            </div>
+                </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">                
+            <div class="form-group">
+                <label for="pendidikan_ibu_id">Pendidikan ibu</label>
+                <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id">
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    @foreach ($pendidikan as $pendidikanItem)
+                        <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>
+                    @endforeach
+                </select>
+            </div>
+                </div>
+
+                <div class="col-md-6">                
+
+            <div class="form-group">
+                <label for="pekerjaan_ibu_id">Pekerjaan Ibu</label>
+                <select class="form-control js-example-basic-single" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
+                    <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
+                    @foreach ($pekerjaan as $pekerjaanItem)
+                        <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
+                    @endforeach
+                </select>
+            </div>
+                </div>
+            </div>
+
+
+            <hr>
+            <div style="text-align: left; position: relative; top: -10px;">
+                <span style="background-color: grey;">Data Diri Ayah</span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">                
+            <div class="form-group">
+                <label for="nama_ayah">Nama Ayah</label>
+                <input type="text" class="form-control" id="nama_ayah" name="nama_ayah">
+            </div>
+                </div>
+
+                <div class="col-md-6">                
+
+            <div class="form-group">
+                <label for="nik_ayah">NIK Ayah</label>
+                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah">
+            </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">                
+            <div class="form-group">
+                <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
+                <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah">
+            </div>
+                </div>
+
+                <div class="col-md-6">                
+
+            <div class="form-group">
+                <label for="no_hp_ayah">No. HP Ayah</label>
+                <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah">
+            </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">                
             <div class="form-group">
                 <label for="pendidikan_ayah_id">Pendidikan Ayah</label>
                 <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id">
@@ -63,6 +143,9 @@
                     @endforeach
                 </select>
             </div>
+                </div>
+
+                <div class="col-md-6">                
 
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah</label>
@@ -73,57 +156,73 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label for="no_hp_ayah">No. HP Ayah</label>
-                <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah">
+                </div>
             </div>
+
+
             <div class="form-group">
-                <label for="pendidikan_ibu_id">Pendidikan ibu</label>
-                <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id">
-                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
-                    @foreach ($pendidikan as $pendidikanItem)
-                        <option value="{{ $pendidikanItem->id }}">{{ $pendidikanItem->tingkat_pendidikan }}</option>
-                    @endforeach
-                </select>
+                <label for="alamat_orangtua">Alamat Orangtua</label>
+                <input type="text" class="form-control" id="alamat_orangtua" name="alamat_orangtua">
             </div>
-            <div class="form-group">
-                <label for="pekerjaan_ibu_id">Pekerjaan Ibu</label>
-                <select class="form-control js-example-basic-single" id="pekerjaan_ibu_id" name="pekerjaan_ibu_id">
-                    <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
-                    @foreach ($pekerjaan as $pekerjaanItem)
-                        <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="no_hp_ibu">No. HP Ibu</label>
-                <input type="text" class="form-control" id="no_hp_ibu" name="no_hp_ibu">
-            </div>
-            <div class="form-group">
-                <label for="nama_wali">Nama Wali</label>
-                <input type="text" class="form-control" id="nama_wali" name="nama_wali">
-            </div>
-            <div class="form-group">
-                <label for="alamat_wali">Alamat Wali</label>
-                <input type="text" class="form-control" id="alamat_wali" name="alamat_wali">
-            </div>
-            <div class="form-group">
-                <label for="pekerjaan_wali_id">Pekerjaan Wali</label>
-                <select class="form-control js-example-basic-single" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
-                    <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
-                    @foreach ($pekerjaan as $pekerjaanItem)
-                        <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="tanggal_lahir_wali">Tanggal Lahir Wali</label>
-                <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali">
-            </div>
-            <div class="form-group">
-                <label for="no_hp_wali">No. HP Wali</label>
-                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali">
-            </div>
+
+<hr>
+
+<div style="text-align: left; position: relative; top: -10px;">
+    <span style="background-color: grey;">Data Diri Wali</span>
+</div>
+
+<div class="row">
+    <div class="col-md-6">                
+        <div class="form-group">
+            <label for="nama_wali">Nama Wali</label>
+            <input type="text" class="form-control" id="nama_wali" name="nama_wali">
+        </div>
+    </div>
+
+    <div class="col-md-6">                
+
+        <div class="form-group">
+            <label for="no_hp_wali">No. HP Wali</label>
+            <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">                
+        <div class="form-group">
+            <label for="tanggal_lahir_wali">Tanggal Lahir Wali</label>
+            <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali">
+        </div>
+    </div>
+
+    <div class="col-md-6">                
+
+        <div class="form-group">
+            <label for="pekerjaan_wali_id">Pekerjaan Wali</label>
+            <select class="form-control js-example-basic-single" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
+                <option value="" disabled selected>-- Pilih Jenis Pekerjaan --</option>
+                @foreach ($pekerjaan as $pekerjaanItem)
+                    <option value="{{ $pekerjaanItem->id }}">{{ $pekerjaanItem->jenis_pekerjaan }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="alamat_wali">Alamat Wali</label>
+    <input type="text" class="form-control" id="alamat_wali" name="alamat_wali">
+</div>
+
+          
+<hr>           
+
+            
+           
+            
+
+
+
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" class="btn btn-success">Simpan</button>
         </form>
