@@ -155,6 +155,7 @@ class AdministratorController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
+            'nama_lengkap' => 'nullable|string',
             'nip' => 'nullable|string',
             'golongan_darah_id' => 'nullable|string',
             'jenis_kelamin_id' => 'nullable|string',
@@ -272,6 +273,7 @@ class AdministratorController extends Controller
 {
     // Validasi data
     $validatedData = $request->validate([
+        'nama_lengkap' => 'nullable|string',
         'golongan_darah_id' => 'nullable|string',
         'jenis_kelamin_id' => 'nullable|string',
         'agama_id' => 'nullable|string',
@@ -357,6 +359,7 @@ class AdministratorController extends Controller
     public function updateStaffDataDiri(Request $request, User $user)
     {
         $validatedData = $request->validate([
+            'nama_lengkap' => 'nullable|string',
             'golongan_darah_id' => 'nullable|string',
             'jenis_kelamin_id' => 'nullable|string',
             'agama_id' => 'nullable|string',
