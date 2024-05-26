@@ -24,7 +24,7 @@
                     </div>
             @endif
 
-            <form action="{{ route('anak.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.anak.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="nama_lengkap">Nama Lengkap <span style="color: red">*</span></label>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="jenis_kelamin_id">Jenis Kelamin <span style="color: red">*</span></label>
                     <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
-                        <option value="" disabled>-- Pilih Jenis Kelamin --</option>
+                        <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
                         @foreach ($jenisKelamin as $jenisKelaminItem)
                             <option value="{{ $jenisKelaminItem->id }}" {{ old('jenis_kelamin_id') == $jenisKelaminItem->id ? 'selected' : '' }}>{{ $jenisKelaminItem->jenis_kelamin }}</option>
                         @endforeach
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="golongan_darah_id">Golongan Darah <span style="color: red">*</span></label>
                     <select class="form-control js-example-basic-single" id="golongan_darah_id" name="golongan_darah_id" required>
-                        <option value="" disabled>-- Pilih Golongan Darah --</option>
+                        <option value="" disabled selected>-- Pilih Golongan Darah --</option>
                         @foreach ($golonganDarah as $golonganDarahItem)
                             <option value="{{ $golonganDarahItem->id }}" {{ old('golongan_darah_id') == $golonganDarahItem->id ? 'selected' : '' }}>{{ $golonganDarahItem->golongan_darah }}</option>
                         @endforeach
@@ -83,14 +83,14 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">                
+                    <div class="col-md-6">
                 <div class="form-group">
                     <label for="tempat_lahir">Tempat Lahir <span style="color: red">*</label>
                     <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
                 </div>
                     </div>
 
-                    <div class="col-md-6">                
+                    <div class="col-md-6">
 
                 <div class="form-group">
                     <label for="tanggal_lahir">Tanggal Lahir <span style="color: red">*</label>
@@ -98,7 +98,7 @@
                 </div>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="alamat">Alamat <span style="color: red">*</label>
                     <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" required>
@@ -165,7 +165,7 @@
                 <div class="form-group">
                     <label for="lokasi_id">Tempat Yayasan <span style="color: red">*</span></label>
                     <select class="form-control js-example-basic-single" id="lokasi_id" name="lokasi_id" required>
-                        <option value="" disabled>-- Pilih Lokasi --</option>
+                        <option value="" disabled selected>-- Pilih Lokasi --</option>
                         @foreach ($lokasiTugas as $lokasi)
                             <option value="{{ $lokasi->id }}" {{ old('lokasi_id') == $lokasi->id ? 'selected' : '' }}>{{ $lokasi->lokasi }}</option>
                         @endforeach

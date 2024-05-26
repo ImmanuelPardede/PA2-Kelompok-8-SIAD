@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Pendidikan;
 
 use App\Http\Controllers\Controller;
+use App\Models\LokasiTugas;
 use App\Models\MingguPembelajaran;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,10 @@ class MingguPembelajaranController extends Controller
      */
     public function create()
     {
-        return view('admin.pendidikan.mingguPembelajaran.create');
+        $lokasiPenugasanList = LokasiTugas::orderBy('lokasi', 'asc')->get(); // Ambil semua lokasi penugasan
+        return view('admin.pendidikan.mingguPembelajaran.create', compact('lokasiPenugasanList'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -32,13 +35,19 @@ class MingguPembelajaranController extends Controller
     {
         $request->validate([
             'minggu_pembelajaran' => 'required|string',
+            'tanggal_mulai' => 'required|date_format:Y-m-d',
+            'tanggal_berakhir' => 'required|date_format:Y-m-d',
+            'lokasi_penugasan_id' => 'required|exists:lokasi_penugasan,id',
         ]);
 
         MingguPembelajaran::create([
             'minggu_pembelajaran' => $request->minggu_pembelajaran,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
         ]);
 
-        return redirect()->route('mingguPembelajaran.index')->with('success', 'Tahun Kurikulum berhasil ditambahkan.');
+        return redirect()->route('admin.mingguPembelajaran.index')->with('success', 'Minggu Pembelajaran berhasil ditambahkan.');
     }
 
     /**
@@ -66,14 +75,20 @@ class MingguPembelajaranController extends Controller
     {
         $request->validate([
             'minggu_pembelajaran' => 'required|string',
+            'tanggal_mulai' => 'required|date_format:Y-m-d',
+            'tanggal_berakhir' => 'required|date_format:Y-m-d',
+            'lokasi_penugasan_id' => 'required|exists:lokasi_penugasan,id',
         ]);
 
         $mingguPembelajaran = MingguPembelajaran::findOrFail($id);
         $mingguPembelajaran->update([
             'minggu_pembelajaran' => $request->minggu_pembelajaran,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
         ]);
 
-        return redirect()->route('mingguPembelajaran.index')->with('success', 'Tahun Kurikulum berhasil diperbarui.');
+        return redirect()->route('admin.mingguPembelajaran.index')->with('success', 'Minggu Pembelajaran berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +99,6 @@ class MingguPembelajaranController extends Controller
         $mingguPembelajaran = MingguPembelajaran::findOrFail($id);
         $mingguPembelajaran->delete();
 
-        return redirect()->route('mingguPembelajaran.index')->with('success', 'Tahun Kurikulum berhasil dihapus.');
+        return redirect()->route('admin.mingguPembelajaran.index')->with('success', 'Minggu Pembelajaran berhasil dihapus.');
     }
 }

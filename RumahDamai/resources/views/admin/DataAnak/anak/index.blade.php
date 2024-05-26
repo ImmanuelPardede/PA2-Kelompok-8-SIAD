@@ -13,14 +13,14 @@
                         </div>
                     @endif
                     <div class="d-flex">
-                        <a href="{{ route('anak.create') }}" class="btn btn-success">Tambah Anak</a>
+                        <a href="{{ route('admin.anak.create') }}" class="btn btn-success">Tambah Anak</a>
                     </div>
                 </div>
 
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('anak.export.excel') }}" class="btn btn-primary mr-auto">Export to Excel</a>
-                    <form action="{{ route('anak.index') }}" method="GET" class="d-flex">
+                    <a href="{{ route('admin.anak.export.excel') }}" class="btn btn-primary mr-auto">Export to Excel</a>
+                    <form action="{{ route('admin.anak.index') }}" method="GET" class="d-flex">
                         <div class="input-group">
                             <input type="text" name="search" id="search" class="form-control typeahead" placeholder="Cari Nama Anak" aria-label="Cari Nama Anak" value="{{ request('search') ?? '' }}">
                             <div class="input-group-append">
@@ -29,7 +29,7 @@
                         </div>
                     </form>
                 </div>
-                
+
 
                 <div class="table-responsive">
                     <table class="table mt-3 table-hover">
@@ -50,9 +50,9 @@
                                     <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
                                     <td>{{ $anak->status }}</td>
                                     <td>
-                                        <a href="{{ route('anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
-                                        <a href="{{ route('anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
-                                        <form method="POST" id="deleteForm{{ $anak->id }}" class="d-inline" action="{{ route('anak.destroy', $anak->id) }}">
+                                        <a href="{{ route('admin.anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
+                                        <a href="{{ route('admin.anak.edit', $anak->id) }}" class="btn btn-warning">Edit</a>
+                                        <form method="POST" id="deleteForm{{ $anak->id }}" class="d-inline" action="{{ route('admin.anak.destroy', $anak->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $anak->id }}')">Hapus</button>

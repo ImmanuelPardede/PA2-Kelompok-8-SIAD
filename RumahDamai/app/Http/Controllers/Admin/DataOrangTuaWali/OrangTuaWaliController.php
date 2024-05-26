@@ -54,7 +54,7 @@ class OrangTuaWaliController extends Controller
 
         OrangTuaWali::create($validatedData);
 
-        return redirect()->route('orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil ditambahkan.');
+        return redirect()->route('admin.orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil ditambahkan.');
     }
 
     public function show($id)
@@ -101,7 +101,7 @@ class OrangTuaWaliController extends Controller
         $orangtuawali = OrangTuaWali::find($id);
         $orangtuawali->update($validatedData);
 
-        return redirect()->route('orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil diperbarui.');
+        return redirect()->route('admin.orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -109,6 +109,6 @@ class OrangTuaWaliController extends Controller
         $orangtuawali = OrangTuaWali::find($id);
         $orangtuawali->delete();
 
-        return redirect()->route('orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil dihapus.');
+        return redirect()->route('admin.orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil dihapus.');
     }
 }

@@ -42,7 +42,7 @@ class RiwayatMedisController extends Controller
         $data = $request->except('_token');
         RiwayatMedis::create($data);
 
-        return redirect()->route('riwayatMedis.index')->with('success', 'Riwayat Medis berhasil ditambahkan.');
+        return redirect()->route('admin.riwayatMedis.index')->with('success', 'Riwayat Medis berhasil ditambahkan.');
     }
 
     /**
@@ -80,7 +80,7 @@ class RiwayatMedisController extends Controller
         $riwayatmedis = RiwayatMedis::find($id);
         $riwayatmedis->update($request->all());
 
-        return redirect()->route('riwayatMedis.index')->with('success', 'Riwayat Medis berhasil diperbarui.');
+        return redirect()->route('admin.riwayatMedis.index')->with('success', 'Riwayat Medis berhasil diperbarui.');
     }
 
     /**
@@ -91,6 +91,6 @@ class RiwayatMedisController extends Controller
         $riwayatmedis = RiwayatMedis::find($id);
         $riwayatmedis->delete();
 
-        return redirect()->route('riwayatMedis.index')->with('success', 'Riwayat Medis berhasil dihapus.');
+        return redirect()->route('admin.riwayatMedis.index')->with('success', 'Riwayat Medis berhasil dihapus.');
     }
 }

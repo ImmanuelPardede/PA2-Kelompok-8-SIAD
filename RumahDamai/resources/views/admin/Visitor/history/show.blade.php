@@ -38,7 +38,7 @@
             @endif
 
             <div class="mt-4">
-                <a href="{{ route('history.index') }}" class="btn btn-primary">Back to History List</a>
+                <a href="{{ route('admin.history.index') }}" class="btn btn-primary">Back to History List</a>
             </div>
         </div>
     </div>

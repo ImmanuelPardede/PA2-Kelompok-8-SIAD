@@ -8,7 +8,7 @@
         <h2 class="card-title">Edit Data Orang Tua/Wali</h2>
 
 
-        <form action="{{ route('orangTuaWali.update', $orangtuawali->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.orangTuaWali.update', $orangtuawali->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -43,7 +43,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="nama_ibu">Nama Ibu</label>
                         <input type="text" class="form-control" id="nama_ibu" name="nama_ibu"
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="nik_ibu">NIK Ibu</label>
@@ -62,7 +62,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu</label>
                         <input type="date" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu"
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="no_hp_ibu">No. HP Ibu</label>
@@ -81,7 +81,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="pendidikan_ibu_id">Pendidikan Ibu</label>
                         <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id">
@@ -94,10 +94,10 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="pekerjaan_ibu_id">Pekerjaan Ibu</label>
@@ -124,7 +124,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="nama_ayah">Nama Ayah</label>
                         <input type="text" class="form-control" id="nama_ayah" name="nama_ayah"
@@ -132,7 +132,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="nik_ayah">NIK Ayah</label>
@@ -143,7 +143,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
                         <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah"
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="no_hp_ayah">No. HP Ayah</label>
@@ -162,7 +162,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="pendidikan_ayah_id">Pendidikan Ayah</label>
                         <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id">
@@ -175,10 +175,10 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
                     <div class="form-group">
                         <label for="pekerjaan_ayah_id">Pekerjaan Ayah</label>
@@ -198,17 +198,17 @@
 
 
 
-            
 
-            
 
-          
 
-            
 
-           
 
-            
+
+
+
+
+
+
 
             <div class="form-group">
                 <label for="alamat_orangtua">Alamat Orangtua</label>
@@ -225,18 +225,18 @@
             <div style="text-align: left; position: relative; top: -10px;">
                 <span style="background-color: grey;">Data Diri Wali</span>
             </div>
-            
+
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="nama_wali">Nama Wali</label>
                         <input type="text" class="form-control" id="nama_wali" name="nama_wali"
                             value="{{ $orangtuawali->nama_wali }}">
                     </div>
                 </div>
-            
-                <div class="col-md-6">                
-            
+
+                <div class="col-md-6">
+
                     <div class="form-group">
                         <label for="no_hp_wali">No. HP Wali</label>
                         <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali"
@@ -244,18 +244,18 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="tanggal_lahir_wali">Tanggal Lahir Wali</label>
                         <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali"
                             value="{{ $orangtuawali->tanggal_lahir_wali }}">
                     </div>
                 </div>
-            
-                <div class="col-md-6">                
-            
+
+                <div class="col-md-6">
+
                     <div class="form-group">
                         <label for="pekerjaan_wali_id">Pekerjaan Wali</label>
                         <select class="form-control js-example-basic-single" id="pekerjaan_wali_id" name="pekerjaan_wali_id">
@@ -274,13 +274,13 @@
                 <label for="alamat_wali">Alamat Wali</label>
                 <textarea class="form-control" id="alamat_wali" name="alamat_wali" rows="3">{{ $orangtuawali->alamat_wali }}</textarea>
             </div>
-            
-                      
-            <hr>    
 
 
-<hr>    
-            
+            <hr>
+
+
+<hr>
+
 
             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
             <button type="submit" id="submitButton" class="btn btn-primary mr-2"

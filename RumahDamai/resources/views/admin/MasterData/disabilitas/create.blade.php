@@ -1,3 +1,4 @@
+@extends('layouts.management.master')
 
 @section('content')
     <div class="container">
@@ -14,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('disabilitas.store') }}" method="post">
+        <form action="{{ route('admin.disabilitas.store') }}" method="post">
             @csrf
 
             <div class="form-group">

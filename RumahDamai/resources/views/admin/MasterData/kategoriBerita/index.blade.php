@@ -12,7 +12,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('kategoriBerita.create') }}" class="btn btn-success mb-3">Tambah Kategori Berita</a>
+                    <a href="{{ route('admin.kategoriBerita.create') }}" class="btn btn-success mb-3">Tambah Kategori Berita</a>
                 </div>
 
                 <div class="table-responsive">
@@ -28,9 +28,9 @@
                                 <tr>
                                     <td>{{ $kategori->kategori }}</td>
                                     <td>
-                                        <a href="{{ route('kategoriBerita.edit', $kategori->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.kategoriBerita.edit', $kategori->id) }}" class="btn btn-warning">Edit</a>
                                         <form method="POST" id="deleteForm{{ $kategori->id }}" class="d-inline"
-                                            action="{{ route('kategoriBerita.destroy', $kategori->id) }}">
+                                            action="{{ route('admin.kategoriBerita.destroy', $kategori->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"

@@ -42,7 +42,7 @@ class KelasController extends Controller
 
         Kelas::create($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan.');
+        return redirect()->route('admin.kelas.index')->with('success', 'Data kelas berhasil ditambahkan.');
     }
 
     /**
@@ -81,7 +81,7 @@ class KelasController extends Controller
         $kelas->silabus()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
         $kelas->modulMateri()->update(['tahun_kurikulum_id' => $kelas->tahun_kurikulum_id]);
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diperbarui.');
+        return redirect()->route('admin.kelas.index')->with('success', 'Data kelas berhasil diperbarui.');
     }
 
 
@@ -94,6 +94,6 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         $kelas->delete();
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil dihapus.');
+        return redirect()->route('admin.kelas.index')->with('success', 'Data kelas berhasil dihapus.');
     }
 }

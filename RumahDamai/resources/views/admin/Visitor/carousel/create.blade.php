@@ -7,7 +7,7 @@
             <h1 class="display-5 font-weight-bold text-left mb-3">Form Menambah Carousel</h1>
 
             <!-- Form untuk menambahkan carousel item -->
-            <form method="POST" action="{{ route('carousel.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.carousel.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter caption" maxlength="15">
                     <small class="text-muted" id="wordCountInfo">Maksimal 15 Huruf.</small>
                 </div>
-                
+
 
                 <!-- Input untuk subcaption -->
                 <div class="mb-3">

@@ -12,7 +12,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('mingguPembelajaran.create') }}" class="btn btn-success mb-3">Tambah Minggu
+                    <a href="{{ route('admin.mingguPembelajaran.create') }}" class="btn btn-success mb-3">Tambah Minggu
                         Pembelajaran</a>
                 </div>
 
@@ -33,10 +33,10 @@
                                     <td>{{ $mingguPembelajaran->tanggal_mulai }}</td>
                                     <td>{{ $mingguPembelajaran->tanggal_berakhir }}</td>
                                     <td>
-                                        <a href="{{ route('mingguPembelajaran.edit', $mingguPembelajaran->id) }}"
+                                        <a href="{{ route('admin.mingguPembelajaran.edit', $mingguPembelajaran->id) }}"
                                             class="btn btn-warning">Edit</a>
                                         <form method="POST" id="deleteForm{{ $mingguPembelajaran->id }}" class="d-inline"
-                                            action="{{ route('mingguPembelajaran.destroy', $mingguPembelajaran->id) }}">
+                                            action="{{ route('admin.mingguPembelajaran.destroy', $mingguPembelajaran->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"

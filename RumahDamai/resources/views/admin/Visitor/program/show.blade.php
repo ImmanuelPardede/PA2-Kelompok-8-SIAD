@@ -30,7 +30,7 @@
                     @endforeach
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('program.index') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('admin.program.index') }}" class="btn btn-secondary">Kembali</a>
                 </div>
             </div>
         </div>

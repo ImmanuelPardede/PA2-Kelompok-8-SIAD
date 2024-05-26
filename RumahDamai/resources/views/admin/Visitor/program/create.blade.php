@@ -10,7 +10,7 @@
                 <div class="card-title text-left">Form Menambah Program Yayasan</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('program.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.program.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -62,7 +62,7 @@
 
                         <a href="#" class="addprogram btn btn-primary" style="float: right">Tambah Program</a>
                         <div class="raport"></div>
-            
+
 
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>

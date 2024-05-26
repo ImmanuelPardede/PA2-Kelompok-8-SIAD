@@ -35,9 +35,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('anakNonDisabilitas.show', $anakNonDisabilitas->id) }}"
+                                        <a href="{{ route('admin.anakNonDisabilitas.show', $anakNonDisabilitas->id) }}"
                                             class="btn btn-info">Detail</a>
-                                        <a href="{{ route('anakNonDisabilitas.edit', $anakNonDisabilitas->id) }}"
+                                        <a href="{{ route('admin.anakNonDisabilitas.edit', $anakNonDisabilitas->id) }}"
                                             class="btn btn-warning">Edit</a>
                                     </td>
                                 </tr>

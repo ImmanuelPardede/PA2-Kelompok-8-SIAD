@@ -14,7 +14,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('carousel.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.carousel.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
             </div>
 
             <div class="table-responsive">
@@ -43,14 +43,14 @@
                             <td>{{ $item->caption }}</td>
                             <td>{{ $item->subcaption }}</td>
                             <td>
-                                <a href="{{ route('carousel.show', $item->id) }}" class="btn btn-primary">Detail</a>
-                                <a href="{{ route('carousel.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('carousel.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.carousel.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('admin.carousel.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                <form action="{{ route('admin.carousel.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Hapus</button>
                                 </form>
-                                
+
                             </td>
                         </tr>
                         @endforeach

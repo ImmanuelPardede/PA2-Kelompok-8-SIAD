@@ -6,7 +6,7 @@
                     <div class="card-body">
                     <div class="card-title text-left">Edit Pengumuman</div>
 
-                        <form action="{{ route('pengumuman.update', ['id' => $pengumuman->id]) }}" method="POST">
+                        <form action="{{ route('admin.pengumuman.update', ['id' => $pengumuman->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -27,7 +27,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            
+
 
 
                             <div class="form-group">

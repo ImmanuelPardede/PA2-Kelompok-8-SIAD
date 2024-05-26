@@ -151,7 +151,7 @@ class AnakController extends Controller
                 $anak->save();
             }
 
-            return redirect()->route('anak.index')->with('success', 'Data anak berhasil ditambahkan.');
+            return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil ditambahkan.');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
         }
@@ -184,7 +184,7 @@ class AnakController extends Controller
 
         // Periksa apakah data anak ditemukan
         if (!$anak) {
-            return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
+            return redirect()->route('admin.anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
         return view('admin.DataAnak.Anak.edit', compact('anak', 'agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit', 'lokasiTugas'));
@@ -217,7 +217,7 @@ class AnakController extends Controller
         $anak = Anak::find($id);
 
         if (!$anak) {
-            return redirect()->route('anak.index')->with('error', 'Data anak tidak ditemukan.');
+            return redirect()->route('admin.anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
 
@@ -268,7 +268,7 @@ class AnakController extends Controller
             $anak->save();
         }
         $anak->update($data);
-        return redirect()->route('anak.index')->with('success', 'Data anak berhasil diperbarui.');
+        return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }
 
     /**
@@ -285,9 +285,9 @@ class AnakController extends Controller
             }
 
             $anak->delete();
-            return redirect()->route('anak.index')->with('success', 'Data anak berhasil dihapus.');
+            return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil dihapus.');
         } else {
-            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+            return redirect()->route('admin.anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
 
@@ -299,9 +299,9 @@ class AnakController extends Controller
             $anak->status = 'nonaktif';
             $anak->save();
 
-            return redirect()->route('anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
+            return redirect()->route('admin.anak.index')->with('success', 'Anak berhasil dinonaktifkan.');
         } else {
-            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+            return redirect()->route('admin.anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
 
@@ -313,9 +313,9 @@ class AnakController extends Controller
             $anak->status = 'aktif';
             $anak->save();
 
-            return redirect()->route('anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
+            return redirect()->route('admin.anak.index')->with('success', 'Anak berhasil diaktifkan kembali.');
         } else {
-            return redirect()->route('anak.index')->with('error', 'Anak tidak ditemukan.');
+            return redirect()->route('admin.anak.index')->with('error', 'Anak tidak ditemukan.');
         }
     }
 

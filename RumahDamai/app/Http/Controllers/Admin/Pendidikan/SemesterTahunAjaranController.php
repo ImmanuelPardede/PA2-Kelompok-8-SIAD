@@ -38,7 +38,7 @@ class SemesterTahunAjaranController extends Controller
             'semester_tahun_ajaran' => $request->semester_tahun_ajaran,
         ]);
 
-        return redirect()->route('semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil ditambahkan.');
+        return redirect()->route('admin.semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil ditambahkan.');
     }
 
     /**
@@ -73,7 +73,7 @@ class SemesterTahunAjaranController extends Controller
             'semester_tahun_ajaran' => $request->semester_tahun_ajaran,
         ]);
 
-        return redirect()->route('semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil diperbarui.');
+        return redirect()->route('admin.semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +84,6 @@ class SemesterTahunAjaranController extends Controller
         $semesterTahunAjaran = SemesterTahunAjaran::findOrFail($id);
         $semesterTahunAjaran->delete();
 
-        return redirect()->route('semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil dihapus.');
+        return redirect()->route('admin.semesterTahunAjaran.index')->with('success', 'Semester Tahun Ajaran berhasil dihapus.');
     }
 }

@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('latarBelakang.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.latarBelakang.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="anak_id">Nama Anak <span style="color: red">*</span></label>

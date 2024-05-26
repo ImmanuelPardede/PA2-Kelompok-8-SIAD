@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <form id="editForm" action="{{ route('latarBelakang.update', $latarBelakang->id) }}" method="post"
+            <form id="editForm" action="{{ route('admin.latarBelakang.update', $latarBelakang->id) }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

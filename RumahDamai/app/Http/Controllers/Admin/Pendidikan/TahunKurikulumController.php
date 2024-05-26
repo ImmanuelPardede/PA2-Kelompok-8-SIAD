@@ -38,7 +38,7 @@ class TahunKurikulumController extends Controller
             'tahun_kurikulum' => $request->tahun_kurikulum,
         ]);
 
-        return redirect()->route('tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil ditambahkan.');
+        return redirect()->route('admin.tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil ditambahkan.');
     }
 
     /**
@@ -73,7 +73,7 @@ class TahunKurikulumController extends Controller
             'tahun_kurikulum' => $request->tahun_kurikulum,
         ]);
 
-        return redirect()->route('tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil diperbarui.');
+        return redirect()->route('admin.tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +84,6 @@ class TahunKurikulumController extends Controller
         $tahunKurikulum = TahunKurikulum::findOrFail($id);
         $tahunKurikulum->delete();
 
-        return redirect()->route('tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil dihapus.');
+        return redirect()->route('admin.tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil dihapus.');
     }
 }

@@ -12,7 +12,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('latarBelakang.create') }}" class="btn btn-success mb-3">Tambah Latar Belakang Anak</a>
+                    <a href="{{ route('admin.latarBelakang.create') }}" class="btn btn-success mb-3">Tambah Latar Belakang Anak</a>
                 </div>
 
                 <div class="table-responsive">
@@ -28,11 +28,11 @@
                                 <tr>
                                     <td>{{ App\Models\Anak::find($latarBelakang->anak_id)->nama_lengkap }}</td>
                                     <td>
-                                        <a href="{{ route('latarBelakang.show', $latarBelakang->id) }}" class="btn btn-info">Detail</a>
-                                        <a href="{{ route('latarBelakang.edit', $latarBelakang->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.latarBelakang.show', $latarBelakang->id) }}" class="btn btn-info">Detail</a>
+                                        <a href="{{ route('admin.latarBelakang.edit', $latarBelakang->id) }}" class="btn btn-warning">Edit</a>
                                         <!-- Tambahkan tag form untuk hapus -->
                                         <form method="POST" id="deleteForm{{ $latarBelakang->id }}" class="d-inline"
-                                            action="{{ route('latarBelakang.destroy', $latarBelakang->id) }}">
+                                            action="{{ route('admin.latarBelakang.destroy', $latarBelakang->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"

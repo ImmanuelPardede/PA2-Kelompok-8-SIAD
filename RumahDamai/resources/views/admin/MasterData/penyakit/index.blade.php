@@ -14,7 +14,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('penyakit.create') }}" class="btn btn-success mb-3">Tambah Jenis Penyakit</a>
+                <a href="{{ route('admin.penyakit.create') }}" class="btn btn-success mb-3">Tambah Jenis Penyakit</a>
             </div>
 
             <div class="table-responsive">
@@ -30,10 +30,10 @@
                             <tr>
                                 <td>{{ $penyakit->jenis_penyakit }}</td>
                                 <td>
-                                    <a href="{{ route('penyakit.show', $penyakit->id) }}" class="btn btn-info">Detail</a>
-                                    <a href="{{ route('penyakit.edit', $penyakit->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('admin.penyakit.show', $penyakit->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('admin.penyakit.edit', $penyakit->id) }}" class="btn btn-warning">Edit</a>
                                     <form method="POST" id="deleteForm{{ $penyakit->id }}" class="d-inline"
-                                        action="{{ route('penyakit.destroy', $penyakit->id) }}">
+                                        action="{{ route('admin.penyakit.destroy', $penyakit->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger"

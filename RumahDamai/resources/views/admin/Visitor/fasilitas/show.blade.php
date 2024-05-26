@@ -35,8 +35,8 @@
                     </div>
                 </div>
             </div>
-            
-            <a href="{{ route('fasilitas.index') }}" class="btn btn-primary mt-3">Kembali</a>
+
+            <a href="{{ route('admin.fasilitas.index') }}" class="btn btn-primary mt-3">Kembali</a>
         </div>
     </div>
 </div>

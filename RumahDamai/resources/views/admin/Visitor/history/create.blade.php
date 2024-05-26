@@ -7,7 +7,7 @@
             <h1 class="card-title text-left">Form Menambah Sejarah Singkat Yayasan</h1>
 
             <!-- Form untuk menambahkan foundation history -->
-            <form method="POST" action="{{ route('history.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.history.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -21,7 +21,7 @@
                     <label for="sejarah_singkat" class="form-label">Sejarah Singkat Yayasan<span style="color: red">*</span></label>
                     <textarea class="form-control" id="sejarah_singkat" name="sejarah_singkat" rows="5" placeholder="Enter brief history" maxlength="255" required></textarea>
                 </div>
-                
+
                 <!-- Input untuk tujuan utama -->
                 <div class="mb-3">
                     <label for="tujuan_utama" class="form-label">Tujuan Utama Yayasan<span style="color: red">*</span></label>

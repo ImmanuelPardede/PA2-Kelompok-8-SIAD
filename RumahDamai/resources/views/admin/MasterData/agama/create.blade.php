@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('agama.store') }}" method="post">
+        <form action="{{ route('admin.agama.store') }}" method="post">
             @csrf
 
             <div class="form-group">

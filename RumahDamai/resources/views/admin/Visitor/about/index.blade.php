@@ -15,9 +15,9 @@
                     </div>
                 @endif
                 @if ($abouts->isEmpty())
-                <a href="{{ route('about.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.about.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
             @endif
-        
+
         </div>
 
             <div class="table-responsive">
@@ -43,16 +43,16 @@
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah1,3,'...') }}</td>
                             <td>{{ \Illuminate\Support\Str::words($item->wilayah2,3,'...') }}</td>
                             <td>
-                                <a href="{{ route('about.show', $item->id) }}" class="btn btn-primary">Detail</a>
-                                <a href="{{ route('about.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('about.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.about.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('admin.about.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                <form action="{{ route('admin.about.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Delete</button>
 
                                 </form>
 
-                                
+
                             </td>
                         </tr>
                         @endforeach

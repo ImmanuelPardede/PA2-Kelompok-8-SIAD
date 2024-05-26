@@ -15,7 +15,7 @@
 
                 <!-- Tampilkan tombol "Add New Foundation History" hanya jika tidak ada data -->
                 @if (!$history)
-                    <a href="{{ route('history.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                    <a href="{{ route('admin.history.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
                 @endif
             </div>
 
@@ -40,9 +40,9 @@
                                 <td>{{ \Illuminate\Support\Str::words($history->tujuan_utama, 3, '...') }}</td>
                                 <td>{{ $history->dibangun }}</td>
                                 <td>
-                                    <a href="{{ route('history.show', $history->id) }}" class="btn btn-primary">Detail</a>
-                                    <a href="{{ route('history.edit', $history->id) }}" class="btn btn-info">Edit</a>
-                                    <form action="{{ route('history.destroy', $history->id) }}" id="deleteForm{{ $history->id }}" method="POST" style="display: inline-block;">
+                                    <a href="{{ route('admin.history.show', $history->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ route('admin.history.edit', $history->id) }}" class="btn btn-info">Edit</a>
+                                    <form action="{{ route('admin.history.destroy', $history->id) }}" id="deleteForm{{ $history->id }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $history->id }}')">Hapus</button>

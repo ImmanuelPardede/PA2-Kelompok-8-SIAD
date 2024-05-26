@@ -30,7 +30,7 @@
                     @endforeach
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('galeri.index') }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('admin.galeri.index') }}" class="btn btn-secondary">Kembali</a>
                 </div>
             </div>
         </div>

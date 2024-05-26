@@ -7,7 +7,7 @@
             <h1 class="card-title">Edit About</h1>
 
             <!-- Form untuk mengupdate About -->
-            <form method="POST" action="{{ route('about.update', $abouts->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.about.update', $abouts->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

@@ -44,7 +44,7 @@ class FormatLaporanController extends Controller
             'nama_laporan' => $request->nama_laporan,
         ]);
 
-        return redirect()->route('formatLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
+        return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
     }
 
     public function show($id)
@@ -88,7 +88,7 @@ class FormatLaporanController extends Controller
             'nama_laporan' => $request->nama_laporan,
         ]);
 
-        return redirect()->route('formatLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
+        return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
     }
 
 
@@ -102,7 +102,7 @@ class FormatLaporanController extends Controller
 
         $formatLaporan->delete();
 
-        return redirect()->route('formatLaporan.index')->with('success', 'Format Laporan berhasil dihapus.');
+        return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil dihapus.');
     }
 
     public function download($id)

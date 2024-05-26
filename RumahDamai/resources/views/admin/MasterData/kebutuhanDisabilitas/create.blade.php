@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('kebutuhanDisabilitas.store') }}" method="post">
+        <form action="{{ route('admin.kebutuhanDisabilitas.store') }}" method="post">
             @csrf
 
             <div class="form-group">

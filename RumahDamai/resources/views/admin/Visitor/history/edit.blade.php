@@ -8,7 +8,7 @@
             <h1 class="card-title">Edit Foundation History</h1>
 
             <!-- Form untuk mengupdate foundation history -->
-            <form method="POST" action="{{ route('history.update', $history->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.history.update', $history->id) }}" enctype="multipart/form-data">
                 @csrf <!-- Token CSRF -->
                 @method('PUT') <!-- Method PUT untuk update -->
 

@@ -7,7 +7,7 @@
             <h1 class="card-title">Edit Galeri Item</h1>
 
             <!-- Form untuk mengupdate fasilitas item -->
-            <form method="POST" action="{{ route('galeri.update', $galeri->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.galeri.update', $galeri->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -38,11 +38,11 @@
                 Klik Choose File untuk Mengubah gambarnya
             </span>
         </div>
-    </div>                    
+    </div>
     <div class="mt-2">
         @if ($detailgaleri->img_galeri)
     <img src="{{ asset($detailgaleri->img_galeri) }}" alt="Current Image" class="img-fluid" style="max-width: 300px;">
-    <a href="" onclick="deleteImage('{{ route('galeri.deleteImage', $detailgaleri->id) }}')" class="btn btn-danger btn-sm mt-2">Hapus</a>
+    <a href="" onclick="deleteImage('{{ route('admin.galeri.deleteImage', $detailgaleri->id) }}')" class="btn btn-danger btn-sm mt-2">Hapus</a>
 @endif
     </div>
     <small class="text-muted">Max file size: 2MB | Allowed formats: jpeg, png, jpg, gif</small>
@@ -84,7 +84,7 @@
             .then(response => {
     if (response.ok) {
         // Jika penghapusan berhasil, arahkan pengguna kembali ke halaman galeri.edit
-        window.location.href = "{{ route('galeri.edit', $galeri->id) }}";
+        window.location.href = "{{ route('admin.galeri.edit', $galeri->id) }}";
     } else {
         // Tangani kesalahan jika penghapusan gagal
         console.error('Gagal menghapus gambar.');

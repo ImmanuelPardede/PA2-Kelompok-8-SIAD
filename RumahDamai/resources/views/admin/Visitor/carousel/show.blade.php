@@ -22,7 +22,7 @@
             </div>
             @endif
             <div class="mt-4">
-                <a href="{{ route('carousel.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('admin.carousel.index') }}" class="btn btn-secondary">Kembali</a>
             </div>
         </div>
     </div>

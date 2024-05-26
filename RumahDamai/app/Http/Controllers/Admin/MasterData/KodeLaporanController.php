@@ -31,7 +31,7 @@ class KodeLaporanController extends Controller
         $kodeLaporan = new KodeLaporan(['kode' => $uniqueCode]); // Buat objek KodeLaporan dengan kode unik
         $kodeLaporan->save();
 
-        return redirect()->route('kodeLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
+        return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
     }
 
 
@@ -54,11 +54,15 @@ class KodeLaporanController extends Controller
 
         $request->validate([
             'kode' => 'required|unique:kode_laporan,kode,' . $id,
-
         ]);
 
-        return redirect()->route('kodeLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
+        $kodeLaporan->update([
+            'kode' => $request->kode,
+        ]);
+
+        return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {
@@ -67,7 +71,7 @@ class KodeLaporanController extends Controller
 
         $kodeLaporan->delete();
 
-        return redirect()->route('kodeLaporan.index')->with('success', 'Format Laporan berhasil dihapus.');
+        return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil dihapus.');
     }
 
     private function generateUniqueCode($word)

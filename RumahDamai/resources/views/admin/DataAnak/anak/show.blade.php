@@ -1,12 +1,11 @@
 @extends('layouts.management.master')
 
 @section('content')
-
     <div class="container">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Anak</h4>
-               
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">
@@ -32,12 +31,13 @@
                                         <th class="small-text">Golongan Darah</th>
                                         <td>{{ $anak->golonganDarah->golongan_darah ?? 'Data tidak tersedia' }}</td>
                                     </tr>
-                                    @if($anak->tipe_anak == 'disabilitas')
-    <tr>
-        <th class="small-text">Kebutuhan Disabilitas</th>
-        <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}</td>
-    </tr>
-@endif
+                                    @if ($anak->tipe_anak == 'disabilitas')
+                                        <tr>
+                                            <th class="small-text">Kebutuhan Disabilitas</th>
+                                            <td>{{ $anak->kebutuhanDisabilitas->jenis_kebutuhan_disabilitas ?? 'Data tidak tersedia' }}
+                                            </td>
+                                        </tr>
+                                    @endif
 
                                     <tr>
                                         <th class="small-text">Tempat Lahir</th>
@@ -90,26 +90,25 @@
                         </div>
 
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                            @if ($anak->status === 'aktif')
-                                <form action="{{ route('anak.nonaktifkan', $anak->id) }}" method="post"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
-                                </form>
-                            @else
-                                <form action="{{ route('anak.aktifkan', $anak->id) }}" method="post"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-success"
-                                        onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
-                                </form>
-                            @endif
-                            <a href="{{ route('anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate PDF</a>
+                        @if ($anak->status === 'aktif')
+                            <form action="{{ route('admin.anak.nonaktifkan', $anak->id) }}" method="post"
+                                style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
+                            </form>
+                        @else
+                            <form action="{{ route('admin.anak.aktifkan', $anak->id) }}" method="post" style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-success"
+                                    onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
+                            </form>
+                        @endif
+                        <a href="{{ route('admin.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate PDF</a>
 
-                        
+
 
                     </div>
                     <div class="col-md-4">
@@ -124,13 +123,10 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-        </div>
             </div>
         </div>
     </div>
-
-
-
+    </div>
+    </div>
 @endsection

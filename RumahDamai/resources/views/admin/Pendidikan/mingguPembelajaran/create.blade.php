@@ -4,7 +4,6 @@
     <div class="container">
         <h2>Tambah Minggu Pembelajaran</h2>
 
-        <!-- Tampilkan pesan kesalahan validasi jika ada -->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -15,8 +14,19 @@
             </div>
         @endif
 
-        <form action="{{ route('mingguPembelajaran.store') }}" method="post">
+        <form action="{{ route('admin.mingguPembelajaran.store') }}" method="post">
             @csrf
+
+            <div class="form-group">
+                <label for="lokasi_penugasan_id">Lokasi Penugasan<span style="color: red">*</span></label>
+                <select class="form-control" name="lokasi_penugasan_id" required>
+                    <option value="">Pilih Lokasi Penugasan</option>
+                    @foreach ($lokasiPenugasanList as $lokasiPenugasan)
+                        <option value="{{ $lokasiPenugasan->id }}">{{ $lokasiPenugasan->lokasi }}</option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <div class="form-group">
                 <label for="minggu_pembelajaran">Minggu Pembelajaran<span style="color: red">*</span></label>

@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
             <h2 class="card-title">Tambah Data Orang Tua/Wali</h2>
-        <form action="{{ route('orangTuaWali.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.orangTuaWali.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="anak_id">Nama Anak<span style="color: red">*</span></label>
@@ -32,14 +32,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="nama_ibu">Nama Ibu</label>
                 <input type="text" class="form-control" id="nama_ibu" name="nama_ibu">
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="nik_ibu">NIK Ibu</label>
@@ -49,14 +49,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ibu" name="tanggal_lahir_ibu">
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="no_hp_ibu">No. HP Ibu</label>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="pendidikan_ibu_id">Pendidikan ibu</label>
                 <select class="form-control js-example-basic-single" id="pendidikan_ibu_id" name="pendidikan_ibu_id">
@@ -78,7 +78,7 @@
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="pekerjaan_ibu_id">Pekerjaan Ibu</label>
@@ -99,14 +99,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="nama_ayah">Nama Ayah</label>
                 <input type="text" class="form-control" id="nama_ayah" name="nama_ayah">
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="nik_ayah">NIK Ayah</label>
@@ -116,14 +116,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
                 <input type="date" class="form-control" id="tanggal_lahir_ayah" name="tanggal_lahir_ayah">
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="no_hp_ayah">No. HP Ayah</label>
@@ -133,7 +133,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">                
+                <div class="col-md-6">
             <div class="form-group">
                 <label for="pendidikan_ayah_id">Pendidikan Ayah</label>
                 <select class="form-control js-example-basic-single" id="pendidikan_ayah_id" name="pendidikan_ayah_id">
@@ -145,7 +145,7 @@
             </div>
                 </div>
 
-                <div class="col-md-6">                
+                <div class="col-md-6">
 
             <div class="form-group">
                 <label for="pekerjaan_ayah_id">Pekerjaan Ayah</label>
@@ -172,14 +172,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">                
+    <div class="col-md-6">
         <div class="form-group">
             <label for="nama_wali">Nama Wali</label>
             <input type="text" class="form-control" id="nama_wali" name="nama_wali">
         </div>
     </div>
 
-    <div class="col-md-6">                
+    <div class="col-md-6">
 
         <div class="form-group">
             <label for="no_hp_wali">No. HP Wali</label>
@@ -189,14 +189,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6">                
+    <div class="col-md-6">
         <div class="form-group">
             <label for="tanggal_lahir_wali">Tanggal Lahir Wali</label>
             <input type="date" class="form-control" id="tanggal_lahir_wali" name="tanggal_lahir_wali">
         </div>
     </div>
 
-    <div class="col-md-6">                
+    <div class="col-md-6">
 
         <div class="form-group">
             <label for="pekerjaan_wali_id">Pekerjaan Wali</label>
@@ -214,12 +214,12 @@
     <input type="text" class="form-control" id="alamat_wali" name="alamat_wali">
 </div>
 
-          
-<hr>           
 
-            
-           
-            
+<hr>
+
+
+
+
 
 
 

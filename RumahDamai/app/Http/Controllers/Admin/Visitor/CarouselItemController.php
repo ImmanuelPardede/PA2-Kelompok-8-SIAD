@@ -39,32 +39,32 @@ class CarouselItemController extends Controller
             'caption' => 'nullable|string',
             'subcaption' => 'nullable|string',
         ]);
-    
+
         // Mengelola upload foto profil
         if ($request->hasFile('image_url')) {
             $gambar = $request->file('image_url');
             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
             $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
-    
+
             // Pindahkan gambar ke direktori yang diinginkan (storage/app/public/uploads/carousel/)
             $gambar->move('uploads/visitor/carousel/', $new_gambar);
-    
+
             // Buat instance CarouselItem dengan data yang disediakan
             $carousel = new CarouselItem([
                 'caption' => $request->caption,
                 'subcaption' => $request->subcaption,
                 'image_url' => 'uploads/visitor/carousel/' . $new_gambar, // Set nilai image_url
             ]);
-    
+
             // Simpan instance CarouselItem ke dalam database
             $carousel->save();
-    
-            return redirect()->route('carousel.index')
+
+            return redirect()->route('admin.carousel.index')
                              ->with('success', 'Carousel item created successfully.');
         }
-    
+
         // Jika tidak ada file yang diunggah, tampilkan pesan error
-        return redirect()->route('carousel.create')
+        return redirect()->route('admin.carousel.create')
                          ->with('error', 'Failed to upload image.');
     }
 
@@ -75,11 +75,11 @@ class CarouselItemController extends Controller
     {
         // Temukan CarouselItem berdasarkan ID
         $carouselItem = CarouselItem::findOrFail($id);
-    
+
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.carousel.show', compact('carouselItem'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -88,11 +88,11 @@ class CarouselItemController extends Controller
     {
         // Temukan CarouselItem berdasarkan ID
         $carousel = CarouselItem::findOrFail($id);
-    
+
         // Kembalikan view edit dengan data CarouselItem yang ditemukan
         return view('admin.Visitor.carousel.edit', compact('carousel'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -134,7 +134,7 @@ class CarouselItemController extends Controller
     // Simpan perubahan ke dalam database
     $carousel->save();
 
-    return redirect()->route('carousel.index')->with('success', 'Carousel item updated successfully.');
+    return redirect()->route('admin.carousel.index')->with('success', 'Carousel item updated successfully.');
 }
 
 
@@ -146,18 +146,18 @@ class CarouselItemController extends Controller
     {
         // Temukan CarouselItem berdasarkan ID
         $carouselItem = CarouselItem::findOrFail($id);
-    
+
         if ($carouselItem->image_url) {
             if (file_exists(public_path($carouselItem->image_url))) {
                 unlink(public_path($carouselItem->image_url));
         }
         // Hapus CarouselItem dari database
         $carouselItem->delete();
-    
-        return redirect()->route('carousel.index')
+
+        return redirect()->route('admin.carousel.index')
                          ->with('success', 'Carousel item deleted successfully.');
     }
-    
-    
+
+
     }
 }

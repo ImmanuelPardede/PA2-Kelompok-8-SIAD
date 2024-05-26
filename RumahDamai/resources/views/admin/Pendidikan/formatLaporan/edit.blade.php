@@ -15,7 +15,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('formatLaporan.update', $formatLaporan->id) }}" method="post"
+                <form action="{{ route('admin.formatLaporan.update', $formatLaporan->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

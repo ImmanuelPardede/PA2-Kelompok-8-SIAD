@@ -13,7 +13,7 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('riwayatMedis.create') }}" class="btn btn-success mb-3">Tambah Riwayat Medis</a>
+                    <a href="{{ route('admin.riwayatMedis.create') }}" class="btn btn-success mb-3">Tambah Riwayat Medis</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table mt-3 table-hover">
@@ -28,12 +28,12 @@
                                 <tr>
                                     <td>{{ $riwayatMedis->anak->nama_lengkap }}</td>
                                     <td>
-                                        <a href="{{ route('riwayatMedis.show', $riwayatMedis->id) }}"
+                                        <a href="{{ route('admin.riwayatMedis.show', $riwayatMedis->id) }}"
                                             class="btn btn-info">Detail</a>
-                                        <a href="{{ route('riwayatMedis.edit', $riwayatMedis->id) }}"
+                                        <a href="{{ route('admin.riwayatMedis.edit', $riwayatMedis->id) }}"
                                             class="btn btn-warning">Edit</a>
                                         <form method="POST" id="deleteForm{{ $riwayatMedis->id }}" class="d-inline"
-                                            action="{{ route('riwayatMedis.destroy', $riwayatMedis->id) }}">
+                                            action="{{ route('admin.riwayatMedis.destroy', $riwayatMedis->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"

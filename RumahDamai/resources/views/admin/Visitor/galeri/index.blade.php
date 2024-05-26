@@ -16,7 +16,7 @@
                 @endif
 
                 @if ($galeri)
-                <a href="{{ route('galeri.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.galeri.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
                 @endif
 
             </div>
@@ -52,19 +52,19 @@
                                     <p>No Image</p>
                                 @endif
                             </td>
-                            
+
                             <td>{{ $item->judul }}</td>
                             <td>{{ $item->lokasi }}</td>
                             <td>{{ $item->waktu }}</td>
                             <td>
-                                <a href="{{ route('galeri.show', $item->id) }}" class="btn btn-primary">Detail</a>
-                                <a href="{{ route('galeri.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('galeri.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.galeri.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('admin.galeri.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                <form action="{{ route('admin.galeri.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Hapus</button>
                                 </form>
-                                
+
                             </td>
                         </tr>
                         @endforeach

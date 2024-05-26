@@ -5,7 +5,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Modul Materi</h4>
-                <p class="card-description">Modul Materi?</p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">

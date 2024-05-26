@@ -16,7 +16,7 @@
                     @endif
                 </div>
                 <div class="col-6 text-right">
-                    <a href="{{ route('golonganDarah.create') }}" class="btn btn-success mb-3">Tambah Jenis Golongan Darah</a>
+                    <a href="{{ route('admin.golonganDarah.create') }}" class="btn btn-success mb-3">Tambah Jenis Golongan Darah</a>
                 </div>
             </div>
 
@@ -33,9 +33,9 @@
                         <tr>
                             <td>{{ $darah->golongan_darah }}</td>
                             <td>
-                                <a href="{{ route('golonganDarah.edit', $darah->id) }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('admin.golonganDarah.edit', $darah->id) }}" class="btn btn-warning">Edit</a>
                                 <form method="POST" id="deleteForm{{ $darah->id }}" class="d-inline"
-                                    action="{{ route('golonganDarah.destroy', $darah->id) }}">
+                                    action="{{ route('admin.golonganDarah.destroy', $darah->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger"

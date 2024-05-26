@@ -13,7 +13,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('berita.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.berita.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
             </div>
 
             <div class="table-responsive">
@@ -45,12 +45,12 @@
                                 @else
                                     {{ $beritaItem->judul }}
                                 @endif
-                            </td>                                                        
+                            </td>
                             <td>{{$beritaItem->kategori->kategori }}</td>
                             <td>
-                                <a href="{{ route('berita.show', $beritaItem->id) }}" class="btn btn-primary ">Detail</a>
-                                <a href="{{ route('berita.edit', $beritaItem->id) }}" class="btn btn-info ">Edit</a>
-                                <form action="{{ route('berita.destroy', $beritaItem->id) }}" id="deleteForm{{ $beritaItem->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.berita.show', $beritaItem->id) }}" class="btn btn-primary ">Detail</a>
+                                <a href="{{ route('admin.berita.edit', $beritaItem->id) }}" class="btn btn-info ">Edit</a>
+                                <form action="{{ route('admin.berita.destroy', $beritaItem->id) }}" id="deleteForm{{ $beritaItem->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $beritaItem->id }}')">Hapus</button>

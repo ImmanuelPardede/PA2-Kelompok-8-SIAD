@@ -38,7 +38,7 @@ class TahunAjaranController extends Controller
             'tahun_ajaran' => $request->tahun_ajaran,
         ]);
 
-        return redirect()->route('tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil ditambahkan.');
+        return redirect()->route('admin.tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil ditambahkan.');
     }
 
     /**
@@ -73,7 +73,7 @@ class TahunAjaranController extends Controller
             'tahun_ajaran' => $request->tahun_ajaran,
         ]);
 
-        return redirect()->route('tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil diperbarui.');
+        return redirect()->route('admin.tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +84,6 @@ class TahunAjaranController extends Controller
         $tahunAjaran = TahunAjaran::findOrFail($id);
         $tahunAjaran->delete();
 
-        return redirect()->route('tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil dihapus.');
+        return redirect()->route('admin.tahunAjaran.index')->with('success', 'Tahun Ajaran berhasil dihapus.');
     }
 }

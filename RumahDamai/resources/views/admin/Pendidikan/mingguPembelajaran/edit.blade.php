@@ -14,30 +14,39 @@
             </div>
         @endif
 
-        <form action="{{ route('mingguPembelajaran.update', $mingguPembelajaran->id) }}" method="post">
+        <form action="{{ route('admin.mingguPembelajaran.update', $mingguPembelajaran->id) }}" method="post">
             @csrf
             @method('PUT')
+
             <div class="form-group">
-                <label for="minggu_pembelajaran">Minggu Pembelajaran</label>
-                <input type="text" class="form-control" name="minggu_pembelajaran"
-                    value="{{ old('minggu_pembelajaran', $mingguPembelajaran->minggu_pembelajaran) }}" disabled>
+                <label for="lokasi_penugasan_id">Lokasi Penugasan<span style="color: red">*</span></label>
+                <select class="form-control" name="lokasi_penugasan_id" required>
+                    <option value="">Pilih Lokasi Penugasan</option>
+                    @foreach ($lokasiPenugasanList as $lokasiPenugasan)
+                        <option value="{{ $lokasiPenugasan->id }}" {{ old('lokasi_penugasan_id', $mingguPembelajaran->lokasi_penugasan_id) == $lokasiPenugasan->id ? 'selected' : '' }}>
+                            {{ $lokasiPenugasan->lokasi }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="tanggal_mulai">Tanggal Mulai</label>
-                <input type="date" class="form-control" name="tanggal_mulai"
-                    value="{{ old('tanggal_mulai', $mingguPembelajaran->tanggal_mulai) }}">
+                <label for="minggu_pembelajaran">Minggu Pembelajaran<span style="color: red">*</span></label>
+                <input type="text" class="form-control" name="minggu_pembelajaran" value="{{ old('minggu_pembelajaran', $mingguPembelajaran->minggu_pembelajaran) }}" required>
             </div>
 
             <div class="form-group">
-                <label for="tanggal_berakhir">Tanggal Berakhir</label>
-                <input type="date" class="form-control" name="tanggal_berakhir"
-                    value="{{ old('tanggal_berakhir', $mingguPembelajaran->tanggal_berakhir) }}">
+                <label for="tanggal_mulai">Tanggal Mulai<span style="color: red">*</span></label>
+                <input type="date" class="form-control" name="tanggal_mulai" value="{{ old('tanggal_mulai', $mingguPembelajaran->tanggal_mulai) }}" required>
             </div>
 
-            <a href="{{ route('mingguPembelajaran.index') }}" class="btn btn-primary">Batal</a>
-            <button type="submit" id="submitButton" class="btn btn-primary mr-2"
-                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+            <div class="form-group">
+                <label for="tanggal_berakhir">Tanggal Berakhir<span style="color: red">*</span></label>
+                <input type="date" class="form-control" name="tanggal_berakhir" value="{{ old('tanggal_berakhir', $mingguPembelajaran->tanggal_berakhir) }}" required>
+            </div>
+
+            <a href="{{ route('admin.mingguPembelajaran.index') }}" class="btn btn-primary">Batal</a>
+            <button type="submit" class="btn btn-success">Perbarui</button>
         </form>
     </div>
 @endsection

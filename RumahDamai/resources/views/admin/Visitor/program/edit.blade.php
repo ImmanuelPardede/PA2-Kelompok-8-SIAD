@@ -8,7 +8,7 @@
                 <div class="card-title">Edit Program</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('program.update', $program->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.program.update', $program->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

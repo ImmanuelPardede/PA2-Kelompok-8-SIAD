@@ -14,7 +14,7 @@
                     </div>
                 @endif
 
-                <a href="{{ route('lokasiTugas.create') }}" class="btn btn-success mb-3">Tambah Lokasi Penugasan</a>
+                <a href="{{ route('admin.lokasiTugas.create') }}" class="btn btn-success mb-3">Tambah Lokasi Penugasan</a>
             </div>
 
             <div class="table-responsive">
@@ -32,10 +32,10 @@
                                 <td>{{ $lokasi->wilayah }}</td>
                                 <td>{{ $lokasi->lokasi }}</td>
                                 <td>
-                                    <a href="{{ route('lokasiTugas.show', $lokasi->id) }}" class="btn btn-info">Detail</a>
-                                    <a href="{{ route('lokasiTugas.edit', $lokasi->id) }}" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('admin.lokasiTugas.show', $lokasi->id) }}" class="btn btn-info">Detail</a>
+                                    <a href="{{ route('admin.lokasiTugas.edit', $lokasi->id) }}" class="btn btn-warning">Edit</a>
                                     <form method="POST" id="deleteForm{{ $lokasi->id }}" class="d-inline"
-                                        action="{{ route('lokasiTugas.destroy', $lokasi->id) }}">
+                                        action="{{ route('admin.lokasiTugas.destroy', $lokasi->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger"

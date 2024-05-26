@@ -42,23 +42,23 @@ class GaleriController extends Controller
             'lokasi' => 'required|string',
 
         ]);
-    
+
         // Buat instance Fasilitas dan simpan data fasilitas
         $galeri = new Galeri;
-        $galeri->judul = $request->input('judul'); 
-        $galeri->waktu = $request->input('waktu'); 
-        $galeri->lokasi = $request->input('lokasi'); 
+        $galeri->judul = $request->input('judul');
+        $galeri->waktu = $request->input('waktu');
+        $galeri->lokasi = $request->input('lokasi');
         $galeri->save();
-    
+
         // Proses untuk setiap file img_galeri yang diunggah
         if ($request->hasFile('img_galeri')) {
             foreach ($request->file('img_galeri') as $img_galeri) {
                 $slug = Str::slug(pathinfo($img_galeri->getClientOriginalName(), PATHINFO_FILENAME));
                 $new_gambar = time() . '_' . $slug . '.' . $img_galeri->getClientOriginalExtension();
-        
+
                 // Pindahkan img_galeri ke direktori yang diinginkan
                 $img_galeri->move('uploads/visitor/galeri/', $new_gambar);
-        
+
                 // Buat instance Detailgaleri dan simpan data terkait
                 $detailgaleri = new DetailGaleri;
                 $detailgaleri->galeri_id = $galeri->id;
@@ -66,8 +66,8 @@ class GaleriController extends Controller
                 $detailgaleri->save();
             }
         }
-    
-        return redirect()->route('galeri.index')->with('success', 'galeri created successfully.');
+
+        return redirect()->route('admin.galeri.index')->with('success', 'galeri created successfully.');
     }
 
     /**
@@ -78,7 +78,7 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
         $detailgaleri = DetailGaleri::where('galeri_id', $id)->get();
 
-    
+
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.galeri.show', compact('galeri','detailgaleri'));
     }
@@ -91,7 +91,7 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
         $detailgaleri = DetailGaleri::where('galeri_id', $id)->get();
 
-    
+
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.galeri.edit', compact('galeri','detailgaleri'));
     }
@@ -109,9 +109,9 @@ class GaleriController extends Controller
     ]);
 
     $galeri = Galeri::findOrFail($id);
-    $galeri->judul = $request->input('judul'); 
-    $galeri->waktu = $request->input('waktu'); 
-    $galeri->lokasi = $request->input('lokasi'); 
+    $galeri->judul = $request->input('judul');
+    $galeri->waktu = $request->input('waktu');
+    $galeri->lokasi = $request->input('lokasi');
     $galeri->save();
 
     // Proses untuk setiap file img_galeri yang diunggah
@@ -153,7 +153,7 @@ class GaleriController extends Controller
         }
     }
 
-    return redirect()->route('galeri.index')->with('success', 'Galeri updated successfully.');
+    return redirect()->route('admin.galeri.index')->with('success', 'Galeri updated successfully.');
 }
 
 
@@ -168,8 +168,8 @@ class GaleriController extends Controller
                 // Kemudian hapus Raport
                 $galeri = Galeri::findOrFail($id);
                 $galeri->delete();
-            
-        return redirect()->route('galeri.index')->with('success', 'galeri deleted successfully.');
+
+        return redirect()->route('admin.galeri.index')->with('success', 'galeri deleted successfully.');
 
     }
 
@@ -183,5 +183,5 @@ class GaleriController extends Controller
     return redirect()->back()->with('success', 'Gambar berhasil dihapus');
 }
 
-    
+
 }

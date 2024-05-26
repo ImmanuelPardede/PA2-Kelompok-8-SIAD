@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-md-8">
 
-                <form action="{{ route('anak.update', $anak->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.anak.update', $anak->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -72,7 +72,7 @@
                         </select>
                     </div>
                 @endif
-                
+
 
                     <div class="form-group">
                         <label for="tipe_anak">Jenis Anak:</label>
@@ -93,7 +93,7 @@
                                     value="{{ $anak->tempat_lahir }}" required>
                             </div>
                         </div>
-                    
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tanggal_lahir">Tanggal Lahir:</label>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="form-group">
                         <label for="alamat">Alamat:</label>

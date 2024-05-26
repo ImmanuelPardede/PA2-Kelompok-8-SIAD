@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('lokasiTugas.store') }}" method="post">
+        <form action="{{ route('admin.lokasiTugas.store') }}" method="post">
             @csrf
 
             <div class="form-group">

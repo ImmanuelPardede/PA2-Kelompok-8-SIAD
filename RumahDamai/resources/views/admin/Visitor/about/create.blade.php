@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="card-title text-left">Form Menambah Tentang Yayasan</div>
 
-                    <form method="POST" action="{{ route('about.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.about.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Input for img_yayasan -->

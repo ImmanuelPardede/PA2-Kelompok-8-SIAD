@@ -16,7 +16,7 @@
                 @endif
 
                 @if ($fasilitas->isEmpty())
-                <a href="{{ route('fasilitas.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.fasilitas.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
                 @endif
 
             </div>
@@ -58,9 +58,9 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('fasilitas.show', $item->id) }}" class="btn btn-primary">Detail</a>
-                                <a href="{{ route('fasilitas.edit', $item->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('fasilitas.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.fasilitas.show', $item->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ route('admin.fasilitas.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                <form action="{{ route('admin.fasilitas.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $item->id }}')">Hapus</button>

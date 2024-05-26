@@ -15,7 +15,7 @@ class AboutController extends Controller
     public function index()
     {
         $abouts = About::all(); // Mengambil satu data Foundationabouts terbaru
-    
+
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.about.index', compact('abouts'));
     }
@@ -44,25 +44,25 @@ class AboutController extends Controller
             'wilayah1' => 'nullable|string',
             'wilayah2' => 'nullable|string',
         ]);
-    
+
         // Proses pengunggahan gambar img_yayasan
         if ($request->hasFile('img_yayasan')) {
             $imgYayasan = $request->file('img_yayasan');
             $imgYayasanPath = $this->uploadImage($imgYayasan);
         }
-    
+
         // Proses pengunggahan gambar img_wilayah1
         if ($request->hasFile('img_wilayah1')) {
             $imgWilayah1 = $request->file('img_wilayah1');
             $imgWilayah1Path = $this->uploadImage($imgWilayah1);
         }
-    
+
         // Proses pengunggahan gambar img_wilayah2
         if ($request->hasFile('img_wilayah2')) {
             $imgWilayah2 = $request->file('img_wilayah2');
             $imgWilayah2Path = $this->uploadImage($imgWilayah2);
         }
-    
+
         // Buat instance About dengan data yang disediakan
         $about = new About([
             'img_yayasan' => $imgYayasanPath ?? null,
@@ -74,11 +74,11 @@ class AboutController extends Controller
             'wilayah1' => $request->input('wilayah1'),
             'wilayah2' => $request->input('wilayah2'),
         ]);
-    
+
         // Simpan instance About ke dalam database
         $about->save();
-    
-        return redirect()->route('about.index')->with('success', 'About data created successfully.');
+
+        return redirect()->route('admin.about.index')->with('success', 'About data created successfully.');
     }
 
     private function uploadImage($file)
@@ -108,7 +108,7 @@ class AboutController extends Controller
     public function edit(string $id)
     {
         $abouts = About::find($id);
-    
+
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.about.edit', compact('abouts'));
 
@@ -132,15 +132,15 @@ class AboutController extends Controller
 
         $about = About::find($id);
 
-    
+
         // Proses pengunggahan gambar img_yayasan
         if ($request->hasFile('img_yayasan')) {
             $imgYayasan = $request->file('img_yayasan');
             $imgYayasanPath = $this->uploadImage($imgYayasan);
-           
+
             $about->img_yayasan = $imgYayasanPath;
         }
-    
+
         // Proses pengunggahan gambar img_wilayah1
         if ($request->hasFile('img_wilayah1')) {
             $imgWilayah1 = $request->file('img_wilayah1');
@@ -148,7 +148,7 @@ class AboutController extends Controller
 
             $about->img_wilayah1 = $imgWilayah1Path;
         }
-    
+
         // Proses pengunggahan gambar img_wilayah2
         if ($request->hasFile('img_wilayah2')) {
             $imgWilayah2 = $request->file('img_wilayah2');
@@ -156,18 +156,18 @@ class AboutController extends Controller
 
             $about->img_wilayah2 = $imgWilayah2Path;
         }
-    
+
         // Update data About dengan data yang disediakan
         $about->latar_belakang = $request->input('latar_belakang');
         $about->visi = $request->input('visi');
         $about->misi = $request->input('misi');
         $about->wilayah1 = $request->input('wilayah1');
         $about->wilayah2 = $request->input('wilayah2');
-    
+
         // Simpan instance About yang telah diupdate ke dalam database
         $about->save();
-    
-        return redirect()->route('about.index')->with('success', 'About data updated successfully.');
+
+        return redirect()->route('admin.about.index')->with('success', 'About data updated successfully.');
     }
 
     /**
@@ -179,8 +179,8 @@ class AboutController extends Controller
 
         $abouts->delete();
 
-        return redirect()->route('about.index')->with('success', 'Carousel item deleted successfully.');
+        return redirect()->route('admin.about.index')->with('success', 'Carousel item deleted successfully.');
     }
 
-   
+
 }

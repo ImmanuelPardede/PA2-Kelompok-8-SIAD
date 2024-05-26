@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('about.index') }}" class="btn btn-primary mt-3">Kembali</a>
+                <a href="{{ route('admin.about.index') }}" class="btn btn-primary mt-3">Kembali</a>
             </div>
         </div>
     </div>

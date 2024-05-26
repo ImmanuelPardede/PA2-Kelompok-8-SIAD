@@ -21,7 +21,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('formatLaporan.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.formatLaporan.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="kode_laporan">Kode Laporan<span style="color: red">*</span></label>

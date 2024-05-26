@@ -7,7 +7,7 @@
             <h1 class="card-title">Edit Fasilitas Item</h1>
 
             <!-- Form untuk mengupdate fasilitas item -->
-            <form method="POST" action="{{ route('fasilitas.update', $fasilitas->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.fasilitas.update', $fasilitas->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -36,12 +36,12 @@
                                 </span>
                             </div>
                         </div>
-                    
+
                     <div class="mt-2">
                         @if ($detailFasilitas->img_fasilitas)
                         <img src="{{ asset($detailFasilitas->img_fasilitas) }}" alt="Current Image" class="img-fluid" style="max-width: 300px;">
-                        <form action="{{ route('fasilitas.deleteImage', $detailFasilitas->id) }}" method="POST">
-                            <a href="" onclick="deleteImage('{{ route('fasilitas.deleteImage', $detailFasilitas->id) }}')" class="btn btn-danger btn-sm mt-2">Hapus</a>
+                        <form action="{{ route('admin.fasilitas.deleteImage', $detailFasilitas->id) }}" method="POST">
+                            <a href="" onclick="deleteImage('{{ route('admin.fasilitas.deleteImage', $detailFasilitas->id) }}')" class="btn btn-danger btn-sm mt-2">Hapus</a>
                             @endif
 
                     </div>
@@ -92,7 +92,7 @@
             .then(response => {
     if (response.ok) {
         // Jika penghapusan berhasil, arahkan pengguna kembali ke halaman galeri.edit
-        window.location.href = "{{ route('fasilitas.edit', $fasilitas->id) }}";
+        window.location.href = "{{ route('admin.fasilitas.edit', $fasilitas->id) }}";
     } else {
         // Tangani kesalahan jika penghapusan gagal
         console.error('Gagal menghapus gambar.');
@@ -117,7 +117,7 @@
         // Buat div untuk wrapping input file baru
         var newInputFileWrapper = document.createElement('div');
         newInputFileWrapper.className = 'mb-4';
-        
+
         // Buat label untuk input file baru
         var newLabel = document.createElement('label');
         newLabel.setAttribute('for', 'new_img_fasilitas');
@@ -127,7 +127,7 @@
         // Sisipkan input file baru dan label ke dalam div wrapper
         newInputFileWrapper.appendChild(newLabel);
         newInputFileWrapper.appendChild(newInputFile);
-        
+
         // Sisipkan div wrapper ke dalam elemen #new_img_fasilitas
         document.getElementById('new_img_fasilitas').appendChild(newInputFileWrapper);
     });

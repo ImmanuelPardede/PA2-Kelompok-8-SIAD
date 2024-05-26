@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('kelas.update', $kelas->id) }}" method="post">
+        <form action="{{ route('admin.kelas.update', $kelas->id) }}" method="post">
             @csrf
             @method('PUT')
 

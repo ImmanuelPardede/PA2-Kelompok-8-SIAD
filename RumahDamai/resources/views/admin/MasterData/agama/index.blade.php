@@ -12,7 +12,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('agama.create') }}" class="btn btn-success mb-3">Tambah Agama</a>
+                    <a href="{{ route('admin.agama.create') }}" class="btn btn-success mb-3">Tambah Agama</a>
                 </div>
 
                 <div class="table-responsive">
@@ -28,9 +28,9 @@
                                 <tr>
                                     <td>{{ $agama->agama }}</td>
                                     <td>
-                                        <a href="{{ route('agama.edit', $agama->id) }}" class="btn btn-warning">Edit</a>
+                                        <a href="{{ route('admin.agama.edit', $agama->id) }}" class="btn btn-warning">Edit</a>
                                         <form method="POST" id="deleteForm{{ $agama->id }}" class="d-inline"
-                                            action="{{ route('agama.destroy', $agama->id) }}">
+                                            action="{{ route('admin.agama.destroy', $agama->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $agama->id }}')">

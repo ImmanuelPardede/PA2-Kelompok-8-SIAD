@@ -80,12 +80,13 @@ class LatarBelakangController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('latarBelakang.index')->with('success', 'Latar belakang berhasil disimpan.');
+            return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil disimpan.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
+    
     public function edit($id)
     {
         $latarBelakang = LatarBelakang::with('deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
@@ -169,7 +170,7 @@ class LatarBelakangController extends Controller
             }
         });
 
-        return redirect()->route('latarBelakang.index')->with('success', 'Latar belakang berhasil diperbarui.');
+        return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil diperbarui.');
     }
 
 
@@ -178,7 +179,7 @@ class LatarBelakangController extends Controller
         $item = LatarBelakang::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('latarBelakang.index')
+        return redirect()->route('admin.latarBelakang.index')
             ->with('success', 'Latar belakang berhasil dihapus.');
     }
 

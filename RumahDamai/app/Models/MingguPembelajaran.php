@@ -11,4 +11,10 @@ class MingguPembelajaran extends Model
 
     protected $table = 'minggu_pembelajaran';
     protected $fillable = ['minggu_pembelajaran', 'tanggal_mulai', 'tanggal_berakhir'];
+
+    public function lokasiTugas()
+    {
+        return $this->belongsTo(LokasiTugas::class, 'lokasi_penugasan_id');
+    }
+
 }

@@ -13,7 +13,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <a href="{{ route('program.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
+                <a href="{{ route('admin.program.create') }}" class="btn btn-success mb-3">Tambahkan Data</a>
             </div>
 
             <div class="table-responsive">
@@ -40,9 +40,9 @@
                             </td>
                             <td>{!! $programItem->kelas !!}</td>
                             <td>
-                                <a href="{{ route('program.show', $programItem->id) }}" class="btn btn-primary ">Detail</a>
-                                <a href="{{ route('program.edit', $programItem->id) }}" class="btn btn-info ">Edit</a>
-                                <form action="{{ route('program.destroy', $programItem->id) }}" id="deleteForm{{ $programItem->id }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('admin.program.show', $programItem->id) }}" class="btn btn-primary ">Detail</a>
+                                <a href="{{ route('admin.program.edit', $programItem->id) }}" class="btn btn-info ">Edit</a>
+                                <form action="{{ route('admin.program.destroy', $programItem->id) }}" id="deleteForm{{ $programItem->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $programItem->id }}')">Hapus</button>

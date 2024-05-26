@@ -6,7 +6,7 @@
         <div class="card-body">
             <h1 class="card-title text-left">Form Menambah Fasilitas</h1>
 
-            <form method="POST" action="{{ route('fasilitas.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.fasilitas.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -14,7 +14,7 @@
                     <input type="file" class="form-control" id="img_fasilitas" name="img_fasilitas[]" accept="image/*" multiple required>
                     <small class="text-muted" id="wordCountInfo">Maksimal 10 Gambar.</small>
                 </div>
-                
+
                 <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
                 <div class="mb-3">
                     <label for="fasilitas" class="form-label">fasilitas<span style="color: red">*</span></label>
@@ -30,7 +30,7 @@
                     </span>
                     @enderror
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>

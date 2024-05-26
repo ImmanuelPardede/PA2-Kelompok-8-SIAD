@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title">Edit Berita</h2>
-            <form action="{{ route('berita.update', $berita->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.berita.update', $berita->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -41,7 +41,7 @@
                     @enderror
                 </div>
 
-              
+
 
                 <div class="form-group">
                     <label for="img_berita">Gambar</label>

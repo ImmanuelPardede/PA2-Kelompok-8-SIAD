@@ -10,6 +10,7 @@
                     <div class="form-group">
                         <label for="anak_id">Anak</label>
                         <select name="anak_id" id="anak_id" class="form-control">
+                            <option value="" disabled selected>-- Pilih Anak --</option>
                             @foreach($anakList as $anak)
                                 <option value="{{ $anak->id }}">{{ $anak->nama_lengkap }}</option>
                             @endforeach
@@ -27,11 +28,9 @@
                         @endforeach
                     </div>
 
-
-
                     <div class="form-group">
                         <label for="file_ppi_b">File PPI B</label>
-                        <input type="file" name="file_ppi_b" id="file_ppi_b" class="form-control">
+                        <input type="file" name="file_ppi_b" id="file_ppi_b" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi</label>

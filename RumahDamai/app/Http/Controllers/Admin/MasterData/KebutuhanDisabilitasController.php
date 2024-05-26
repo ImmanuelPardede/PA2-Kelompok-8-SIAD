@@ -36,7 +36,7 @@ class KebutuhanDisabilitasController extends Controller
 
         KebutuhanDisabilitas::create($request->all());
 
-        return redirect()->route('kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil ditambahkan.');
+        return redirect()->route('admin.kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil ditambahkan.');
     }
 
     /**
@@ -70,7 +70,7 @@ class KebutuhanDisabilitasController extends Controller
         $jenisKebutuhanDisabilitas = KebutuhanDisabilitas::find($id);
         $jenisKebutuhanDisabilitas->update($request->all());
 
-        return redirect()->route('kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil diperbarui.');
+        return redirect()->route('admin.kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil diperbarui.');
     }
 
     /**
@@ -81,6 +81,6 @@ class KebutuhanDisabilitasController extends Controller
         $jenisKebutuhanDisabilitas = KebutuhanDisabilitas::findOrFail($id);
         $jenisKebutuhanDisabilitas->delete();
 
-        return redirect()->route('kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil dihapus.');
+        return redirect()->route('admin.kebutuhanDisabilitas.index')->with('success', 'Jenis Kebutuhan Disabilitas berhasil dihapus.');
     }
 }

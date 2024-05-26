@@ -6,7 +6,7 @@
         <div class="card-body">
             <h1 class="card-title text-left">Form Menambah Galeri</h1>
 
-            <form method="POST" action="{{ route('galeri.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.galeri.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -14,7 +14,7 @@
                     <input type="file" class="form-control" id="img_galeri" name="img_galeri[]" accept="image/*" multiple required>
                     <small class="text-muted" id="wordCountInfo">Maksimal 10 Gambar.</small>
                 </div>
-                
+
                 <div class="mb-3">
                     <label for="judul" class="form-label">Kegitan<span style="color: red">*</span></label>
                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter judul">

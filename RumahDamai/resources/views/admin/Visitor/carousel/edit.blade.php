@@ -8,7 +8,7 @@
             <h1 class="display-5 font-weight-bold text-left">Edit Data Carousel</h1>
 
             <!-- Form untuk mengupdate carousel item -->
-            <form method="POST" action="{{ route('carousel.update', $carousel->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.carousel.update', $carousel->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -23,7 +23,7 @@
                     <label for="subcaption" class="form-label">Subcaption (Max 50 characters)</label>
                     <input type="text" class="form-control" id="subcaption" name="subcaption" value="{{ $carousel->subcaption }}" placeholder="Enter subcaption" maxlength="52">
                 </div>
-                
+
 
                 <!-- Input untuk gambar -->
                 <div class="mb-3">

@@ -11,7 +11,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <a href="{{ route('formatLaporan.create') }}" class="btn btn-success mb-3">Tambah Format Laporan</a>
+                    <a href="{{ route('admin.formatLaporan.create') }}" class="btn btn-success mb-3">Tambah Format Laporan</a>
                 </div>
 
                 <div class="table-responsive">
@@ -31,16 +31,16 @@
                                     <td>{{ $formatLaporan->nama_laporan }}</td>
                                     <td>
                                         @if ($formatLaporan->format_laporan)
-                                            <a href="{{ route('formatLaporan.download', $formatLaporan->id) }}">{{ $formatLaporan->format_laporan }}</a>
+                                            <a href="{{ route('admin.formatLaporan.download', $formatLaporan->id) }}">{{ $formatLaporan->format_laporan }}</a>
                                         @else
                                             Data tidak tersedia
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('formatLaporan.edit', $formatLaporan->id) }}"
+                                        <a href="{{ route('admin.formatLaporan.edit', $formatLaporan->id) }}"
                                             class="btn btn-warning">Edit</a>
                                         <form method="POST" id="deleteForm{{ $formatLaporan->id }}" class="d-inline"
-                                            action="{{ route('formatLaporan.destroy', $formatLaporan->id) }}">
+                                            action="{{ route('admin.formatLaporan.destroy', $formatLaporan->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" class="btn btn-danger"
