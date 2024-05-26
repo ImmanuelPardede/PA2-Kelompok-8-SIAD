@@ -61,7 +61,7 @@ class LatarBelakangController extends Controller
             foreach ($request->deskripsi as $desc) {
                 DeskripsiLatarBelakang::create([
                     'latar_belakang_id' => $latarBelakang->id,
-                    'deskripsi' => $desc,
+                    'deskripsi' => strip_tags($desc), // Membersihkan deskripsi dari tag HTML
                 ]);
             }
 
@@ -86,7 +86,7 @@ class LatarBelakangController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
         }
     }
-    
+
     public function edit($id)
     {
         $latarBelakang = LatarBelakang::with('deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
@@ -165,14 +165,13 @@ class LatarBelakangController extends Controller
             foreach ($request->deskripsi as $desc) {
                 DeskripsiLatarBelakang::create([
                     'latar_belakang_id' => $latarBelakang->id,
-                    'deskripsi' => $desc,
+                    'deskripsi' => strip_tags($desc), // Membersihkan deskripsi dari tag HTML
                 ]);
             }
         });
 
         return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil diperbarui.');
     }
-
 
     public function destroy($id)
     {
@@ -182,7 +181,6 @@ class LatarBelakangController extends Controller
         return redirect()->route('admin.latarBelakang.index')
             ->with('success', 'Latar belakang berhasil dihapus.');
     }
-
 
     public function generatePDF($id)
     {

@@ -1,40 +1,45 @@
 @extends('layouts.management.master')
 
 @section('content')
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Detail Program</h3>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <strong>Kelas:</strong> {!! $program->kelas !!}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Detail Program</h4>
+            <div class="d-flex justify-content-center mb-4">
+                <img src="{{ asset($program->img_program) }}" alt="Gambar Program" class="img-fluid" style="width: 500px; height: auto;">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Kelas</th>
+                                    <td>{!! $program->kelas !!}</td>
+                                </tr>
+                                <tr>
+                                    <th>Detail Program</th>
+                                    <td>
+                                        @foreach ($detailPrograms as $detail)
+                                            <div class="mb-3">
+                                                <strong>Jenis Program:</strong> {{ $detail->jenis_program }}
+                                            </div>
+                                            <div class="mb-3">
+                                                <strong>Deskripsi:</strong> {{ $detail->deskripsi }}
+                                            </div>
+                                            <hr>
+                                        @endforeach
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="mb-3">
-                        <strong>Gambar Program:</strong><br>
-                        <img src="{{ asset($program->img_program) }}" alt="Gambar Program" class="img-fluid">
+                    <div class="card-footer">
+                        <a href="{{ route('admin.program.index') }}" class="btn btn-primary">Kembali</a>
                     </div>
-                    <hr>
-                    <h4>Detail Program</h4>
-                    @foreach ($detailPrograms as $detail)
-                        <div class="mb-3">
-                            <strong>Jenis Program:</strong> {{ $detail->jenis_program }}
-                        </div>
-                        <div class="mb-3">
-                            <strong>Deskripsi:</strong> {{ $detail->deskripsi }}
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
-                <div class="card-footer">
-                    <a href="{{ route('admin.program.index') }}" class="btn btn-secondary">Kembali</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

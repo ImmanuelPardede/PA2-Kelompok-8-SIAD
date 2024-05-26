@@ -6,7 +6,8 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Diri</h4>
-                <p class="card-description">{{ $user->nama_lengkap }} {{ $user->nip }} <span class="text-success">{{ $user->status }}</span></p>
+                <p class="card-description">{{ $user->nama_lengkap }} {{ $user->nip }} <span
+                        class="text-success">{{ $user->status }}</span></p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">
@@ -111,82 +112,95 @@
                     <div class="col-md-4">
                         <div class="image-frame">
                             @if ($user->foto)
-                                <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user" class="img-fluid rounded">
+                                <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Tidak ada foto profil.</p>
                             @endif
                         </div>
                     </div>
                 </div>
-                @if ($user->role == 'admin')
-                    <a href="{{ route('admin.administrator.admin') }}" class="btn btn-primary mt-3">Kembali</a>
-                @elseif ($user->role == 'guru')
-                    <a href="{{ route('admin.administrator.guru') }}" class="btn btn-primary mt-3">Kembali</a>
-                @elseif ($user->role == 'staff')
-                    <a href="{{ route('admin.administrator.staff') }}" class="btn btn-primary mt-3">Kembali</a>
-                @elseif ($user->role == 'direktur') 
-                    <a href="{{ route('admin.administrator.direktur') }}" class="btn btn-primary mt-3">Kembali</a>
-                @endif
-                <!-- Nonaktifkan atau Aktifkan Admin -->
-                @if ($user->role === 'admin')
-                    @if ($user->status === 'aktif')
-                        <form action="{{ route('admin.nonaktifkan.admin', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger mt-3"
-                                onclick="return confirm('Yakin ingin menonaktifkan admin ini?')">Nonaktifkan Admin</button>
-                        </form>
-                    @else
-                        <form action="{{ route('admin.aktifkan.admin', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success mt-3"
-                                onclick="return confirm('Yakin ingin mengaktifkan admin ini?')">Aktifkan Admin</button>
-                        </form>
-                    @endif
-                @endif
+                <div style="form-group d-flex justify-content-between">
+                    <div>
+                        @if ($user->role == 'admin')
+                            <a href="{{ route('admin.administrator.admin') }}" class="btn btn-primary mt-3">Kembali</a>
+                        @elseif ($user->role == 'guru')
+                            <a href="{{ route('admin.administrator.guru') }}" class="btn btn-primary mt-3">Kembali</a>
+                        @elseif ($user->role == 'staff')
+                            <a href="{{ route('admin.administrator.staff') }}" class="btn btn-primary mt-3">Kembali</a>
+                        @elseif ($user->role == 'direktur')
+                            <a href="{{ route('admin.administrator.direktur') }}" class="btn btn-primary mt-3">Kembali</a>
+                        @endif
 
-                <!-- Nonaktifkan atau Aktifkan Guru -->
-                @if ($user->role === 'guru')
-                    @if ($user->status === 'aktif')
-                        <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger mt-3"
-                                onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan Guru</button>
-                        </form>
-                    @else
-                        <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success mt-3"
-                                onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan Guru</button>
-                        </form>
-                    @endif
-                @endif
+                        <!-- Nonaktifkan atau Aktifkan Pegawai -->
+                        <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary mt-3">Generate
+                            PDF</a>
+                        <!-- Nonaktifkan atau Aktifkan Admin -->
+                        <div style="float: right;">
+                            @if ($user->role === 'admin')
+                                @if ($user->status === 'aktif')
+                                    <form action="{{ route('admin.nonaktifkan.admin', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-3"
+                                            onclick="return confirm('Yakin ingin menonaktifkan admin ini?')">Nonaktifkan
+                                            Admin</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.aktifkan.admin', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success mt-3"
+                                            onclick="return confirm('Yakin ingin mengaktifkan admin ini?')">Aktifkan
+                                            Admin</button>
+                                    </form>
+                                @endif
+                            @endif
 
-                <!-- Nonaktifkan atau Aktifkan Guru -->
-                @if ($user->role === 'direktur')
-                    @if ($user->status === 'aktif')
-                        <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-danger mt-3"
-                                onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan Guru</button>
-                        </form>
-                    @else
-                        <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success mt-3"
-                                onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan Guru</button>
-                        </form>
-                    @endif
-                @endif
+                            <!-- Nonaktifkan atau Aktifkan Guru -->
+                            @if ($user->role === 'guru')
+                                @if ($user->status === 'aktif')
+                                    <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-3"
+                                            onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan
+                                            Guru</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success mt-3"
+                                            onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan
+                                            Guru</button>
+                                    </form>
+                                @endif
+                            @endif
 
-                <!-- Nonaktifkan atau Aktifkan Pegawai -->
-                <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary mt-3">Generate PDF</a>
-
+                            <!-- Nonaktifkan atau Aktifkan Guru -->
+                            @if ($user->role === 'direktur')
+                                @if ($user->status === 'aktif')
+                                    <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-3"
+                                            onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan
+                                            Guru</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success mt-3"
+                                            onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan
+                                            Guru</button>
+                                    </form>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

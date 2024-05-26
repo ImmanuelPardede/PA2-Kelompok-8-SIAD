@@ -2,14 +2,33 @@
 
 @section('content')
     <div class="container">
-        <h2>Detail Jenis Disabilitas</h2>
-
-        <div>
-            <strong>Kategori Disabilitas:</strong> {{ $disabilitas->kategori_disabilitas }}<br>
-            <strong>Jenis Disabilitas:</strong> {{ $disabilitas->jenis_disabilitas }}<br>
-            <strong>Deskripsi:</strong> {{ $disabilitas->deskripsi ?? 'Data tidak tersedia'}}
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Detail Jenis Disabilitas</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Kategori Disabilitas:</th>
+                                        <td>{{ $disabilitas->kategori_disabilitas }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Disabilitas:</th>
+                                        <td>{{ $disabilitas->jenis_disabilitas }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi:</th>
+                                        <td>{{ $disabilitas->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+            </div>
         </div>
-
-        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection

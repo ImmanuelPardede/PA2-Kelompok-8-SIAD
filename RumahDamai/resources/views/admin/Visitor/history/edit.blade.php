@@ -40,7 +40,7 @@
                     <input type="date" class="form-control" id="dibangun" name="dibangun" value="{{ $history->dibangun }}" required>
                 </div>
 
-                <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                 <button type="submit" id="submitButton" class="btn btn-success mr-2" onclick="handleUpdatedConfirmation(event)">Ubah</button>
             </form>
         </div>

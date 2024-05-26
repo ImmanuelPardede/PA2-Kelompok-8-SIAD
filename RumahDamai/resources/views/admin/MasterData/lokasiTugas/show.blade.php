@@ -2,14 +2,33 @@
 
 @section('content')
     <div class="container">
-        <h2>Detail Lokasi Penugasan</h2>
-
-        <div>
-            <strong>Nama Wilayah:</strong> {{ $lokasi->wilayah }}<br>
-            <strong>Lokasi:</strong> {{ $lokasi->lokasi ?? 'Data tidak tersedia'}}<br>
-            <strong>Deskripsi:</strong> {{ $lokasi->deskripsi ?? 'Data tidak tersedia'}}
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Detail Lokasi Penugasan</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Nama Wilayah</th>
+                                        <td>{{ $lokasi->wilayah }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lokasi</th>
+                                        <td>{{ $lokasi->lokasi ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Deskripsi</th>
+                                        <td>{{ $lokasi->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+            </div>
         </div>
-
-        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 @endsection

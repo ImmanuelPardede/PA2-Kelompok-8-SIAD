@@ -1,35 +1,37 @@
 @extends('layouts.management.master')
 
 @section('content')
-
-<div class="container">
-    <div class="col-lg-12 grid-margin stretch-card">
+    <div class="container">
         <div class="card">
             <div class="card-body">
-                <div class="card-title text-left">Detail Berita</div>
-                <div class="form-group">
-                    <label for="judul">Judul:</label>
-                    <p>{{ $berita->judul }}</p>
+                <h4 class="card-title">Detail Berita</h4>
+                <div class="d-flex justify-content-center mb-4">
+                    <img src="{{ asset($berita->img_berita) }}" alt="Gambar Berita" style="width: 500px; height: auto;">
                 </div>
-
-                <div class="form-group">
-                    <label for="kategori_id">Kategori:</label>
-                    <p>{{ $berita->kategori->kategori }}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th for="judul">Judul:</th>
+                                        <td>{{ $berita->judul }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kategori:</th>
+                                        <td>{{ $berita->kategori->kategori }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th for="deskripsi">Deskripsi:</th>
+                                        <td>{!! $berita->deskripsi !!}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="{{ route('admin.program.index') }}" class="btn btn-primary">Kembali</a>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi:</label>
-                    <p>{!! $berita->deskripsi !!}</p>
-                </div>
-
-                <div class="form-group">
-                    <label for="img_berita">Gambar:</label>
-                    <img src="{{ asset($berita->img_berita) }}" alt="Gambar Berita">
-                </div>
-
             </div>
         </div>
     </div>
-</div>
-
 @endsection

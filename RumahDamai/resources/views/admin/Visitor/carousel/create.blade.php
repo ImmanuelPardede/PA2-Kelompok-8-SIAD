@@ -13,6 +13,7 @@
                 <div class="mb-3">
                     <label for="image_url" class="form-label">Gambar<span style="color: red">*</span></label>
                     <input type="file" class="form-control" id="image_url" name="image_url" accept="image_url/*" required>
+                    <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
                 </div>
 
                 <!-- Input untuk caption -->
@@ -31,6 +32,7 @@
                 </div>
 
                 <!-- Tombol untuk submit form -->
+                <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>

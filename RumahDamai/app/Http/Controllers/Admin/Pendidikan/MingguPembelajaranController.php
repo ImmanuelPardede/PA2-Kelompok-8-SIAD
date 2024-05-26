@@ -62,11 +62,16 @@ class MingguPembelajaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id)
     {
         $mingguPembelajaran = MingguPembelajaran::findOrFail($id);
-        return view('admin.pendidikan.mingguPembelajaran.edit', compact('mingguPembelajaran'));
+        $lokasiPenugasanList = LokasiTugas::orderBy('lokasi', 'asc')->get(); // Get all lokasi penugasan
+        return view('admin.pendidikan.mingguPembelajaran.edit', compact('mingguPembelajaran', 'lokasiPenugasanList'));
     }
+    
 
     /**
      * Update the specified resource in storage.

@@ -44,7 +44,7 @@
                         @enderror
                     </div>
 
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Batal dan Kembali ke Daftar Format Laporan</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" class="btn btn-success">Perbarui</button>
                 </form>
             </div>

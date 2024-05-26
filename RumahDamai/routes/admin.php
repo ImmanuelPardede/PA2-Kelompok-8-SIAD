@@ -61,6 +61,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('/admin/DataOrangTuaWali/orangTuaWali', OrangTuaWaliController::class);
     Route::resource('/admin/DataAnak/riwayatMedis', RiwayatMedisController::class);
     Route::get('/admin/anak/{id}/pdf', [AnakController::class, 'generatePDF'])->name('admin.anak.pdf');
+    Route::get('/admin/latarBelakang/pdf/{id}', [LatarBelakangController::class, 'generatePDF'])->name('admin.latarBelakang.pdf');
 
 
 
@@ -74,7 +75,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/latarBelakang/{id}/edit', [LatarBelakangController::class, 'edit'])->name('admin.latarBelakang.edit');
     Route::delete('/admin/latarBelakang/{id}', [LatarBelakangController::class, 'destroy'])->name('admin.latarBelakang.destroy');
     Route::put('/admin/latarBelakang/{id}', [LatarBelakangController::class, 'update'])->name('admin.latarBelakang.update');
-    Route::get('/admin/anak/pdf/{id}', [LatarBelakangController::class, 'generatePDF'])->name('admin.anak.pdf');
 
 
 
@@ -95,21 +95,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/latarBelakang', [LatarBelakangController::class, 'index'])->name('admin.latarBelakang.index');
     Route::get('/admin/orangTuaWali', [OrangTuaWaliController::class, 'index'])->name('admin.orangTuaWali.index');
     Route::get('/admin/riwayatMedis', [RiwayatMedisController::class, 'index'])->name('admin.riwayatMedis.index');
-
-
-
-
-
-
-    Route::get('/admin/anakDisabilitas', [AnakDisabilitasController::class, 'index'])->name('admin.anakDisabilitas.index');
-    Route::get('/admin/anakNonDisabilitas', [AnakNonDisabilitasController::class, 'index'])->name('admin.anakNonDisabilitas.index');
-    Route::resource('/admin/TipeAnak/anakDisabilitas', AnakDisabilitasController::class);
-    Route::get('admin/anakDisabilitas/{id}', [AnakDisabilitasController::class, 'show'])->name('admin.anakDisabilitas.show');
-    Route::get('admin/anakDisabilitas/{id}/edit', [AnakDisabilitasController::class, 'edit'])->name('admin.anakDisabilitas.edit');
-    Route::put('admin/anakDisabilitas/{id}', [AnakDisabilitasController::class, 'update'])->name('admin.anakDisabilitas.update');
-
-
-
 
 
 
@@ -145,11 +130,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::put('admin/semester-tahun-ajaran/{id}', [SemesterTahunAjaranController::class, 'update'])->name('admin.semesterTahunAjaran.update');
 
 
-    Route::get('/admin/mingguPembelajaran', [MingguPembelajaranController::class, 'index'])->name('admin.mingguPembelajaran.index');
+    Route::get('/admin/minggu-pembelajaran', [MingguPembelajaranController::class, 'index'])->name('admin.mingguPembelajaran.index');
     Route::get('admin/minggu-pembelajaran/create', [MingguPembelajaranController::class, 'create'])->name('admin.mingguPembelajaran.create');
-    Route::get('admin/minggu-pembelajaran/{id}/edit', [MingguPembelajaranController::class, 'edit'])->name('admin.mingguPembelajaran.edit');
+    Route::get('admin/minggu-pembelajaran/edit/{id}', [MingguPembelajaranController::class, 'edit'])->name('admin.mingguPembelajaran.edit');
     Route::delete('admin/minggu-pembelajaran/{id}', [MingguPembelajaranController::class, 'destroy'])->name('admin.mingguPembelajaran.destroy');
     Route::post('admin/minggu-pembelajaran', [MingguPembelajaranController::class, 'store'])->name('admin.mingguPembelajaran.store');
+    Route::put('admin/minggu-pembelajaran/{id}', [MingguPembelajaranController::class, 'update'])->name('admin.mingguPembelajaran.update');
 
 
     Route::get('/admin/formatLaporan', [FormatLaporanController::class, 'index'])->name('admin.formatLaporan.index');
@@ -158,6 +144,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('admin/format-laporan/{id}/edit', [FormatLaporanController::class, 'edit'])->name('admin.formatLaporan.edit');
     Route::delete('admin/format-laporan/{id}', [FormatLaporanController::class, 'destroy'])->name('admin.formatLaporan.destroy');
     Route::post('admin/format-laporan', [FormatLaporanController::class, 'store'])->name('admin.formatLaporan.store');
+    Route::put('admin/format-laporan/{id}', [FormatLaporanController::class, 'update'])->name('admin.formatLaporan.update');
 
 
 
@@ -349,10 +336,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::get('/admin/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
-    Route::post('/admin/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
-    Route::get('/admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
-    Route::put('/admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
-    Route::delete('/admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
+    Route::get('/admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+    Route::put('/admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+    Route::delete('/admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
+    Route::post('admin/pengumuman', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
 
 
     /*
@@ -496,5 +483,4 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('admin/galeri/{galeri}', [GaleriController::class, 'destroy'])->name('admin.galeri.destroy');
     Route::delete('admin/galeri/{id}/deleteImage', [GaleriController::class, 'deleteImage'])->name('admin.galeri.deleteImage');
     Route::put('admin/galeri/{id}', [GaleriController::class, 'update'])->name('admin.galeri.update');
-
 });

@@ -10,7 +10,7 @@ class MingguPembelajaran extends Model
     use HasFactory;
 
     protected $table = 'minggu_pembelajaran';
-    protected $fillable = ['minggu_pembelajaran', 'tanggal_mulai', 'tanggal_berakhir'];
+    protected $fillable = ['lokasi_penugasan_id', 'minggu_pembelajaran', 'tanggal_mulai', 'tanggal_berakhir'];
 
     public function lokasiTugas()
     {

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('anak_id');
             $table->unsignedBigInteger('penyakit_id');
-            $table->string('riwayat_perawatan')->nullable();
-            $table->string('riwayat_perilaku')->nullable();
-            $table->string('deskripsi_riwayat')->nullable();
-            $table->string('kondisi');
+            $table->text('riwayat_perawatan')->nullable();
+            $table->text('riwayat_perilaku')->nullable();
+            $table->text('deskripsi_riwayat')->nullable();
+            $table->text('kondisi');
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak')->onDelete('cascade')->onUpdate('cascade');

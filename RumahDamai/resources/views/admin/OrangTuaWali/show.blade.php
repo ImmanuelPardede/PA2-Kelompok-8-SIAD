@@ -5,7 +5,6 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Detail Orang Tua/Wali</h4>
-            <p class="card-description">Orang tua?</p>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">

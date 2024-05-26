@@ -16,6 +16,7 @@
                         <div class="form-group">
                             <label for="img_program">Gambar<span style="color: red">*</span></label>
                             <input type="file" class="form-control @error('img_program') is-invalid @enderror" id="img_program" name="img_program" required>
+                            <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
                             <small class="text-muted" id="wordCountInfo">Gambar Tidak Boleh Lebih Dari 1.</small>
                             @error('img_program')
                                 <span class="invalid-feedback" role="alert">
@@ -63,7 +64,7 @@
                         <a href="#" class="addprogram btn btn-primary" style="float: right">Tambah Program</a>
                         <div class="raport"></div>
 
-
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                 </div>

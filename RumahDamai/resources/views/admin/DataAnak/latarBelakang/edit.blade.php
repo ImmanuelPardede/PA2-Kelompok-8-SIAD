@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="usia">Usia</label>
                     <input type="number" class="form-control" id="usia" name="usia"
-                        value="{{ $latarBelakang->usia }}">
+                        value="{{ $latarBelakang->usia }}" readonly>
                 </div>
 
                 <div class="form-group">
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <input type="date" class="form-control" id="tanggal" name="tanggal"
-                        value="{{ $latarBelakang->tanggal }}">
+                        value="{{ $latarBelakang->tanggal }}" readonly>
                 </div>
 
                 <div id="gambar_latar_belakang_wrapper">
