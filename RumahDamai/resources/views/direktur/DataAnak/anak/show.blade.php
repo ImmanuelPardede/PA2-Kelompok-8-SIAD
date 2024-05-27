@@ -87,28 +87,6 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                        @if ($anak->status === 'aktif')
-                            <form action="{{ route('direktur.anak.nonaktifkan', $anak->id) }}" method="post"
-                                style="display:inline;">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktif</button>
-                            </form>
-                        @else
-                            <form action="{{ route('direktur.anak.aktifkan', $anak->id) }}" method="post" style="display:inline;">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit" class="btn btn-success"
-                                    onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan</button>
-                            </form>
-                        @endif
-                        <a href="{{ route('direktur.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate PDF</a>
-
-
-
                     </div>
                     <div class="col-md-4">
                         <div class="image-container">
@@ -123,9 +101,32 @@
                         </div>
                     </div>
                 </div>
+                <div style="form-group d-flex justify-content-between">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('direktur.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate
+                        PDF</a>
+                    <div style="float: right;">
+
+                        @if ($anak->status === 'aktif')
+                            <form action="{{ route('direktur.anak.nonaktifkan', $anak->id) }}" method="post"
+                                style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Yakin ingin menonaktifkan?')">NonAktifkan Anak</button>
+                            </form>
+                        @else
+                            <form action="{{ route('direktur.anak.aktifkan', $anak->id) }}" method="post"
+                                style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-success"
+                                    onclick="return confirm('Yakin ingin mengaktifkan?')">Aktifkan Anak</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

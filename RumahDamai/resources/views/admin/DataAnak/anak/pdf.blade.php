@@ -7,7 +7,7 @@
     <title>Rumah Damai</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
         }
@@ -27,7 +27,15 @@
         .header-text {
             overflow: hidden;
             text-align: center;
-            /* Menyamakan teks secara horizontal di tengah */
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .header-bottom-text {
+            overflow: hidden;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 0;
         }
 
         .header h2,
@@ -46,7 +54,6 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: grid;
@@ -110,7 +117,7 @@
                     @endif
                 </h3>
                 <hr>
-                <h5 style="font-size: 16px;">
+                <h5 class="header-bottom-text" style="font-size: 16px;">
                     @if ($anak->lokasi_id == 1)
                         Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
                     @elseif ($anak->lokasi_id == 2)

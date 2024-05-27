@@ -395,55 +395,6 @@
                         </ul>
                     </div>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
-                        aria-controls="tables">
-                        <i class="mdi mdi-account-supervisor-circle menu-icon"></i>
-                        <span class="menu-title">Tipe Anak</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="tables">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.anakDisabilitas.index') }}">Disabilitas</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.anakNonDisabilitas.index') }}">Non
-                                    Disabilitas</a></li>
-
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
-                        aria-controls="error">
-                        <i class="mdi mdi-school menu-icon"></i>
-                        <span class="menu-title">Pendidikan</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="error">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.kelas.index') }}">Kelas</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.tahunKurikulum.index') }}">Tahun
-                                    Kurikulum</a>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.tahunAjaran.index') }}">Tahun
-                                    Ajaran</a>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('semesterTahunAjaran.index') }}">Semester Ajaran</a>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.mingguPembelajaran.index') }}">
-                                    Pembelajaran</a>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.formatLaporan.index') }}">Format
-                                    Laporan</a></li>
-
-                        </ul>
-                    </div>
-                </li>
             @endif
         @endauth
 

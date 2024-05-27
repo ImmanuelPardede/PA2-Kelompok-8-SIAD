@@ -4,10 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-
                 <h2 class="card-title">Edit Data Orang Tua/Wali</h2>
-
-
                 <form action="{{ route('admin.orangTuaWali.update', $orangtuawali->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf

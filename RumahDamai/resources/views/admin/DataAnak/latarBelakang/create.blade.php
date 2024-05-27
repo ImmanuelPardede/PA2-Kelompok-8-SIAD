@@ -83,10 +83,15 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="tambahGambarDanDeskripsi()">Tambah Gambar &
-                        Deskripsi</button>
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-                    <button type="submit" id="submitButton" class="btn btn-success">Simpan</button>
+                    <div style="form-group d-flex justify-content-between">
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                        <button type="submit" id="submitButton" class="btn btn-success">Simpan</button>
+                        <div style="float: right;">
+                            <button type="button" class="btn btn-primary" onclick="tambahGambarDanDeskripsi()">Tambah
+                                Gambar &
+                                Deskripsi</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

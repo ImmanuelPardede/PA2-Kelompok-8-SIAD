@@ -88,7 +88,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                     <div class="col-md-4">
                         <div class="image-container">
@@ -108,8 +107,8 @@
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                     <a href="{{ route('admin.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate
                         PDF</a>
-                    <div style="float: right;">
 
+                    <div style="float: right;">
                         @if ($anak->status === 'aktif')
                             <form action="{{ route('admin.anak.nonaktifkan', $anak->id) }}" method="post"
                                 style="display:inline;">

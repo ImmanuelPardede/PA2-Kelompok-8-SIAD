@@ -14,13 +14,13 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="nama_lengkap">Nama Lengkap:</label>
+                        <label for="nama_lengkap">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
                             value="{{ $anak->nama_lengkap }}" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="agama_id">Agama:</label>
+                        <label for="agama_id">Agama</label>
                         <select class="form-control" id="agama_id" name="agama_id" required>
                             <option value="" disabled>-- Pilih Agama --</option>
                             @foreach ($agama as $agamalist)
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="jenis_kelamin_id">Jenis Kelamin:</label>
+                        <label for="jenis_kelamin_id">Jenis Kelamin</label>
                         <select class="form-control" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
                             <option value="" disabled>-- Pilih Jenis Kelamin --</option>
                             @foreach ($jenisKelamin as $kelaminlist)
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="golongan_darah_id">Golongan Darah:</label>
+                        <label for="golongan_darah_id">Golongan Darah</label>
                         <select class="form-control" id="golongan_darah_id" name="golongan_darah_id" required>
                             <option value="" disabled>-- Pilih Golongan Darah --</option>
                             @foreach ($golonganDarah as $darahlist)
@@ -60,7 +60,7 @@
 
                     @if($anak->tipe_anak == 'disabilitas')
                     <div class="form-group">
-                        <label for="kebutuhan_disabilitas_id">Kebutuhan Disabilitas:</label>
+                        <label for="kebutuhan_disabilitas_id">Kebutuhan Disabilitas</label>
                         <select class="form-control" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id" required>
                             <option value="" disabled selected>-- Pilih Kebutuhan Disabilitas --</option>
                             @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitaslist)
@@ -73,9 +73,8 @@
                     </div>
                 @endif
 
-
                     <div class="form-group">
-                        <label for="tipe_anak">Jenis Anak:</label>
+                        <label for="tipe_anak">Jenis Anak</label>
                         <select class="form-control" id="tipe_anak" name="tipe_anak" required>
                             <option value="" disabled>-- Pilih Jenis Anak --</option>
                             <option value="disabilitas" @if ($anak->tipe_anak == 'disabilitas') selected @endif>Disabilitas
@@ -88,7 +87,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="tempat_lahir">Tempat Lahir:</label>
+                                <label for="tempat_lahir">Tempat Lahir</label>
                                 <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
                                     value="{{ $anak->tempat_lahir }}" required>
                             </div>
@@ -96,7 +95,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="tanggal_lahir">Tanggal Lahir:</label>
+                                <label for="tanggal_lahir">Tanggal Lahir</label>
                                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
                                     value="{{ $anak->tanggal_lahir }}" required>
                             </div>
@@ -105,7 +104,7 @@
 
 
                     <div class="form-group">
-                        <label for="alamat">Alamat:</label>
+                        <label for="alamat">Alamat</label>
                         <textarea class="form-control" id="alamat" name="alamat" rows="3">{{ $anak->alamat }}</textarea>
                     </div>
 
@@ -177,8 +176,9 @@
                         @endif
                             </div>
                             <div class="form-group">
-                                <label for="foto_profil">Foto Profil Baru:</label>
+                                <label for="foto_profil">Foto Profil Baru</label>
                                 <input type="file" class="form-control" id="foto_profil" name="foto_profil">
+                                <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
                             </div>
                         </div>
 
