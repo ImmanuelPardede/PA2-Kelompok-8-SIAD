@@ -31,10 +31,9 @@ class VisitorsController extends Controller
         $berita = Berita::all();
         $totalProgram = DetailProgram::count();
         $kategori = KategoriBerita::all();
-        $anaktepi = AnakDisabilitas::count();
-        $anakdisabilitas = AnakNonDisabilitas::count();
-        return view('visitor.home.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori','anaktepi','anakdisabilitas'));
-
+        $anaktepi = Anak::where('tipe_anak', 'non_disabilitas')->count();
+        $anakdisabilitas = Anak::where('tipe_anak', 'disabilitas')->count();
+        return view('visitor.home.home', compact('carousel', 'history', 'totalAnak', 'berita', 'totalProgram', 'kategori', 'anaktepi', 'anakdisabilitas'));
     }
 
     public function aboutUs()
@@ -48,21 +47,21 @@ class VisitorsController extends Controller
         $programs = Program::all();
         $detailPrograms = DetailProgram::all();
         $totalProgram = DetailProgram::count();
-        return view('visitor.program.program', compact('programs','detailPrograms','totalProgram'));
+        return view('visitor.program.program', compact('programs', 'detailPrograms', 'totalProgram'));
     }
 
     public function fasilitasi()
     {
         $fasilitas = Fasilitas::all();
         $detailfasilitas = Fasilitas::all();
-        return view('visitor.fasilitas.fasilitas',compact('fasilitas','detailfasilitas'));
+        return view('visitor.fasilitas.fasilitas', compact('fasilitas', 'detailfasilitas'));
     }
 
     public function news()
     {
         $berita = Berita::all();
         $kategori = KategoriBerita::all();
-        return view('visitor.berita.berita', compact('berita','kategori'));
+        return view('visitor.berita.berita', compact('berita', 'kategori'));
     }
 
     public function show($id)
@@ -77,7 +76,7 @@ class VisitorsController extends Controller
         $recentNews = Berita::all();
         $kategori = KategoriBerita::all();
         // Mengirim data berita dan recent news ke halaman detail berita
-        return view('visitor.berita.detailberita', compact('berita', 'recentNews','kategori'));
+        return view('visitor.berita.detailberita', compact('berita', 'recentNews', 'kategori'));
     }
 
 
@@ -85,14 +84,14 @@ class VisitorsController extends Controller
     {
         $galeri = Galeri::all();
         $detailgaleriCounts = DetailGaleri::groupBy('galeri_id')->pluck(DB::raw('count(*) as total'), 'galeri_id');
-        return view('visitor.galeri.galeri', compact('galeri','detailgaleriCounts'));
+        return view('visitor.galeri.galeri', compact('galeri', 'detailgaleriCounts'));
     }
 
     public function detailgallery($id)
     {
         $galeri = Galeri::find($id);
         $detailgaleriCounts = DetailGaleri::groupBy('galeri_id')->pluck(DB::raw('count(*) as total'), 'galeri_id');
-        return view('visitor.galeri.detailgaleri', compact('galeri','detailgaleriCounts'));
+        return view('visitor.galeri.detailgaleri', compact('galeri', 'detailgaleriCounts'));
     }
 
 

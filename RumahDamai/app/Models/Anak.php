@@ -63,20 +63,10 @@ class Anak extends Model
         return $this->belongsTo(Penyakit::class, 'penyakit_id');
     }
 
-    public function anakDisabilitas()
-    {
-        return $this->hasOne(AnakDisabilitas::class, 'anak_id');
-    }
-
-    public function anakNonDisabilitas()
-    {
-        return $this->hasOne(AnakNonDisabilitas::class, 'anak_id');
-    }
-
     public function lokasiTugas()
     {
         return $this->belongsTo(LokasiTugas::class, 'lokasi_id');
     }
 
-    
+
 }
