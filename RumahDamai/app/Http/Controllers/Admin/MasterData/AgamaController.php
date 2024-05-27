@@ -31,7 +31,9 @@ class AgamaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'agama' => 'required|string',
+            'agama' => 'required|string|unique:agama,agama',
+        ], [
+            'agama.unique' => 'Data agama sudah ada, tidak boleh duplikat.',
         ]);
 
         Agama::create($request->all());
@@ -63,7 +65,9 @@ class AgamaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'agama' => 'required|string',
+            'agama' => 'required|string|unique:agama,agama,' . $id,
+        ], [
+            'agama.unique' => 'Data agama sudah ada, tidak boleh duplikat.',
         ]);
 
         $agama = Agama::find($id);

@@ -15,7 +15,6 @@ class PenyakitController extends Controller
     {
         $penyakitList = Penyakit::orderBy('jenis_penyakit', 'asc')->paginate(7);
         return view('admin.masterdata.penyakit.index', compact('penyakitList'));
-
     }
 
     /**
@@ -32,7 +31,9 @@ class PenyakitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_penyakit' => 'required|string',
+            'jenis_penyakit' => 'required|string|unique:penyakit',
+        ], [
+            'jenis_penyakit.unique' => 'Jenis penyakit sudah ada, tidak boleh duplikat.',
         ]);
 
         Penyakit::create($request->all());
@@ -45,7 +46,6 @@ class PenyakitController extends Controller
      */
     public function show(string $id)
     {
-
         $penyakit = Penyakit::find($id);
         return view('admin.masterdata.penyakit.show', compact('penyakit'));
     }
@@ -65,7 +65,9 @@ class PenyakitController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_penyakit' => 'required|string',
+            'jenis_penyakit' => 'required|string|unique:penyakit,jenis_penyakit,' . $id,
+        ], [
+            'jenis_penyakit.unique' => 'Jenis penyakit sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisPenyakit = Penyakit::find($id);

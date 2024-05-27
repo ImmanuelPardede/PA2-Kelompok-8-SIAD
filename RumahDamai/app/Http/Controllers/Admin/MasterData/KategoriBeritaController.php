@@ -31,7 +31,9 @@ class KategoriBeritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kategori' => 'required|string',
+            'kategori' => 'required|string|unique:kategori_berita,kategori',
+        ], [
+            'kategori.unique' => 'Kategori sudah ada, tidak boleh duplikat.',
         ]);
 
         KategoriBerita::create($request->all());
@@ -44,8 +46,8 @@ class KategoriBeritaController extends Controller
      */
     public function show(string $id)
     {
-        $kategoriList = KategoriBerita::find($id);
-        return view('admin.masterdata.kategoriBerita.show', compact('kategoriList'));
+        $kategori = KategoriBerita::find($id);
+        return view('admin.masterdata.kategoriBerita.show', compact('kategori'));
     }
 
     /**
@@ -53,8 +55,8 @@ class KategoriBeritaController extends Controller
      */
     public function edit(string $id)
     {
-        $kategoriList = KategoriBerita::find($id);
-        return view('admin.masterdata.kategoriBerita.edit', compact('kategoriList'));
+        $kategori = KategoriBerita::find($id);
+        return view('admin.masterdata.kategoriBerita.edit', compact('kategori'));
     }
 
     /**
@@ -63,7 +65,9 @@ class KategoriBeritaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'kategori' => 'required|string',
+            'kategori' => 'required|string|unique:kategori_berita,kategori,' . $id,
+        ], [
+            'kategori.unique' => 'Kategori sudah ada, tidak boleh duplikat.',
         ]);
 
         $kategori = KategoriBerita::find($id);
@@ -81,6 +85,5 @@ class KategoriBeritaController extends Controller
         $kategori->delete();
 
         return redirect()->route('kategoriBerita.index')->with('success', 'Data Kategori Berita berhasil dihapus.');
-        
     }
 }

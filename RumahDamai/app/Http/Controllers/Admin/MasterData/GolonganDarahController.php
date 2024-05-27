@@ -15,10 +15,9 @@ class GolonganDarahController extends Controller
     {
         $golonganDarahList = GolonganDarah::orderBy('golongan_darah', 'asc')->paginate(7);
         return view('admin.masterdata.golonganDarah.index', compact('golonganDarahList'));
-
     }
+
     /**
-     *
      * Show the form for creating a new resource.
      */
     public function create()
@@ -32,8 +31,13 @@ class GolonganDarahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'golongan_darah' => 'required|string',
+            'golongan_darah' => 'required|string|unique:golongan_darah,golongan_darah',
+        ], [
+            'golongan_darah.unique' => 'Golongan Darah sudah ada, tidak boleh duplikat.',
         ]);
+
+        // Ubah input golongan darah menjadi huruf besar sebelum disimpan
+        $request['golongan_darah'] = strtoupper($request->golongan_darah);
 
         GolonganDarah::create($request->all());
 
@@ -64,8 +68,13 @@ class GolonganDarahController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'golongan_darah' => 'required|string',
+            'golongan_darah' => 'required|string|unique:golongan_darah,golongan_darah,' . $id,
+        ], [
+            'golongan_darah.unique' => 'Golongan Darah sudah ada, tidak boleh duplikat.',
         ]);
+
+        // Ubah input golongan darah menjadi huruf besar sebelum update
+        $request['golongan_darah'] = strtoupper($request->golongan_darah);
 
         $golonganDarah = GolonganDarah::find($id);
         $golonganDarah->update($request->all());

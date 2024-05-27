@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin\MasterData;
 
 use App\Http\Controllers\Controller;
 use App\Models\LokasiTugas;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LokasiTugasController extends Controller
 {
@@ -33,9 +31,11 @@ class LokasiTugasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lokasi' => 'required|string',
+            'lokasi' => 'required|string|unique:lokasi_tugas',
             'wilayah' => 'required|string',
             'deskripsi' => 'required|string',
+        ], [
+            'lokasi.unique' => 'Lokasi sudah ada, tidak boleh duplikat.',
         ]);
 
         LokasiTugas::create($request->all());
@@ -48,12 +48,8 @@ class LokasiTugasController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $lokasi = LokasiTugas::findOrFail($id);
-            return view('admin.masterdata.lokasiTugas.show', compact('lokasi'));
-        } catch (ModelNotFoundException $e) {
-            abort(404);
-        }
+        $lokasi = LokasiTugas::findOrFail($id);
+        return view('admin.masterdata.lokasiTugas.show', compact('lokasi'));
     }
 
     /**
@@ -61,14 +57,9 @@ class LokasiTugasController extends Controller
      */
     public function edit(string $id)
     {
-        try {
-            $lokasiPenugasan = LokasiTugas::findOrFail($id);
-            return view('admin.masterdata.lokasiTugas.edit', compact('lokasiPenugasan'));
-        } catch (ModelNotFoundException $e) {
-            abort(404);
-        }
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
+        return view('admin.masterdata.lokasiTugas.edit', compact('lokasiPenugasan'));
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -76,31 +67,27 @@ class LokasiTugasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'lokasi' => 'required|string',
+            'lokasi' => 'required|string|unique:lokasi_tugas,lokasi,' . $id,
             'wilayah' => 'required|string',
             'deskripsi' => 'required|string',
+        ], [
+            'lokasi.unique' => 'Lokasi sudah ada, tidak boleh duplikat.',
         ]);
 
-        try {
-            $lokasiPenugasan = LokasiTugas::findOrFail($id);
-            $lokasiPenugasan->update($request->all());
-            return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil diperbarui.');
-        } catch (ModelNotFoundException $e) {
-            abort(404);
-        }
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
+        $lokasiPenugasan->update($request->all());
+
+        return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        try {
-            $lokasiPenugasan = LokasiTugas::findOrFail($id);
-            $lokasiPenugasan->delete();
-            return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil dihapus.');
-        } catch (ModelNotFoundException $e) {
-            abort(404);
-        }
+        $lokasiPenugasan = LokasiTugas::findOrFail($id);
+        $lokasiPenugasan->delete();
+
+        return redirect()->route('lokasiTugas.index')->with('success', 'Lokasi Tugas berhasil dihapus.');
     }
 }

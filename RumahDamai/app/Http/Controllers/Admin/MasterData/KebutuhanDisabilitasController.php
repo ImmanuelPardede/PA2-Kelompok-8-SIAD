@@ -31,7 +31,9 @@ class KebutuhanDisabilitasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_kebutuhan_disabilitas' => 'required|string',
+            'jenis_kebutuhan_disabilitas' => 'required|string|unique:kebutuhan_disabilitas,jenis_kebutuhan_disabilitas',
+        ], [
+            'jenis_kebutuhan_disabilitas.unique' => 'Jenis kebutuhan disabilitas sudah ada, tidak boleh duplikat.',
         ]);
 
         KebutuhanDisabilitas::create($request->all());
@@ -64,7 +66,9 @@ class KebutuhanDisabilitasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_kebutuhan_disabilitas' => 'required|string',
+            'jenis_kebutuhan_disabilitas' => 'required|string|unique:kebutuhan_disabilitas,jenis_kebutuhan_disabilitas,' . $id,
+        ], [
+            'jenis_kebutuhan_disabilitas.unique' => 'Jenis kebutuhan disabilitas sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisKebutuhanDisabilitas = KebutuhanDisabilitas::find($id);

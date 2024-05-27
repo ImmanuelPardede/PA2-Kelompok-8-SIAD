@@ -8,14 +8,13 @@ use App\Models\Donasi;
 
 class DonasiController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $donasiList = Donasi::orderBy('jenis_donasi', 'asc')->paginate(7);
         return view('admin.masterdata.donasi.index', compact('donasiList'));
-
     }
 
     /**
@@ -32,7 +31,9 @@ class DonasiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_donasi' => 'required|string',
+            'jenis_donasi' => 'required|string|unique:donasi,jenis_donasi',
+        ], [
+            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat.',
         ]);
 
         Donasi::create($request->all());
@@ -45,7 +46,6 @@ class DonasiController extends Controller
      */
     public function show(string $id)
     {
-
         $donasi = Donasi::find($id);
         return view('admin.masterdata.donasi.show', compact('donasi'));
     }
@@ -65,7 +65,9 @@ class DonasiController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_donasi' => 'required|string',
+            'jenis_donasi' => 'required|string|unique:donasi,jenis_donasi,' . $id,
+        ], [
+            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisDonasi = Donasi::find($id);

@@ -8,14 +8,13 @@ use App\Http\Controllers\Controller;
 
 class DisabilitasController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $disabilitasList = Disabilitas::orderBy('jenis_disabilitas', 'asc')->paginate(7);
         return view('admin.masterdata.disabilitas.index', compact('disabilitasList'));
-
     }
 
     /**
@@ -32,7 +31,9 @@ class DisabilitasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_disabilitas' => 'required|string',
+            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas',
+        ], [
+            'jenis_disabilitas.unique' => 'Jenis Disabilitas sudah ada, tidak boleh duplikat.',
         ]);
 
         Disabilitas::create($request->all());
@@ -45,7 +46,6 @@ class DisabilitasController extends Controller
      */
     public function show(string $id)
     {
-
         $disabilitas = Disabilitas::find($id);
         return view('admin.masterdata.disabilitas.show', compact('disabilitas'));
     }
@@ -65,7 +65,9 @@ class DisabilitasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_disabilitas' => 'required|string',
+            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas,' . $id,
+        ], [
+            'jenis_disabilitas.unique' => 'Jenis Disabilitas sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisDisabilitas = Disabilitas::find($id);

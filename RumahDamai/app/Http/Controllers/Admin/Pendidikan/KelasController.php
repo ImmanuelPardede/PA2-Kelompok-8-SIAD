@@ -37,7 +37,9 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kelas' => 'nullable|string',
+            'nama_kelas' => 'required|unique:kelas,nama_kelas',
+        ], [
+            'nama_kelas.unique' => 'Nama Kelas sudah digunakan, tidak boleh duplikat.',
         ]);
 
         Kelas::create($request->all());
@@ -63,7 +65,7 @@ class KelasController extends Controller
         $tahunKurikulum = TahunKurikulum::all();
         $tahunAjaran = TahunAjaran::all();
         $semesterTahunAjaran = SemesterTahunAjaran::all();
-        return view('admin.pendidikan.kelas.edit', compact('kelas', 'tahunKurikulum', 'tahunAjaran','semesterTahunAjaran'));
+        return view('admin.pendidikan.kelas.edit', compact('kelas', 'tahunKurikulum', 'tahunAjaran', 'semesterTahunAjaran'));
     }
 
     /**
@@ -72,8 +74,10 @@ class KelasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_kelas' => 'nullable|string',
+            'nama_kelas' => 'required|unique:kelas,nama_kelas,' . $id,
             'tahun_kurikulum_id' => 'nullable|exists:tahun_kurikulum,id',
+        ], [
+            'nama_kelas.unique' => 'Nama Kelas sudah digunakan, tidak boleh duplikat.',
         ]);
 
         $kelas = Kelas::findOrFail($id);
@@ -83,8 +87,6 @@ class KelasController extends Controller
 
         return redirect()->route('admin.kelas.index')->with('success', 'Data kelas berhasil diperbarui.');
     }
-
-
 
     /**
      * Remove the specified resource from storage.

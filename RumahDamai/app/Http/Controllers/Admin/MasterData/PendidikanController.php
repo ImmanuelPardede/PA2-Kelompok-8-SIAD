@@ -8,14 +8,13 @@ use App\Models\Pendidikan;
 
 class PendidikanController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $pendidikanList = Pendidikan::orderBy('tingkat_pendidikan', 'asc')->paginate(7);
         return view('admin.masterdata.pendidikan.index', compact('pendidikanList'));
-
     }
 
     /**
@@ -32,7 +31,9 @@ class PendidikanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tingkat_pendidikan' => 'required|string',
+            'tingkat_pendidikan' => 'required|string|unique:pendidikan',
+        ], [
+            'tingkat_pendidikan.unique' => 'Tingkat pendidikan sudah ada, tidak boleh duplikat.',
         ]);
 
         Pendidikan::create($request->all());
@@ -45,7 +46,6 @@ class PendidikanController extends Controller
      */
     public function show(string $id)
     {
-
         $pendidikan = Pendidikan::find($id);
         return view('admin.masterdata.pendidikan.show', compact('pendidikan'));
     }
@@ -65,7 +65,9 @@ class PendidikanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'tingkat_pendidikan' => 'required|string',
+            'tingkat_pendidikan' => 'required|string|unique:pendidikan,tingkat_pendidikan,' . $id,
+        ], [
+            'tingkat_pendidikan.unique' => 'Tingkat pendidikan sudah ada, tidak boleh duplikat.',
         ]);
 
         $tingkatPendidikan = Pendidikan::find($id);

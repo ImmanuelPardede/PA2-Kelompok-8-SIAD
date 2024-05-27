@@ -31,7 +31,9 @@ class SemesterTahunAjaranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'semester_tahun_ajaran' => 'required|string',
+            'semester_tahun_ajaran' => 'required|string|unique:semester_tahun_ajaran,semester_tahun_ajaran,NULL,id',
+        ], [
+            'semester_tahun_ajaran.unique' => 'Semester tahun ajaran ini sudah ada dalam database.',
         ]);
 
         SemesterTahunAjaran::create([
@@ -65,7 +67,9 @@ class SemesterTahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'semester_tahun_ajaran' => 'required|string',
+            'semester_tahun_ajaran' => 'required|string|unique:semester_tahun_ajaran,semester_tahun_ajaran,'.$id,
+        ], [
+            'semester_tahun_ajaran.unique' => 'Semester tahun ajaran ini sudah ada dalam database.',
         ]);
 
         $semesterTahunAjaran = SemesterTahunAjaran::findOrFail($id);

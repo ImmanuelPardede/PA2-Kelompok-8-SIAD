@@ -40,6 +40,18 @@ class MingguPembelajaranController extends Controller
             'lokasi_penugasan_id' => 'required|exists:lokasi_penugasan,id',
         ]);
 
+        // Check for duplicate entry
+        $duplicateCheck = MingguPembelajaran::where([
+            'minggu_pembelajaran' => $request->minggu_pembelajaran,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
+        ])->exists();
+
+        if ($duplicateCheck) {
+            return redirect()->back()->with('error', 'Data Minggu Pembelajaran sudah ada.');
+        }
+
         MingguPembelajaran::create([
             'minggu_pembelajaran' => $request->minggu_pembelajaran,
             'tanggal_mulai' => $request->tanggal_mulai,
@@ -62,16 +74,13 @@ class MingguPembelajaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $mingguPembelajaran = MingguPembelajaran::findOrFail($id);
         $lokasiPenugasanList = LokasiTugas::orderBy('lokasi', 'asc')->get(); // Get all lokasi penugasan
         return view('admin.pendidikan.mingguPembelajaran.edit', compact('mingguPembelajaran', 'lokasiPenugasanList'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -84,6 +93,18 @@ class MingguPembelajaranController extends Controller
             'tanggal_berakhir' => 'required|date_format:Y-m-d',
             'lokasi_penugasan_id' => 'required|exists:lokasi_penugasan,id',
         ]);
+
+        // Check for duplicate entry
+        $duplicateCheck = MingguPembelajaran::where([
+            'minggu_pembelajaran' => $request->minggu_pembelajaran,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
+        ])->where('id', '!=', $id)->exists();
+
+        if ($duplicateCheck) {
+            return redirect()->back()->with('error', 'Data Minggu Pembelajaran sudah ada.');
+        }
 
         $mingguPembelajaran = MingguPembelajaran::findOrFail($id);
         $mingguPembelajaran->update([

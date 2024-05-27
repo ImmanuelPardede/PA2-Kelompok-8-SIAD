@@ -8,7 +8,7 @@ use App\Models\Pekerjaan;
 
 class PekerjaanController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -31,7 +31,9 @@ class PekerjaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_pekerjaan' => 'required|string',
+            'jenis_pekerjaan' => 'required|string|unique:pekerjaan',
+        ], [
+            'jenis_pekerjaan.unique' => 'Jenis pekerjaan sudah ada, tidak boleh duplikat.',
         ]);
 
         Pekerjaan::create($request->all());
@@ -44,7 +46,6 @@ class PekerjaanController extends Controller
      */
     public function show(string $id)
     {
-
         $pekerjaan = Pekerjaan::find($id);
         return view('admin.masterdata.pekerjaan.show', compact('pekerjaan'));
     }
@@ -64,7 +65,9 @@ class PekerjaanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_pekerjaan' => 'required|string',
+            'jenis_pekerjaan' => 'required|string|unique:pekerjaan,jenis_pekerjaan,' . $id,
+        ], [
+            'jenis_pekerjaan.unique' => 'Jenis pekerjaan sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisPekerjaan = Pekerjaan::find($id);

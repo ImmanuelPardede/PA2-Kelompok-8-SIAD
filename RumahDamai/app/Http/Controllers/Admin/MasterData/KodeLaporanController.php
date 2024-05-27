@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\MasterData;
 use App\Http\Controllers\Controller;
 use App\Models\KodeLaporan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class KodeLaporanController extends Controller
 {
@@ -24,6 +23,8 @@ class KodeLaporanController extends Controller
     {
         $request->validate([
             'kode' => 'required|unique:kode_laporan',
+        ], [
+            'kode.unique' => 'Kode laporan sudah ada, tidak boleh duplikat.',
         ]);
 
         $word = strtoupper($request->kode); // Ubah kata menjadi huruf besar
@@ -33,8 +34,6 @@ class KodeLaporanController extends Controller
 
         return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
     }
-
-
 
     public function show($id)
     {
@@ -54,6 +53,8 @@ class KodeLaporanController extends Controller
 
         $request->validate([
             'kode' => 'required|unique:kode_laporan,kode,' . $id,
+        ], [
+            'kode.unique' => 'Kode laporan sudah ada, tidak boleh duplikat.',
         ]);
 
         $kodeLaporan->update([
@@ -63,12 +64,9 @@ class KodeLaporanController extends Controller
         return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
     }
 
-
     public function destroy($id)
     {
         $kodeLaporan = KodeLaporan::findOrFail($id);
-
-
         $kodeLaporan->delete();
 
         return redirect()->route('admin.kodeLaporan.index')->with('success', 'Format Laporan berhasil dihapus.');

@@ -31,7 +31,9 @@ class TahunKurikulumController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tahun_kurikulum' => 'required|string',
+            'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,NULL,id',
+        ], [
+            'tahun_kurikulum.unique' => 'Tahun kurikulum ini sudah ada dalam database.',
         ]);
 
         TahunKurikulum::create([
@@ -65,7 +67,9 @@ class TahunKurikulumController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tahun_kurikulum' => 'required|string',
+            'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,'.$id,
+        ], [
+            'tahun_kurikulum.unique' => 'Tahun kurikulum ini sudah ada dalam database.',
         ]);
 
         $tahunKurikulum = TahunKurikulum::findOrFail($id);

@@ -28,7 +28,9 @@ class JenisKelaminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_kelamin' => 'required|string',
+            'jenis_kelamin' => 'required|string|unique:jenis_kelamin,jenis_kelamin',
+        ], [
+            'jenis_kelamin.unique' => 'Jenis kelamin sudah ada, tidak boleh duplikat.',
         ]);
 
         JenisKelamin::create($request->all());
@@ -45,7 +47,9 @@ class JenisKelaminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jenis_kelamin' => 'required|string',
+            'jenis_kelamin' => 'required|string|unique:jenis_kelamin,jenis_kelamin,' . $id,
+        ], [
+            'jenis_kelamin.unique' => 'Jenis kelamin sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisKelamin = JenisKelamin::find($id);

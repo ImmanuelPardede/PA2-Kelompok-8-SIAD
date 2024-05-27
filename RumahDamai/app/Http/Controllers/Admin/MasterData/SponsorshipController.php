@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsorship;
 
-
 class SponsorshipController extends Controller
 {
     /**
@@ -16,7 +15,6 @@ class SponsorshipController extends Controller
     {
         $sponsorshipList = Sponsorship::orderBy('jenis_sponsorship', 'asc')->paginate(7);
         return view('admin.masterdata.sponsorship.index', compact('sponsorshipList'));
-
     }
 
     /**
@@ -33,7 +31,9 @@ class SponsorshipController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_sponsorship' => 'required|string',
+            'jenis_sponsorship' => 'required|string|unique:sponsorships',
+        ], [
+            'jenis_sponsorship.unique' => 'Jenis sponsorship sudah ada, tidak boleh duplikat.',
         ]);
 
         Sponsorship::create($request->all());
@@ -46,7 +46,6 @@ class SponsorshipController extends Controller
      */
     public function show(string $id)
     {
-
         $sponsorship = Sponsorship::find($id);
         return view('admin.masterdata.sponsorship.show', compact('sponsorship'));
     }
@@ -66,7 +65,9 @@ class SponsorshipController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_sponsorship' => 'required|string',
+            'jenis_sponsorship' => 'required|string|unique:sponsorships,jenis_sponsorship,' . $id,
+        ], [
+            'jenis_sponsorship.unique' => 'Jenis sponsorship sudah ada, tidak boleh duplikat.',
         ]);
 
         $jenisSponsorship = Sponsorship::find($id);

@@ -205,9 +205,7 @@ class AnakController extends Controller
             return redirect()->route('admin.anak.index')->with('error', 'Data anak tidak ditemukan.');
         }
 
-
         $data = $request->except('_token', '_method', 'foto_profil');
-
 
         if ($request->hasFile('foto_profil')) {
             $gambar = $request->file('foto_profil');
@@ -225,6 +223,12 @@ class AnakController extends Controller
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
         }
 
+        if ($request->filled('tipe_anak') && $anak->tipe_anak != $request->tipe_anak) {
+            $anak->tipe_anak = $request->tipe_anak;
+            $anak->save();
+        }
+        $anak->update($data);
+        return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }
 
     /**

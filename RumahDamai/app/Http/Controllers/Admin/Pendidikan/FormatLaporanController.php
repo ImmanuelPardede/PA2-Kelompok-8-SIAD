@@ -28,6 +28,8 @@ class FormatLaporanController extends Controller
             'kode_laporan' => 'required|unique:format_laporan,kode_laporan_id',
             'nama_laporan' => 'required',
             'format_laporan' => 'required|file|mimes:pdf,doc,docx',
+        ], [
+            'kode_laporan.unique' => 'Kode Laporan sudah digunakan, tidak boleh duplikat.',
         ]);
 
         // Handle file upload
@@ -68,6 +70,8 @@ class FormatLaporanController extends Controller
             'kode_laporan' => 'required|unique:format_laporan,kode_laporan_id,' . $id,
             'nama_laporan' => 'required',
             'format_laporan' => 'nullable|file|mimes:pdf,doc,docx',
+        ], [
+            'kode_laporan.unique' => 'Kode Laporan sudah digunakan, tidak boleh duplikat.',
         ]);
 
         // Handle file upload
@@ -90,7 +94,6 @@ class FormatLaporanController extends Controller
 
         return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
     }
-
 
     public function destroy($id)
     {
