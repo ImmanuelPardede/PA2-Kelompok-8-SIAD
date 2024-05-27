@@ -280,10 +280,6 @@
         </section>
     @endif
 
-
-
-
-
     <section class="contact-section section-padding" id="section_6">
         <div class="container">
             <div class="row">
@@ -363,7 +359,6 @@
             </div>
     </section>
 
-
     <hr>
 
     <section class="contact-section section-padding" id="section_6">
@@ -393,8 +388,6 @@
                             referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
-
-
 
                 <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
                     <div class="contact-info-wrap">
@@ -443,7 +436,6 @@
                     </div>
                 </div>
             </div>
-
 
     </section>
 

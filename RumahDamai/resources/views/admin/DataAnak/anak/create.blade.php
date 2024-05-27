@@ -262,6 +262,5 @@
                         });
                 });
             </script>
-        @endsection
     </div>
 @endsection
