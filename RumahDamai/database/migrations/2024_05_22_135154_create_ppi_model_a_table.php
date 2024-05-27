@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ppi_model_a', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('anak_id');
+            $table->increments('id');
+            $table->unsignedInteger('anak_id');
 
             $table->foreign('anak_id')->references('id')->on('anak');
             $table->timestamps();

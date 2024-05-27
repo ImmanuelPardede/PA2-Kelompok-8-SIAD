@@ -9,7 +9,7 @@ class CreateJenisKelaminTable extends Migration
     public function up()
     {
         Schema::create('jenis_kelamin', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('jenis_kelamin');
             $table->timestamps();
         });

@@ -67,7 +67,7 @@ class TahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tahun_ajaran' => 'required|string|unique:tahun_ajaran,tahun_ajaran,'.$id,
+            'tahun_ajaran' => 'required|string|unique:tahun_ajaran,tahun_ajaran,' . $id,
         ], [
             'tahun_ajaran.unique' => 'Tahun ajaran ini sudah ada dalam database.',
         ]);

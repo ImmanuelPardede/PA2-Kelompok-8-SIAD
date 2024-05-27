@@ -9,12 +9,12 @@ class CreateJadwalPembelajaranTable extends Migration
     public function up()
     {
         Schema::create('jadwal_pembelajaran', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('kelas_id');
-            $table->unsignedBigInteger('minggu_pembelajaran_id');
-            $table->unsignedBigInteger('modul_materi_id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('lokasi_penugasan_id');
+            $table->increments('id');
+            $table->unsignedInteger('kelas_id');
+            $table->unsignedInteger('minggu_pembelajaran_id');
+            $table->unsignedInteger('modul_materi_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('lokasi_penugasan_id');
             $table->date('tanggal_pembelajaran')->nullable();
             $table->string('hari_pembelajaran')->nullable();
             $table->time('jam_mulai')->nullable();

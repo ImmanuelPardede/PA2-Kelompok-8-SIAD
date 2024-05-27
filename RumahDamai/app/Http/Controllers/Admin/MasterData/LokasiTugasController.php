@@ -31,11 +31,12 @@ class LokasiTugasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lokasi' => 'required|string|unique:lokasi_tugas',
-            'wilayah' => 'required|string',
+            'lokasi' => 'required|string|unique:lokasi_penugasan',
+            'wilayah' => 'required|string|unique:lokasi_penugasan',
             'deskripsi' => 'required|string',
         ], [
             'lokasi.unique' => 'Lokasi sudah ada, tidak boleh duplikat.',
+            'wilayah.unique' => 'Wilayah sudah ada, tidak boleh duplikat.',
         ]);
 
         LokasiTugas::create($request->all());
@@ -67,11 +68,12 @@ class LokasiTugasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'lokasi' => 'required|string|unique:lokasi_tugas,lokasi,' . $id,
-            'wilayah' => 'required|string',
+            'lokasi' => 'required|string|unique:lokasi_penugasan,lokasi,' . $id,
+            'wilayah' => 'required|string|unique:lokasi_penugasan,wilayah,' . $id,
             'deskripsi' => 'required|string',
         ], [
             'lokasi.unique' => 'Lokasi sudah ada, tidak boleh duplikat.',
+            'wilayah.unique' => 'Wilayah sudah ada, tidak boleh duplikat.',
         ]);
 
         $lokasiPenugasan = LokasiTugas::findOrFail($id);

@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pengumuman', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id'); // Unsigned integer auto-incrementing primary key
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('kategori');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedInteger('user_id'); // Unsigned Big Integer for foreign key
             $table->timestamps();
+
+            // Define foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -26,6 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('pengumuman', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+
         Schema::dropIfExists('pengumuman');
     }
 };

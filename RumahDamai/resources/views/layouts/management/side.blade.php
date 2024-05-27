@@ -275,6 +275,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('guru.anak.index') }}">
+                        <i class="mdi mdi-human-child menu-icon"></i>
+                        <span class="menu-title">Data Anak</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('raport.index') }}">
                         <i class="mdi mdi-file-document menu-icon"></i>
                         <span class="menu-title">Raport Anak</span>

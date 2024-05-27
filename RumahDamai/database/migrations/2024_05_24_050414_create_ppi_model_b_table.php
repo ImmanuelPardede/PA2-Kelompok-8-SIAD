@@ -9,9 +9,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ppi_model_b', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('anak_id');
-            $table->unsignedBigInteger('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('anak_id');
+            $table->unsignedInteger('user_id');
             $table->string('file_ppi_b');
             $table->string('deskripsi');
             $table->timestamps();

@@ -9,9 +9,9 @@ class CreateSponsorSponsorshipTable extends Migration
     public function up()
     {
         Schema::create('sponsor_sponsorship', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('sponsorship_id');
-            $table->unsignedBigInteger('sponsor_id');
+            $table->increments('id');
+            $table->unsignedInteger('sponsorship_id');
+            $table->unsignedInteger('sponsor_id');
             $table->timestamps();
 
             $table->foreign('sponsorship_id')->references('id')->on('sponsorship')->onDelete('cascade');

@@ -43,8 +43,6 @@ class MingguPembelajaranController extends Controller
         // Check for duplicate entry
         $duplicateCheck = MingguPembelajaran::where([
             'minggu_pembelajaran' => $request->minggu_pembelajaran,
-            'tanggal_mulai' => $request->tanggal_mulai,
-            'tanggal_berakhir' => $request->tanggal_berakhir,
             'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
         ])->exists();
 
@@ -61,6 +59,7 @@ class MingguPembelajaranController extends Controller
 
         return redirect()->route('admin.mingguPembelajaran.index')->with('success', 'Minggu Pembelajaran berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -97,8 +96,6 @@ class MingguPembelajaranController extends Controller
         // Check for duplicate entry
         $duplicateCheck = MingguPembelajaran::where([
             'minggu_pembelajaran' => $request->minggu_pembelajaran,
-            'tanggal_mulai' => $request->tanggal_mulai,
-            'tanggal_berakhir' => $request->tanggal_berakhir,
             'lokasi_penugasan_id' => $request->lokasi_penugasan_id,
         ])->where('id', '!=', $id)->exists();
 
@@ -116,6 +113,7 @@ class MingguPembelajaranController extends Controller
 
         return redirect()->route('admin.mingguPembelajaran.index')->with('success', 'Minggu Pembelajaran berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.

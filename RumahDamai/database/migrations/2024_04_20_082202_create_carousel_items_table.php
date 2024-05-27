@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carousel_items', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('image_url');
             $table->string('caption')->nullable();
             $table->string('subcaption')->nullable();

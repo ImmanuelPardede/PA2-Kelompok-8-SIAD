@@ -12,8 +12,8 @@ class CreateTahunAjaranTable extends Migration
     public function up(): void
     {
         Schema::create('tahun_ajaran', function (Blueprint $table) {
-            $table->id();
-            $table->year('tahun_ajaran');
+            $table->increments('id');
+            $table->string('tahun_ajaran');
             $table->timestamps();
         });
     }

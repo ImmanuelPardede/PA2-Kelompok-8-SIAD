@@ -33,7 +33,7 @@ class TahunKurikulumController extends Controller
         $request->validate([
             'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,NULL,id',
         ], [
-            'tahun_kurikulum.unique' => 'Tahun kurikulum ini sudah ada dalam database.',
+            'tahun_kurikulum.unique' => '"Tahun kurikulum"  sudah ada.',
         ]);
 
         TahunKurikulum::create([
@@ -69,7 +69,7 @@ class TahunKurikulumController extends Controller
         $request->validate([
             'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,'.$id,
         ], [
-            'tahun_kurikulum.unique' => 'Tahun kurikulum ini sudah ada dalam database.',
+            'tahun_kurikulum.unique' => '"Tahun kurikulum"  sudah ada.',
         ]);
 
         $tahunKurikulum = TahunKurikulum::findOrFail($id);

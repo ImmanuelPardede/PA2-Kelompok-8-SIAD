@@ -12,7 +12,7 @@ class CreateTahunKurikulumTable extends Migration
     public function up(): void
     {
         Schema::create('tahun_kurikulum', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('tahun_kurikulum');
             $table->timestamps();
         });

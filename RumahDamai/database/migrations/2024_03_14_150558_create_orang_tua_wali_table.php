@@ -12,9 +12,9 @@ class CreateOrangTuaWaliTable extends Migration
     public function up(): void
     {
         Schema::create('orang_tua_wali', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('anak_id');
-            $table->unsignedBigInteger('agama_id')->nullable();
+            $table->increments('id');
+            $table->unsignedInteger('anak_id');
+            $table->unsignedInteger('agama_id')->nullable();
             $table->string('nama_ibu')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->bigInteger('nik_ayah')->nullable();
@@ -23,17 +23,17 @@ class CreateOrangTuaWaliTable extends Migration
             $table->date('tanggal_lahir_ibu')->nullable();
             $table->string('alamat_orangtua')->nullable();
             $table->string('pendidikan_ayah_id')->nullable();
-            $table->unsignedBigInteger('pekerjaan_ayah_id')->nullable();
+            $table->unsignedInteger('pekerjaan_ayah_id')->nullable();
             $table->bigInteger('no_hp_ayah')->nullable();
             $table->string('pendidikan_ibu_id')->nullable();
-            $table->unsignedBigInteger('pekerjaan_ibu_id')->nullable();
+            $table->unsignedInteger('pekerjaan_ibu_id')->nullable();
             $table->bigInteger('no_hp_ibu')->nullable();
             $table->string('nama_wali')->nullable();
             $table->string('alamat_wali')->nullable();
-            $table->unsignedBigInteger('pekerjaan_wali_id')->nullable();
+            $table->unsignedInteger('pekerjaan_wali_id')->nullable();
             $table->date('tanggal_lahir_wali')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('anak_id')->references('id')->on('anak');
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('pekerjaan_ayah_id')->references('id')->on('pekerjaan');

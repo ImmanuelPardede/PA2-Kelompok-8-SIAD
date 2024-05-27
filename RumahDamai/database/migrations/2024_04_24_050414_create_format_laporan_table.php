@@ -9,8 +9,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('format_laporan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('kode_laporan_id')->unique();
+            $table->increments('id');
+            $table->unsignedInteger('kode_laporan_id')->unique();
             $table->string('format_laporan');
             $table->string('nama_laporan');
             $table->timestamps();

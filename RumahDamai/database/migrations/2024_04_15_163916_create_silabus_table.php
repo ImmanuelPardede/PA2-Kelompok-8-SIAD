@@ -9,10 +9,10 @@ class CreateSilabusTable extends Migration
     public function up()
     {
         Schema::create('silabus', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('tahun_kurikulum_id');
-            $table->unsignedBigInteger('kelas_id');
-            $table->unsignedBigInteger('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('tahun_kurikulum_id');
+            $table->unsignedInteger('kelas_id');
+            $table->unsignedInteger('user_id');
             $table->string('deskripsi', 2000)->nullable();
             $table->string('hasil_kursus')->nullable();
             $table->string('tipe_pembelajaran')->nullable();

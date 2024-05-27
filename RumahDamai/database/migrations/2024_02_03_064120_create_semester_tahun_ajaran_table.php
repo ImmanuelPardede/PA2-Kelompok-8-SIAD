@@ -12,7 +12,7 @@ class CreateSemesterTahunAjaranTable extends Migration
     public function up(): void
     {
         Schema::create('semester_tahun_ajaran', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('semester_tahun_ajaran');
             $table->timestamps();
         });

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nama_lengkap');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('status')->default('aktif');
             $table->boolean('role')->default(false); //add type boolean Users: 0=>User, 1=>Admin, 2=>Manager
             $table->string('nip')->nullable();
-            $table->unsignedBigInteger('golongan_darah_id')->nullable();
-            $table->unsignedBigInteger('jenis_kelamin_id')->nullable();
-            $table->unsignedBigInteger('agama_id')->nullable();
-            $table->unsignedBigInteger('pendidikan_id')->nullable();
+            $table->unsignedInteger('golongan_darah_id')->nullable();
+            $table->unsignedInteger('jenis_kelamin_id')->nullable();
+            $table->unsignedInteger('agama_id')->nullable();
+            $table->unsignedInteger('pendidikan_id')->nullable();
             $table->string('alamat')->nullable();
 
             $table->string('no_telepon', 12)->nullable();
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->timestamp('tanggal_keluar')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->unsignedBigInteger('lokasi_penugasan_id')->nullable();
+            $table->unsignedInteger('lokasi_penugasan_id')->nullable();
             $table->string('foto')->nullable();
             $table->rememberToken();
             $table->timestamps();

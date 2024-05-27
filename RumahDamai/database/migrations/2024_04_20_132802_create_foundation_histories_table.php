@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('foundation_histories', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('gambar'); // Kolom untuk nama file gambar
             $table->string('sejarah_singkat',2000); // Kolom untuk sejarah yayasan
             $table->string('tujuan_utama',2000); // Kolom untuk tujuan utama yayasan

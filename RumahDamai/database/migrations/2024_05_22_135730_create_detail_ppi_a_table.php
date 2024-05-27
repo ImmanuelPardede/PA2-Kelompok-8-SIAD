@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_ppi_a', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('ppiA_id');
+            $table->increments('id');
+            $table->unsignedInteger('ppiA_id');
             $table->text('level_komunikasi');
             $table->text('gambaran_sensorik');
             $table->text('informasi_penting');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('tujuan_jangka_panjang');
             $table->text('tujuan_jangka_pendek');
             $table->timestamps();
-            
+
 
 
 

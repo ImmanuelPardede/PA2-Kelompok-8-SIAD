@@ -9,12 +9,12 @@ class CreateModulMateriTable extends Migration
     public function up()
     {
         Schema::create('modul_materi', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('kelas_id');
+            $table->increments('id');
+            $table->unsignedInteger('kelas_id');
             $table->string('nama_materi');
-            $table->unsignedBigInteger('minggu_pembelajaran_id');
-            $table->unsignedBigInteger('tahun_kurikulum_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('minggu_pembelajaran_id');
+            $table->unsignedInteger('tahun_kurikulum_id');
+            $table->unsignedInteger('user_id');
             $table->string('file_modul');
             $table->string('deskripsi', 2000);
             $table->timestamps();

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_galeri', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('galeri_id');
+            $table->increments('id');
+            $table->unsignedInteger('galeri_id');
             $table->string('img_galeri');
             $table->timestamps();
 

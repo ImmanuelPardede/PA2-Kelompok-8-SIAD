@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('raport', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('anak_id');
-            $table->unsignedBigInteger('tahun_ajaran_id'); 
-            $table->unsignedBigInteger('semester_id',); 
-            $table->unsignedBigInteger('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('anak_id');
+            $table->unsignedInteger('tahun_ajaran_id');
+            $table->unsignedInteger('semester_id',);
+            $table->unsignedInteger('user_id');
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('semester_id')->references('id')->on('semester_tahun_ajaran');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
+
     }
 
     /**

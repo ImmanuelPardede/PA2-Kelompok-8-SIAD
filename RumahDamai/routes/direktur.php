@@ -28,13 +28,11 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::post('/direktur/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordStaff'])->name('direktur.DataDiri.password');
 
 
-
-    Route::get('direktur/anak/create', [AnakController::class, 'create'])->name('direktur.anak.create');
-    Route::get('direktur/anak', [AnakController::class, 'index'])->name('direktur.anak.index');
-    Route::get('direktur/anak/{id}', [AnakController::class, 'show'])->name('direktur.anak.show');
-    Route::get('direktur/anak/{id}/edit', [AnakController::class, 'edit'])->name('direktur.anak.edit');
-
-
+    /*
+    |--------------------------------------------------------------------------
+    | Data Latar Belakang
+    |--------------------------------------------------------------------------
+    */
     Route::get('direktur/latar-belakang', [LatarBelakangController::class, 'index'])->name('direktur.latarBelakang.index');
     Route::get('direktur/latar-belakang/create', [LatarBelakangController::class, 'create'])->name('direktur.latarBelakang.create');
     Route::post('direktur/latar-belakang', [LatarBelakangController::class, 'store'])->name('direktur.latarBelakang.store');
@@ -42,10 +40,14 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::get('direktur/latar-belakang/{id}/edit', [LatarBelakangController::class, 'edit'])->name('direktur.latarBelakang.edit');
     Route::delete('direktur/latar-belakang/{id}', [LatarBelakangController::class, 'destroy'])->name('direktur.latarBelakang.destroy');
     Route::put('direktur/latar-belakang/{id}', [LatarBelakangController::class, 'update'])->name('direktur.latarBelakang.update');
-
-
     Route::get('/direktur/anak/pdf/{id}', [LatarBelakangController::class, 'generatePDF'])->name('direktur.anak.pdf');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Data Anak
+    |--------------------------------------------------------------------------
+    */
     Route::get('/direktur/anak', [AnakController::class, 'index'])->name('direktur.anak.index');
     Route::get('/direktur/anak/create', [AnakController::class, 'create'])->name('direktur.anak.create');
     Route::get('/direktur/anak/export/excel', [AnakController::class, 'exportExcel'])->name('direktur.anak.export.excel');
@@ -55,14 +57,19 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::post('/direktur/anak', [AnakController::class, 'store'])->name('direktur.anak.store');
     Route::post('/direktur/anak/{id}/nonaktifkan', [AnakController::class, 'nonaktifkan'])->name('direktur.anak.nonaktifkan');
     Route::put('/direktur/anak/{id}', [AnakController::class, 'update'])->name('direktur.anak.update');
+    Route::get('direktur/anak/create', [AnakController::class, 'create'])->name('direktur.anak.create');
+    Route::get('direktur/anak', [AnakController::class, 'index'])->name('direktur.anak.index');
+    Route::get('direktur/anak/{id}', [AnakController::class, 'show'])->name('direktur.anak.show');
+    Route::get('direktur/anak/{id}/edit', [AnakController::class, 'edit'])->name('direktur.anak.edit');
 
 
-
+    /*
+    |--------------------------------------------------------------------------
+    | Data Anak - Orang Tua Wali
+    |--------------------------------------------------------------------------
+    */
     Route::get('direktur/orangTuaWali/create', [OrangTuaWaliController::class, 'create'])->name('direktur.orangTuaWali.create');
     Route::get('direktur/orang-tua-wali', [OrangTuaWaliController::class, 'index'])->name('direktur.orangTuaWali.index');
-
-
-    Route::get('/direktur/DataOrangTuaWali', [RiwayatMedisController::class, 'index'])->name('direktur.DataOrangTuaWali.index');
     Route::get('/direktur/DataOrangTuaWali/create', [OrangTuaWaliController::class, 'create'])->name('direktur.orangTuaWali.create');
     Route::post('/direktur/DataOrangTuaWali', [OrangTuaWaliController::class, 'store'])->name('direktur.orangTuaWali.store');
     Route::get('/direktur/DataOrangTuaWali/{id}', [OrangTuaWaliController::class, 'show'])->name('direktur.orangTuaWali.show');
@@ -71,7 +78,11 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::put('/direktur/DataOrangTuaWali/{id}', [OrangTuaWaliController::class, 'update'])->name('direktur.orangTuaWali.update');
 
 
-
+    /*
+    |--------------------------------------------------------------------------
+    | Data Anak - Riwayat Medis
+    |--------------------------------------------------------------------------
+    */
     Route::get('/direktur/riwayatMedis/create', [RiwayatMedisController::class, 'create'])->name('direktur.riwayatMedis.create');
     Route::post('/direktur/riwayatMedis', [RiwayatMedisController::class, 'store'])->name('direktur.riwayatMedis.store');
     Route::get('/direktur/riwayatMedis/{id}', [RiwayatMedisController::class, 'show'])->name('direktur.riwayatMedis.show');
@@ -79,6 +90,7 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::delete('/direktur/riwayatMedis/{id}', [RiwayatMedisController::class, 'destroy'])->name('direktur.riwayatMedis.destroy');
     Route::put('/direktur/riwayatMedis/{id}', [RiwayatMedisController::class, 'update'])->name('direktur.riwayatMedis.update');
     Route::get('/direktur/riwayatMedis', [RiwayatMedisController::class, 'index'])->name('direktur.riwayatMedis.index');
+    Route::get('/direktur/DataOrangTuaWali', [RiwayatMedisController::class, 'index'])->name('direktur.DataOrangTuaWali.index');
 
 
     /*
@@ -107,40 +119,4 @@ Route::middleware(['auth', 'user-access:direktur'])->group(function () {
     Route::get('/direktur/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('direktur.pengumuman.edit');
     Route::put('/direktur/pengumuman/{id}', [PengumumanController::class, 'update'])->name('direktur.pengumuman.update');
     Route::delete('/direktur/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('direktur.pengumuman.destroy');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Status Admin
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/direktur/nonaktifkan/admin/{id}', [AdministratorController::class, 'nonaktifkanAdmin'])->name('direktur.nonaktifkan.admin');
-    Route::post('/direktur/aktifkan/admin/{id}', [AdministratorController::class, 'aktifkanAdmin'])->name('direktur.aktifkan.admin');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Status Guru
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/direktur/nonaktifkan/guru/{id}', [AdministratorController::class, 'nonaktifkanGuru'])->name('direktur.nonaktifkan.guru');
-    Route::post('/direktur/aktifkan/guru/{id}', [AdministratorController::class, 'aktifkanGuru'])->name('direktur.aktifkan.guru');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Status Staff
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/direktur/nonaktifkan/staff/{id}', [AdministratorController::class, 'nonaktifkanStaff'])->name('direktur.nonaktifkan.staff');
-    Route::post('/direktur/aktifkan/staff/{id}', [AdministratorController::class, 'aktifkanStaff'])->name('direktur.aktifkan.staff');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Status Direktur
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/direktur/nonaktifkan/direktur/{id}', [AdministratorController::class, 'nonaktifkanDirektur'])->name('direktur.nonaktifkan.direktur');
-    Route::post('/direktur/aktifkan/direktur/{id}', [AdministratorController::class, 'aktifkanDirektur'])->name('direktur.aktifkan.direktur');
 });

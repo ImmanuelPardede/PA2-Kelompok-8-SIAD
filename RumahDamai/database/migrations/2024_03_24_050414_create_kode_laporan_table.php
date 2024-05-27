@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kode_laporan', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('kode')->unique();
             $table->timestamps();
         });

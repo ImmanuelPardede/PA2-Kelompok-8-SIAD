@@ -12,8 +12,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('deskripsi_latar_belakang', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('latar_belakang_id');
+            $table->increments('id');
+            $table->unsignedInteger('latar_belakang_id');
             $table->text('deskripsi');
             $table->timestamps();
 

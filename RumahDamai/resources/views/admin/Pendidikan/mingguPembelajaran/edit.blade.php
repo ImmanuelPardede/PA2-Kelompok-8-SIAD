@@ -15,6 +15,9 @@
                         </ul>
                     </div>
                 @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
 
                 <form action="{{ route('admin.mingguPembelajaran.update', $mingguPembelajaran->id) }}" method="post">
                     @csrf

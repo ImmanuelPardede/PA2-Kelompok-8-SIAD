@@ -31,7 +31,7 @@ class SponsorshipController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_sponsorship' => 'required|string|unique:sponsorships',
+            'jenis_sponsorship' => 'required|string|unique:sponsorship',
         ], [
             'jenis_sponsorship.unique' => 'Jenis sponsorship sudah ada, tidak boleh duplikat.',
         ]);
@@ -65,7 +65,7 @@ class SponsorshipController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_sponsorship' => 'required|string|unique:sponsorships,jenis_sponsorship,' . $id,
+            'jenis_sponsorship' => 'required|string|unique:sponsorship,jenis_sponsorship,' . $id,
         ], [
             'jenis_sponsorship.unique' => 'Jenis sponsorship sudah ada, tidak boleh duplikat.',
         ]);

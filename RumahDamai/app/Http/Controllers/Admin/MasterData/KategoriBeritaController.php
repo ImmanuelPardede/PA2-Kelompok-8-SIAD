@@ -56,7 +56,8 @@ class KategoriBeritaController extends Controller
     public function edit(string $id)
     {
         $kategori = KategoriBerita::find($id);
-        return view('admin.masterdata.kategoriBerita.edit', compact('kategori'));
+        $kategoriList = KategoriBerita::find($id);
+        return view('admin.masterdata.kategoriBerita.edit', compact('kategori', 'kategoriList'));
     }
 
     /**

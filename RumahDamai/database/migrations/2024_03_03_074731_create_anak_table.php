@@ -9,15 +9,15 @@ class CreateAnakTable extends Migration
     public function up()
     {
         Schema::create('anak', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('foto_profil')->nullable();
             $table->string('nama_lengkap')->nullable();
-            $table->unsignedBigInteger('agama_id')->nullable();
+            $table->unsignedInteger('agama_id')->nullable();
             $table->string('nia')->nullable();
-            $table->unsignedBigInteger('jenis_kelamin_id')->nullable();
-            $table->unsignedBigInteger('golongan_darah_id')->nullable();
-            $table->unsignedBigInteger('kebutuhan_disabilitas_id')->nullable();
-            $table->unsignedBigInteger('lokasi_id')->nullable();
+            $table->unsignedInteger('jenis_kelamin_id')->nullable();
+            $table->unsignedInteger('golongan_darah_id')->nullable();
+            $table->unsignedInteger('kebutuhan_disabilitas_id')->nullable();
+            $table->unsignedInteger('lokasi_id')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('disukai')->nullable();

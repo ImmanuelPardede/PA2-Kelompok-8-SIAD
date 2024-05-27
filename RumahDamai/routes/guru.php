@@ -7,6 +7,7 @@ use App\Http\Controllers\Guru\PPI\PPIModelAController;
 use App\Http\Controllers\Guru\Materi\ModulMateriController;
 use App\Http\Controllers\Guru\Materi\SilabusController;
 use App\Http\Controllers\Admin\Administrator\AdministratorController;
+use App\Http\Controllers\Guru\DataAnak\AnakController;
 use App\Http\Controllers\Guru\PPI\ModelA\PPIAController;
 
 Route::middleware(['auth', 'user-access:guru'])->group(function () {
@@ -84,4 +85,29 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/guru/DataDiri/show/{user}', [AdministratorController::class, 'showGuruDataDiri'])->name('guru.DataDiri.show');
     Route::get('/guru/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordGuru'])->name('guru.DataDiri.password');
     Route::post('/guru/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordGuru'])->name('guru.DataDiri.password');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Data Anak
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/guru/anak', [AnakController::class, 'index'])->name('guru.anak.index');
+    Route::get('/guru/anak/create', [AnakController::class, 'create'])->name('guru.anak.create');
+    Route::get('/guru/anak/export/excel', [AnakController::class, 'exportExcel'])->name('guru.anak.export.excel');
+    Route::get('/guru/anak/{id}', [AnakController::class, 'show'])->name('guru.anak.show');
+    Route::get('/guru/anak/{id}/edit', [AnakController::class, 'edit'])->name('guru.anak.edit');
+    Route::delete('/guru/anak/{id}', [AnakController::class, 'destroy'])->name('guru.anak.destroy');
+    Route::post('/guru/anak', [AnakController::class, 'store'])->name('guru.anak.store');
+    Route::post('/guru/anak/{id}/nonaktifkan', [AnakController::class, 'nonaktifkan'])->name('guru.anak.nonaktifkan');
+    Route::put('/guru/anak/{id}', [AnakController::class, 'update'])->name('guru.anak.update');
+    Route::get('guru/anak/create', [AnakController::class, 'create'])->name('guru.anak.create');
+    Route::get('guru/anak', [AnakController::class, 'index'])->name('guru.anak.index');
+    Route::get('guru/anak/{id}', [AnakController::class, 'show'])->name('guru.anak.show');
+    Route::get('guru/anak/{id}/edit', [AnakController::class, 'edit'])->name('guru.anak.edit');
+    Route::resource('/guru/DataAnak/anak', AnakController::class);
+    Route::patch('/guru/anak/{id}/aktifkan', [AnakController::class, 'aktifkan'])->name('guru.anak.aktifkan');
+    Route::patch('/guru/anak/nonaktifkan/{id}', [AnakController::class, 'nonaktifkan'])->name('guru.anak.nonaktifkan');
+    Route::get('/guru/anak/{id}/pdf', [AnakController::class, 'generatePDF'])->name('guru.anak.pdf');
+    Route::get('/guru/anak/export/excel', [AnakController::class, 'exportExcel'])->name('guru.anak.export.excel');
 });

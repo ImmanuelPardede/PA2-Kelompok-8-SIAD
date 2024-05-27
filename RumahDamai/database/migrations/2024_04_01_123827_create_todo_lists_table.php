@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('todo_lists', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('tugas');
-            $table->string('status')->default('menunggu'); 
-            $table->unsignedBigInteger('user_id'); 
+            $table->string('status')->default('menunggu');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
