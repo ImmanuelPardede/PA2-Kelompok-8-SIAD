@@ -10,7 +10,13 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
-    protected $fillable = ['nama_kelas', 'tahun_kurikulum_id', 'tahun_ajaran_id', 'semester_tahun_ajaran_id'];
+    protected $fillable = [
+        'nama_kelas',
+        'user_id',
+        'tahun_kurikulum_id',
+        'tahun_ajaran_id',
+        'semester_tahun_ajaran_id'
+    ];
 
     public function tahunKurikulum()
     {
@@ -35,5 +41,10 @@ class Kelas extends Model
     public function semesterTahunAjaran()
     {
         return $this->belongsTo(SemesterTahunAjaran::class, 'semester_tahun_ajaran_id');
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

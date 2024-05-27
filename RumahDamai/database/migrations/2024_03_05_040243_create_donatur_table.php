@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('donatur', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('nama_donatur');
             $table->string('email_donatur')->unique();
             $table->date('tanggal_donatur');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('foto_donatur');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

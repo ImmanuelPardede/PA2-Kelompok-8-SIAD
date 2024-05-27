@@ -23,12 +23,7 @@ return new class extends Migration
             $table->text('tujuan_jangka_pendek');
             $table->timestamps();
 
-
-
-
-
             $table->foreign('ppiA_id')->references('id')->on('ppi_model_a')->onDelete('cascade');
-
         });
     }
 

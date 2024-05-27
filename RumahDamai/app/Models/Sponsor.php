@@ -11,6 +11,7 @@ class Sponsor extends Model
 
     protected $table = 'sponsor';
     protected $fillable = [
+        'user_id',
         'nama_sponsor',
         'email_sponsor',
         'tanggal_sponsor',
@@ -23,5 +24,10 @@ class Sponsor extends Model
     public function sponsorship()
     {
         return $this->belongsToMany(Sponsorship::class, 'sponsor_sponsorship', 'sponsor_id', 'sponsorship_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

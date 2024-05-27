@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('ppi_model_a', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('anak_id');
+            $table->unsignedInteger('user_id');
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('anak_id')->references('id')->on('anak');
             $table->timestamps();
         });

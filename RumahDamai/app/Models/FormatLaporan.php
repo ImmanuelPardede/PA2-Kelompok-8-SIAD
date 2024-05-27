@@ -11,6 +11,7 @@ class FormatLaporan extends Model
 
     protected $table = 'format_laporan';
     protected $fillable = [
+        'user_id',
         'kode_laporan_id',
         'format_laporan',
         'nama_laporan',
@@ -19,5 +20,10 @@ class FormatLaporan extends Model
     public function kodeLaporan()
     {
         return $this->belongsTo(KodeLaporan::class, 'kode_laporan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

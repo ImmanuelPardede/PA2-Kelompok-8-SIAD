@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
@@ -25,8 +27,10 @@ class AboutController extends Controller
      */
     public function create()
     {
-        return view('admin.visitor.about.create');
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
 
+        return view('admin.visitor.about.create');
     }
 
     /**
@@ -44,6 +48,13 @@ class AboutController extends Controller
             'wilayah1' => 'nullable|string',
             'wilayah2' => 'nullable|string',
         ]);
+
+        if ($request->fails()) {
+            return redirect()->back()->withErrors($request)->withInput();
+        }
+
+        $about = new About();
+        $about->user_id = Auth::id();
 
         // Proses pengunggahan gambar img_yayasan
         if ($request->hasFile('img_yayasan')) {
@@ -73,6 +84,7 @@ class AboutController extends Controller
             'misi' => $request->input('misi'),
             'wilayah1' => $request->input('wilayah1'),
             'wilayah2' => $request->input('wilayah2'),
+            'user_id' => Auth::id(), // Assign logged in user ID
         ]);
 
         // Simpan instance About ke dalam database
@@ -130,8 +142,12 @@ class AboutController extends Controller
             'wilayah2' => 'nullable|string',
         ]);
 
+        if ($request->fails()) {
+            return redirect()->back()->withErrors($request)->withInput();
+        }
         $about = About::find($id);
 
+        $about->user_id = Auth::id();
 
         // Proses pengunggahan gambar img_yayasan
         if ($request->hasFile('img_yayasan')) {

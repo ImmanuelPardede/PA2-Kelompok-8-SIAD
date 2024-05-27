@@ -13,10 +13,16 @@ class PpiModelA extends Model
 
     protected $fillable = [
         'anak_id',
+        'user_id',
     ];
 
     public function anak()
     {
         return $this->belongsTo(Anak::class, 'anak_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

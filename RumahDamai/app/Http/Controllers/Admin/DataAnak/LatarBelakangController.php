@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use Dompdf\Options;
-use Dompdf\Dompdf;
-
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LatarBelakangController extends Controller
 {
@@ -28,7 +26,11 @@ class LatarBelakangController extends Controller
     public function create()
     {
         $anak = Anak::all();
-        return view('admin.DataAnak.latarBelakang.create', compact('anak'));
+        $loggedInUserId = Auth::id();
+
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
+
+        return view('admin.DataAnak.latarBelakang.create', compact('anak', 'users'));
     }
 
     public function store(Request $request)
@@ -38,7 +40,7 @@ class LatarBelakangController extends Controller
             'usia' => 'required|numeric',
             'kelas' => 'required|string',
             'tanggal' => 'required|date_format:Y-m-d',
-            'gambar_latar_belakang.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar_latar_belakang.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi.*' => 'required|string'
         ]);
 
@@ -49,28 +51,25 @@ class LatarBelakangController extends Controller
         try {
             DB::beginTransaction();
 
-            // Create the LatarBelakang record
             $latarBelakang = LatarBelakang::create([
                 'anak_id' => $request->anak_id,
                 'usia' => $request->usia,
                 'kelas' => $request->kelas,
                 'tanggal' => $request->tanggal,
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
 
-            // Save each description as a separate record in the deskripsi_latar_belakang table
             foreach ($request->deskripsi as $desc) {
                 DeskripsiLatarBelakang::create([
                     'latar_belakang_id' => $latarBelakang->id,
-                    'deskripsi' => strip_tags($desc), // Membersihkan deskripsi dari tag HTML
+                    'deskripsi' => strip_tags($desc),
                 ]);
             }
 
-            // Handle Gambar Upload
             if ($request->hasFile('gambar_latar_belakang')) {
                 foreach ($request->file('gambar_latar_belakang') as $image) {
                     $filename = time() . '_' . $image->getClientOriginalName();
-                    $path = public_path('uploads/gambar_latar_belakang/');
-                    $image->move($path, $filename);
+                    $path = $image->storeAs('public/uploads/gambar_latar_belakang', $filename);
 
                     GambarLatarBelakang::create([
                         'nama' => $filename,
@@ -94,35 +93,38 @@ class LatarBelakangController extends Controller
         return view('admin.DataAnak.latarBelakang.edit', compact('latarBelakang', 'anak'));
     }
 
-    public function show($id)
-    {
-        $latarBelakang = LatarBelakang::with('deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
-        return view('admin.DataAnak.latarBelakang.show', compact('latarBelakang'));
-    }
-
     public function update(Request $request, $id)
     {
         $latarBelakang = LatarBelakang::findOrFail($id);
 
-        $request->validate([
-            'anak_id' => 'required|integer|exists:anak,id',
-            'usia' => 'required|integer',
+        $validator = Validator::make($request->all(), [
+            'anak_id' => 'required|exists:anak,id',
+            'usia' => 'required|numeric',
             'kelas' => 'required|string',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date_format:Y-m-d',
             'gambar_latar_belakang.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi.*' => 'required|string'
         ]);
 
-        DB::transaction(function () use ($request, $latarBelakang) {
-            // Update the main record
-            $latarBelakang->update($request->only(['anak_id', 'usia', 'kelas', 'tanggal']));
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Update the main record and assign user_id to the logged-in user
+            $latarBelakang->update(array_merge(
+                $request->only(['anak_id', 'usia', 'kelas', 'tanggal']),
+                ['user_id' => Auth::id()]
+            ));
 
             // Handle image deletions
             if ($request->has('deleted_images')) {
                 foreach ($request->deleted_images as $imageId) {
                     $image = GambarLatarBelakang::find($imageId);
                     if ($image) {
-                        $path = public_path('uploads/gambar_latar_belakang/' . $image->nama);
+                        $path = storage_path('app/public/uploads/gambar_latar_belakang/' . $image->nama);
                         if (File::exists($path)) {
                             File::delete($path);
                         }
@@ -136,14 +138,14 @@ class LatarBelakangController extends Controller
                 foreach ($request->file('gambar_latar_belakang') as $key => $file) {
                     if ($file->isValid()) {
                         $filename = time() . '_' . $file->getClientOriginalName();
-                        $file->move(public_path('uploads/gambar_latar_belakang'), $filename);
+                        $file->storeAs('public/uploads/gambar_latar_belakang', $filename);
 
-                        if ($request->has('existing_image_ids') && isset($request->existing_image_ids[$key])) {
+                        if (isset($request->existing_image_ids[$key])) {
                             $existingImageId = $request->existing_image_ids[$key];
                             $existingImage = GambarLatarBelakang::find($existingImageId);
 
                             if ($existingImage) {
-                                $existingImagePath = public_path('uploads/gambar_latar_belakang/' . $existingImage->nama);
+                                $existingImagePath = storage_path('app/public/uploads/gambar_latar_belakang/' . $existingImage->nama);
                                 if (File::exists($existingImagePath)) {
                                     File::delete($existingImagePath);
                                 }
@@ -165,26 +167,30 @@ class LatarBelakangController extends Controller
             foreach ($request->deskripsi as $desc) {
                 DeskripsiLatarBelakang::create([
                     'latar_belakang_id' => $latarBelakang->id,
-                    'deskripsi' => strip_tags($desc), // Membersihkan deskripsi dari tag HTML
+                    'deskripsi' => strip_tags($desc),
                 ]);
             }
-        });
 
-        return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil diperbarui.');
+            DB::commit();
+            return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil diperbarui.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+        }
     }
+
 
     public function destroy($id)
     {
         $item = LatarBelakang::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('admin.latarBelakang.index')
-            ->with('success', 'Latar belakang berhasil dihapus.');
+        return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil dihapus.');
     }
 
     public function generatePDF($id)
     {
-        ini_set('max_execution_time', 300); // Extend execution time to 5 minutes
+        ini_set('max_execution_time', 300);
 
         $latarBelakang = LatarBelakang::with('anak', 'deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
 

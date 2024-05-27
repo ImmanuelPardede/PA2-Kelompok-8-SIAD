@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Donatur;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class DonaturController extends Controller
@@ -22,6 +23,9 @@ class DonaturController extends Controller
     public function create()
     {
         $donasi = Donasi::all();
+        $loggedInUserId = Auth::id();
+
+        $users = User::where('role', 'staff')->where('id', $loggedInUserId)->get();
         return view('staff.DataDonatur.create', compact('donasi'));
     }
 
@@ -39,6 +43,9 @@ class DonaturController extends Controller
             'foto_donatur' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Assign logged in user ID
+        $validatedData['user_id'] = Auth::id();
+
         // Proses upload foto_donatur
         if ($request->hasFile('foto_donatur')) {
             $gambar = $request->file('foto_donatur');
@@ -50,16 +57,7 @@ class DonaturController extends Controller
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
         }
 
-        $donatur = new Donatur([
-            'nama_donatur' => $validatedData['nama_donatur'],
-            'email_donatur' => $validatedData['email_donatur'],
-            'tanggal_donatur' => $validatedData['tanggal_donatur'],
-            'no_hp_donatur' => $validatedData['no_hp_donatur'],
-            'deskripsi' => $validatedData['deskripsi'],
-            'jumlah_donasi' => $validatedData['jumlah_donasi'],
-            'foto_donatur' => $validatedData['foto_donatur'],
-        ]);
-        $donatur->save();
+        $donatur = Donatur::create($validatedData);
 
         // Menyimpan relasi dengan donasi
         if (isset($validatedData['donasi_id'])) {
@@ -96,6 +94,9 @@ class DonaturController extends Controller
             'foto_donatur' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Assign logged in user ID
+        $validatedData['user_id'] = Auth::id();
+
         $donatur = Donatur::findOrFail($id);
 
         // Proses upload foto_donatur
@@ -108,7 +109,7 @@ class DonaturController extends Controller
 
             // Hapus foto lama jika ada
             if ($donatur->foto_donatur) {
-                unlink($donatur->foto_donatur);
+                unlink(public_path($donatur->foto_donatur));
             }
 
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
@@ -125,8 +126,6 @@ class DonaturController extends Controller
 
         return redirect()->route('dataDonatur.index')->with('success', 'Data Donatur berhasil diperbarui.');
     }
-
-
 
     public function destroy($id)
     {

@@ -11,6 +11,7 @@ class Donatur extends Model
 
     protected $table = 'donatur';
     protected $fillable = [
+        'user_id',
         'nama_donatur',
         'email_donatur',
         'tanggal_donatur',
@@ -23,5 +24,10 @@ class Donatur extends Model
     public function donasi()
     {
         return $this->belongsToMany(Donasi::class, 'donatur_donasi', 'donatur_id', 'donasi_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

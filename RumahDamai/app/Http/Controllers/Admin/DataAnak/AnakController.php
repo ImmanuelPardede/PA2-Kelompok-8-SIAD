@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AnakController extends Controller
 {
@@ -54,6 +56,8 @@ class AnakController extends Controller
         $golonganDarah = GolonganDarah::all();
         $kebutuhanDisabilitas = KebutuhanDisabilitas::all();
         $penyakit = Penyakit::all();
+        $loggedInUserId = Auth::id();
+
         return view('admin.DataAnak.Anak.create', compact('agama', 'jenisKelamin', 'golonganDarah', 'kebutuhanDisabilitas', 'penyakit', 'lokasiTugas'));
     }
 
@@ -83,8 +87,6 @@ class AnakController extends Controller
         ]);
 
         try {
-
-
             // Generate NIA
             $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
             $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
@@ -99,7 +101,6 @@ class AnakController extends Controller
             $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
 
             $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
-
 
             $anak = Anak::create([
                 'nama_lengkap' => $request->nama_lengkap,
@@ -120,6 +121,7 @@ class AnakController extends Controller
                 'tanggal_masuk' => now(),
                 'tipe_anak' => $request->tipe_anak,
                 'nia' => $nia, // Simpan NIA yang baru diambil
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
 
             // Mengelola upload foto profil
@@ -179,57 +181,58 @@ class AnakController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'nama_lengkap' => 'nullable|string',
-            'agama_id' => 'nullable',
-            'jenis_kelamin_id' => 'nullable',
-            'golongan_darah_id' => 'nullable',
-            'kebutuhan_disabilitas_id' => 'nullable',
-            'penyakit_id' => 'nullable',
-            'lokasi_id' => 'nullable',
-            'tempat_lahir' => 'nullable|string',
-            'tanggal_lahir' => 'nullable|date',
-            'disukai' => 'nullable|string',
-            'tidak_disukai' => 'nullable|string',
-            'alamat' => 'nullable|string',
-            'kelebihan' => 'nullable|string',
-            'kekurangan' => 'nullable|string',
-            'tipe_anak' => 'nullable|in:disabilitas,non_disabilitas'
-        ]);
-        $anak = Anak::find($id);
+     public function update(Request $request, string $id)
+     {
+         $request->validate([
+             'foto_profil' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+             'nama_lengkap' => 'nullable|string',
+             'agama_id' => 'nullable',
+             'jenis_kelamin_id' => 'nullable',
+             'golongan_darah_id' => 'nullable',
+             'kebutuhan_disabilitas_id' => 'nullable',
+             'penyakit_id' => 'nullable',
+             'lokasi_id' => 'nullable',
+             'tempat_lahir' => 'nullable|string',
+             'tanggal_lahir' => 'nullable|date',
+             'disukai' => 'nullable|string',
+             'tidak_disukai' => 'nullable|string',
+             'alamat' => 'nullable|string',
+             'kelebihan' => 'nullable|string',
+             'kekurangan' => 'nullable|string',
+             'tipe_anak' => 'nullable|in:disabilitas,non_disabilitas'
+         ]);
 
-        if (!$anak) {
-            return redirect()->route('admin.anak.index')->with('error', 'Data anak tidak ditemukan.');
-        }
+         $anak = Anak::find($id);
+         if (!$anak) {
+             return redirect()->route('admin.anak.index')->with('error', 'Data anak tidak ditemukan.');
+         }
 
-        $data = $request->except('_token', '_method', 'foto_profil');
+         $data = $request->except('_token', '_method', 'foto_profil');
 
-        if ($request->hasFile('foto_profil')) {
-            $gambar = $request->file('foto_profil');
-            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
-            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
+         if ($request->hasFile('foto_profil')) {
+             $gambar = $request->file('foto_profil');
+             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+             $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-            $gambar->move('uploads/anak', $new_gambar);
+             $gambar->move('uploads/anak', $new_gambar);
 
-            if ($anak->foto_profil) {
-                if (file_exists(public_path($anak->foto_profil))) {
-                    unlink(public_path($anak->foto_profil));
-                }
-            }
+             if ($anak->foto_profil && file_exists(public_path($anak->foto_profil))) {
+                 unlink(public_path($anak->foto_profil));
+             }
 
-            $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
-        }
+             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
+         }
 
-        if ($request->filled('tipe_anak') && $anak->tipe_anak != $request->tipe_anak) {
-            $anak->tipe_anak = $request->tipe_anak;
-            $anak->save();
-        }
-        $anak->update($data);
-        return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil diperbarui.');
-    }
+         if ($request->filled('tipe_anak') && $anak->tipe_anak != $request->tipe_anak) {
+             $anak->tipe_anak = $request->tipe_anak;
+             $anak->save();
+         }
+
+         $data['user_id'] = Auth::id(); // Assign logged in user ID
+         $anak->update($data);
+
+         return redirect()->route('admin.anak.index')->with('success', 'Data anak berhasil diperbarui.');
+     }
 
     /**
      * Remove the specified resource from storage.

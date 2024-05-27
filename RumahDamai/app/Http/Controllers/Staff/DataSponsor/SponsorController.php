@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
@@ -22,6 +22,8 @@ class SponsorController extends Controller
     public function create()
     {
         $sponsorship = Sponsorship::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'staff')->where('id', $loggedInUserId)->get();
         return view('staff.DataSponsor.create', compact('sponsorship'));
     }
 
@@ -39,6 +41,9 @@ class SponsorController extends Controller
             'foto_sponsor' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Assign logged in user ID
+        $validatedData['user_id'] = Auth::id();
+
         // Proses upload foto_sponsor
         if ($request->hasFile('foto_sponsor')) {
             $gambar = $request->file('foto_sponsor');
@@ -50,16 +55,7 @@ class SponsorController extends Controller
             $validatedData['foto_sponsor'] = 'uploads/sponsor/' . $new_gambar;
         }
 
-        $sponsor = new Sponsor([
-            'nama_sponsor' => $validatedData['nama_sponsor'],
-            'email_sponsor' => $validatedData['email_sponsor'],
-            'tanggal_sponsor' => $validatedData['tanggal_sponsor'],
-            'no_telepon_sponsor' => $validatedData['no_telepon_sponsor'],
-            'deskripsi' => $validatedData['deskripsi'],
-            'jumlah_sponsor' => $validatedData['jumlah_sponsor'],
-            'foto_sponsor' => $validatedData['foto_sponsor'],
-        ]);
-        $sponsor->save();
+        $sponsor = Sponsor::create($validatedData);
 
         // Menyimpan relasi dengan sponsor
         if (isset($validatedData['sponsorship_id'])) {
@@ -96,6 +92,9 @@ class SponsorController extends Controller
             'foto_sponsor' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        // Assign logged in user ID
+        $validatedData['user_id'] = Auth::id();
+
         $sponsor = Sponsor::findOrFail($id);
 
         // Proses upload foto_sponsor
@@ -108,7 +107,7 @@ class SponsorController extends Controller
 
             // Hapus foto lama jika ada
             if ($sponsor->foto_sponsor) {
-                unlink($sponsor->foto_sponsor);
+                unlink(public_path($sponsor->foto_sponsor));
             }
 
             $validatedData['foto_sponsor'] = 'uploads/sponsor/' . $new_gambar;
@@ -125,8 +124,6 @@ class SponsorController extends Controller
 
         return redirect()->route('dataSponsor.index')->with('success', 'Data Sponsor berhasil diperbarui.');
     }
-
-
 
     public function destroy($id)
     {

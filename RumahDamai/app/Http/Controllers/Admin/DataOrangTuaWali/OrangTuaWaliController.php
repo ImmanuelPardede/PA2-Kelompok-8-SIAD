@@ -9,6 +9,8 @@ use App\Models\Anak;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrangTuaWaliController extends Controller
 {
@@ -24,6 +26,9 @@ class OrangTuaWaliController extends Controller
         $agama = Agama::all();
         $pekerjaan = Pekerjaan::all();
         $pendidikan = Pendidikan::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
+
         return view('admin.OrangTuaWali.create', compact('anak', 'agama', 'pekerjaan', 'pendidikan'));
     }
 
@@ -52,6 +57,8 @@ class OrangTuaWaliController extends Controller
             'no_hp_wali' => 'nullable|numeric',
         ]);
 
+        $validatedData['user_id'] = Auth::id(); // Assign logged in user ID
+
         OrangTuaWali::create($validatedData);
 
         return redirect()->route('admin.orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil ditambahkan.');
@@ -70,7 +77,7 @@ class OrangTuaWaliController extends Controller
         $orangtuawali = OrangTuaWali::find($id);
         $pekerjaan = Pekerjaan::all();
         $pendidikan = Pendidikan::all();
-        return view('admin.OrangTuaWali.edit', compact('orangtuawali', 'anak', 'agama', 'pekerjaan','pendidikan'));
+        return view('admin.OrangTuaWali.edit', compact('orangtuawali', 'anak', 'agama', 'pekerjaan', 'pendidikan'));
     }
 
     public function update(Request $request, $id)
@@ -98,7 +105,9 @@ class OrangTuaWaliController extends Controller
             'no_hp_wali' => 'nullable|numeric',
         ]);
 
-        $orangtuawali = OrangTuaWali::find($id);
+        $validatedData['user_id'] = Auth::id(); // Assign logged in user ID
+
+        $orangtuawali = OrangTuaWali::findOrFail($id);
         $orangtuawali->update($validatedData);
 
         return redirect()->route('admin.orangTuaWali.index')->with('success', 'Data Orang Tua/Wali berhasil diperbarui.');

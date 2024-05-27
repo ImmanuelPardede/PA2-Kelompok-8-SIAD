@@ -15,6 +15,8 @@ class CreateOrangTuaWaliTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('anak_id');
             $table->unsignedInteger('agama_id')->nullable();
+            $table->unsignedInteger('user_id');
+
             $table->string('nama_ibu')->nullable();
             $table->string('nama_ayah')->nullable();
             $table->bigInteger('nik_ayah')->nullable();
@@ -32,14 +34,15 @@ class CreateOrangTuaWaliTable extends Migration
             $table->string('alamat_wali')->nullable();
             $table->unsignedInteger('pekerjaan_wali_id')->nullable();
             $table->date('tanggal_lahir_wali')->nullable();
+            $table->bigInteger('no_hp_wali')->nullable();
             $table->timestamps();
 
-            $table->foreign('anak_id')->references('id')->on('anak');
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('pekerjaan_ayah_id')->references('id')->on('pekerjaan');
             $table->foreign('pekerjaan_ibu_id')->references('id')->on('pekerjaan');
             $table->foreign('pekerjaan_wali_id')->references('id')->on('pekerjaan');
-            $table->bigInteger('no_hp_wali')->nullable();
+            $table->foreign('anak_id')->references('id')->on('anak');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

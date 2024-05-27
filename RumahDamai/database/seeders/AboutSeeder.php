@@ -14,6 +14,7 @@ class AboutSeeder extends Seeder
     public function run(): void
     {
         DB::table('about')->insert([
+            'user_id' => 1,
             'latar_belakang' => 'Yayasan Pendidikan Anak Rumah Damai atau yang sering dikenal masyarakat adalah Rumah Damai berdiri pada tanggal 25 Januari 2022 yang dahulu bernama Komunitas Rumah Dame. Komunitas ini dimulai dari sebuah desa di pinggiran Danau Toba yaitu Desa Lumban Silintong dengan mengajak anak-anak di desa tersebut. Pada 11 Maret 2023, komunitas Rumah Dame resmi terdaftar di Kemenkuham dengan SK Pendirian nomor AHU-004325.AH.01.04.Tahun 2023 dan berubah nama menjadi Yayasan Pendidikan Anak Rumah Damai.',
             'img_yayasan' => 'uploads/visitor/about/dummy2.jpg',
             'img_wilayah1' => 'uploads/visitor/about/dummy3.jpg',

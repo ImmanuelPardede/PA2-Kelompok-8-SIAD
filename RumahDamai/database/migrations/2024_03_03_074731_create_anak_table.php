@@ -18,6 +18,7 @@ class CreateAnakTable extends Migration
             $table->unsignedInteger('golongan_darah_id')->nullable();
             $table->unsignedInteger('kebutuhan_disabilitas_id')->nullable();
             $table->unsignedInteger('lokasi_id')->nullable();
+            $table->unsignedInteger('user_id');
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('disukai')->nullable();
@@ -31,6 +32,7 @@ class CreateAnakTable extends Migration
             $table->string('tipe_anak');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('agama_id')->references('id')->on('agama');
             $table->foreign('lokasi_id')->references('id')->on('lokasi_penugasan');
             $table->foreign('jenis_kelamin_id')->references('id')->on('jenis_kelamin');

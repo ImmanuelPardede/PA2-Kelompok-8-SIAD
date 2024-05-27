@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sponsor', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('nama_sponsor');
             $table->string('email_sponsor')->unique();
             $table->date('tanggal_sponsor');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('foto_sponsor');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

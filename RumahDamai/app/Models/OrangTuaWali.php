@@ -14,6 +14,7 @@ class OrangTuaWali extends Model
     protected $fillable = [
         'anak_id',
         'agama_id',
+        'user_id',
         'nama_ibu',
         'nama_ayah',
         'nik_ayah',
@@ -63,12 +64,14 @@ class OrangTuaWali extends Model
     {
         return $this->belongsTo(Pendidikan::class, 'pendidikan_ayah_id');
     }
-    
+
     public function pendidikan_ibu()
     {
         return $this->belongsTo(Pendidikan::class, 'pendidikan_ibu_id');
     }
 
-
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

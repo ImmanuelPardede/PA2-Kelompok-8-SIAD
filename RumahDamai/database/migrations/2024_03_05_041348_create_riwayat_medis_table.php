@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('riwayat_medis', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('anak_id');
             $table->unsignedInteger('penyakit_id');
             $table->text('riwayat_perawatan')->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->text('kondisi');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('anak_id')->references('id')->on('anak')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('penyakit_id')->references('id')->on('penyakit')->onDelete('cascade')->onUpdate('cascade');
         });

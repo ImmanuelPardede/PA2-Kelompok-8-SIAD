@@ -10,13 +10,14 @@ return new class extends Migration
     {
         Schema::create('format_laporan', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('kode_laporan_id')->unique();
             $table->string('format_laporan');
             $table->string('nama_laporan');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('kode_laporan_id')->references('id')->on('kode_laporan')->onDelete('cascade');
-
         });
     }
 

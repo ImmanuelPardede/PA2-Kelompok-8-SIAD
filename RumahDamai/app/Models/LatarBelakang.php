@@ -10,7 +10,14 @@ class LatarBelakang extends Model
     use HasFactory;
 
     protected $table = 'latar_belakang';
-    protected $fillable = ['anak_id','usia', 'kelas', 'tanggal', 'deskripsi'];
+    protected $fillable = [
+        'anak_id',
+        'user_id',
+        'usia',
+        'kelas',
+        'tanggal',
+        'deskripsi'
+    ];
 
     public function uploadImage()
     {
@@ -30,5 +37,10 @@ class LatarBelakang extends Model
     public function deskripsiLatarBelakang()
     {
         return $this->hasMany(DeskripsiLatarBelakang::class, 'latar_belakang_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

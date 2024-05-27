@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('latar_belakang', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('anak_id');
+            $table->unsignedInteger('user_id');
             $table->integer('usia');
             $table->string('kelas');
             $table->date('tanggal');
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

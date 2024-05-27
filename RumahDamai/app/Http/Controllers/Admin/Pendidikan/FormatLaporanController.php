@@ -7,6 +7,8 @@ use App\Models\FormatLaporan;
 use App\Models\KodeLaporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FormatLaporanController extends Controller
 {
@@ -19,6 +21,9 @@ class FormatLaporanController extends Controller
     public function create()
     {
         $kodeLaporan = KodeLaporan::all();
+        $loggedInUserId = Auth::id();
+
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Pendidikan.formatLaporan.create', compact('kodeLaporan'));
     }
 
@@ -44,6 +49,7 @@ class FormatLaporanController extends Controller
             'kode_laporan_id' => $request->kode_laporan,
             'format_laporan' => $formatLaporan,
             'nama_laporan' => $request->nama_laporan,
+            'user_id' => Auth::id(), // Assign logged in user ID
         ]);
 
         return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');

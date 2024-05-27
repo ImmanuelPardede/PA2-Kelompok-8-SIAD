@@ -19,6 +19,7 @@ class Anak extends Model
         'jenis_kelamin_id',
         'golongan_darah_id',
         'kebutuhan_disabilitas_id',
+        'user_id',  
         'tempat_lahir',
         'tanggal_lahir',
         'tanggal_masuk',

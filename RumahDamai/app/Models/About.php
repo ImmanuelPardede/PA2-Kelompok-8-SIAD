@@ -12,6 +12,8 @@ class About extends Model
     protected $table = 'about';
 
     protected $fillable = [
+        'anak_id',
+        'usia' => 'required|numeric',
         'latar_belakang',
         'img_yayasan',
         'visi',
@@ -22,4 +24,8 @@ class About extends Model
         'img_wilayah2',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

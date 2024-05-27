@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('about', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('latar_belakang',3000)->nullable();
             $table->string('img_yayasan')->nullable();
             $table->string('visi',3000)->nullable();
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->string('img_wilayah1')->nullable();
             $table->string('img_wilayah2')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
