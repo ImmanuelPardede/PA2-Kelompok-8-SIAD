@@ -277,7 +277,7 @@
                         <div class="d-flex flex-column justify-content-center ">
                             <p class="mb-0">Lumban Silintong, Balige</p>
                             <p class="mb-0"><strong>Anak Dipesisir Danau Toba</strong></p>
-                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{$anaktepi}}</strong></p>
+                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{-- {{$anaktepi}} --}}</strong></p>
                         </div>
                     </div>
 
@@ -367,7 +367,7 @@
                         <div class="d-flex flex-column justify-content-center ">
                             <p class="mb-0">Sawah Lamo, Andam Dewi, Tapteng</p>
                             <p class="mb-0"><strong>Anak Berkebutuhan Khusus</strong></p>
-                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{$anakdisabilitas}}</strong></p>
+                            <p class="mb-0">Dengan Jumlah Anak Sebannyak <strong>{{-- {{$anakdisabilitas}} --}}</strong></p>
                         </div>
                     </div>
 

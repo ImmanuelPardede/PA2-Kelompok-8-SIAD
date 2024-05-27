@@ -31,9 +31,7 @@ class VisitorsController extends Controller
         $berita = Berita::all();
         $totalProgram = DetailProgram::count();
         $kategori = KategoriBerita::all();
-        $anaktepi = AnakDisabilitas::count();
-        $anakdisabilitas = AnakNonDisabilitas::count();
-        return view('visitor.home.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori','anaktepi','anakdisabilitas'));
+        return view('visitor.home.home', compact('carousel','history','totalAnak','berita','totalProgram','kategori'));
 
     }
 
