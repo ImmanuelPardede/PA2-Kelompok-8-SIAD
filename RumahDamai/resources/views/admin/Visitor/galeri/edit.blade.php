@@ -59,7 +59,7 @@
                     <!-- Tombol untuk submit form -->
                     <a href="{{ url()->previous() }}" class="btn btn-danger">Batal</a>
                     <button type="submit" id="submitButton" class="btn btn-success mr-2"
-                        onclick="handleUpdatedConfirmation(event)">Ubah</button>
+                        onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     <button type="button" class="btn btn-primary" id="addImageButton" style="float: right">Tambah
                         Gambar</button>
                 </form>

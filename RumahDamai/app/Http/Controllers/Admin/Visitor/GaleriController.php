@@ -8,6 +8,8 @@ use App\Models\Galeri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class GaleriController extends Controller
 {
@@ -27,6 +29,8 @@ class GaleriController extends Controller
      */
     public function create()
     {
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Visitor.galeri.create');
     }
 
@@ -48,6 +52,7 @@ class GaleriController extends Controller
         $galeri->judul = $request->input('judul');
         $galeri->waktu = $request->input('waktu');
         $galeri->lokasi = $request->input('lokasi');
+        $galeri->user_id = Auth::id(); // Update user_id to the current logged-in user ID
         $galeri->save();
 
         // Proses untuk setiap file img_galeri yang diunggah
@@ -112,6 +117,7 @@ class GaleriController extends Controller
     $galeri->judul = $request->input('judul');
     $galeri->waktu = $request->input('waktu');
     $galeri->lokasi = $request->input('lokasi');
+    $galeri->user_id = Auth::id(); // Update user_id to the current logged-in user ID
     $galeri->save();
 
     // Proses untuk setiap file img_galeri yang diunggah

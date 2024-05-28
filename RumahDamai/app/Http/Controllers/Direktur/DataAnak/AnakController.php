@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Support\Facades\Auth;
+    
 class AnakController extends Controller
 {
 
@@ -120,22 +121,8 @@ class AnakController extends Controller
                 'tanggal_masuk' => now(),
                 'tipe_anak' => $request->tipe_anak,
                 'nia' => $nia, // Simpan NIA yang baru diambil
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
-
-
-            if ($request->tipe_anak == 'disabilitas') {
-                AnakDisabilitas::create([
-                    'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
-                    'nama_lengkap' => $anak->nama_lengkap,
-                    'tipe_anak' => 'disabilitas',
-                ]);
-            } elseif ($request->tipe_anak == 'non_disabilitas') {
-                AnakNonDisabilitas::create([
-                    'anak_id' => $anak->id, // Gunakan $anak->id bukan $anak->anak_id
-                    'nama_lengkap' => $anak->nama_lengkap,
-                    'tipe_anak' => 'non_disabilitas',
-                ]);
-            }
 
             // Mengelola upload foto profil
             if ($request->hasFile('foto_profil')) {
@@ -240,33 +227,7 @@ class AnakController extends Controller
             $data['foto_profil'] = 'uploads/anak/' . $new_gambar;
         }
 
-        if ($request->filled('tipe_anak') && $anak->tipe_anak != $request->tipe_anak) {
-            if ($anak->tipe_anak == 'disabilitas') {
-                $anakDisabilitas = AnakDisabilitas::where('anak_id', $anak->id)->first();
-                if ($anakDisabilitas) {
-                    $anakDisabilitas->delete();
-                }
-            } elseif ($anak->tipe_anak == 'non_disabilitas') {
-                $anakNonDisabilitas = AnakNonDisabilitas::where('anak_id', $anak->id)->first();
-                if ($anakNonDisabilitas) {
-                    $anakNonDisabilitas->delete();
-                }
-            }
-            if ($request->tipe_anak == 'disabilitas') {
-                AnakDisabilitas::updateOrCreate(
-                    ['anak_id' => $anak->id],
-                    ['nama_lengkap' => $anak->nama_lengkap, 'tipe_anak' => 'disabilitas']
-                );
-            } elseif ($request->tipe_anak == 'non_disabilitas') {
-                AnakNonDisabilitas::updateOrCreate(
-                    ['anak_id' => $anak->id],
-                    ['nama_lengkap' => $anak->nama_lengkap, 'tipe_anak' => 'non_disabilitas']
-                );
-            }
-
-            $anak->tipe_anak = $request->tipe_anak;
-            $anak->save();
-        }
+        $data['user_id'] = Auth::id(); // Assign logged in user ID
         $anak->update($data);
         return redirect()->route('direktur.anak.index')->with('success', 'Data anak berhasil diperbarui.');
     }

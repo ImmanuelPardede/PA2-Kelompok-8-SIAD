@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\FoundationHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HistoryController extends Controller
 {
@@ -14,7 +16,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-    $history = FoundationHistory::latest()->first(); // Mengambil satu data FoundationHistory terbaru
+        $history = FoundationHistory::latest()->first(); // Mengambil satu data FoundationHistory terbaru
 
         // Kembalikan view 'carousel.show' dengan data CarouselItem yang ditemukan
         return view('admin.visitor.history.index', compact('history'));
@@ -25,6 +27,8 @@ class HistoryController extends Controller
      */
     public function create()
     {
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Visitor.history.create');
     }
 
@@ -32,38 +36,40 @@ class HistoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validasi input form
-    $validatedData = $request->validate([
-        'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
-        'sejarah_singkat' => 'required|string',
-        'tujuan_utama' => 'required|string',
-        'dibangun' => 'required|date',
-    ]);
+    {
+        // Validasi input form
+        $validatedData = $request->validate([
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:3000',
+            'sejarah_singkat' => 'required|string',
+            'tujuan_utama' => 'required|string',
+            'dibangun' => 'required|date',
+        ]);
 
-    // Proses penyimpanan gambar
-    if ($request->hasFile('gambar')) {
-        $gambar = $request->file('gambar');
-        $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
-        $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
+        // Proses penyimpanan gambar
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-        // Pindahkan gambar ke direktori yang diinginkan
-        $gambar->move('uploads/visitor/history/', $new_gambar);
+            // Pindahkan gambar ke direktori yang diinginkan
+            $gambar->move('uploads/visitor/history/', $new_gambar);
+        }
+
+        // Buat instance FoundationHistory dengan data yang disediakan
+        $foundationHistory = new FoundationHistory();
+        $foundationHistory->gambar = 'uploads/visitor/history/' . $new_gambar;
+        $foundationHistory->sejarah_singkat = $validatedData['sejarah_singkat'];
+        $foundationHistory->tujuan_utama = $validatedData['tujuan_utama'];
+        $foundationHistory->dibangun = $validatedData['dibangun'];
+        $foundationHistory->user_id = Auth::id(); // Update user_id to the current logged-in user ID
+
+
+        // Simpan instance FoundationHistory ke dalam database
+        $foundationHistory->save();
+
+        // Redirect dengan flash message sukses
+        return redirect()->route('admin.history.index')->with('success', 'Foundation history has been added successfully.');
     }
-
-    // Buat instance FoundationHistory dengan data yang disediakan
-    $foundationHistory = new FoundationHistory();
-    $foundationHistory->gambar = 'uploads/visitor/history/' . $new_gambar;
-    $foundationHistory->sejarah_singkat = $validatedData['sejarah_singkat'];
-    $foundationHistory->tujuan_utama = $validatedData['tujuan_utama'];
-    $foundationHistory->dibangun = $validatedData['dibangun'];
-
-    // Simpan instance FoundationHistory ke dalam database
-    $foundationHistory->save();
-
-    // Redirect dengan flash message sukses
-    return redirect()->route('admin.history.index')->with('success', 'Foundation history has been added successfully.');
-}
 
     /**
      * Display the specified resource.
@@ -73,7 +79,6 @@ class HistoryController extends Controller
         $history = FoundationHistory::find($id);
 
         return view('admin.visitor.history.show', compact('history'));
-
     }
 
     /**
@@ -84,7 +89,6 @@ class HistoryController extends Controller
         $history = FoundationHistory::find($id);
 
         return view('admin.visitor.history.edit', compact('history'));
-
     }
 
     /**
@@ -111,19 +115,19 @@ class HistoryController extends Controller
 
             $gambar->move('uploads/visitor/history/', $new_gambar);
 
-            if ($history->gambar){
+            if ($history->gambar) {
                 if (file_exists(public_path($history->gambar))) {
                     unlink(public_path($history->gambar));
                 }
             }
 
             $history->gambar = 'uploads/visitor/history/' . $new_gambar;
-
         }
-                // Proses update data
-                $history->sejarah_singkat = $request->sejarah_singkat;
-                $history->tujuan_utama = $request->tujuan_utama;
-                $history->dibangun = $request->dibangun;
+        // Proses update data
+        $history->sejarah_singkat = $request->sejarah_singkat;
+        $history->tujuan_utama = $request->tujuan_utama;
+        $history->dibangun = $request->dibangun;
+        $history->user_id = Auth::id(); // Update user_id to the current logged-in user ID
 
         $history->save();
 
@@ -141,19 +145,12 @@ class HistoryController extends Controller
         if ($history->gambar) {
             if (file_exists(public_path($history->gambar))) {
                 unlink(public_path($history->gambar));
+            }
+            // Hapus history dari database
+            $history->delete();
+
+            return redirect()->route('admin.history.index')
+                ->with('success', 'Carousel item deleted successfully.');
         }
-        // Hapus history dari database
-        $history->delete();
-
-        return redirect()->route('admin.history.index')
-                         ->with('success', 'Carousel item deleted successfully.');
-
     }
-
-
-
-}
-
-
-
 }

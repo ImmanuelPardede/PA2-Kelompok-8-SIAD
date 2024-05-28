@@ -7,6 +7,8 @@ use App\Models\CarouselItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CarouselItemController extends Controller
 {
@@ -24,6 +26,8 @@ class CarouselItemController extends Controller
      */
     public function create()
     {
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Visitor.carousel.create');
     }
 
@@ -54,18 +58,19 @@ class CarouselItemController extends Controller
                 'caption' => $request->caption,
                 'subcaption' => $request->subcaption,
                 'image_url' => 'uploads/visitor/carousel/' . $new_gambar, // Set nilai image_url
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
 
             // Simpan instance CarouselItem ke dalam database
             $carousel->save();
 
             return redirect()->route('admin.carousel.index')
-                             ->with('success', 'Carousel item created successfully.');
+                ->with('success', 'Carousel item created successfully.');
         }
 
         // Jika tidak ada file yang diunggah, tampilkan pesan error
         return redirect()->route('admin.carousel.create')
-                         ->with('error', 'Failed to upload image.');
+            ->with('error', 'Failed to upload image.');
     }
 
     /**
@@ -98,44 +103,45 @@ class CarouselItemController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'image_url' => 'nullable|image|mimes:jpeg,png,jpg|max:3000',
-        'caption' => 'nullable|string',
-        'subcaption' => 'nullable|string',
-    ]);
+    {
+        $request->validate([
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg|max:3000',
+            'caption' => 'nullable|string',
+            'subcaption' => 'nullable|string',
+        ]);
 
-    $carousel = CarouselItem::findOrFail($id);
+        $carousel = CarouselItem::findOrFail($id);
 
-    // Tangani penghapusan gambar lama jika ada gambar baru yang diunggah
-    if ($request->hasFile('image_url')) {
-        $gambar = $request->file('image_url');
-        $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
-        $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
+        // Tangani penghapusan gambar lama jika ada gambar baru yang diunggah
+        if ($request->hasFile('image_url')) {
+            $gambar = $request->file('image_url');
+            $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
+            $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
 
-        // Pindahkan gambar baru ke direktori yang diinginkan
-        $gambar->move('uploads/visitor/carousel/', $new_gambar);
+            // Pindahkan gambar baru ke direktori yang diinginkan
+            $gambar->move('uploads/visitor/carousel/', $new_gambar);
 
-        // Hapus gambar lama jika ada
-        if ($carousel->image_url){
-            if (file_exists(public_path($carousel->image_url))) {
-                unlink(public_path($carousel->image_url));
+            // Hapus gambar lama jika ada
+            if ($carousel->image_url) {
+                if (file_exists(public_path($carousel->image_url))) {
+                    unlink(public_path($carousel->image_url));
+                }
             }
+
+            // Simpan path gambar baru ke dalam database
+            $carousel->image_url = 'uploads/visitor/carousel/' . $new_gambar;
         }
 
-        // Simpan path gambar baru ke dalam database
-        $carousel->image_url = 'uploads/visitor/carousel/' . $new_gambar;
+        // Update caption dan subcaption
+        $carousel->caption = $request->caption;
+        $carousel->subcaption = $request->subcaption;
+        $carousel->user_id = Auth::id(); // Update user_id to the current logged-in user ID
+
+        // Simpan perubahan ke dalam database
+        $carousel->save();
+
+        return redirect()->route('admin.carousel.index')->with('success', 'Carousel item updated successfully.');
     }
-
-    // Update caption dan subcaption
-    $carousel->caption = $request->caption;
-    $carousel->subcaption = $request->subcaption;
-
-    // Simpan perubahan ke dalam database
-    $carousel->save();
-
-    return redirect()->route('admin.carousel.index')->with('success', 'Carousel item updated successfully.');
-}
 
 
 
@@ -150,14 +156,12 @@ class CarouselItemController extends Controller
         if ($carouselItem->image_url) {
             if (file_exists(public_path($carouselItem->image_url))) {
                 unlink(public_path($carouselItem->image_url));
+            }
+            // Hapus CarouselItem dari database
+            $carouselItem->delete();
+
+            return redirect()->route('admin.carousel.index')
+                ->with('success', 'Carousel item deleted successfully.');
         }
-        // Hapus CarouselItem dari database
-        $carouselItem->delete();
-
-        return redirect()->route('admin.carousel.index')
-                         ->with('success', 'Carousel item deleted successfully.');
-    }
-
-
     }
 }

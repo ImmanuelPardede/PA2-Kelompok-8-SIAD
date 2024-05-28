@@ -102,7 +102,7 @@
                     <!-- Tombol untuk submit form -->
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" id="submitButton" class="btn btn-success mr-2"
-                        onclick="handleUpdatedConfirmation(event)">Ubah</button>
+                        onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                 </form>
             </div>
         </div>

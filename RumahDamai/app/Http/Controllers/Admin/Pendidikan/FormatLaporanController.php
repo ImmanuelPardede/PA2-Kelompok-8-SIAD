@@ -22,7 +22,6 @@ class FormatLaporanController extends Controller
     {
         $kodeLaporan = KodeLaporan::all();
         $loggedInUserId = Auth::id();
-
         $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Pendidikan.formatLaporan.create', compact('kodeLaporan'));
     }
@@ -96,6 +95,7 @@ class FormatLaporanController extends Controller
             'kode_laporan_id' => $request->kode_laporan,
             'format_laporan' => $fileformatLaporan,
             'nama_laporan' => $request->nama_laporan,
+            'user_id' => Auth::id(), // Update user_id to the current logged-in user ID
         ]);
 
         return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');

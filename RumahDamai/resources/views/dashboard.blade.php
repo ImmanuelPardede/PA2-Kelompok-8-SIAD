@@ -154,7 +154,7 @@
                             @if (Auth::user()->role == 'direktur')
                                 <div class="mb-3 ml-auto">
 
-                                    <a href="{{ route('admin.pengumuman.create') }}" class="btn btn-primary">Buat
+                                    <a href="{{ route('direktur.pengumuman.create') }}" class="btn btn-primary">Buat
                                         Pengumuman</a>
                                 </div>
                             @endif
@@ -224,9 +224,9 @@
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item"
-                                                                href="{{ route('admin.pengumuman.edit', ['id' => $pengumuman->id]) }}">Edit</a>
+                                                                href="{{ route('direktur.pengumuman.edit', ['id' => $pengumuman->id]) }}">Edit</a>
                                                             <form
-                                                                action="{{ route('admin.pengumuman.destroy', ['id' => $pengumuman->id]) }}"
+                                                                action="{{ route('direktur.pengumuman.destroy', ['id' => $pengumuman->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -237,7 +237,6 @@
                                                     </div>
                                                 </td>
                                             @endif
-
                                         </tr>
                                     @endforeach
                                 </tbody>

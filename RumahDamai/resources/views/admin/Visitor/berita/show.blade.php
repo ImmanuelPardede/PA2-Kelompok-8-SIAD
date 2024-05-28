@@ -28,7 +28,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('admin.program.index') }}" class="btn btn-primary">Kembali</a>
+                        <a href="{{ route('admin.berita.index') }}" class="btn btn-primary">Kembali</a>
                     </div>
                 </div>
             </div>

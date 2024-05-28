@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('program', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('img_program')->nullable();
             $table->string('kelas',2000);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

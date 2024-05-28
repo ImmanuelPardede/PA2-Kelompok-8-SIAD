@@ -7,6 +7,8 @@ use App\Models\Berita;
 use App\Models\KategoriBerita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class BeritaController extends Controller
 {
@@ -27,6 +29,8 @@ class BeritaController extends Controller
     public function create()
     {
         $kategori = KategoriBerita::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.visitor.berita.create', compact('kategori'));
     }
 
@@ -58,6 +62,7 @@ class BeritaController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'kategori_id' => $request->kategori_id,
                 'img_berita' => 'uploads/visitor/berita/' . $new_gambar, // Set nilai img_berita
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
 
             // Simpan instance beritaItem ke dalam database
@@ -116,6 +121,7 @@ class BeritaController extends Controller
         // Perbarui data berita sesuai dengan data yang dikirimkan
         $berita->kategori_id = $request->kategori_id;
         $berita->judul = $request->judul;
+        $berita->user_id = Auth::id(); // Update user_id to the current logged-in user ID
         $berita->deskripsi = $request->deskripsi;
 
         // Mengelola update gambar berita

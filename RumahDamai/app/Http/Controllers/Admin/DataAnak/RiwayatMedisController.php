@@ -26,7 +26,6 @@ class RiwayatMedisController extends Controller
         $anak = Anak::all();
         $penyakit = Penyakit::all();
         $loggedInUserId = Auth::id();
-
         $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.DataAnak.riwayatMedis.create', compact('anak', 'penyakit'));
     }

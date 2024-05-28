@@ -103,7 +103,7 @@
                 </div>
                 <div style="form-group d-flex justify-content-between">
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                    <a href="{{ route('direktur.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-primary">Generate
+                    <a href="{{ route('direktur.anak.pdf', ['id' => $anak->id]) }}" class="btn btn-success">Generate
                         PDF</a>
                     <div style="float: right;">
 

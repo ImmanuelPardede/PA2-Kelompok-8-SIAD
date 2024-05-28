@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('foundation_histories', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('gambar'); // Kolom untuk nama file gambar
             $table->string('sejarah_singkat',2000); // Kolom untuk sejarah yayasan
             $table->string('tujuan_utama',2000); // Kolom untuk tujuan utama yayasan
             $table->date('dibangun'); // Kolom tanggal pendirian yayasan
             $table->integer('jumlah_anak')->unsigned()->default(0); // Kolom jumlah anak yang dilayani yayasan
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

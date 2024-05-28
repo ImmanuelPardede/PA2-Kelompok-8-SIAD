@@ -10,10 +10,18 @@ class Program extends Model
     use HasFactory;
     protected $table = 'program'; // Menentukan nama tabel yang digunakan
 
-    protected $fillable = ['img_program', 'kelas'];
+    protected $fillable = [
+        'user_id',
+        'img_program',
+        'kelas'];
 
     public function detailPrograms()
     {
         return $this->hasMany(DetailProgram::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

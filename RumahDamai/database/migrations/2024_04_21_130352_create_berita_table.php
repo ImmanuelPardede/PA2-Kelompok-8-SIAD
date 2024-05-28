@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('kategori_id');
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('img_berita')->nullable();
             $table->timestamps();
 
-
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('kategori_id')->references('id')->on('kategori_berita')->onDelete('cascade');
 
         });

@@ -7,6 +7,8 @@ use App\Models\DetailProgram;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramController extends Controller
 {
@@ -26,6 +28,8 @@ class ProgramController extends Controller
     public function create()
     {
         $program = Program::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.visitor.program.create', compact('program'));
 
     }
@@ -42,6 +46,8 @@ class ProgramController extends Controller
             'deskripsi' => 'required',
         ]);
 
+
+
         if ($request->hasFile('img_program')) {
             $img_program = $request->file('img_program');
             $slug = Str::slug(pathinfo($img_program->getClientOriginalName(), PATHINFO_FILENAME));
@@ -51,10 +57,11 @@ class ProgramController extends Controller
             $img_program->move('uploads/visitor/program/', $new_gambar);
         }
 
-        $program = new Program;
-        $program->kelas = $request->input('kelas');
-        $program->img_program = 'uploads/visitor/program/' . $new_gambar;
-        $program->save();
+        $program = Program::create([
+            'kelas' => $request->input('kelas'),
+            'img_program' => 'uploads/visitor/program/' . $new_gambar,
+            'user_id' => Auth::id(), // Assign logged in user ID
+        ]);
 
         $jenis_programs = $request->input('jenis_program');
         $deskripsis = $request->input('deskripsi');
@@ -128,6 +135,7 @@ class ProgramController extends Controller
 
         // Update program data
         $program->kelas = $request->input('kelas');
+        $program->user_id = Auth::id(); // Assign logged in user ID
         $program->save();
 
         // Update or create new detail program records

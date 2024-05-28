@@ -7,7 +7,8 @@ use App\Models\Penyakit;
 use App\Models\RiwayatMedis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatMedisController extends Controller
 {
@@ -24,6 +25,8 @@ class RiwayatMedisController extends Controller
     {
         $anak = Anak::all();
         $penyakit = Penyakit::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('direktur.DataAnak.riwayatMedis.create', compact('anak', 'penyakit'));
     }
 
@@ -33,6 +36,8 @@ class RiwayatMedisController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'anak_id' => 'required|exists:anak,id',
+            'penyakit_id' => 'required|exists:penyakit,id',
             'riwayat_perawatan' => 'required|string',
             'riwayat_perilaku' => 'nullable|string',
             'deskripsi_riwayat' => 'nullable|string',
@@ -40,6 +45,8 @@ class RiwayatMedisController extends Controller
         ]);
 
         $data = $request->except('_token');
+        $data['user_id'] = Auth::id();
+
         RiwayatMedis::create($data);
 
         return redirect()->route('direktur.riwayatMedis.index')->with('success', 'Riwayat Medis berhasil ditambahkan.');
@@ -71,11 +78,16 @@ class RiwayatMedisController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'anak_id' => 'required|exists:anak,id',
+            'penyakit_id' => 'required|exists:penyakit,id',
             'riwayat_perawatan' => 'required|string',
             'riwayat_perilaku' => 'nullable|string',
             'deskripsi_riwayat' => 'nullable|string',
             'kondisi' => 'nullable|string',
         ]);
+
+        $data = $request->except('_token');
+        $data['user_id'] = Auth::id();
 
         $riwayatmedis = RiwayatMedis::find($id);
         $riwayatmedis->update($request->all());

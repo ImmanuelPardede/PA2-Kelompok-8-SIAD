@@ -71,10 +71,12 @@
                         <div class="form-group mb-3" id="deskripsi_group_1">
                             <label for="deskripsi_1" class="form-label">Deskripsi<span style="color: red">*</span></label>
                             <textarea id="deskripsi_1" class="form-control" name="deskripsi[]" required autocomplete="deskripsi">
-                            {{ old('deskripsi') }}
-                            <ul>
-                            </ul>
-                        </textarea>
+                                <ul>
+                                    @foreach(old('deskripsi', []) as $deskripsi)
+                                        <li>{{ $deskripsi }}</li>
+                                    @endforeach
+                                </ul>
+                            </textarea>
                             @error('deskripsi')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

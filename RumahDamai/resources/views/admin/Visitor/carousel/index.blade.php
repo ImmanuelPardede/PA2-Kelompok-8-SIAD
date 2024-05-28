@@ -43,8 +43,8 @@
                             <td>{{ $item->caption }}</td>
                             <td>{{ $item->subcaption }}</td>
                             <td>
-                                <a href="{{ route('admin.carousel.show', $item->id) }}" class="btn btn-primary">Detail</a>
-                                <a href="{{ route('admin.carousel.edit', $item->id) }}" class="btn btn-info">Edit</a>
+                                <a href="{{ route('admin.carousel.show', $item->id) }}" class="btn btn-info">Detail</a>
+                                <a href="{{ route('admin.carousel.edit', $item->id) }}" class="btn btn-warning">Edit</a>
                                 <form action="{{ route('admin.carousel.destroy', $item->id) }}" id="deleteForm{{ $item->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')

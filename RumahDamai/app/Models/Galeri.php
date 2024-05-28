@@ -12,11 +12,19 @@ class Galeri extends Model
     protected $table = 'galeri';
 
     protected $fillable = [
-        'judul', 'waktu', 'lokasi',
+        'user_id',
+        'judul',
+        'waktu',
+        'lokasi',
     ];
 
     public function detailGaleri()
     {
         return $this->hasMany(DetailGaleri::class, 'galeri_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

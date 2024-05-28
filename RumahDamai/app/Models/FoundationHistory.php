@@ -11,6 +11,7 @@ class FoundationHistory extends Model
     protected $table = 'foundation_histories';
 
     protected $fillable = [
+        'user_id',
         'gambar',
         'sejarah',
         'tujuan_utama',
@@ -22,4 +23,9 @@ class FoundationHistory extends Model
     protected $dates = [
         'dibangun',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

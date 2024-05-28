@@ -27,7 +27,6 @@ class LatarBelakangController extends Controller
     {
         $anak = Anak::all();
         $loggedInUserId = Auth::id();
-
         $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
 
         return view('admin.DataAnak.latarBelakang.create', compact('anak', 'users'));
@@ -91,6 +90,12 @@ class LatarBelakangController extends Controller
         $latarBelakang = LatarBelakang::with('deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
         $anak = Anak::all();
         return view('admin.DataAnak.latarBelakang.edit', compact('latarBelakang', 'anak'));
+    }
+
+    public function show($id)
+    {
+        $latarBelakang = LatarBelakang::with('deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
+        return view('admin.DataAnak.latarBelakang.show', compact('latarBelakang'));
     }
 
     public function update(Request $request, $id)

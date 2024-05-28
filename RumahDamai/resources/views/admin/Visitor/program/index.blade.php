@@ -40,8 +40,8 @@
                             </td>
                             <td>{!! $programItem->kelas !!}</td>
                             <td>
-                                <a href="{{ route('admin.program.show', $programItem->id) }}" class="btn btn-primary ">Detail</a>
-                                <a href="{{ route('admin.program.edit', $programItem->id) }}" class="btn btn-info ">Edit</a>
+                                <a href="{{ route('admin.program.show', $programItem->id) }}" class="btn btn-info">Detail</a>
+                                <a href="{{ route('admin.program.edit', $programItem->id) }}" class="btn btn-warning ">Edit</a>
                                 <form action="{{ route('admin.program.destroy', $programItem->id) }}" id="deleteForm{{ $programItem->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')

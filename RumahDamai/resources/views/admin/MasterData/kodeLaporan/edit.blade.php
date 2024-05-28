@@ -29,7 +29,7 @@
 
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-                    <button type="submit" class="btn btn-success">Perbarui</button>
+                    <button type="submit" class="btn btn-success">Perbaharui</button>
                 </form>
             </div>
         </div>

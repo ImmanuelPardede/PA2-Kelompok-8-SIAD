@@ -37,8 +37,8 @@
                             </div>
 
                                     <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali</a>
-                                    <button type="submit" id="submitButton" class="btn btn-primary mr-2"
-                                        onclick="handleUpdatedConfirmation(event)">Perbarui Pengumuman</button>
+                                    <button type="submit" id="submitButton" class="btn btn-success mr-2"
+                                        onclick="handleUpdatedConfirmation(event)">Perbaharui Pengumuman</button>
                         </form>
             </div>
         </div>

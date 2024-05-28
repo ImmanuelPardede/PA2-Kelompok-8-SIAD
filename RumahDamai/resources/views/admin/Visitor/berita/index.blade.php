@@ -48,8 +48,8 @@
                             </td>
                             <td>{{$beritaItem->kategori->kategori }}</td>
                             <td>
-                                <a href="{{ route('admin.berita.show', $beritaItem->id) }}" class="btn btn-primary ">Detail</a>
-                                <a href="{{ route('admin.berita.edit', $beritaItem->id) }}" class="btn btn-info ">Edit</a>
+                                <a href="{{ route('admin.berita.show', $beritaItem->id) }}" class="btn btn-info ">Detail</a>
+                                <a href="{{ route('admin.berita.edit', $beritaItem->id) }}" class="btn btn-warning ">Edit</a>
                                 <form action="{{ route('admin.berita.destroy', $beritaItem->id) }}" id="deleteForm{{ $beritaItem->id }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')

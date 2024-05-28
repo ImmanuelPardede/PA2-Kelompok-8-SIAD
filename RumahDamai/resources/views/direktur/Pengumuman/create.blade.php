@@ -65,7 +65,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Buat Pengumuman</button>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                        <button type="submit" class="btn btn-success">Buat Pengumuman</button>
                     </div>
                 </form>
             </div>
@@ -83,5 +84,3 @@
         });
     </script>
 @endsection
-
-

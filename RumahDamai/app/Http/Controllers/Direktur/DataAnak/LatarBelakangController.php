@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Dompdf\Options;
 use Dompdf\Dompdf;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 
 class LatarBelakangController extends Controller
@@ -28,6 +29,8 @@ class LatarBelakangController extends Controller
     public function create()
     {
         $anak = Anak::all();
+        $loggedInUserId = Auth::id();
+        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('direktur.DataAnak.latarBelakang.create', compact('anak'));
     }
 
@@ -55,6 +58,7 @@ class LatarBelakangController extends Controller
                 'usia' => $request->usia,
                 'kelas' => $request->kelas,
                 'tanggal' => $request->tanggal,
+                'user_id' => Auth::id(), // Assign logged in user ID
             ]);
 
             // Save each description as a separate record in the deskripsi_latar_belakang table
@@ -115,7 +119,10 @@ class LatarBelakangController extends Controller
 
         DB::transaction(function () use ($request, $latarBelakang) {
             // Update the main record
-            $latarBelakang->update($request->only(['anak_id', 'usia', 'kelas', 'tanggal']));
+            $latarBelakang->update(array_merge(
+                $request->only(['anak_id', 'usia', 'kelas', 'tanggal']),
+                ['user_id' => Auth::id()]
+            ));
 
             // Handle image deletions
             if ($request->has('deleted_images')) {

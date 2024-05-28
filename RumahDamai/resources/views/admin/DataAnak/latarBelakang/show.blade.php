@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-md-4">
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                        <a href="{{ route('admin.latarBelakang.pdf', ['id' => $latarBelakang->id]) }}" class="btn btn-primary">Generate PDF</a>
+                        <a href="{{ route('admin.latarBelakang.pdf', ['id' => $latarBelakang->id]) }}" class="btn btn-success">Generate PDF</a>
                     </div>
                 </div>
             </div>

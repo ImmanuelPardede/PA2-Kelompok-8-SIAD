@@ -64,9 +64,8 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Buat Pengumuman</button>
-                    </div>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                        <button type="submit" class="btn btn-success">Buat Pengumuman</button>
                 </form>
             </div>
         </div>
@@ -83,5 +82,3 @@
         });
     </script>
 @endsection
-
-

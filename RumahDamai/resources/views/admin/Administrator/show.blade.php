@@ -133,7 +133,7 @@
                         @endif
 
                         <!-- Nonaktifkan atau Aktifkan Pegawai -->
-                        <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-primary mt-3">Generate
+                        <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-success mt-3">Generate
                             PDF</a>
                         <!-- Nonaktifkan atau Aktifkan Admin -->
                         <div style="float: right;">

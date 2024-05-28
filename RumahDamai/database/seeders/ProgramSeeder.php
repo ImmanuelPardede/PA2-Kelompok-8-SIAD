@@ -14,6 +14,7 @@ class ProgramSeeder extends Seeder
     public function run(): void
     {
         DB::table('program')->insert([
+            'user_id' => 1,
             'img_program' => 'uploads/visitor/program/dummy2.jpg',
             'kelas' => '<ol>
             <li>Kelas Spritualitas</li>
