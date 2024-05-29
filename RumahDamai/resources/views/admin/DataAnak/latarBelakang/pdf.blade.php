@@ -26,6 +26,15 @@
         .header-text {
             overflow: hidden;
             text-align: center;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .header-bottom-text {
+            overflow: hidden;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 0;
         }
 
         .header h2,
@@ -44,14 +53,11 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: grid;
             grid-template-columns: 1fr 3fr;
-            /* Mengatur grid untuk logo dan konten */
             gap: 20px;
-            /* Jarak antara kolom */
         }
 
         .gambar-anak {
@@ -146,23 +152,15 @@
                 alt="Logo">
             <div class="header-text">
                 <h2>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</h2>
-                <h3>
-                    @if ($latarBelakang->anak->lokasi_id == 1)
-                        Lumban Silintong
-                    @elseif ($latarBelakang->anak->lokasi_id == 2)
-                        Andam Dewi
-                    @endif
-                </h3>
-                <hr>
-                <h5 style="font-size: 16px;"> <!-- Ganti font-size sesuai kebutuhan -->
+                <p style="font-size: 16px;">
                     @if ($latarBelakang->anak->lokasi_id == 1)
                         Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
                     @elseif ($latarBelakang->anak->lokasi_id == 2)
                         Sawah Lamo, Andam Dewi 22651, Tapanuli Tengah, Sumatra Utara, Indonesia
-                    @else
-                        Data Alamat Tidak Tersedia
-                    @endif
-                </h5>
+                </p>
+                @endif
+                </p>
+                <hr>
             </div>
             <div style="clear: both;"></div>
         </div>
@@ -189,13 +187,13 @@
         @foreach ($latarBelakang->gambarLatarBelakang as $index => $gambar)
             <div class="image-description-wrapper">
                 <div class="image-container">
-                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('uploads/gambar_latar_belakang/' . $gambar->nama))) }}"
+                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/uploads/gambar_latar_belakang/' . $gambar->nama))) }}"
                         alt="Gambar Latar Belakang">
                     <div class="image-number">{{ $index + 1 }}</div>
                 </div>
                 <div class="description-container">
                     <div class="description-text">
-                        {{ $latarBelakang->deskripsiLatarBelakang[$index]->deskripsi ?? 'Data tidak tersedia' }}</div>
+                        {!! $latarBelakang->deskripsiLatarBelakang[$index]->deskripsi ?? 'Data tidak tersedia' !!}</div>
                 </div>
             </div>
         @endforeach

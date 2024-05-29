@@ -49,11 +49,12 @@
                     </div>
 
                     <div id="gambar_latar_belakang_wrapper">
+                        <!-- Elemen gambar dan deskripsi yang sudah ada -->
                         @foreach ($latarBelakang->gambarLatarBelakang ?? [] as $index => $gambar)
                             <div class="form-group" id="gambar_latar_belakang_group_{{ $index }}">
                                 <label for="gambar_latar_belakang_{{ $index }}">Gambar Latar Belakang</label>
                                 <div class="d-flex align-items-center mb-2">
-                                    <img src="{{ Storage::url('uploads/gambar_latar_belakang/' . $gambar->nama) }}"
+                                    <img src="{{ asset('storage/uploads/gambar_latar_belakang/' . $gambar->nama) }}"
                                         alt="Gambar Latar Belakang" class="img-thumbnail"
                                         style="width: 200px; height: 200px; object-fit: cover;">
                                     <input type="file" class="form-control ml-3"
@@ -123,7 +124,7 @@
             </div>
         `;
         document.getElementById('gambar_latar_belakang_wrapper').insertAdjacentHTML('beforeend',
-            newGambarLatarBelakang);
+        newGambarLatarBelakang);
         document.getElementById('gambar_latar_belakang_wrapper').insertAdjacentHTML('beforeend', newDeskripsi);
 
         // Initialize CKEditor for the new textarea
