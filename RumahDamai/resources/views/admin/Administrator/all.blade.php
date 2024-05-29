@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="display-5 font-weight-bold text-left">Daftar Akun Admin</h1>
+                    <h1 class="display-5 font-weight-bold text-left">Daftar Akun Yayasan Rumah Damai</h1>
                     @if (session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -15,7 +15,7 @@
                         <a href="{{ route('export.excel') }}" class="btn btn-primary btn-icon-text mr-2">
                             <span>Excel</span><i class="mdi mdi-file-excel btn-icon-append"></i>
                         </a>
-                        
+
                         <form action="{{ route('admin.administrator.all') }}" method="GET" class="d-flex">
                             <div class="input-group">
                                 <input type="text" name="search" id="search" class="form-control" placeholder="Cari Nama User" aria-label="Cari Nama User" value="{{ request('search') ?? '' }}">
@@ -25,9 +25,9 @@
                             </div>
                         </form>
                     </div>
-                    
+
                 </div>
-                
+
 
                 <div class="table-responsive">
                     @if ($users->count() > 0)

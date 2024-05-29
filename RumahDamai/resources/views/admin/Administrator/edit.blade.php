@@ -129,7 +129,7 @@
                             <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
                             <div class="mb-3">
                                 <label for="pengalaman" class="form-label">pengalaman</label>
-                                <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required
+                                <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman"
                                     autocomplete="pengalaman">
             {{ old('pengalaman') }}
             {{ $user->pengalaman }}
