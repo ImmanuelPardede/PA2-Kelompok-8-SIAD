@@ -14,7 +14,6 @@
 
         .header {
             text-align: center;
-            /* Menyamakan teks secara horizontal di tengah */
         }
 
         .header img {
@@ -58,9 +57,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: grid;
             grid-template-columns: 1fr 3fr;
-            /* Mengatur grid untuk logo dan konten */
             gap: 20px;
-            /* Jarak antara kolom */
         }
 
         .gambar-anak {
@@ -106,27 +103,18 @@
     <div class="container">
         <div class="header">
             <img src="data:image/png;base64,{{ base64_encode(file_get_contents('uploads/logo/logo.png')) }}"
-                alt="">
+                alt="Logo">
             <div class="header-text">
                 <h2>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</h2>
-                <h3>
-                    @if ($anak->lokasi_id == 1)
-                        Lumban Silintong
-                    @elseif ($anak->lokasi_id == 2)
-                        Andam Dewi
-                    @endif
-                </h3>
-                <hr>
-                <h5 class="header-bottom-text" style="font-size: 16px;">
+                <p style="font-size: 16px;">
                     @if ($anak->lokasi_id == 1)
                         Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
                     @elseif ($anak->lokasi_id == 2)
                         Sawah Lamo, Andam Dewi 22651, Tapanuli Tengah, Sumatra Utara, Indonesia
-                        </p>
-                    @else
-                        Data Alamat Tidak Tersedia
-                    @endif
-                </h5>
+                </p>
+                @endif
+                </p>
+                <hr>
             </div>
             <div style="clear: both;"></div>
         </div>
@@ -135,7 +123,7 @@
         <div class="gambar-anak" style="margin-bottom: 2em">
             @if ($anak->foto_profil)
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents($anak->foto_profil)) }}"
-                    style="width: 150px; height: 170px; border: 1px solid #000;">
+                    style="width: auto; height: 170px; border: 1px solid #000;">
             @else
                 <em>Foto tidak tersedia</em>
             @endif
@@ -169,6 +157,10 @@
             <tr>
                 <th>Alamat</th>
                 <td>{{ $anak->alamat }}</td>
+            </tr>
+            <tr>
+                <th>Tempat Yayasan</th>
+                <td>{{ $anak->lokasiTugas->lokasi }}</td>
             </tr>
             <tr>
                 <th>Masuk</th>

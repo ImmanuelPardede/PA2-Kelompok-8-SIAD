@@ -25,8 +25,8 @@
 
                     <div class="form-group">
                         <label for="lokasi_penugasan_id">Lokasi Penugasan<span style="color: red">*</span></label>
-                        <select class="form-control" name="lokasi_penugasan_id" required>
-                            <option value="">Pilih Lokasi Penugasan</option>
+                        <select class="form-control js-example-basic-single" name="lokasi_penugasan_id" required>
+                            <option value="" disable selected>-- Pilih Lokasi Penugasan --</option>
                             @foreach ($lokasiPenugasanList as $lokasiPenugasan)
                                 <option value="{{ $lokasiPenugasan->id }}"
                                     {{ old('lokasi_penugasan_id', $mingguPembelajaran->lokasi_penugasan_id) == $lokasiPenugasan->id ? 'selected' : '' }}>

@@ -191,7 +191,7 @@ class LatarBelakangController extends Controller
 
     public function generatePDF($id)
     {
-        ini_set('max_execution_time', 300); // Extend execution time to 5 minutes
+        ini_set('max_execution_time', 300); 
 
         $latarBelakang = LatarBelakang::with('anak', 'deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
 

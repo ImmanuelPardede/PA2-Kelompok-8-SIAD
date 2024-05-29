@@ -34,7 +34,7 @@
                                                     <div class="d-flex align-items-center">
                                                         <div class="image-container" style="width: 200px; height: 200px; overflow: hidden; border-radius: 5px; margin-bottom: 20px;">
                                                             <div class="image-frame" style="width: 100%; height: 100%; object-fit: cover;">
-                                                                <img src="{{ asset('uploads/gambar_latar_belakang/' . $gambar->nama) }}" alt="Gambar Latar Belakang" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
+                                                                <img src="{{ asset('storage/uploads/gambar_latar_belakang/' . $gambar->nama) }}" alt="Gambar Latar Belakang" style="width: 100%; height: auto; object-fit: cover; border-radius: 5px;">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -44,7 +44,7 @@
                                                 <th>Deskripsi</th>
                                                 <td>
                                                     @if(isset($latarBelakang->deskripsiLatarBelakang[$index]->deskripsi))
-                                                        <p>{{ $latarBelakang->deskripsiLatarBelakang[$index]->deskripsi }}</p>
+                                                        <p>{!! $latarBelakang->deskripsiLatarBelakang[$index]->deskripsi !!}</p>
                                                     @else
                                                         <p>Data tidak tersedia</p>
                                                     @endif

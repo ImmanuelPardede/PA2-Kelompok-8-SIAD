@@ -30,6 +30,13 @@
             /* Menyamakan teks secara horizontal di tengah */
         }
 
+        .header-bottom-text {
+            overflow: hidden;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
         .header h2,
         .header h3,
         .header h4 {
@@ -46,7 +53,6 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: grid;
@@ -100,23 +106,15 @@
                 alt="Logo">
             <div class="header-text">
                 <h2>YAYASAN PENDIDIKAN ANAK RUMAH DAMAI</h2>
-                <h3>
-                    @if ($user->lokasi_penugasan_id == 1)
-                        Lumban Silintong
-                    @elseif ($user->lokasi_penugasan_id == 2)
-                        Andam Dewi
-                    @endif
-                </h3>
-                <hr>
-                <h5 style="font-size: 16px;">
+                <p style="font-size: 16px;">
                     @if ($user->lokasi_penugasan_id == 1)
                         Jl. Pemandian, Lumban Silintong, Balige 22651, Toba, Sumatra Utara, Indonesia
                     @elseif ($user->lokasi_penugasan_id == 2)
-                        Sawah Lamo, Andam Dewi 22651, Kabupaten Tapanuli Tengah, Sumatra Utara, Indonesia
-                    @else
-                        <em>Data Alamat tidak tersedia</em>
-                    @endif
-                </h5>
+                        Sawah Lamo, Andam Dewi 22651, Tapanuli Tengah, Sumatra Utara, Indonesia
+                </p>
+                @endif
+                </p>
+                <hr>
             </div>
             <div style="clear: both;"></div>
         </div>
@@ -125,7 +123,7 @@
         <div class="gambar-pegawai" style="margin-bottom: 2em">
             @if ($user->foto)
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('uploads/pegawai/' . $user->foto))) }}"
-                    alt="Foto Pegawai">
+                    alt="Foto Pegawai" style="width: auto; height: 170px; border: 1px solid #000;">
             @else
                 <em>Foto tidak tersedia</em>
             @endif

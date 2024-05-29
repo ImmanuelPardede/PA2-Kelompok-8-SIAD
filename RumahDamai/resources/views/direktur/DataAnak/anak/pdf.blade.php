@@ -135,7 +135,7 @@
         <div class="gambar-anak" style="margin-bottom: 2em">
             @if ($anak->foto_profil)
                 <img src="data:image/png;base64,{{ base64_encode(file_get_contents($anak->foto_profil)) }}"
-                    style="width: 150px; height: 170px; border: 1px solid #000;">
+                    style="width: auto; height: 170px; border: 1px solid #000;">
             @else
                 <em>Foto tidak tersedia</em>
             @endif

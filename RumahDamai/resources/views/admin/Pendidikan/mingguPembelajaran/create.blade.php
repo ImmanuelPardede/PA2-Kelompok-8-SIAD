@@ -21,8 +21,8 @@
 
                     <div class="form-group">
                         <label for="lokasi_penugasan_id">Lokasi Penugasan<span style="color: red">*</span></label>
-                        <select class="form-control" name="lokasi_penugasan_id" required>
-                            <option value="">Pilih Lokasi Penugasan</option>
+                        <select class="form-control js-example-basic-single" name="lokasi_penugasan_id" required>
+                            <option value="" disabled selected>-- Pilih Lokasi Penugasan --</option>
                             @foreach ($lokasiPenugasanList as $lokasiPenugasan)
                                 <option value="{{ $lokasiPenugasan->id }}">{{ $lokasiPenugasan->lokasi }}</option>
                             @endforeach
@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label for="minggu_pembelajaran">Minggu Pembelajaran<span style="color: red">*</span></label>
-                        <input type="text" class="form-control" name="minggu_pembelajaran"
+                        <input type="text" class="form-control js-example-basic-single" name="minggu_pembelajaran"
                             value="{{ old('minggu_pembelajaran') }}" required>
                     </div>
 

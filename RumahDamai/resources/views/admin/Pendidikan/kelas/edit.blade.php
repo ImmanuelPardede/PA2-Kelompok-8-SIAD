@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="tahun_kurikulum_id">Tahun Kurikulum:</label>
-                        <select class="form-control" id="tahun_kurikulum_id" name="tahun_kurikulum_id">
+                        <select class="form-control js-example-basic-single" id="tahun_kurikulum_id" name="tahun_kurikulum_id">
                             <option value="" disabled>-- Pilih Tahun Kurikulum --</option>
                             @foreach ($tahunKurikulum as $item)
                                 <option value="{{ $item->id }}"
@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <label for="tahun_ajaran_id">Tahun Ajaran:</label>
-                        <select class="form-control" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                        <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
                             <option value="" disabled>-- Pilih Tahun Ajaran --</option>
                             @foreach ($tahunAjaran as $item)
                                 <option value="{{ $item->id }}"
@@ -53,7 +53,7 @@
 
                     <div class="form-group">
                         <label for="semester_tahun_ajaran_id">Semester Tahun Ajaran</label>
-                        <select class="form-control" id="semester_tahun_ajaran_id" name="semester_tahun_ajaran_id">
+                        <select class="form-control js-example-basic-single" id="semester_tahun_ajaran_id" name="semester_tahun_ajaran_id">
                             <option value="" disabled>-- Pilih Semester Tahun Ajaran --</option>
                             @foreach ($semesterTahunAjaran as $item)
                                 <option value="{{ $item->id }}"

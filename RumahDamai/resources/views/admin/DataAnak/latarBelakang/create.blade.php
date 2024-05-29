@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="usia">Usia</label>
+                        <label for="usia">Usia <span style="color: red">*</span></label>
                         <input type="number" class="form-control" id="usia" name="usia" value="{{ old('usia') }}"
                             required readonly>
                     </div>
@@ -50,7 +50,7 @@
                         <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="tanggal">Tanggal</label>
+                        <label for="tanggal">Tanggal <span style="color: red">*</span></label>
                         <input type="date" class="form-control" name="tanggal"
                             value="{{ old('tanggal') ?? date('Y-m-d') }}" required readonly>
                     </div>

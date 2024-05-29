@@ -21,7 +21,7 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="kode_laporan">Kode Laporan:</label>
-                        <select class="form-control" id="kode_laporan" name="kode_laporan">
+                        <select class="form-control js-example-basic-single" id="kode_laporan" name="kode_laporan">
                             <option value="" disabled>-- Pilih Kode Laporan --</option>
                             @foreach ($kodeLaporan as $item)
                                 <option value="{{ $item->id }}"

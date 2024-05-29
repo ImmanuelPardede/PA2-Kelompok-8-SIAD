@@ -8,9 +8,10 @@
                 <form action="{{ route('ppiB.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="anak_id">Anak</label>
-                        <select name="anak_id" id="anak_id" class="form-control">
-                            <option value="" disabled selected>-- Pilih Anak --</option>
+                        <label for="anak_id">Anak<span
+                            style="color: red">*</span></label>
+                        <select name="anak_id" id="anak_id" class="form-control js-example-basic-single">
+                            <option value="" disabled selected required>-- Pilih Anak --</option>
                             @foreach($anakList as $anak)
                                 <option value="{{ $anak->id }}">{{ $anak->nama_lengkap }}</option>
                             @endforeach
@@ -29,7 +30,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="file_ppi_b">File PPI B</label>
+                        <label for="file_ppi_b">File PPI B<span
+                            style="color: red">*</span></label>
                         <input type="file" name="file_ppi_b" id="file_ppi_b" class="form-control" required>
                     </div>
                     <div class="form-group">

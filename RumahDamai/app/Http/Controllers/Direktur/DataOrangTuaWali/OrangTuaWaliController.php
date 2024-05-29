@@ -9,6 +9,8 @@ use App\Models\Anak;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrangTuaWaliController extends Controller
 {
@@ -51,6 +53,8 @@ class OrangTuaWaliController extends Controller
             'tanggal_lahir_wali' => 'nullable|date',
             'no_hp_wali' => 'nullable|numeric',
         ]);
+
+        $validatedData['user_id'] = Auth::id(); // Assign logged in user ID
 
         OrangTuaWali::create($validatedData);
 
@@ -97,6 +101,8 @@ class OrangTuaWaliController extends Controller
             'tanggal_lahir_wali' => 'nullable|date',
             'no_hp_wali' => 'nullable|numeric',
         ]);
+
+        $validatedData['user_id'] = Auth::id(); // Assign logged in user ID
 
         $orangtuawali = OrangTuaWali::find($id);
         $orangtuawali->update($validatedData);
