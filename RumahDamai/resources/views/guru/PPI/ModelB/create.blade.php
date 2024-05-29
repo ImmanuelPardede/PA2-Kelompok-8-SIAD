@@ -36,7 +36,8 @@
                         <label for="deskripsi">Deskripsi</label>
                         <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                    <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>

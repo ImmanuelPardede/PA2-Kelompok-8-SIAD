@@ -13,13 +13,13 @@ class CreateSilabusTable extends Migration
             $table->unsignedInteger('tahun_kurikulum_id');
             $table->unsignedInteger('kelas_id');
             $table->unsignedInteger('user_id');
-            $table->string('deskripsi', 2000)->nullable();
-            $table->string('hasil_kursus')->nullable();
-            $table->string('tipe_pembelajaran')->nullable();
-            $table->string('penilaian')->nullable();
-            $table->string('konten_kursus')->nullable();
-            $table->string('buku_pegangan_dan_referensi')->nullable();
-            $table->string('alat')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->text('hasil_kursus')->nullable();
+            $table->text('tipe_pembelajaran')->nullable();
+            $table->text('penilaian')->nullable();
+            $table->text('konten_kursus')->nullable();
+            $table->text('buku_pegangan_dan_referensi')->nullable();
+            $table->text('alat')->nullable();
             $table->timestamps();
 
             $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
@@ -27,6 +27,7 @@ class CreateSilabusTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
+
 
     public function down()
     {

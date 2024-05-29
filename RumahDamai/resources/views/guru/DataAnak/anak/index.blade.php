@@ -27,7 +27,6 @@
                     </form>
                 </div>
 
-
                 <div class="table-responsive">
                     <table class="table mt-3 table-hover">
                         <thead>

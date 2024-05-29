@@ -24,7 +24,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $data->nama_lengkap }}</td>
                                     <td>{{ $data->status }}</td>
-                                    <td><a href="{{ route('ppiA.show', $data->id) }}" class="btn btn-primary">Show</a></td>
+                                    <td><a href="{{ route('ppiA.show', $data->id) }}" class="btn btn-info">Detail</a></td>
                                 </tr>
                             @endforeach
 

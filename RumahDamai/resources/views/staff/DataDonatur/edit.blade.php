@@ -5,15 +5,15 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="card-title">Edit Data Donatur</h1>
+                    <div class="image-frame">
 
-                    <p><strong>Foto Donatur</strong></p>
-                    @if ($donatur->foto_donatur)
-                        <img src="{{ asset($donatur->foto_donatur) }}" alt="Foto Donatur" class="img-fluid">
-                        <strong>Foto Donasi</strong> {{ $donatur->foto_donatur }}
-                    @else
-                        <p>Tidak ada foto Donatur.</p>
-                    @endif
-
+                        @if ($donatur->foto_donatur)
+                            <img src="{{ asset($donatur->foto_donatur) }}" alt="Foto Donatur" class="img-fluid"
+                                style="width: 400px; height: auto; display: block; margin: auto;">
+                        @else
+                            <p>Tidak ada foto Donatur.</p>
+                        @endif
+                    </div>
                     <form action="{{ route('dataDonatur.update', $donatur->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
@@ -36,7 +36,6 @@
                             </select>
 
                         </div>
-
 
                         <div class="form-group">
                             <label for="nama_donatur">Nama Donatur</label>
@@ -72,7 +71,7 @@
                             <label for="jumlah_donasi">Jumlah Donasi</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="height: 86%;">Rp</span>
+                                    <span class="input-group-text" style="height: 100%;">Rp</span>
                                 </div>
                                 <input type="text" class="form-control" id="jumlah_donasi" name="jumlah_donasi"
                                     value="{{ isset($donatur->jumlah_donasi) ? $donatur->jumlah_donasi : '' }}">
@@ -81,8 +80,8 @@
 
 
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-                        <button type="submit" id="submitButton" class="btn btn-primary mr-2"
-                            onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                        <button type="submit" id="submitButton" class="btn btn-success mr-2"
+                            onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     </form>
                 </div>
             </div>

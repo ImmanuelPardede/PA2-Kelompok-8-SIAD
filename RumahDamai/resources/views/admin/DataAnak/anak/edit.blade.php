@@ -170,7 +170,7 @@
 
                             <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                             <button type="submit" id="submitButton" class="btn btn-success mr-2"
-                                onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                                onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     </div>
                     <div class="col-md-4">
                         <div class="image-frame">

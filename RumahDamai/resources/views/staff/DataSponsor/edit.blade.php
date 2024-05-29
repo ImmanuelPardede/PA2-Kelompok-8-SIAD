@@ -6,28 +6,32 @@
                 <div class="card-body">
                     <h1 class="card-title">Edit Data Sponsor</h1>
 
-                    <p><strong>Foto Sponsor</strong></p>
                     @if ($sponsor->foto_sponsor)
-                            <img src="{{ asset($sponsor->foto_sponsor) }}" alt="Foto Sponsor" class="img-fluid">
-                            <strong>Foto Sponsor</strong> {{ $sponsor->foto_sponsor }}
-                        @else
-                            <p>Tidak ada foto Sponsor.</p>
-                        @endif
+                        <img src="{{ asset($sponsor->foto_sponsor) }}" alt="Foto Sponsor" class="img-fluid"
+                            style="width: 400px; height: auto; display: block; margin: auto;">
+                    @else
+                        <p>Tidak ada foto Sponsor.</p>
+                    @endif
 
-                    <form action="{{ route('dataSponsor.update', $sponsor->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dataSponsor.update', $sponsor->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="form-group">
                             <label for="foto_sponsor">Foto Sponsor Baru</label>
                             <input type="file" class="form-control" id="foto_sponsor" name="foto_sponsor">
+                            <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
                         </div>
 
                         <div class="form-group">
                             <label for="sponsorship_id">Jenis Sponsorship</label>
-                            <select class="form-control js-example-basic-single" id="sponsorship_id" name="sponsorship_id[]" multiple required>
+                            <select class="form-control js-example-basic-single" id="sponsorship_id" name="sponsorship_id[]"
+                                multiple required>
                                 @foreach ($sponsorship as $sponsorshipItem)
-                                    <option value="{{ $sponsorshipItem->id }}" {{ $sponsor->sponsorship->contains($sponsorshipItem->id) ? 'selected' : '' }}>{{ $sponsorshipItem->jenis_sponsorship }}</option>
+                                    <option value="{{ $sponsorshipItem->id }}"
+                                        {{ $sponsor->sponsorship->contains($sponsorshipItem->id) ? 'selected' : '' }}>
+                                        {{ $sponsorshipItem->jenis_sponsorship }}</option>
                                 @endforeach
                             </select>
 
@@ -68,7 +72,7 @@
                             <label for="jumlah_sponsor">Jumlah Sponsor</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" style="height: 86%;">Rp</span>
+                                    <span class="input-group-text" style="height: 100%;">Rp</span>
                                 </div>
                                 <input type="text" class="form-control" id="jumlah_sponsor" name="jumlah_sponsor"
                                     value="{{ isset($sponsor->jumlah_sponsor) ? $sponsor->jumlah_sponsor : '' }}">
@@ -77,8 +81,8 @@
 
 
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-                        <button type="submit" id="submitButton" class="btn btn-primary mr-2"
-                            onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                        <button type="submit" id="submitButton" class="btn btn-success mr-2"
+                            onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     </form>
                 </div>
             </div>

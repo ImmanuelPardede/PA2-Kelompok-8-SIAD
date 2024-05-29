@@ -20,6 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Nama Silabus</th>
+                                <th>Tahun Kurikulum</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -27,6 +28,7 @@
                             @forelse ($silabusList as $silabus)
                                 <tr>
                                     <td>{{ $silabus->kelas->nama_kelas }}</td>
+                                    <td>{{ $silabus->tahunKurikulum->tahun_kurikulum }}</td>
                                     <td>
                                         <a href="{{ route('silabus.show', $silabus->id) }}"
                                             class="btn btn-info">Detail</a>

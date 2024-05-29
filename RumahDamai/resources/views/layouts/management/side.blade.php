@@ -253,6 +253,13 @@
         @auth
             @if (auth()->user()->role === 'guru')
                 <li class="nav-item">
+                    <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
+                        <i class="mdi mdi-calendar-clock menu-icon"></i>
+                        <span class="menu-title">Atur Jadwal Belajar</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
                         aria-controls="error">
                         <i class="mdi mdi-account menu-icon"></i>
@@ -265,13 +272,6 @@
                                 </a></li>
                         </ul>
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('jadwalPembelajaran.index') }}" class="nav-link">
-                        <i class="mdi mdi-calendar-clock menu-icon"></i>
-                        <span class="menu-title">Atur Jadwal Belajar</span>
-                    </a>
                 </li>
 
                 <li class="nav-item">

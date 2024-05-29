@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h4 class="card-title">Detail Silabus</h4>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md">
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
@@ -43,31 +43,31 @@
 
                                     <tr>
                                         <th>Deskripsi</th>
-                                        <td>{{ $silabus->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->deskripsi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Hasil Kursus</th>
-                                        <td>{{ $silabus->hasil_kursus ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->hasil_kursus ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Tipe Pembelajaran</th>
-                                        <td>{{ $silabus->tipe_pembelajaran ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->tipe_pembelajaran ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Penilaian</th>
-                                        <td>{{ $silabus->penilaian ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->penilaian ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Konten Kursus</th>
-                                        <td>{{ $silabus->konten_kursus ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->konten_kursus ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Buku Pegangan Dan Referensi</th>
-                                        <td>{{ $silabus->buku_pegangan_dan_referensi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->buku_pegangan_dan_referensi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Alat</th>
-                                        <td>{{ $silabus->alat ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $silabus->alat ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

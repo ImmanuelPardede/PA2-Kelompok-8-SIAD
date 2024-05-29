@@ -5,9 +5,32 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title">Edit Profil Anda</h1>
-                <form action="{{ route('staff.DataDiri.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                <div class="image-frame">
+                    @if ($user->foto)
+                        <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
+                            class="img-fluid rounded" style="width: 400px; height: auto; display: block; margin: auto;">
+                    @else
+                        <p>Tidak ada foto profil.</p>
+                    @endif
+                </div>
+                <form action="{{ route('staff.DataDiri.update', ['user' => $user->id]) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <div class="form-group">
+                        <label for="foto">Foto Profil Baru</label>
+                        <input type="file" name="foto" class="file-upload-default" id="fotoInput">
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" id="fotoName" disabled
+                                placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button"
+                                    onclick="document.getElementById('fotoInput').click()">Upload</button>
+                            </span>
+                        </div>
+                        <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
+                    </div>
+
                     <div class="form-group">
                         <label for="nama_lengkap">Nama Lengkap</label>
                         <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control"
@@ -22,8 +45,8 @@
 
                     <div class="form-group">
                         <label for="nip">NIP</label>
-                        <input type="text" name="nip" id="nip" class="form-control"
-                            value="{{ $user->nip }}" disabled>
+                        <input type="text" name="nip" id="nip" class="form-control" value="{{ $user->nip }}"
+                            disabled>
                     </div>
 
                     <div class="form-group">
@@ -87,30 +110,29 @@
 
                     <div class="form-group">
                         <label for="no_telepon">No Telepon</label>
-                        <input type="text" name="no_telepon" id="no_telepon" maxlength="12" class="form-control"
+                        <input type="number" name="no_telepon" id="no_telepon" maxlength="12" class="form-control"
                             value="{{ $user->no_telepon }}">
                     </div>
+
                     <div class="form-group">
                         <label for="lulusan">Lulusan</label>
                         <input type="text" name="lulusan" id="lulusan" class="form-control"
                             value="{{ $user->lulusan }}">
                     </div>
-                    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+
                     <div class="mb-3">
-                        <label for="pengalaman" class="form-label">pengalaman</label>
-                        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required autocomplete="pengalaman">
-                            {{ old('pengalaman') }}
-                            {{ $user->pengalaman }}
-                        </textarea>
+                        <label for="pengalaman" class="form-label">Pengalaman</label>
+                        <textarea id="editor1" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" required
+                            autocomplete="pengalaman">
+                        {{ old('pengalaman') }}
+                        {{ $user->pengalaman }}
+                    </textarea>
                         @error('pengalaman')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
-
-
-
 
                     <div class="form-group">
                         <label for="tempat_lahir">Tempat Lahir</label>
@@ -123,34 +145,15 @@
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
                             value="{{ $user->tanggal_lahir }}">
                     </div>
-                    <div class="form-group">
-                        <label for="foto">Foto Profil Baru</label>
-                        <input type="file" name="foto" class="file-upload-default" id="fotoInput">
-                        <div class="input-group col-xs-12">
-                            <input type="text" class="form-control file-upload-info" id="fotoName" disabled
-                                placeholder="Upload Image">
-                            <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button"
-                                    onclick="document.getElementById('fotoInput').click()">Upload</button>
-                            </span>
-                        </div>
-                    </div>
 
-                    <div class="image-frame">
-                        @if ($user->foto)
-                            <img src="{{ asset('uploads/pegawai/' . $user->foto) }}" alt="Foto Profil user"
-                                class="img-fluid rounded">
-                        @else
-                            <p>Tidak ada foto profil.</p>
-                        @endif
-                    </div>
-
-                    <button type="submit" id="submitButton" class="btn btn-primary mr-2"
-                        onclick="handleUpdatedConfirmation(event)">Perbarui</button>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                    <button type="submit" id="submitButton" class="btn btn-success mr-2"
+                        onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                 </form>
             </div>
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
     <script>
         document.getElementById('fotoInput').addEventListener('change', function() {
@@ -158,18 +161,15 @@
             var fileName = fullPath.split('\\').pop();
             document.getElementById('fotoName').value = fileName;
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
     </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        ClassicEditor
-            .create(document.querySelector('#editor1'), {
-                // Konfigurasi CKEditor 5 untuk textarea pertama
-            })
-            .catch(error => {
-                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
-            });
-    });
-</script>
-
 @endsection

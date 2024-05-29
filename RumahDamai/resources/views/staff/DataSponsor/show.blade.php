@@ -5,7 +5,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Sponsor</h4>
-                <p class="card-description">Sponsor?</p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">

@@ -30,15 +30,15 @@ class SponsorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'sponsorship_id' => 'nullable|array',
+            'sponsorship_id' => 'required|array',
             'sponsorship_id.*' => 'exists:sponsorship,id',
-            'nama_sponsor' => 'nullable|string',
+            'nama_sponsor' => 'required|string',
             'email_sponsor' => 'nullable|string',
-            'tanggal_sponsor' => 'nullable|date',
+            'tanggal_sponsor' => 'required|date',
             'no_telepon_sponsor' => 'nullable|numeric',
             'deskripsi' => 'nullable|string',
             'jumlah_sponsor' => 'nullable|string',
-            'foto_sponsor' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_sponsor' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // Assign logged in user ID

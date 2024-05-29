@@ -47,9 +47,9 @@ class LatarBelakangController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             $latarBelakang = LatarBelakang::create([
                 'anak_id' => $request->anak_id,
                 'usia' => $request->usia,
@@ -115,9 +115,9 @@ class LatarBelakangController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        try {
-            DB::beginTransaction();
+        DB::beginTransaction();
 
+        try {
             // Update the main record and assign user_id to the logged-in user
             $latarBelakang->update(array_merge(
                 $request->only(['anak_id', 'usia', 'kelas', 'tanggal']),
@@ -184,13 +184,33 @@ class LatarBelakangController extends Controller
         }
     }
 
-
     public function destroy($id)
     {
-        $item = LatarBelakang::findOrFail($id);
-        $item->delete();
+        try {
+            DB::beginTransaction();
 
-        return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil dihapus.');
+            $item = LatarBelakang::findOrFail($id);
+
+            // Delete related images
+            foreach ($item->gambarLatarBelakang as $image) {
+                $path = storage_path('app/public/uploads/gambar_latar_belakang/' . $image->nama);
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+                $image->delete();
+            }
+
+            // Delete related descriptions
+            DeskripsiLatarBelakang::where('latar_belakang_id', $id)->delete();
+
+            $item->delete();
+
+            DB::commit();
+            return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function generatePDF($id)

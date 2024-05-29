@@ -10,6 +10,7 @@
                     <div class="form-group">
                         <label for="kelas_id">Nama Kelas<span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id" required>
+                            <option value="" disabled selected>-- Nama Kelas--</option>
                             @foreach ($kelas as $kelasItem)
                                 <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
                             @endforeach
@@ -25,6 +26,7 @@
                         <label for="minggu_pembelajaran_id">Minggu Pembelajaran<span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id"
                             name="minggu_pembelajaran_id" required>
+                            <option value="" disabled selected>-- Minggu Pembelajaran--</option>
                             @foreach ($mingguPembelajaran as $mingguPembelajaranItem)
                                 <option value="{{ $mingguPembelajaranItem->id }}">
                                     {{ $mingguPembelajaranItem->minggu_pembelajaran }}</option>

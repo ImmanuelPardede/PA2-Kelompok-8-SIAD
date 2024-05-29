@@ -32,15 +32,15 @@ class DonaturController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'donasi_id' => 'nullable|array',
+            'donasi_id' => 'required|array',
             'donasi_id.*' => 'exists:donasi,id',
-            'nama_donatur' => 'nullable|string',
+            'nama_donatur' => 'required|string',
             'email_donatur' => 'nullable|string',
-            'tanggal_donatur' => 'nullable|date',
+            'tanggal_donatur' => 'required|date',
             'no_hp_donatur' => 'nullable|string',
             'deskripsi' => 'nullable|string',
             'jumlah_donasi' => 'nullable|numeric',
-            'foto_donatur' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto_donatur' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // Assign logged in user ID
