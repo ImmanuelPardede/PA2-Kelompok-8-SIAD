@@ -184,7 +184,7 @@
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <div>
-                        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                         <button type="submit" id="submitButton" class="btn btn-success mr-2"
                             onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     </div>

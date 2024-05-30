@@ -5,11 +5,25 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Tambah Data Orang Tua/Wali</h2>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('admin.orangTuaWali.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="anak_id">Nama Anak<span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
+                        <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" >
                             <option value="" disabled selected>-- Nama Anak --</option>
                             @foreach ($anak as $anakItem)
                                 <option value="{{ $anakItem->id }}">{{ $anakItem->nama_lengkap }}</option>
@@ -18,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="agama_id">Agama<span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" required>
+                        <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" >
                             <option value="" disabled selected>-- Pilih Agama --</option>
                             @foreach ($agama as $agamaItem)
                                 <option value="{{ $agamaItem->id }}">{{ $agamaItem->agama }}</option>

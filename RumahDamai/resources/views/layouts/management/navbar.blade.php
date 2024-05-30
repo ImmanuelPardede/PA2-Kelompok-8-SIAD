@@ -15,7 +15,7 @@
                 <span class="icon-menu"></span>
             </button>
             <ul class="navbar-nav mr-lg-2">
-              
+
             </ul>
             <ul class="navbar-nav navbar-nav-right">
 
@@ -75,9 +75,9 @@
                                 <!-- Jika pengguna belum terautentikasi atau tidak memiliki foto profil -->
                                 <img src="{{ asset('uploads/default/bodat.jpg') }}" alt="Default Photo">
                             @endif
-                            <span> {{ Auth::user()->nama_lengkap }}
-                            </span> <!-- Teks "halo" yang Anda tambahkan -->
-                            <!-- Tambahkan ikon panah ke bawah -->
+                            <span>
+                                {{ explode(' ', Auth::user()->nama_lengkap)[0] }}
+                            </span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"

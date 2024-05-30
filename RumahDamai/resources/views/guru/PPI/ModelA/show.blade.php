@@ -1,6 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
+<div style="container">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -51,8 +52,9 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="{{ route('ppiA.index') }}" class="btn btn-primary">Data Raport Anak Didik</a>
             </div>
         </div>
     </div>
+    <a href="{{ route('ppiA.index') }}" class="col-lg-12 grid-margin stretch-card" style="text-decoration:none;">Kembali Ke daftar Raport Anak Didik</a>
+</div>
 @endsection

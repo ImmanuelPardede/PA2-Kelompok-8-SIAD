@@ -10,16 +10,13 @@
                         {{ session('success') }}
                     </div>
                 @endif
-
                 @if ($errors->any())
                     <div class="alert alert-danger">
-                        Terdapat kesalahan saat validasi data. Mohon periksa kembali.
-                    </div>
-                @endif
-
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
 
@@ -28,7 +25,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="anak_id">Nama Anak <span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="anak_id" name="anak_id" required>
+                        <select class="form-control js-example-basic-single" id="anak_id" name="anak_id">
                             <option value="" disabled selected>-- Pilih Anak --</option>
                             @foreach ($anak as $anakItem)
                                 <option value="{{ $anakItem->id }}" data-tanggal_lahir="{{ $anakItem->tanggal_lahir }}"
@@ -42,17 +39,17 @@
                     <div class="form-group">
                         <label for="usia">Usia <span style="color: red">*</span></label>
                         <input type="number" class="form-control" id="usia" name="usia" value="{{ old('usia') }}"
-                            required readonly>
+                            readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="kelas">Kelas <span style="color: red">*</span></label>
-                        <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}" required>
+                        <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal <span style="color: red">*</span></label>
                         <input type="date" class="form-control" name="tanggal"
-                            value="{{ old('tanggal') ?? date('Y-m-d') }}" required readonly>
+                            value="{{ old('tanggal') ?? date('Y-m-d') }}" readonly>
                     </div>
 
 
@@ -62,25 +59,25 @@
                                     style="color: red">*</span></label>
                             <div class="d-flex align-items-center mb-2">
                                 <input type="file" class="form-control" id="gambar_latar_belakang_1"
-                                    name="gambar_latar_belakang[]" accept="image/*" required>
+                                    name="gambar_latar_belakang[]" accept="image/*">
                                 <button type="button" class="btn btn-danger ml-2"
                                     onclick="hapusGambarDanDeskripsi(1)">Hapus</button>
                             </div>
                             <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
                         </div>
-                        <div class="form-group mb-3" id="deskripsi_group_1">
-                            <label for="deskripsi_1" class="form-label">Deskripsi<span style="color: red">*</span></label>
-                            <textarea id="deskripsi_1" class="form-control" name="deskripsi[]" required autocomplete="deskripsi">
-                            {{ old('deskripsi') }}
-                            <ul>
-                            </ul>
-                        </textarea>
-                            @error('deskripsi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        @foreach (old('deskripsi', ['']) as $key => $value)
+                            <div class="form-group mb-3" id="deskripsi_group_{{ $key + 1 }}">
+                                <label for="deskripsi_{{ $key + 1 }}" class="form-label">Deskripsi<span
+                                        style="color: red">*</span></label>
+                                <textarea id="deskripsi_{{ $key + 1 }}" class="form-control" name="deskripsi[]" autocomplete="deskripsi">{{ $value }}</textarea>
+                                @error('deskripsi.' . $key)
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        @endforeach
+
                     </div>
 
                     <div style="form-group d-flex justify-content-between">
@@ -109,7 +106,7 @@
     <div class="form-group" id="gambar_latar_belakang_group_${counter}">
         <label for="gambar_latar_belakang_${counter}">Gambar Latar Belakang</label>
         <div class="d-flex align-items-center mb-2">
-            <input type="file" class="form-control" id="gambar_latar_belakang_${counter}" name="gambar_latar_belakang[]" accept="image/*" required>
+            <input type="file" class="form-control" id="gambar_latar_belakang_${counter}" name="gambar_latar_belakang[]" accept="image/*" >
             <button type="button" class="btn btn-danger ml-2" onclick="hapusGambarDanDeskripsi(${counter})">Hapus</button>
         </div>
         <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>
@@ -118,7 +115,7 @@
         let newDeskripsi = `
     <div class="form-group mb-3" id="deskripsi_group_${counter}">
         <label for="deskripsi_${counter}" class="form-label">Deskripsi<span style="color: red">*</span></label>
-        <textarea id="deskripsi_${counter}" class="form-control" name="deskripsi[]" required autocomplete="deskripsi"></textarea>
+        <textarea id="deskripsi_${counter}" class="form-control" name="deskripsi[]"  autocomplete="deskripsi"></textarea>
         <span class="invalid-feedback" role="alert" id="deskripsi-error-${counter}" style="display: none;">
             <strong></strong>
         </span>

@@ -36,7 +36,7 @@ class OrangTuaWaliController extends Controller
     {
         $validatedData = $request->validate([
             'anak_id' => 'required',
-            'agama_id' => 'nullable',
+            'agama_id' => 'required',
             'nama_ibu' => 'nullable|string',
             'nama_ayah' => 'nullable|string',
             'nik_ayah' => 'nullable|numeric',
@@ -83,7 +83,7 @@ class OrangTuaWaliController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'anak_id' => 'required',
+            'anak_id' => 'nullable',
             'agama_id' => 'nullable',
             'nama_ibu' => 'nullable|string',
             'nama_ayah' => 'nullable|string',
