@@ -34,7 +34,7 @@
                         @if ($history)
                             <tr>
                                 <td>
-                                    <img src="{{ $history->gambar }}" alt="Foundation Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
+                                    <img src="{{ asset($history->gambar) }}" alt="Foundation Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
                                 </td>
                                 <td>{{ \Illuminate\Support\Str::words($history->sejarah_singkat, 3, '...') }}</td>
                                 <td>{{ \Illuminate\Support\Str::words($history->tujuan_utama, 3, '...') }}</td>

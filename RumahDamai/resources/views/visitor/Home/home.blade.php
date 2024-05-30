@@ -239,17 +239,19 @@
                         <h5 class="mt-5 mb-3">Berita Lainnya</h5>
                         @foreach ($berita as $item)
                             <div class="news-block news-block-two-col d-flex mt-4">
+                                <div class="row">
+                                    <div class="col-6">
+
                                 <div class="news-block-two-col-image-wrap">
                                     <a href="{{ route('news.detail', ['id' => $item->id]) }}">
-                                        <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid"
-                                            alt="">
+                                        <img src="{{ asset($item->img_berita) }}" class="news-image img-fluid" alt="" style="width: 200px; height: 100px; object-fit: cover;">
                                     </a>
                                 </div>
-
+                                    </div>
+                                    <div class="col-6">
                                 <div class="news-block-two-col-info">
                                     <div class="news-block-title mb-2">
-                                        <h6><a href="{{ route('news.detail', ['id' => $item->id]) }}"
-                                                class="news-block-title-link">{{ $item->judul }}</a></h6>
+                                        <h6><a href="{{ route('news.detail', ['id' => $item->id]) }}" class="news-block-title-link">{{ $item->judul }}</a></h6>
                                     </div>
 
                                     <div class="news-block-date">
@@ -257,6 +259,8 @@
                                             <i class="bi-calendar4 custom-icon me-1"></i>
                                             {{ $item->created_at }}
                                         </p>
+                                    </div>
+                                </div>
                                     </div>
                                 </div>
                             </div>

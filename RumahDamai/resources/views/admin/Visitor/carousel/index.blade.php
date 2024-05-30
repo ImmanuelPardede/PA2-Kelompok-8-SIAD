@@ -38,7 +38,8 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>
-                                <img src="{{ $item->image_url }}" alt="Carousel Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
+                                <img src="{{ asset($item->image_url) }}" alt="Carousel Image" class="img-fluid" style="border-radius: initial; width: 100%; height: auto; max-width: 100%;">
+
                             </td>
                             <td>{{ $item->caption }}</td>
                             <td>{{ $item->subcaption }}</td>

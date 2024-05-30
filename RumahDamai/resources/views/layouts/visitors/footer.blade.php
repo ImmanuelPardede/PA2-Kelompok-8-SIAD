@@ -18,9 +18,9 @@
                     </li>
                     <li class="footer-menu-item"><a href="/aboutus" class="footer-menu-link">Tentang Kami</a></li>
                     <li class="footer-menu-item"><a href="/programrm" class="footer-menu-link">Program Kami</a></li>
-                    <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQ</a></li>
+{{--                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQ</a></li>
                     <li class="footer-menu-item"><a href="#" class="footer-menu-link">Bantuan</a></li>
-                </ul>
+ --}}                </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 col-12 mx-auto">

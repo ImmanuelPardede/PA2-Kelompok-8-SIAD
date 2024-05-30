@@ -88,18 +88,30 @@ class AnakController extends Controller
 
         try {
             // Generate NIA
+
+            // Menambahkan padding nol di depan lokasi_id hingga menjadi 1 digit, jika lokasi_id tidak ada, default menjadi '0'
             $lokasi_id = str_pad($request->lokasi_id ?? 0, 1, '0', STR_PAD_LEFT);
+
+            // Menentukan tipe anak berdasarkan input: '01' untuk disabilitas, '02' untuk lainnya
             $tipe_anak = $request->tipe_anak == 'disabilitas' ? '01' : '02';
+            
+            // Mendapatkan dua digit terakhir dari tahun saat ini
             $tahun_masuk = date('y');
+
+            // Mendapatkan dua digit terakhir dari tahun lahir yang diambil dari tanggal lahir yang diberikan
             $tahun_lahir = substr(date('Y', strtotime($request->tanggal_lahir)), -2);
 
+           // Mengambil data anak terbaru berdasarkan lokasi_id dan tipe_anak untuk mendapatkan nomor urut terakhir
             $latest_anak = Anak::where('lokasi_id', $request->lokasi_id)
                 ->where('tipe_anak', $request->tipe_anak)
                 ->latest()
                 ->first();
 
+
+            // Menentukan nomor urut berikutnya: jika ada anak terbaru, tambahkan 1 ke nomor urutnya, jika tidak, mulai dari 
             $nomor_urut = $latest_anak ? ((int) substr($latest_anak->nia, -3)) + 1 : 1;
 
+            // Menggabungkan semua bagian untuk membentuk NIA (Nomor Induk Anak) dengan format yang ditentukan
             $nia = $lokasi_id . $tipe_anak . $tahun_masuk . $tahun_lahir . str_pad($nomor_urut, 3, '0', STR_PAD_LEFT);
 
             $anak = Anak::create([
@@ -125,7 +137,11 @@ class AnakController extends Controller
             ]);
 
             // Mengelola upload foto profil
+
+            // Mengecek apakah ada file yang diunggah dengan nama 'foto_profil'
             if ($request->hasFile('foto_profil')) {
+
+                // Mengambil file yang diunggah dengan nama 'foto_profil'
                 $gambar = $request->file('foto_profil');
                 $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
                 $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();

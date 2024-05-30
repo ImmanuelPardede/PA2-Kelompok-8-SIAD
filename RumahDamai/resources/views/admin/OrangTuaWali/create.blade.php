@@ -58,7 +58,7 @@
 
                             <div class="form-group">
                                 <label for="nik_ibu">NIK Ibu</label>
-                                <input type="text" class="form-control" id="nik_ibu" name="nik_ibu">
+                                <input type="text" class="form-control" id="nik_ibu" name="nik_ibu" maxlength="16">
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
 
                             <div class="form-group">
                                 <label for="no_hp_ibu">No. HP Ibu</label>
-                                <input type="text" class="form-control" id="no_hp_ibu" name="no_hp_ibu">
+                                <input type="text" class="form-control" id="no_hp_ibu" name="no_hp_ibu" maxlength="13">
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
 
                             <div class="form-group">
                                 <label for="nik_ayah">NIK Ayah</label>
-                                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah">
+                                <input type="text" class="form-control" id="nik_ayah" name="nik_ayah" maxlength="16">
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
 
                             <div class="form-group">
                                 <label for="no_hp_ayah">No. HP Ayah</label>
-                                <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah">
+                                <input type="text" class="form-control" id="no_hp_ayah" name="no_hp_ayah" maxlength="13">
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
 
                             <div class="form-group">
                                 <label for="no_hp_wali">No. HP Wali</label>
-                                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali">
+                                <input type="text" class="form-control" id="no_hp_wali" name="no_hp_wali" maxlength="13">
                             </div>
                         </div>
                     </div>

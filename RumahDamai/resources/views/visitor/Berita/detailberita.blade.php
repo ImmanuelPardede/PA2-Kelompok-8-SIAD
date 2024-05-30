@@ -24,7 +24,8 @@
             <div class="col-lg-7 col-12">
                 <div class="news-block">
                     <div class="news-block-top">
-                        <img src="{{ asset($berita->img_berita) }}" class="news-image img-fluid" alt="">
+                        <img src="{{ asset($berita->img_berita) }}" class="news-image img-fluid" alt="" style="width: 100%; max-height: 500px; object-fit: cover;">
+
 
                         <div class="news-category-block">
                             <a href="#" class="category-block-link">{{ $berita->kategori->kategori }}</a>
