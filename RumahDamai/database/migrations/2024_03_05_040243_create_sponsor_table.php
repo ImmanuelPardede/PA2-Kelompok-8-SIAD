@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('nama_sponsor');
             $table->string('email_sponsor')->unique();
             $table->date('tanggal_sponsor');
-            $table->string('no_telepon_sponsor');
-            $table->string('deskripsi');
-            $table->bigInteger  ('jumlah_sponsor');
+            $table->string('no_telepon_sponsor')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->bigInteger  ('jumlah_sponsor')->nullable();
             $table->string('foto_sponsor');
             $table->timestamps();
 

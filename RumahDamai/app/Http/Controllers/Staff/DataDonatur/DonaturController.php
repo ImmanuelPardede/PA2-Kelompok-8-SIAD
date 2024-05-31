@@ -8,9 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Donatur;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 
 class DonaturController extends Controller
 {
@@ -24,8 +22,6 @@ class DonaturController extends Controller
     {
         $donasi = Donasi::all();
         $loggedInUserId = Auth::id();
-
-        $users = User::where('role', 'staff')->where('id', $loggedInUserId)->get();
         return view('staff.DataDonatur.create', compact('donasi'));
     }
 
@@ -35,7 +31,7 @@ class DonaturController extends Controller
             'donasi_id' => 'required|array',
             'donasi_id.*' => 'exists:donasi,id',
             'nama_donatur' => 'required|string',
-            'email_donatur' => 'nullable|string',
+            'email_donatur' => 'required|string',
             'tanggal_donatur' => 'required|date',
             'no_hp_donatur' => 'nullable|string',
             'deskripsi' => 'nullable|string',
@@ -43,23 +39,22 @@ class DonaturController extends Controller
             'foto_donatur' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Assign logged in user ID
         $validatedData['user_id'] = Auth::id();
 
-        // Proses upload foto_donatur
+        if (!isset($validatedData['jumlah_donasi'])) {
+            $validatedData['jumlah_donasi'] = 0; // Default value
+        }
+
         if ($request->hasFile('foto_donatur')) {
             $gambar = $request->file('foto_donatur');
             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
             $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
-
             $gambar->move('uploads/donatur/', $new_gambar);
-
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
         }
 
         $donatur = Donatur::create($validatedData);
 
-        // Menyimpan relasi dengan donasi
         if (isset($validatedData['donasi_id'])) {
             $donatur->donasi()->attach($validatedData['donasi_id']);
         }
@@ -94,30 +89,27 @@ class DonaturController extends Controller
             'foto_donatur' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Assign logged in user ID
         $validatedData['user_id'] = Auth::id();
+
+        if (!isset($validatedData['jumlah_donasi'])) {
+            $validatedData['jumlah_donasi'] = 0; // Default value
+        }
 
         $donatur = Donatur::findOrFail($id);
 
-        // Proses upload foto_donatur
         if ($request->hasFile('foto_donatur')) {
             $gambar = $request->file('foto_donatur');
             $slug = Str::slug(pathinfo($gambar->getClientOriginalName(), PATHINFO_FILENAME));
             $new_gambar = time() . '_' . $slug . '.' . $gambar->getClientOriginalExtension();
-
             $gambar->move('uploads/donatur/', $new_gambar);
-
-            // Hapus foto lama jika ada
             if ($donatur->foto_donatur) {
                 unlink(public_path($donatur->foto_donatur));
             }
-
             $validatedData['foto_donatur'] = 'uploads/donatur/' . $new_gambar;
         }
 
         $donatur->update($validatedData);
 
-        // Menyimpan relasi dengan donasi
         if (isset($validatedData['donasi_id'])) {
             $donatur->donasi()->sync($validatedData['donasi_id']);
         } else {
@@ -131,25 +123,13 @@ class DonaturController extends Controller
     {
         $donatur = Donatur::findOrFail($id);
 
-        // Menghapus foto donatur jika ada
         if ($donatur->foto_donatur) {
             Storage::delete($donatur->foto_donatur);
         }
 
-        // Menghapus relasi donasi
         $donatur->donasi()->detach();
-
-        // Menghapus data donatur
         $donatur->delete();
 
         return redirect()->route('dataDonatur.index')->with('success', 'Data Donatur berhasil dihapus.');
     }
-
-    // public function destroy($id)
-    // {
-    //     $donatur = Donatur::find($id);
-    //     $donatur->delete();
-
-    //     return redirect()->route('dataDonatur.index')->with('success', 'Data Donatur berhasil dihapus.');
-    // }
 }

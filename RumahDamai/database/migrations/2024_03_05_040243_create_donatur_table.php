@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('nama_donatur');
             $table->string('email_donatur')->unique();
             $table->date('tanggal_donatur');
-            $table->string('no_hp_donatur');
-            $table->string('deskripsi');
-            $table->bigInteger  ('jumlah_donasi');
+            $table->string('no_hp_donatur')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->bigInteger('jumlah_donasi')->nullable();
             $table->string('foto_donatur');
             $table->timestamps();
 

@@ -22,7 +22,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
-    
+
 class AnakController extends Controller
 {
 
@@ -70,17 +70,16 @@ class AnakController extends Controller
             'nia' => 'nullable',
             'jenis_kelamin_id' => 'required',
             'golongan_darah_id' => 'required',
-            'lokasi_id' => 'required',
-            'kebutuhan_disabilitas_id' => 'nullable',
-            'penyakit_id' => 'nullable',
+            'tipe_anak' => 'required|in:disabilitas,non_disabilitas',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
+            'lokasi_id' => 'required',
+            'kebutuhan_disabilitas_id' => 'nullable',
             'disukai' => 'nullable|string',
             'tidak_disukai' => 'nullable|string',
             'alamat' => 'required|string',
             'kelebihan' => 'nullable|string',
             'kekurangan' => 'nullable|string',
-            'tipe_anak' => 'required|in:disabilitas,non_disabilitas'
         ]);
 
         try {

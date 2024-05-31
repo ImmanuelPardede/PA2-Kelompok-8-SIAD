@@ -33,7 +33,7 @@ class SponsorController extends Controller
             'sponsorship_id' => 'required|array',
             'sponsorship_id.*' => 'exists:sponsorship,id',
             'nama_sponsor' => 'required|string',
-            'email_sponsor' => 'nullable|string',
+            'email_sponsor' => 'required|string',
             'tanggal_sponsor' => 'required|date',
             'no_telepon_sponsor' => 'nullable|numeric',
             'deskripsi' => 'nullable|string',

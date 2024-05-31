@@ -21,7 +21,7 @@
 
                     <div class="form-group">
                         <label for="agama_id">Agama</label>
-                        <select class="form-control" id="agama_id" name="agama_id" required>
+                        <select class="form-control js-example-basic-single" id="agama_id" name="agama_id" required>
                             <option value="" disabled>-- Pilih Agama --</option>
                             @foreach ($agama as $agamalist)
                                 <option value="{{ $agamalist->id }}"
@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label for="jenis_kelamin_id">Jenis Kelamin</label>
-                        <select class="form-control" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
+                        <select class="form-control js-example-basic-single" id="jenis_kelamin_id" name="jenis_kelamin_id" required>
                             <option value="" disabled>-- Pilih Jenis Kelamin --</option>
                             @foreach ($jenisKelamin as $kelaminlist)
                                 <option value="{{ $kelaminlist->id }}"
@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="golongan_darah_id">Golongan Darah</label>
-                        <select class="form-control" id="golongan_darah_id" name="golongan_darah_id" required>
+                        <select class="form-control js-example-basic-single" id="golongan_darah_id" name="golongan_darah_id" required>
                             <option value="" disabled>-- Pilih Golongan Darah --</option>
                             @foreach ($golonganDarah as $darahlist)
                                 <option value="{{ $darahlist->id }}"
@@ -61,7 +61,7 @@
                     @if($anak->tipe_anak == 'disabilitas')
                     <div class="form-group">
                         <label for="kebutuhan_disabilitas_id">Kebutuhan Disabilitas</label>
-                        <select class="form-control" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id" required>
+                        <select class="form-control js-example-basic-single" id="kebutuhan_disabilitas_id" name="kebutuhan_disabilitas_id" required>
                             <option value="" disabled selected>-- Pilih Kebutuhan Disabilitas --</option>
                             @foreach ($kebutuhanDisabilitas as $kebutuhanDisabilitaslist)
                                 <option value="{{ $kebutuhanDisabilitaslist->id }}"
@@ -75,7 +75,7 @@
 
                     <div class="form-group">
                         <label for="tipe_anak">Jenis Anak</label>
-                        <select class="form-control" id="tipe_anak" name="tipe_anak" required>
+                        <select class="form-control js-example-basic-single" id="tipe_anak" name="tipe_anak" required>
                             <option value="" disabled>-- Pilih Jenis Anak --</option>
                             <option value="disabilitas" @if ($anak->tipe_anak == 'disabilitas') selected @endif>Disabilitas
                             </option>
@@ -111,7 +111,7 @@
                     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 
                 <div class="mb-3">
-                    <label for="disukai" class="form-label">Disukai<span style="color: red">*</span></label>
+                    <label for="disukai" class="form-label">Disukai</label>
                     <textarea id="editor1" class="form-control @error('disukai') is-invalid @enderror" name="disukai" required autocomplete="disukai">
                         {{ $anak->disukai }}
                         {{ old('disukai') }}
@@ -124,7 +124,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="tidak_disukai" class="form-label">Tidak Disukai<span style="color: red">*</span></label>
+                    <label for="tidak_disukai" class="form-label">Tidak Disukai</label>
                     <textarea id="editor2" class="form-control @error('tidak_disukai') is-invalid @enderror" name="tidak_disukai" required autocomplete="tidak_disukai">
                         {{ $anak->tidak_disukai }}
                         {{ old('tidak_disukai') }}
@@ -137,7 +137,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="kelebihan" class="form-label">Kelebihan<span style="color: red">*</span></label>
+                    <label for="kelebihan" class="form-label">Kelebihan</label>
                     <textarea id="editor3" class="form-control @error('kelebihan') is-invalid @enderror" name="kelebihan" required autocomplete="kelebihan">
                         {{ $anak->kelebihan }}
                         {{ old('kelebihan') }}
@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="kekurangan" class="form-label">Kekurangan<span style="color: red">*</span></label>
+                    <label for="kekurangan" class="form-label">Kekurangan</label>
                     <textarea id="editor4" class="form-control @error('kekurangan') is-invalid @enderror" name="kekurangan" required autocomplete="kekurangan">
                         {{ $anak->kekurangan }}
                         {{ old('kekurangan') }}
