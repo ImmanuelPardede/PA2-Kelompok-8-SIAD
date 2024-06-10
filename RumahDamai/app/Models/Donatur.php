@@ -13,6 +13,7 @@ class Donatur extends Model
     protected $fillable = [
         'user_id',
         'nama_donatur',
+        'lainnya',
         'email_donatur',
         'tanggal_donatur',
         'no_hp_donatur',

@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h4 class="card-title">Detail PPI Model B</h4>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md">
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>

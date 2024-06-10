@@ -23,18 +23,18 @@
                     <div class="form-group">
                         <label for="kategori_disabilitas">Kategori Disabilitas<span style="color: red">*</span></label>
                         <input type="text" class="form-control" name="kategori_disabilitas"
-                            value="{{ old('kategori_disabilitas') }}" required>
+                            value="{{ old('kategori_disabilitas') }}" >
                     </div>
 
                     <div class="form-group">
                         <label for="jenis_disabilitas">Jenis Disabilitas<span style="color: red">*</span></label>
                         <input type="text" class="form-control" name="jenis_disabilitas"
-                            value="{{ old('jenis_disabilitas') }}" required>
+                            value="{{ old('jenis_disabilitas') }}" >
                     </div>
 
                     <div class="form-group">
                         <label for="deskripsi">Deskripsi<span style="color: red">*</span></label>
-                        <textarea class="form-control" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
+                        <textarea class="form-control" name="deskripsi" >{{ old('deskripsi') }}</textarea>
                     </div>
 
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>

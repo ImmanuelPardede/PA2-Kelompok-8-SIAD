@@ -5,11 +5,26 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Tambah Modul Materi</h2>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('modulMateri.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="kelas_id">Nama Kelas<span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id" required>
+                        <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id" >
                             <option value="" disabled selected>-- Nama Kelas--</option>
                             @foreach ($kelas as $kelasItem)
                                 <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
@@ -19,13 +34,13 @@
 
                     <div class="form-group">
                         <label for="nama_materi">Nama Materi<span style="color: red">*</span></label>
-                        <input type="text" class="form-control" id="nama_materi" name="nama_materi" required>
+                        <input type="text" class="form-control" id="nama_materi" name="nama_materi" >
                     </div>
 
                     <div class="form-group">
                         <label for="minggu_pembelajaran_id">Minggu Pembelajaran<span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id"
-                            name="minggu_pembelajaran_id" required>
+                            name="minggu_pembelajaran_id" >
                             <option value="" disabled selected>-- Minggu Pembelajaran--</option>
                             @foreach ($mingguPembelajaran as $mingguPembelajaranItem)
                                 <option value="{{ $mingguPembelajaranItem->id }}">
@@ -36,7 +51,8 @@
 
                     <div class="form-group">
                         <label for="file_modul">File Modul<span style="color: red">*</span></label>
-                        <input type="file" class="form-control" name="file_modul" required>
+                        <input type="file" class="form-control" name="file_modul" >
+                        <small class="text-muted">Jenis file yang diizinkan: PDF, DOC, DOCX.</small>
                     </div>
 
                     <div class="form-group">

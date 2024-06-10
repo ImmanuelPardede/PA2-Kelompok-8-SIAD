@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('nama_donatur');
+            $table->string('lainnya')->nullable();
             $table->string('email_donatur')->unique();
             $table->date('tanggal_donatur');
             $table->string('no_hp_donatur')->nullable();

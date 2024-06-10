@@ -183,6 +183,21 @@ class LatarBelakangController extends Controller
     public function destroy($id)
     {
         $item = LatarBelakang::findOrFail($id);
+
+        // Hapus file terkait gambar latar belakang
+        $gambarLatarBelakang = GambarLatarBelakang::where('latar_belakang_id', $id)->get();
+        foreach ($gambarLatarBelakang as $gambar) {
+            $path = public_path('uploads/gambar_latar_belakang/' . $gambar->nama);
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+            $gambar->delete();
+        }
+
+        // Hapus deskripsi terkait
+        DeskripsiLatarBelakang::where('latar_belakang_id', $id)->delete();
+
+        // Hapus entitas LatarBelakang
         $item->delete();
 
         return redirect()->route('direktur.latarBelakang.index')
@@ -191,7 +206,7 @@ class LatarBelakangController extends Controller
 
     public function generatePDF($id)
     {
-        ini_set('max_execution_time', 300); 
+        ini_set('max_execution_time', 300);
 
         $latarBelakang = LatarBelakang::with('anak', 'deskripsiLatarBelakang', 'gambarLatarBelakang')->findOrFail($id);
 

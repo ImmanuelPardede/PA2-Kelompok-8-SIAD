@@ -187,7 +187,7 @@
         @foreach ($latarBelakang->gambarLatarBelakang as $index => $gambar)
             <div class="image-description-wrapper">
                 <div class="image-container">
-                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('storage/uploads/gambar_latar_belakang/' . $gambar->nama))) }}"
+                    <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('uploads/gambar_latar_belakang/' . $gambar->nama))) }}"
                         alt="Gambar Latar Belakang">
                     <div class="image-number">{{ $index + 1 }}</div>
                 </div>

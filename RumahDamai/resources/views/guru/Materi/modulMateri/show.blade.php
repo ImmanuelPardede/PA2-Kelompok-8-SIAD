@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h4 class="card-title">Detail Modul Materi</h4>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md">
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
@@ -38,7 +38,7 @@
                                         <th>File Modul</th>
                                         <td>
                                             @if ($modulMateri->file_modul)
-                                                <a href="{{ route('modulMateri.download', $modulMateri->id) }}">{{ $modulMateri->file_modul }}</a>
+                                            <a href="{{ route('modulMateri.download', $modulMateri->id) }}" download>{{ $modulMateri->file_modul }}</a>
                                             @else
                                                 Data tidak tersedia
                                             @endif

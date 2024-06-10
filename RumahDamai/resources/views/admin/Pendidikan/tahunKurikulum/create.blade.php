@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="tahun_kurikulum">Tahun Kurikulum</label>
-                        <input type="number" class="form-control" name="tahun_kurikulum"
+                        <input type="text" class="form-control" name="tahun_kurikulum"
                             value="{{ old('tahun_kurikulum') }}" min="1900" max="9999">
                     </div>
 

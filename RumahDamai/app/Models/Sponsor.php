@@ -13,6 +13,7 @@ class Sponsor extends Model
     protected $fillable = [
         'user_id',
         'nama_sponsor',
+        'lainnya',
         'email_sponsor',
         'tanggal_sponsor',
         'no_telepon_sponsor',

@@ -32,14 +32,20 @@ class DonasiController extends Controller
     {
         $request->validate([
             'jenis_donasi' => 'required|string|unique:donasi,jenis_donasi',
+            'deskripsi' => 'required|string',
         ], [
-            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat.',
+            'jenis_donasi.required' => 'Jenis Donasi wajib diisi.',
+            'jenis_donasi.string' => 'Jenis Donasi harus berupa teks.',
+            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat. Harap pastikan jenis donasi yang Anda masukkan belum terdaftar sebelumnya.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
         Donasi::create($request->all());
 
         return redirect()->route('donasi.index')->with('success', 'Jenis Donasi berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -66,8 +72,13 @@ class DonasiController extends Controller
     {
         $request->validate([
             'jenis_donasi' => 'required|string|unique:donasi,jenis_donasi,' . $id,
+            'deskripsi' => 'required|string',
         ], [
-            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat.',
+            'jenis_donasi.required' => 'Jenis Donasi wajib diisi.',
+            'jenis_donasi.string' => 'Jenis Donasi harus berupa teks.',
+            'jenis_donasi.unique' => 'Jenis Donasi sudah ada, tidak boleh duplikat. Harap pastikan jenis donasi yang Anda masukkan belum terdaftar sebelumnya.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
         $jenisDonasi = Donasi::find($id);

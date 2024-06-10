@@ -31,9 +31,11 @@ class TahunKurikulumController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,NULL,id',
+            'tahun_kurikulum' => ['required', 'numeric', 'unique:tahun_kurikulum,tahun_kurikulum,NULL,id'],
         ], [
-            'tahun_kurikulum.unique' => '"Tahun kurikulum"  sudah ada.',
+            'tahun_kurikulum.required' => 'Tahun kurikulum wajib diisi.',
+            'tahun_kurikulum.numeric' => 'Tahun kurikulum harus berupa angka.',
+            'tahun_kurikulum.unique' => 'Tahun kurikulum sudah ada.',
         ]);
 
         TahunKurikulum::create([
@@ -42,6 +44,7 @@ class TahunKurikulumController extends Controller
 
         return redirect()->route('admin.tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -67,9 +70,11 @@ class TahunKurikulumController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tahun_kurikulum' => 'required|string|unique:tahun_kurikulum,tahun_kurikulum,'.$id,
+            'tahun_kurikulum' => ['required', 'numeric', 'unique:tahun_kurikulum,tahun_kurikulum,' . $id],
         ], [
-            'tahun_kurikulum.unique' => '"Tahun kurikulum"  sudah ada.',
+            'tahun_kurikulum.required' => 'Tahun kurikulum wajib diisi.',
+            'tahun_kurikulum.numeric' => 'Tahun kurikulum harus berupa angka.',
+            'tahun_kurikulum.unique' => 'Tahun kurikulum sudah ada.',
         ]);
 
         $tahunKurikulum = TahunKurikulum::findOrFail($id);
@@ -79,7 +84,6 @@ class TahunKurikulumController extends Controller
 
         return redirect()->route('admin.tahunKurikulum.index')->with('success', 'Tahun Kurikulum berhasil diperbarui.');
     }
-
     /**
      * Remove the specified resource from storage.
      */

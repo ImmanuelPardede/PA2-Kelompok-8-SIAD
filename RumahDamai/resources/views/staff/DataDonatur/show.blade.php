@@ -14,17 +14,28 @@
                                         <th>Jenis Donasi</th>
                                         <td>
                                             @if ($donatur->donasi->count() > 0)
-                                                @if ($donatur->donasi->count() == 1)
-                                                    {{ $donatur->donasi->first()->jenis_donasi }}
-                                                @else
-                                                    @foreach ($donatur->donasi as $index => $jenis_donasi)
-                                                        {{ $index + 1 }}. {{ $jenis_donasi->jenis_donasi }} <br>
-                                                    @endforeach
+                                                @php $donasiCount = $donatur->donasi->count(); @endphp
+                                                @foreach ($donatur->donasi as $index => $jenis_donasi)
+                                                    @if ($donasiCount > 1)
+                                                        {{ $index + 1 }}.
+                                                    @endif
+                                                    {{ $jenis_donasi->jenis_donasi }} <br>
+                                                @endforeach
+                                                @if ($donatur->lainnya)
+                                                    @if ($donasiCount > 1)
+                                                        {{ $donasiCount + 1 }}.
+                                                    @endif
+                                                    {{ $donatur->lainnya }}
                                                 @endif
                                             @else
-                                                Data tidak tersedia
+                                                @if ($donatur->lainnya)
+                                                    {{ $donatur->lainnya }}
+                                                @else
+                                                    Data tidak tersedia
+                                                @endif
                                             @endif
                                         </td>
+
                                     </tr>
                                     <tr>
                                         <th>Nama Donatur</th>
@@ -52,13 +63,11 @@
                                                 11 => 'November',
                                                 12 => 'Desember',
                                             ];
-
                                             $tanggal_donasi = isset($donatur->tanggal_donatur) ? date('d', strtotime($donatur->tanggal_donatur)) . ' ' . $bulanIndonesia[date('n', strtotime($donatur->tanggal_donatur))] . ' ' . date('Y', strtotime($donatur->tanggal_donatur)) : 'Data tidak tersedia';
                                             echo $tanggal_donasi;
                                             ?>
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <th>No. Hp Donatur</th>
                                         <td>{{ $donatur->no_hp_donatur ?? 'Data tidak tersedia' }}</td>
@@ -83,7 +92,8 @@
                     <div class="col-md-4">
                         <div class="image-frame">
                             @if ($donatur->foto_donatur)
-                                <img src="{{ asset($donatur->foto_donatur) }}" alt="Foto Donatur" class="img-fluid rounded">
+                                <img src="{{ asset($donatur->foto_donatur) }}" alt="Foto Donatur"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Tidak ada foto Donatur.</p>
                             @endif

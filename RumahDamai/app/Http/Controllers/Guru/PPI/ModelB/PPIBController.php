@@ -8,9 +8,7 @@ use App\Models\PpiModelB;
 use App\Models\Anak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Support\Facades\Auth;
-
 
 class PPIBController extends Controller
 {
@@ -27,14 +25,22 @@ class PPIBController extends Controller
         return view('guru.ppi.modelB.create', compact('anakList', 'formatLaporanList'));
     }
 
-
     public function store(Request $request)
     {
+        $messages = [
+            'anak_id.required' => 'Anak harus dipilih.',
+            'anak_id.exists' => 'Anak yang dipilih tidak valid.',
+            'file_ppi_b.required' => 'File PPI B harus diunggah.',
+            'file_ppi_b.mimes' => 'File PPI B harus berupa PDF, DOC, atau DOCX.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
+        ];
+
         $request->validate([
             'anak_id' => 'required|exists:anak,id',
-            'file_ppi_b' => 'nullable|mimes:pdf,doc,docx',
+            'file_ppi_b' => 'required|mimes:pdf,doc,docx',
             'deskripsi' => 'nullable|string',
-        ]);
+        ], $messages);
+
 
         $userRole = Auth::user()->role;
 
@@ -43,13 +49,14 @@ class PPIBController extends Controller
 
             if ($request->hasFile('file_ppi_b')) {
                 $file = $request->file('file_ppi_b');
-                $filePpiB = time() . '_' . $file->getClientOriginalName(); // Generate unique file name
-                $file->storeAs('ppiB_files', $filePpiB, 'public'); // Store file in 'ppiB_files' directory
+                $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
+                $filePpiB = $fileName; // Gunakan nama asli file
+                $file->move(public_path('uploads/ppiB_files'), $filePpiB); // Store file in 'ppiB_files' directory
             }
 
             PpiModelB::create([
                 'anak_id' => $request->anak_id,
-                'user_id' => Auth::id(), // Menggunakan Auth::id() untuk mendapatkan ID user yang sedang login
+                'user_id' => Auth::id(),
                 'file_ppi_b' => $filePpiB,
                 'deskripsi' => $request->deskripsi,
             ]);
@@ -79,24 +86,34 @@ class PPIBController extends Controller
     {
         $ppiB = PpiModelB::findOrFail($id);
 
+        $messages = [
+            'anak_id.required' => 'Anak harus dipilih.',
+            'anak_id.exists' => 'Anak yang dipilih tidak valid.',
+            'file_ppi_b.mimes' => 'File PPI B harus berupa PDF, DOC, atau DOCX.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
+            'deskripsi.required' => 'Deskripsi tidak boleh kosong.',
+        ];
+
         $request->validate([
             'anak_id' => 'required|exists:anak,id',
             'file_ppi_b' => 'nullable|mimes:pdf,doc,docx',
-            'deskripsi' => 'nullable|string',
-        ]);
+            'deskripsi' => 'nullable|string|required',
+        ], $messages);
 
-        // Hapus file lama jika ada
-        if ($ppiB->file_ppi_b) {
-            Storage::disk('public')->delete('ppiB_files/' . $ppiB->file_ppi_b);
-        }
-
-        $filePpiB = $ppiB->file_ppi_b; // Gunakan nama file yang sudah ada sebelumnya sebagai default
+        $filePpiB = $ppiB->file_ppi_b;
 
         if ($request->hasFile('file_ppi_b')) {
-            // Upload file baru
             $file = $request->file('file_ppi_b');
-            $filePpiB = time() . '_' . $file->getClientOriginalName(); // Generate unique file name
-            $file->storeAs('ppiB_files', $filePpiB, 'public'); // Store file in 'ppiB_files' directory
+            $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
+            $newFilePpiB = $fileName; // Gunakan nama asli file
+            $file->move(public_path('uploads/ppiB_files'), $newFilePpiB); // Store file in 'ppiB_files' directory
+
+            // Hapus file lama jika ada
+            if ($ppiB->file_ppi_b && file_exists(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b))) {
+                unlink(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b));
+            }
+
+            $filePpiB = $newFilePpiB;
         }
 
         // Update data PPI B
@@ -109,17 +126,13 @@ class PPIBController extends Controller
         return redirect()->route('ppiB.index')->with('success', 'PPI Model B berhasil diperbarui.');
     }
 
-
-
-
-
     public function destroy($id)
     {
         $ppiB = PpiModelB::findOrFail($id);
 
         // Hapus file terlebih dahulu jika ada
-        if ($ppiB->file_ppi_b) {
-            Storage::disk('public')->delete('ppiB_files/' . $ppiB->file_ppi_b);
+        if ($ppiB->file_ppi_b && file_exists(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b))) {
+            unlink(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b));
         }
 
         // Hapus entitas PPI Model B
@@ -127,7 +140,6 @@ class PPIBController extends Controller
 
         return redirect()->route('ppiB.index')->with('success', 'PPI Model B berhasil dihapus.');
     }
-
 
     public function downloadPpiB($id)
     {
@@ -137,15 +149,14 @@ class PPIBController extends Controller
             return redirect()->back()->with('error', 'File PPI B tidak ditemukan.');
         }
 
-        $filePath = storage_path("app/public/ppiB_files/{$ppiB->file_ppi_b}");
+        $filePath = public_path("uploads/ppiB_files/{$ppiB->file_ppi_b}");
 
-        if (!Storage::disk('public')->exists("ppiB_files/{$ppiB->file_ppi_b}")) {
+        if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File PPI B tidak ditemukan.');
         }
 
         return response()->download($filePath, $ppiB->file_ppi_b);
     }
-
 
     public function downloadFormatLaporan($id)
     {
@@ -155,7 +166,7 @@ class PPIBController extends Controller
             return redirect()->back()->with('error', 'File Format Laporan tidak ditemukan.');
         }
 
-        $filePath = storage_path("app/public/format_laporan/{$formatLaporan->format_laporan}");
+        $filePath = public_path("uploads/format_laporan/{$formatLaporan->format_laporan}");
 
         if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File Format Laporan tidak ditemukan.');

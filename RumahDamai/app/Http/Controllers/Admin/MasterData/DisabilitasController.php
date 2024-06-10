@@ -31,9 +31,19 @@ class DisabilitasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas',
+            'kategori_disabilitas' => 'required|string|regex:/^[a-zA-Z\s]+$/',
+            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas|regex:/^[a-zA-Z\s]+$/',
+            'deskripsi' => 'required|string',
         ], [
+            'kategori_disabilitas.required' => 'Kategori Disabilitas wajib diisi.',
+            'kategori_disabilitas.string' => 'Kategori Disabilitas harus berupa teks.',
+            'kategori_disabilitas.regex' => 'Kategori Disabilitas hanya boleh mengandung huruf dan spasi.',
+            'jenis_disabilitas.required' => 'Jenis Disabilitas wajib diisi.',
+            'jenis_disabilitas.string' => 'Jenis Disabilitas harus berupa teks.',
             'jenis_disabilitas.unique' => 'Jenis Disabilitas sudah ada, tidak boleh duplikat.',
+            'jenis_disabilitas.regex' => 'Jenis Disabilitas hanya boleh mengandung huruf dan spasi.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
         Disabilitas::create($request->all());
@@ -65,9 +75,19 @@ class DisabilitasController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas,' . $id,
+            'jenis_disabilitas' => 'required|string|unique:disabilitas,jenis_disabilitas,' . $id . '|regex:/^[a-zA-Z\s]+$/',
+            'kategori_disabilitas' => 'required|string|regex:/^[a-zA-Z\s]+$/',
+            'deskripsi' => 'required|string',
         ], [
+            'jenis_disabilitas.required' => 'Jenis Disabilitas wajib diisi.',
+            'jenis_disabilitas.string' => 'Jenis Disabilitas harus berupa teks.',
             'jenis_disabilitas.unique' => 'Jenis Disabilitas sudah ada, tidak boleh duplikat.',
+            'jenis_disabilitas.regex' => 'Jenis Disabilitas hanya boleh mengandung huruf dan spasi.',
+            'kategori_disabilitas.required' => 'Kategori Disabilitas wajib diisi.',
+            'kategori_disabilitas.string' => 'Kategori Disabilitas harus berupa teks.',
+            'kategori_disabilitas.regex' => 'Kategori Disabilitas hanya boleh mengandung huruf dan spasi.',
+            'deskripsi.required' => 'Deskripsi wajib diisi.',
+            'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ]);
 
         $jenisDisabilitas = Disabilitas::find($id);

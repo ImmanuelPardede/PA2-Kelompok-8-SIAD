@@ -68,7 +68,8 @@ class LatarBelakangController extends Controller
             if ($request->hasFile('gambar_latar_belakang')) {
                 foreach ($request->file('gambar_latar_belakang') as $image) {
                     $filename = time() . '_' . $image->getClientOriginalName();
-                    $image->storeAs('uploads/gambar_latar_belakang', $filename, 'public');
+                    $path = public_path('uploads/gambar_latar_belakang/');
+                    $image->move($path, $filename);
 
                     GambarLatarBelakang::create([
                         'nama' => $filename,
@@ -129,7 +130,7 @@ class LatarBelakangController extends Controller
                 foreach ($request->deleted_images as $imageId) {
                     $image = GambarLatarBelakang::find($imageId);
                     if ($image) {
-                        $path = storage_path('app/public/uploads/gambar_latar_belakang/' . $image->nama);
+                        $path = public_path('uploads/gambar_latar_belakang/' . $image->nama);
                         if (File::exists($path)) {
                             File::delete($path);
                         }
@@ -143,14 +144,14 @@ class LatarBelakangController extends Controller
                 foreach ($request->file('gambar_latar_belakang') as $key => $file) {
                     if ($file->isValid()) {
                         $filename = time() . '_' . $file->getClientOriginalName();
-                        $file->storeAs('uploads/gambar_latar_belakang', $filename, 'public');
+                        $file->move(public_path('uploads/gambar_latar_belakang'), $filename);
 
-                        if (isset($request->existing_image_ids[$key])) {
+                        if ($request->has('existing_image_ids') && isset($request->existing_image_ids[$key])) {
                             $existingImageId = $request->existing_image_ids[$key];
                             $existingImage = GambarLatarBelakang::find($existingImageId);
 
                             if ($existingImage) {
-                                $existingImagePath = storage_path('app/public/uploads/gambar_latar_belakang/' . $existingImage->nama);
+                                $existingImagePath = public_path('uploads/gambar_latar_belakang/' . $existingImage->nama);
                                 if (File::exists($existingImagePath)) {
                                     File::delete($existingImagePath);
                                 }
@@ -187,6 +188,17 @@ class LatarBelakangController extends Controller
     public function destroy($id)
     {
         $item = LatarBelakang::findOrFail($id);
+        $gambarLatarBelakang = GambarLatarBelakang::where('latar_belakang_id', $id)->get();
+        foreach ($gambarLatarBelakang as $gambar) {
+            $path = public_path('uploads/gambar_latar_belakang/' . $gambar->nama);
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+            $gambar->delete();
+        }
+
+        // Hapus deskripsi terkait
+        DeskripsiLatarBelakang::where('latar_belakang_id', $id)->delete();
         $item->delete();
 
         return redirect()->route('admin.latarBelakang.index')->with('success', 'Latar belakang berhasil dihapus.');

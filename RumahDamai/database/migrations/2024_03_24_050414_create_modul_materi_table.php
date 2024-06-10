@@ -16,7 +16,7 @@ class CreateModulMateriTable extends Migration
             $table->unsignedInteger('tahun_kurikulum_id');
             $table->unsignedInteger('user_id');
             $table->string('file_modul');
-            $table->string('deskripsi', 2000);
+            $table->string('deskripsi', 2000)->nullable();
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

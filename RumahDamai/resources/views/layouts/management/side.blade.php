@@ -303,8 +303,6 @@
                     </div>
                 </li>
 
-
-
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
                         aria-controls="tables">
@@ -359,8 +357,6 @@
                 </li>
             @endif
         @endauth
-
-
 
         @auth
             @if (auth()->user()->role === 'direktur')
@@ -465,12 +461,7 @@
             </a>
         </li> --}}
     </ul>
-
-
-
 </nav>
-
-
 
 <script>
     $(document).ready(function() {

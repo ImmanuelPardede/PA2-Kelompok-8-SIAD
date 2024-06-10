@@ -5,13 +5,28 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Edit Materi</h2>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="{{ route('modulMateri.update', $modulMateri->id) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="kelas_id">Nama Kelas</label>
-                        <select class="form-control" id="kelas_id" name="kelas_id">
+                        <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id">
                             <option value="" disabled>-- Nama Kelas --</option>
                             @foreach ($kelas as $kelasdata)
                                 <option value="{{ $kelasdata->id }}"
@@ -30,7 +45,7 @@
 
                     <div class="form-group">
                         <label for="minggu_pembelajaran_id">Minggu Pembelajaran</label>
-                        <select class="form-control" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id">
+                        <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id">
                             <option value="" disabled>-- Minggu Pembelajaran --</option>
                             @foreach ($mingguPembelajaran as $mingguPembelajarandata)
                                 <option value="{{ $mingguPembelajarandata->id }}"
@@ -44,6 +59,7 @@
                     <div class="form-group">
                         <label for="file_modul">File Modul</label>
                         <input type="file" class="form-control" name="file_modul">
+                        <small class="text-muted">Jenis file yang diizinkan: PDF, DOC, DOCX.</small>
                     </div>
 
                     <div class="form-group">

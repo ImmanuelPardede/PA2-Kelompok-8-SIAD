@@ -13,20 +13,31 @@
                                     <tr>
                                         <th>Jenis Sponsor</th>
                                         <td>
-                                            @if ($sponsor->sponsorship->count() > 0)
-                                                @if ($sponsor->sponsorship->count() == 1)
-                                                    {{ $sponsor->sponsorship->first()->jenis_sponsorship }} <!-- Hanya satu jenis sponsor -->
-                                                @else
-                                                    @foreach ($sponsor->sponsorship as $index => $jenis_sponsorship)
-                                                        {{ $index + 1 }}. {{ $jenis_sponsorship->jenis_sponsorship }}<br>
-                                                    @endforeach
+                                            @if ($sponsor->sponsorship->count() > 0 || $sponsor->lainnya)
+                                                @php $sponsorshipCount = $sponsor->sponsorship->count(); @endphp
+                                                @foreach ($sponsor->sponsorship as $index => $jenis_sponsorship)
+                                                    @if ($sponsorshipCount > 1)
+                                                        {{ $index + 1 }}.
+                                                    @endif
+                                                    {{ $jenis_sponsorship->jenis_sponsorship }} <br>
+                                                @endforeach
+
+                                                @if ($sponsor->lainnya)
+                                                    @if ($sponsorshipCount > 1)
+                                                        {{ $sponsorshipCount + 1 }}.
+                                                    @endif
+                                                    {{ $sponsor->lainnya }}
                                                 @endif
                                             @else
-                                                Data tidak tersedia
+                                                @if ($sponsor->lainnya)
+                                                    {{ $sponsor->lainnya }}
+                                                @else
+                                                    Data tidak tersedia
+                                                @endif
                                             @endif
                                         </td>
-                                    </tr>
 
+                                    </tr>
                                     <tr>
                                         <th>Nama Sponsor</th>
                                         <td>{{ $sponsor->nama_sponsor ?? 'Data tidak tersedia' }}</td>
@@ -38,24 +49,32 @@
                                     <tr>
                                         <th>Tanggal Sponsor</th>
                                         <td>
-                                            <?php
-                                            $bulanIndonesia = [
-                                                1 => 'Januari',
-                                                2 => 'Februari',
-                                                3 => 'Maret',
-                                                4 => 'April',
-                                                5 => 'Mei',
-                                                6 => 'Juni',
-                                                7 => 'Juli',
-                                                8 => 'Agustus',
-                                                9 => 'September',
-                                                10 => 'Oktober',
-                                                11 => 'November',
-                                                12 => 'Desember'
-                                            ];
-                                            $tanggal_sponsor = isset($sponsor->tanggal_sponsor) ? date('d', strtotime($sponsor->tanggal_sponsor)) . ' ' . $bulanIndonesia[date('n', strtotime($sponsor->tanggal_sponsor))] . ' ' . date('Y', strtotime($sponsor->tanggal_sponsor)) : 'Data tidak tersedia';
-                                            echo $tanggal_sponsor;
-                                            ?>
+                                            @php
+                                                $bulanIndonesia = [
+                                                    1 => 'Januari',
+                                                    2 => 'Februari',
+                                                    3 => 'Maret',
+                                                    4 => 'April',
+                                                    5 => 'Mei',
+                                                    6 => 'Juni',
+                                                    7 => 'Juli',
+                                                    8 => 'Agustus',
+                                                    9 => 'September',
+                                                    10 => 'Oktober',
+                                                    11 => 'November',
+                                                    12 => 'Desember',
+                                                ];
+                                                $tanggal_sponsor = isset($sponsor->tanggal_sponsor)
+                                                    ? date('d', strtotime($sponsor->tanggal_sponsor)) .
+                                                        ' ' .
+                                                        $bulanIndonesia[
+                                                            date('n', strtotime($sponsor->tanggal_sponsor))
+                                                        ] .
+                                                        ' ' .
+                                                        date('Y', strtotime($sponsor->tanggal_sponsor))
+                                                    : 'Data tidak tersedia';
+                                                echo $tanggal_sponsor;
+                                            @endphp
                                         </td>
                                     </tr>
                                     <tr>
@@ -68,20 +87,20 @@
                                     </tr>
                                     <tr>
                                         <th>Jumlah Sponsor</th>
-                                        <td>{{ isset($sponsor->jumlah_sponsor) ? 'Rp ' . number_format($sponsor->jumlah_sponsor) : 'Data tidak tersedia' }}</td>
+                                        <td>{{ isset($sponsor->jumlah_sponsor) ? 'Rp ' . number_format($sponsor->jumlah_sponsor) : 'Data tidak tersedia' }}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4">
-                            <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
-                        </div>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
                     </div>
 
                     <div class="col-md-4">
                         <div class="image-frame">
                             @if ($sponsor->foto_sponsor)
-                                <img src="{{ asset($sponsor->foto_sponsor) }}" alt="Foto Sponsor" class="img-fluid rounded">
+                                <img src="{{ asset($sponsor->foto_sponsor) }}" alt="Foto Sponsor"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Tidak ada foto Sponsor.</p>
                             @endif

@@ -31,9 +31,12 @@ class AgamaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'agama' => 'required|string|unique:agama,agama',
+            'agama' => ['required', 'string', 'unique:agama,agama', 'regex:/^[a-zA-Z\s]+$/'],
         ], [
+            'agama.required' => 'Nama agama wajib diisi.',
+            'agama.string' => 'Nama agama harus berupa string.',
             'agama.unique' => 'Data agama sudah ada, tidak boleh duplikat.',
+            'agama.regex' => 'Nama agama hanya boleh mengandung huruf dan spasi.',
         ]);
 
         Agama::create($request->all());
@@ -65,9 +68,12 @@ class AgamaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'agama' => 'required|string|unique:agama,agama,' . $id,
+            'agama' => ['required', 'string', 'unique:agama,agama,' . $id, 'regex:/^[a-zA-Z\s]+$/'],
         ], [
+            'agama.required' => 'Nama agama wajib diisi.',
+            'agama.string' => 'Nama agama harus berupa string.',
             'agama.unique' => 'Data agama sudah ada, tidak boleh duplikat.',
+            'agama.regex' => 'Nama agama hanya boleh mengandung huruf dan spasi.',
         ]);
 
         $agama = Agama::find($id);
@@ -75,6 +81,7 @@ class AgamaController extends Controller
 
         return redirect()->route('agama.index')->with('success', 'Data agama berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.

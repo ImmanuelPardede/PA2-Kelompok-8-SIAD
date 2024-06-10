@@ -24,14 +24,23 @@
                     @csrf
                     <div class="form-group">
                         <label for="donasi_id">Jenis Donasi<span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="donasi_id" name="donasi_id[]" multiple>
+                        <select class="form-control js-example-basic-multiple" id="donasi_id" name="donasi_id[]" multiple>
                             @foreach ($donasi as $donasiItem)
                                 <option value="{{ $donasiItem->id }}"
                                     {{ collect(old('donasi_id'))->contains($donasiItem->id) ? 'selected' : '' }}>
                                     {{ $donasiItem->jenis_donasi }}
                                 </option>
                             @endforeach
+                            <option value="lainnya" {{ collect(old('donasi_id'))->contains('lainnya') ? 'selected' : '' }}>
+                                Pilihan Lainnya</option>
                         </select>
+
+                        <div class="form-group" id="lainnya_div"
+                            style="{{ collect(old('donasi_id'))->contains('lainnya') ? '' : 'display:none;' }}">
+                            <label for="lainnya">Jenis Donasi Lainnya</label>
+                            <input type="text" class="form-control" id="lainnya" name="lainnya"
+                                value="{{ old('lainnya') }}">
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -60,7 +69,7 @@
                             value="{{ old('deskripsi') }}">
                     </div>
                     <div class="form-group">
-                        <label for="jumlah_donasi">Jumlah Donasi</label>
+                        <label for="jumlah_donasi">Jumlah Total</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" style="height: 100%;">Rp</span>
@@ -82,4 +91,17 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#donasi_id').change(function() {
+                if ($(this).val().indexOf('lainnya') !== -1) {
+                    $('#lainnya_div').show();
+                } else {
+                    $('#lainnya_div').hide();
+                }
+            }).trigger('change');
+        });
+    </script>
 @endsection

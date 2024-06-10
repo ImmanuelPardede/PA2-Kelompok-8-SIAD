@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedInteger('anak_id');
             $table->unsignedInteger('user_id');
             $table->string('file_ppi_b');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
 
             $table->foreign('anak_id')->references('id')->on('anak')->onDelete('cascade')->onUpdate('cascade');

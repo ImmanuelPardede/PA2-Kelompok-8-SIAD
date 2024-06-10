@@ -52,8 +52,8 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="{{ route('raport.index') }}" class="btn btn-primary">Data Raport Anak Didik</a>
             </div>
         </div>
     </div>
+    <a href="{{ route('raport.index') }}" class="col-lg-12 grid-margin stretch-card" style="text-decoration:none;">Kembali Data Raport Anak Didik</a>
 @endsection

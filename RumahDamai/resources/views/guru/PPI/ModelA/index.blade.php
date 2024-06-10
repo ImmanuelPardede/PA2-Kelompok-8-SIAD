@@ -12,25 +12,29 @@
                     <table class="table mt-3 table-hover">
                         <thead>
                             <tr>
-                                <th>No</th>
                                 <th>Nama Lengkap Anak</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($anak as $key => $data)
+                            @php
+                                $filteredAnak = $anak->filter(function ($data) {
+                                    return $data->tipe_anak === 'disabilitas';
+                                });
+                            @endphp
+
+                            @foreach ($filteredAnak as $key => $data)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $data->nama_lengkap }}</td>
                                     <td>{{ $data->status }}</td>
                                     <td><a href="{{ route('ppiA.show', $data->id) }}" class="btn btn-info">Detail</a></td>
                                 </tr>
                             @endforeach
 
-                            @if ($anak->isEmpty())
+                            @if ($filteredAnak->isEmpty())
                                 <tr>
-                                    <td colspan="4">Tidak ada Data Anak.</td>
+                                    <td colspan="4">Tidak ada Data Anak Disabilitas.</td>
                                 </tr>
                             @endif
                         </tbody>
