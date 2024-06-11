@@ -12,20 +12,20 @@
                                 <tbody>
                                     <tr>
                                         <th>Riwayat Perawatan:</th>
-                                        <td>{{ $riwayatmedis->riwayat_perawatan ?? 'Data tidak tersedia' }}
+                                        <td>{!! $riwayatmedis->riwayat_perawatan ?? 'Data tidak tersedia' !!}
                                         <td>
                                     </tr>
                                     <tr>
                                         <th>Riwayat Perilaku:</th>
-                                        <td>{{ $riwayatmedis->riwayat_perilaku ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $riwayatmedis->riwayat_perilaku ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Deskripsi Riwayat:</th>
-                                        <td>{{ $riwayatmedis->deskripsi_riwayat ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $riwayatmedis->deskripsi_riwayat ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Kondisi:</th>
-                                        <td>{{ $riwayatmedis->kondisi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $riwayatmedis->kondisi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

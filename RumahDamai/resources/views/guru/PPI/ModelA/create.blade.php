@@ -241,16 +241,3 @@
             });
     });
 </script>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        ClassicEditor
-            .create(document.querySelector('#editor7'), {
-                // Konfigurasi CKEditor 5 untuk textarea pertama
-            })
-            .catch(error => {
-                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
-            });
-    });
-</script>
