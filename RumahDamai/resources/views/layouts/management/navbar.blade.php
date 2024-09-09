@@ -21,8 +21,6 @@
 
                 <ul class="navbar-nav navbar-nav-right">
 
-
-
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                             data-toggle="dropdown">
@@ -56,21 +54,13 @@
                         </div>
                     </li>
 
-
-
-
-
-
-
-
-
-
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <!-- Ganti teks statis dengan nama lengkap pengguna yang terautentikasi -->
                             <!-- Jika pengguna terautentikasi dan memiliki foto profil -->
                             @if (Auth::check() && Auth::user()->foto)
-                            <img src="{{ asset('uploads/pegawai/' . Auth::user()->foto) }}" alt="Foto Profil" style="object-fit: cover;">
+                                <img src="{{ asset('uploads/pegawai/' . Auth::user()->foto) }}" alt="Foto Profil"
+                                    style="object-fit: cover;">
                             @else
                                 <!-- Jika pengguna belum terautentikasi atau tidak memiliki foto profil -->
                                 <img src="{{ asset('uploads/default/bodat.jpg') }}" alt="Default Photo">

@@ -55,29 +55,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($calendarData as $time => $days)
+                                    @if (isset($calendarData) && count($calendarData) > 0)
+                                        @foreach ($calendarData as $time => $days)
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::parse(explode(' - ', $time)[0])->format('H:i') }} -
+                                                    {{ \Carbon\Carbon::parse(explode(' - ', $time)[1])->format('H:i') }}
+                                                </td>
+                                                @foreach ($weekDays as $day)
+                                                    @if (isset($days[$day]))
+                                                        <td class="align-middle text-center special"
+                                                            style="background-color: {{ $days[$day]['color'] ?? '#ffffff' }}">
+                                                            @if ($days[$day]['time_start'] != '-')
+                                                                <div>
+                                                                    {{ $days[$day]['guru'] }}<br>
+                                                                    {{ $days[$day]['kelas'] }}<br>
+                                                                </div>
+                                                            @else
+                                                                ....
+                                                            @endif
+                                                        </td>
+                                                    @else
+                                                        <td class="special">....</td>
+                                                    @endif
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse(explode(' - ', $time)[0])->format('H:i') }} -
-                                                {{ \Carbon\Carbon::parse(explode(' - ', $time)[1])->format('H:i') }}</td>
-                                            @foreach ($weekDays as $day)
-                                                @if (isset($days[$day]))
-                                                    <td class="align-middle text-center special"
-                                                        style="background-color: {{ $days[$day]['color'] ?? '#ffffff' }}">
-                                                        @if ($days[$day]['time_start'] != '-')
-                                                            <div>
-                                                                {{ $days[$day]['guru'] }}<br>
-                                                                {{ $days[$day]['kelas'] }}<br>
-                                                            </div>
-                                                        @else
-                                                            ....
-                                                        @endif
-                                                    </td>
-                                                @else
-                                                    <td class="special">....</td>
-                                                @endif
-                                            @endforeach
+                                            <td colspan="{{ count($weekDays) + 1 }}" class="text-center">Tidak ada data
+                                                jadwal pembelajaran tersedia.</td>
                                         </tr>
-                                    @endforeach
+                                    @endif
+
                                 </tbody>
                             </table>
                         </div>

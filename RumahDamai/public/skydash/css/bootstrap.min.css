@@ -3283,6 +3283,15 @@ fieldset:disabled .btn {
 .collapse:not(.show) {
     display: none;
 }
+.collapse {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.collapse.show {
+    display: block;
+}
+
 .collapsing {
     height: 0;
     overflow: hidden;
@@ -3833,6 +3842,8 @@ fieldset:disabled .btn {
     flex-basis: 0;
     flex-grow: 1;
     text-align: center;
+    cursor: pointer;
+
 }
 .nav-fill .nav-item .nav-link,
 .nav-justified .nav-item .nav-link {

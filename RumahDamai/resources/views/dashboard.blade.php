@@ -55,11 +55,6 @@
                             </div>
                         @endif
 
-
-
-
-
-
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -206,8 +201,7 @@
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="dropdown-item">Hapus</button>
+                                                                <button type="submit" class="dropdown-item">Hapus</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -230,8 +224,7 @@
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="dropdown-item">Hapus</button>
+                                                                <button type="submit" class="dropdown-item">Hapus</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -361,10 +354,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Container untuk chart diagram kolom -->
-                            <div id="column-chart-pendukung" class="google-chart"></div>
-                            <!-- Container untuk chart diagram lingkaran -->
-                            <div id="pie-chart-pendukung" class="google-chart"></div>
+                            <!-- Container untuk chart diagram garis -->
+                            <div id="line-chart-pendukung" class="google-chart"></div>
                         </div>
                     </div>
                 </div>
@@ -373,10 +364,6 @@
 
     </div>
     </div>
-
-
-
-
     </div>
     </div>
     </div>

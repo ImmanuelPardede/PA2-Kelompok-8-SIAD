@@ -10,8 +10,19 @@
 <!-- main-panel ends -->
 </div>
 <!-- page-body-wrapper ends -->
-
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="{{ asset('skydash/js/utama/html2canvas.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 <!-- container-scroller -->
 
@@ -23,12 +34,11 @@
 <script src="{{ asset('skydash/vendors/datatables.net/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('skydash/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('skydash/js/dataTables.select.min.js') }}"></script>
-<script src="{{ asset('skydash/js/dataTables.select2.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
+{{-- <script src="{{ asset('skydash/js/dataTables.select2.js') }}"></script> --}}
+
+
 
 <!-- End plugin js for this page -->
 <!-- inject:js -->
@@ -50,21 +60,10 @@
 <script src="{{ asset('skydash/vendors/select2/select2.min.js') }}"></script>
 <script src="{{ asset('skydash/js/select2.js') }}"></script>
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs5.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="{{ asset('skydash/js/utama/sweetalert.min.js') }}"></script>
 <script src="{{ asset('skydash/js/utama/chartsAnak.min.js') }}"></script>
 <script src="{{ asset('skydash/js/utama/chartsPendukung.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-<script src="{{ asset('skydash/js/utama/html2canvas.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="{{ asset('skydash/js/utama/sidedropdown.js') }}"></script>
 
 
 

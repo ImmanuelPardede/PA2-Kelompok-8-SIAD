@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\FormatLaporan;
 use App\Models\KodeLaporan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class FormatLaporanController extends Controller
@@ -21,8 +19,6 @@ class FormatLaporanController extends Controller
     public function create()
     {
         $kodeLaporan = KodeLaporan::all();
-        $loggedInUserId = Auth::id();
-        $users = User::where('role', 'admin')->where('id', $loggedInUserId)->get();
         return view('admin.Pendidikan.formatLaporan.create', compact('kodeLaporan'));
     }
 
@@ -36,19 +32,18 @@ class FormatLaporanController extends Controller
             'kode_laporan.unique' => 'Kode Laporan sudah digunakan, tidak boleh duplikat.',
         ]);
 
-        // Handle file upload
-        $formatLaporan = null;
+        $fileName = null;
         if ($request->hasFile('format_laporan')) {
             $file = $request->file('format_laporan');
-            $formatLaporan = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('format_laporan', $formatLaporan, 'public');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/format_laporan'), $fileName);
         }
 
         FormatLaporan::create([
             'kode_laporan_id' => $request->kode_laporan,
-            'format_laporan' => $formatLaporan,
             'nama_laporan' => $request->nama_laporan,
-            'user_id' => Auth::id(), // Assign logged in user ID
+            'format_laporan' => $fileName,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil disimpan.');
@@ -79,23 +74,22 @@ class FormatLaporanController extends Controller
             'kode_laporan.unique' => 'Kode Laporan sudah digunakan, tidak boleh duplikat.',
         ]);
 
-        // Handle file upload
-        $fileformatLaporan = $formatLaporan->format_laporan;
+        $fileName = $formatLaporan->format_laporan;
         if ($request->hasFile('format_laporan')) {
-            if ($formatLaporan->format_laporan) {
-                Storage::disk('public')->delete('format_laporan/' . $formatLaporan->format_laporan);
+            if ($fileName) {
+                unlink(public_path('uploads/format_laporan/' . $fileName));
             }
 
             $file = $request->file('format_laporan');
-            $fileformatLaporan = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('format_laporan', $fileformatLaporan, 'public');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads/format_laporan'), $fileName);
         }
 
         $formatLaporan->update([
             'kode_laporan_id' => $request->kode_laporan,
-            'format_laporan' => $fileformatLaporan,
             'nama_laporan' => $request->nama_laporan,
-            'user_id' => Auth::id(), // Update user_id to the current logged-in user ID
+            'format_laporan' => $fileName,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('admin.formatLaporan.index')->with('success', 'Format Laporan berhasil diperbarui.');
@@ -106,7 +100,7 @@ class FormatLaporanController extends Controller
         $formatLaporan = FormatLaporan::findOrFail($id);
 
         if ($formatLaporan->format_laporan) {
-            Storage::disk('public')->delete('format_laporan/' . $formatLaporan->format_laporan);
+            unlink(public_path('uploads/format_laporan/' . $formatLaporan->format_laporan));
         }
 
         $formatLaporan->delete();
@@ -116,22 +110,18 @@ class FormatLaporanController extends Controller
 
     public function download($id)
     {
-        $formatLaporan = FormatLaporan::find($id);
+        $formatLaporan = FormatLaporan::findOrFail($id);
 
         if (!$formatLaporan || !$formatLaporan->format_laporan) {
             return redirect()->back()->with('error', 'File Format Laporan tidak ditemukan.');
         }
 
-        $filePath = storage_path("app/public/format_laporan/{$formatLaporan->format_laporan}");
+        $filePath = public_path('uploads/format_laporan/' . $formatLaporan->format_laporan);
 
         if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File Format Laporan tidak ditemukan.');
         }
 
-        // Menggunakan nama file asli sebagai nama file yang akan didownload
-        $originalFileName = pathinfo($formatLaporan->format_laporan, PATHINFO_FILENAME);
-        $extension = pathinfo($formatLaporan->format_laporan, PATHINFO_EXTENSION);
-
-        return response()->download($filePath, $originalFileName . '.' . $extension);
+        return response()->download($filePath);
     }
 }

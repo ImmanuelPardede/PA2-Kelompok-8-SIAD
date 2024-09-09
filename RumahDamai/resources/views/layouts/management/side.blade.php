@@ -10,6 +10,15 @@
     .sidebar .menu-title {
         margin-left: 10px;
     }
+
+    .collapse {
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    .collapse.show {
+        display: block;
+    }
 </style>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -29,12 +38,13 @@
         @auth
             @if (auth()->user()->role === 'admin')
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                    <a class="nav-link" data-toggle="collapse" href="#kepegawaian" aria-expanded="false"
+                        aria-controls="kepegawaian">
                         <i class="mdi mdi-account menu-icon"></i>
                         <span class="menu-title">Kepegawaian</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="charts">
+                    <div class="collapse" id="kepegawaian">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.administrator.admin') }}">Admin</a></li>
@@ -46,20 +56,18 @@
                                     href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.administrator.all') }}">All</a>
                             </li>
-
                         </ul>
                     </div>
                 </li>
 
-
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                        aria-controls="form-elements">
+                    <a class="nav-link" data-toggle="collapse" href="#data-anak" aria-expanded="false"
+                        aria-controls="data-anak">
                         <i class="mdi mdi-human-child menu-icon"></i>
                         <span class="menu-title">Data Anak</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="form-elements">
+                    <div class="collapse" id="data-anak">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.anak.index') }}">Anak</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.latarBelakang.index') }}">Latar
@@ -67,75 +75,68 @@
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.orangTuaWali.index') }}">Orangtua/Wali</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.riwayatMedis.index') }}">Riwayat
-                                    Medis</a></li>
+                                    href="{{ route('admin.riwayatMedis.index') }}">Riwayat Medis</a></li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
+                    <a class="nav-link" data-toggle="collapse" href="#pendidikan" aria-expanded="false"
+                        aria-controls="pendidikan">
                         <i class="mdi mdi-school menu-icon"></i>
                         <span class="menu-title">Pendidikan</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="error">
+                    <div class="collapse" id="pendidikan">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.kelas.index') }}">Kelas</a>
                             </li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.tahunKurikulum.index') }}">Tahun
-                                    Kurikulum</a>
+                                    href="{{ route('admin.tahunKurikulum.index') }}">Tahun Kurikulum</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.tahunAjaran.index') }}">Tahun
-                                    Ajaran</a>
+                                    Ajaran</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.semesterTahunAjaran.index') }}">Semester Ajaran</a>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.mingguPembelajaran.index') }}">
-                                    Pembelajaran</a>
+                                    href="{{ route('admin.semesterTahunAjaran.index') }}">Semester Ajaran</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.formatLaporan.index') }}">Format
-                                    Laporan</a></li>
+                                    href="{{ route('admin.mingguPembelajaran.index') }}">Pembelajaran</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.formatLaporan.index') }}">Format Laporan</a></li>
                         </ul>
                     </div>
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                        aria-controls="ui-basic">
+                    <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false"
+                        aria-controls="master-data">
                         <i class="mdi mdi-database menu-icon"></i>
                         <span class="menu-title">Master Data</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="master-data">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.agama.index') }}">Agama</a>
                             </li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.disabilitas.index') }}">Jenis
-                                    Disabilitas</a></li>
+                                    href="{{ route('admin.disabilitas.index') }}">Jenis Disabilitas</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.donasi.index') }}">Jenis
-                                    Donasi</a>
-                            </li>
+                                    Donasi</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.golonganDarah.index') }}">Golongan
-                                    Darah</a></li>
+                                    href="{{ route('admin.golonganDarah.index') }}">Golongan Darah</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.jenisKelamin.index') }}">Jenis
-                                    Kelamin</a>
+                                    href="{{ route('admin.jenisKelamin.index') }}">Jenis Kelamin</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.kebutuhanDisabilitas.index') }}">Jenis Kebutuhan</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.lokasiTugas.index') }}">Lokasi
-                                    Penugasan</a>
+                                    href="{{ route('admin.lokasiTugas.index') }}">Lokasi Penugasan</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.pekerjaan.index') }}">Jenis
                                     Pekerjaan</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.pendidikan.index') }}">Jenis
-                                    Pendidikan</a>
+                                    Pendidikan</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.penyakit.index') }}">Jenis
                                     Penyakit</a></li>
                             <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('admin.sponsorship.index') }}">Jenis
-                                    Sponsorship</a></li>
+                                    href="{{ route('admin.sponsorship.index') }}">Jenis Sponsorship</a></li>
                             <li class="nav-item"> <a class="nav-link"
                                     href="{{ route('admin.kategoriBerita.index') }}">Kategori Berita</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin.kodeLaporan.index') }}">Kode
@@ -144,36 +145,37 @@
                     </div>
                 </li>
 
+
                 <hr>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#succes" aria-expanded="false"
-                        aria-controls="succes">
+                    <a class="nav-link" data-toggle="collapse" href="#home-collapse" aria-expanded="false"
+                        aria-controls="home-collapse">
                         <i class="mdi mdi-home"></i>
                         <span class="menu-title">Home</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="succes">
+                    <div class="collapse" id="home-collapse">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.carousel.index') }}">
-                                    Carousel
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.carousel.index') }}">Carousel</a>
                             </li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.history.index') }}"> History
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.history.index') }}">History</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
+
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#about" aria-expanded="false"
-                        aria-controls="about">
+                    <a class="nav-link" data-toggle="collapse" href="#about-collapse" aria-expanded="false"
+                        aria-controls="about-collapse">
                         <i class="mdi mdi-information"></i>
                         <span class="menu-title">About</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="about">
+                    <div class="collapse" id="about-collapse">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.about.index') }}">Content</a>
@@ -183,13 +185,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#program" aria-expanded="false"
-                        aria-controls="program">
+                    <a class="nav-link" data-toggle="collapse" href="#program-collapse" aria-expanded="false"
+                        aria-controls="program-collapse">
                         <i class="mdi mdi-format-list-bulleted"></i>
                         <span class="menu-title">Program</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="program">
+                    <div class="collapse" id="program-collapse">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.program.index') }}">Content</a>
@@ -199,13 +201,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false"
-                        aria-controls="berita">
+                    <a class="nav-link" data-toggle="collapse" href="#berita-collapse" aria-expanded="false"
+                        aria-controls="berita-collapse">
                         <i class="mdi mdi-newspaper"></i>
                         <span class="menu-title">Berita</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="berita">
+                    <div class="collapse" id="berita-collapse">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.berita.index') }}">Content</a>
@@ -215,13 +217,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#fasilitas" aria-expanded="false"
-                        aria-controls="fasilitas">
+                    <a class="nav-link" data-toggle="collapse" href="#fasilitas-collapse" aria-expanded="false"
+                        aria-controls="fasilitas-collapse">
                         <i class="mdi mdi-factory"></i>
                         <span class="menu-title">Fasilitas</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="fasilitas">
+                    <div class="collapse" id="fasilitas-collapse">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.fasilitas.index') }}">Content</a>
@@ -231,13 +233,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#galeri" aria-expanded="false"
-                        aria-controls="galeri">
+                    <a class="nav-link" data-toggle="collapse" href="#galeri-collapse" aria-expanded="false"
+                        aria-controls="galeri-collapse">
                         <i class="mdi mdi-image menu-icon"></i>
                         <span class="menu-title">Galeri</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="galeri">
+                    <div class="collapse" id="galeri-collapse">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.galeri.index') }}">Content</a>
@@ -260,16 +262,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
-                        aria-controls="error">
+                    <a class="nav-link" data-toggle="collapse" href="#data-pegawai-collapse" aria-expanded="false"
+                        aria-controls="data-pegawai-collapse">
                         <i class="mdi mdi-account menu-icon"></i>
-                        <span class="menu-title">Data Induk Pegawai</span>
+                        <span class="menu-title">Data Pegawai</span>
+                        <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="error">
+                    <div class="collapse" id="data-pegawai-collapse">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri
-                                </a></li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}">Data Diri</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -289,32 +293,38 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-                        aria-controls="icons">
+                    <a class="nav-link" data-toggle="collapse" href="#icons-collapse" aria-expanded="false"
+                        aria-controls="icons-collapse">
                         <i class="mdi mdi-file menu-icon"></i>
                         <span class="menu-title">PPI</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="icons">
+                    <div class="collapse" id="icons-collapse">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiA.index') }}">PPI A</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('ppiB.index') }}">PPI B</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ppiA.index') }}">PPI A</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ppiB.index') }}">PPI B</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
-                        aria-controls="tables">
+                    <a class="nav-link" data-toggle="collapse" href="#materi-collapse" aria-expanded="false"
+                        aria-controls="materi-collapse">
                         <i class="mdi mdi-book menu-icon"></i>
                         <span class="menu-title">Materi</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="tables">
+                    <div class="collapse" id="materi-collapse">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('modulMateri.index') }}">Modul
-                                    Materi</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('silabus.index') }}">Silabus</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('modulMateri.index') }}">Modul Materi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('silabus.index') }}">Silabus</a>
                             </li>
                         </ul>
                     </div>
@@ -325,33 +335,38 @@
         @auth
             @if (auth()->user()->role === 'staff')
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
-                        aria-controls="error">
+                    <a class="nav-link" data-toggle="collapse" href="#data-pegawai" aria-expanded="false"
+                        aria-controls="data-pegawai">
                         <i class="mdi mdi-account menu-icon"></i>
-                        <span class="menu-title">Data Induk Pegawai</span>
+                        <span class="menu-title">Data Pegawai</span>
+                        <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="error">
+                    <div class="collapse" id="data-pegawai">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data Diri
-                                </a></li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}">Data
+                                    Diri</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false"
-                        aria-controls="tables">
+                    <a class="nav-link" data-toggle="collapse" href="#pendukung-collapse" aria-expanded="false"
+                        aria-controls="pendukung-collapse">
                         <i class="mdi mdi-gift menu-icon"></i>
                         <span class="menu-title">Pendukung</span>
                         <i class="menu-arrow"></i>
                     </a>
-                    <div class="collapse" id="tables">
+                    <div class="collapse" id="pendukung-collapse">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('dataDonatur.index') }}">Donatur</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('dataSponsor.index') }}">Sponsor</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dataDonatur.index') }}">Donatur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dataSponsor.index') }}">Sponsor</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -368,10 +383,11 @@
                     </a>
                     <div class="collapse" id="error">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}"> Data
-                                    Diri
-                                </a></li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}">Data
+                                    Diri</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -385,16 +401,18 @@
                     </a>
                     <div class="collapse" id="form-elements">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('direktur.anak.index') }}">Anak</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('direktur.anak.index') }}">Anak</a>
                             </li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.latarBelakang.index') }}">Latar
-                                    Belakang</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.orangTuaWali.index') }}">Orangtua/Wali</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="{{ route('direktur.riwayatMedis.index') }}">Riwayat
-                                    Medis</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('direktur.latarBelakang.index') }}">Latar Belakang</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('direktur.orangTuaWali.index') }}">Orangtua/Wali</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('direktur.riwayatMedis.index') }}">Riwayat Medis</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -462,11 +480,3 @@
         </li> --}}
     </ul>
 </nav>
-
-<script>
-    $(document).ready(function() {
-        $('.sidebar .nav-item').on('mouseleave', function() {
-            $(this).find('.collapse').collapse('hide');
-        });
-    });
-</script>
