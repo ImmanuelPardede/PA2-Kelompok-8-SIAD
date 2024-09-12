@@ -8,13 +8,39 @@
             padding: 0;
             cursor: pointer;
         }
+
+        /* Styling each todo item */
+        .todo-list-custom li {
+            height: 4em;
+        }
     </style>
 
     <div class="container">
 
         <div class="row">
             <div class="col-md-12 grid-margin">
-                <div class="row">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <div class="row flex-xl-row-reverse">
+                    <div class="col-12 col-xl-4">
+                        <div class="justify-content-end d-flex">
+                            <button class="btn btn-sm btn-light bg-white" type="button" aria-haspopup="true"
+                                aria-expanded="true">
+                                <?php echo date('l, d F Y'); ?>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                         <h3 class="font-weight-bold">Haloo {{ Auth::user()->name }}</h3>
                         @php
@@ -23,16 +49,16 @@
                         @endphp
 
                         <h6 class="font-weight-normal mb-0">
-                            Hari ini Sistem Berjalan Dengan Baik!
+                            Hari ini Sistem Berjalan Dengan Baik!<br><br>
                             @if ($totalUserTasks > 0)
-                                <a href="#todo"> <span class="text-primary">
+                                <a href="#todo"><span class="text-primary">
                                         Kamu memiliki <span class="text-danger">{{ $totalUserTasks }}</span> To-doList yang
-                                        belum kamu kerjakan!</span></a>
+                                        belum kamu kerjakan!</span>
+                                </a>
                             @else
                                 Selamat bekerja!
                             @endif
                         </h6>
-
 
                         @if (!Auth::user()->isProfileComplete() && Auth::user()->role !== 'admin')
                             <div class="container mt-4">
@@ -54,27 +80,6 @@
                                 </div>
                             </div>
                         @endif
-
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
-
-                    </div>
-                    <div class="col-12 col-xl-4">
-                        <div class="justify-content-end d-flex">
-                            <button class="btn btn-sm btn-light bg-white" type="button" aria-haspopup="true"
-                                aria-expanded="true">
-                                <?php echo date('l, d F Y'); ?>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -249,28 +254,26 @@
 
                                 <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
                                     @foreach ($todolist->where('user_id', Auth::id()) as $task)
-                                        <li>
-                                            <div class="form-check form-check-flat">
+                                        <li class="d-flex align-items-center justify-content-between">
+                                            <div class="form-check form-check-flat d-flex">
                                                 <label class="form-check-label">
                                                     <input class="checkbox" type="checkbox"
                                                         onchange="updateStatus({{ $task->id }}, this.checked)"
                                                         {{ $task->status === 'selesai' ? 'checked' : '' }}>
                                                     {{ $task->tugas }}
                                                 </label>
-
-
                                             </div>
                                             <form method="post" action="{{ route('todo.destroy', $task->id) }}"
-                                                style="display: inline;">
+                                                class="ml-auto">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-link"><i
                                                         class="remove ti-close"></i></button>
                                             </form>
-
                                         </li>
                                     @endforeach
                                 </ul>
+
                             </div>
                         </div>
                         <div class="add-task">
@@ -294,73 +297,75 @@
             </div>
         </div>
 
-        <!-- Blok Grafik Data Anak -->
-        <div id="chart-container-anak">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="chart-header d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Grafik Data Anak</h3>
-                                <!-- Dropdown untuk export chart -->
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                        id="exportDropdownAnak" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Export
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="exportDropdownAnak">
-                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('jpg')">Export
-                                            as JPG</a>
-                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('png')">Export
-                                            as PNG</a>
-                                        <a class="dropdown-item" href="#" onclick="exportChartAnak('pdf')">Export
-                                            as PDF</a>
-                                    </div>
+        <div class="chart-section">
+            <div class="dropdown-chart">
+                <div class="chart-info">
+                    <p>Data Grafik Anak Yayasan Rumah Damai Tahun {{ $year = date('Y') }}</p>
+                    <button class="chart-export" type="button" id="exportDropdownAnak" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Export
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="exportDropdownAnak">
+                        <a class="dropdown-item" href="#" onclick="exportChartAnak('jpg')">Export as JPG</a>
+                        <a class="dropdown-item" href="#" onclick="exportChartAnak('png')">Export as PNG</a>
+                        <a class="dropdown-item" href="#" onclick="exportChartAnak('pdf')">Export as PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div id="chart-container-anak" class="card">
+                            <div class="card-body">
+                                <div class="chart-header d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title">Data Anak Yayasan Pendidikan Anak Rumah Damai</h3>
                                 </div>
+                                <!-- Container untuk chart diagram kolom -->
+                                <div id="column-chart-anak" class="google-chart"></div>
+                                <!-- Container untuk chart diagram lingkaran -->
+                                <div id="pie-chart-anak" class="google-chart"></div>
                             </div>
-                            <!-- Container untuk chart diagram kolom -->
-                            <div id="column-chart-anak" class="google-chart"></div>
-                            <!-- Container untuk chart diagram lingkaran -->
-                            <div id="pie-chart-anak" class="google-chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Blok Grafik Data Pendukung -->
-        <div id="chart-container-pendukung">
-            <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="chart-header d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Grafik Data Pendukung</h3>
-                                <!-- Dropdown untuk export chart -->
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                        id="exportDropdownPendukung" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Export
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="exportDropdownPendukung">
-                                        <a class="dropdown-item" href="#"
-                                            onclick="exportChartPendukung('jpg')">Export as JPG</a>
-                                        <a class="dropdown-item" href="#"
-                                            onclick="exportChartPendukung('png')">Export as PNG</a>
-                                        <a class="dropdown-item" href="#"
-                                            onclick="exportChartPendukung('pdf')">Export as PDF</a>
-                                    </div>
+        <div class="chart-section">
+            <div class="dropdown-chart">
+                <div class="chart-info">
+                    <p>Data Grafik Pendukung Yayasan Rumah Damai Tahun {{ $year = date('Y') }}</p>
+                    <button class="chart-export" type="button" id="exportDropdownPendukung" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Export
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="exportDropdownPendukung">
+                        <a class="dropdown-item" href="#" onclick="exportChartPendukung('jpg')">Export as JPG</a>
+                        <a class="dropdown-item" href="#" onclick="exportChartPendukung('png')">Export as PNG</a>
+                        <a class="dropdown-item" href="#" onclick="exportChartPendukung('pdf')">Export as PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div id="chart-container-pendukung" class="card">
+                            <div class="card-body">
+                                <div class="chart-header d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title">Data Pendukung Yayasan Pendidikan Anak Rumah Damai</h3>
                                 </div>
+                                <!-- Container untuk chart diagram garis -->
+                                <div id="line-chart-pendukung" class="google-chart"></div>
+                                <!-- Container untuk chart diagram lingkaran -->
+                                <div id="pie-chart-pendukung" class="google-chart"></div>
                             </div>
-                            <!-- Container untuk chart diagram garis -->
-                            <div id="line-chart-pendukung" class="google-chart"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
 
     </div>
     </div>

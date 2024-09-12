@@ -65,42 +65,41 @@
                                 <!-- Jika pengguna belum terautentikasi atau tidak memiliki foto profil -->
                                 <img src="{{ asset('uploads/default/bodat.jpg') }}" alt="Default Photo">
                             @endif
-                            <span>
+                            {{-- <span>
                                 {{ explode(' ', Auth::user()->nama_lengkap)[0] }}
-                            </span>
+                            </span> --}}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="profileDropdown">
-
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             @if (auth()->user()->role == 'guru')
-                                <a class="dropdown-item"
-                                    href="{{ route('guru.DataDiri.password', ['user' => auth()->user()->id]) }}">
-                                    <i class="ti-settings text-primary"></i>
-
-                                    Settings </a>
-                            @elseif(auth()->user()->role == 'staff')
-                                <a class="dropdown-item"
-                                    href="{{ route('staff.DataDiri.password', ['user' => auth()->user()->id]) }}">
-                                    <i class="ti-settings text-primary"></i>
-
-                                    Settings
+                                <a class="dropdown-item" href="{{ route('guru.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
                                 </a>
-                            @elseif(auth()->user()->role == 'direktur')
-                                <a class="dropdown-item"
-                                    href="{{ route('direktur.DataDiri.password', ['user' => auth()->user()->id]) }}">
-                                    <i class="ti-settings text-primary"></i>
-
-                                    Settings
+                                <a class="dropdown-item" href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                            @elseif (auth()->user()->role == 'staff')
+                                <a class="dropdown-item" href="{{ route('staff.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
+                                </a>
+                                <a class="dropdown-item" href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                            @elseif (auth()->user()->role == 'direktur')
+                                <a class="dropdown-item" href="{{ route('direktur.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
+                                </a>
+                                <a class="dropdown-item" href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-user text-primary"></i> Data Diri
                                 </a>
                             @endif
 
-                            <a class="dropdown-item" href="{{ route('logout') }} "
+                            <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
+                                <i class="ti-power-off text-primary"></i> Logout
                             </a>
                         </div>
+
                     </li>
 
                 </ul>

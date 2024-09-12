@@ -261,7 +261,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#data-pegawai-collapse" aria-expanded="false"
                         aria-controls="data-pegawai-collapse">
                         <i class="mdi mdi-account menu-icon"></i>
@@ -276,7 +276,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('guru.anak.index') }}">
@@ -334,7 +334,7 @@
 
         @auth
             @if (auth()->user()->role === 'staff')
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#data-pegawai" aria-expanded="false"
                         aria-controls="data-pegawai">
                         <i class="mdi mdi-account menu-icon"></i>
@@ -350,7 +350,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#pendukung-collapse" aria-expanded="false"
@@ -375,11 +375,12 @@
 
         @auth
             @if (auth()->user()->role === 'direktur')
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
                         aria-controls="error">
                         <i class="mdi mdi-account menu-icon"></i>
                         <span class="menu-title">Data Induk</span>
+                        <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="error">
                         <ul class="nav flex-column sub-menu">
@@ -390,7 +391,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"

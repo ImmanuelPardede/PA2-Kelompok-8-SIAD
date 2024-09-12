@@ -49127,25 +49127,159 @@ div.tagsinput span.tag a {
 
 .google-chart {
     width: 100%;
-    max-height: 400px; /* Atur tinggi maksimum jika perlu */
+    max-height: 310px; /* Adjust max height for larger screens */
 }
 
 @media (max-width: 768px) {
     .google-chart {
-        display: none; /* Sembunyikan chart kolom */
-    }
-
-    .chart-card {
-        width: 100%; /* Sesuaikan lebar kartu */
-    }
-
-    .chart-card .google-pie-chart {
-        display: block; /* Tampilkan chart lingkaran */
         width: 100%;
-        height: 300px;
+        height: auto; /* Auto height for mobile */
+        max-height: 250px; /* Optional: set a smaller max height for mobile */
+    }
+
+    /* Adjust chart containers and text */
+    .chart-header h3.card-title {
+        font-size: 1.2rem; /* Smaller font on mobile */
+    }
+
+    /* Display only pie charts on smaller screens */
+    #column-chart-anak,
+    #line-chart-pendukung {
+        display: none; /* Hide non-pie charts */
+    }
+
+    #pie-chart-anak,
+    #pie-chart-pendukung {
+        display: block;
+        width: 100%;
+        height: 250px; /* Adjust pie chart height for mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    .chart-header h3.card-title {
+        font-size: 1rem; /* Further reduce title size on extra small screens */
+    }
+
+    .dropdown {
+        width: 100%; /* Ensure dropdowns take up full width */
+        text-align: right; /* Align dropdowns to the right */
     }
 }
 
 .hide-dropdown .dropdown-toggle {
-            display: none !important;
-        }
+    display: none !important;
+}
+
+/* Struktur dasar untuk chart section */
+.chart-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Warna latar belakang yang ringan */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+}
+
+/* Chart info dan tombol export */
+.chart-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    flex-wrap: wrap;
+}
+
+.chart-info p {
+    font-size: 1.25rem; /* Ukuran font yang lebih besar */
+    font-weight: 600;
+    color: #2c3e50; /* Warna teks lebih gelap */
+    margin: 0;
+}
+
+.chart-export {
+    background-color: #3498db; /* Warna biru yang lembut */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px; /* Border-radius yang lebih besar untuk tombol bulat */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 600; /* Teks tombol tebal */
+}
+
+.chart-export:hover {
+    background-color: #2980b9; /* Biru gelap saat di-hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Bayangan lembut saat hover */
+}
+
+.chart-export:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.7); /* Fokus dengan bayangan lebih halus */
+}
+
+/* Kontainer chart */
+.chart-container {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsif untuk layar lebih kecil */
+@media (max-width: 768px) {
+    .chart-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chart-export {
+        margin-top: 10px;
+        width: 100%; /* Lebar penuh untuk tombol di layar kecil */
+    }
+}
+
+@media (max-width: 576px) {
+    .chart-info p {
+        font-size: 1.1rem; /* Ukuran font lebih kecil di layar kecil */
+    }
+
+    .chart-export {
+        font-size: 0.9rem; /* Ukuran font lebih kecil di layar kecil */
+        padding: 10px 15px;
+    }
+}
+
+/* Aturan untuk tampilan mobile (kurang dari 768px) */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static; /* Mengatur dropdown agar statis */
+        transform: none; /* Hilangkan transformasi default */
+        top: auto; /* Posisi vertikal otomatis */
+        left: auto; /* Posisi horizontal otomatis */
+        margin-top: 10px; /* Beri jarak sedikit di atas dropdown */
+    }
+
+    .dropdown-item {
+        font-size: 0.9rem; /* Ukuran font lebih kecil untuk tampilan mobile */
+        padding: 10px; /* Spasi dalam elemen dropdown */
+    }
+}
+
+/* Aturan tambahan untuk layar sangat kecil (kurang dari 576px) */
+@media (max-width: 576px) {
+    .chart-export {
+        font-size: 0.8rem; /* Ukuran font lebih kecil untuk tombol */
+        padding: 8px 10px; /* Padding tombol lebih kecil */
+    }
+
+    .dropdown-menu {
+        padding: 5px 0; /* Jarak padding di dalam menu dropdown */
+    }
+
+    .dropdown-item {
+        padding: 8px 15px; /* Padding lebih kecil untuk item di dropdown */
+        font-size: 0.85rem; /* Ukuran font dropdown lebih kecil lagi */
+    }
+}
