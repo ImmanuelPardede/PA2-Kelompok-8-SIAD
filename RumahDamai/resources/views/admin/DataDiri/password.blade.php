@@ -16,7 +16,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('guru.DataDiri.password', ['user' => $user]) }}">
+                    <form method="POST" action="{{ route('admin.DataDiri.password', ['user' => $user]) }}">
                         @csrf
 
                         <div class="form-group row">

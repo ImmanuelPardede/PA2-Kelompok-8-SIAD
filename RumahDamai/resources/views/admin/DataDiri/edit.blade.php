@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-8">
 
-                        <form action="{{ route('admin.administrator.update', $user->id) }}" method="POST"
+                        <form action="{{ route('admin.DataDiri.update', $user->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -182,51 +182,17 @@
                     </div>
 
                 </div>
-
                 <div class="form-group d-flex justify-content-between">
                     <div>
                         <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                         <button type="submit" id="submitButton" class="btn btn-success mr-2"
                             onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
                     </div>
-                    <button class="btn btn-danger" type="button" id="change-password" data-toggle="modal"
-                        data-target="#passwordModal">Ganti Password</button>
                 </div>
-
                 </form>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('admin.administrator.update', $user->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="passwordModalLabel">Ganti Password</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="newPassword">Password Baru</label>
-                            <input type="password" name="newPassword" id="newPassword" class="form-control"
-                                placeholder="Masukkan password baru">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <script>
         $(document).ready(function() {

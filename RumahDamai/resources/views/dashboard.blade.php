@@ -43,8 +43,12 @@
 
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                         <h3 class="font-weight-bold">Haloo {{ Auth::user()->name }}</h3>
+
                         @php
-                            $userTasks = $todolist->where('user_id', Auth::id());
+                            // Filter tugas yang statusnya 'menunggu' untuk pengguna yang sedang login
+                            $userTasks = $todolist->filter(function ($task) {
+                                return $task->user_id === Auth::id() && $task->status === 'menunggu';
+                            });
                             $totalUserTasks = $userTasks->count();
                         @endphp
 
@@ -52,7 +56,7 @@
                             Hari ini Sistem Berjalan Dengan Baik!<br><br>
                             @if ($totalUserTasks > 0)
                                 <a href="#todo"><span class="text-primary">
-                                        Kamu memiliki <span class="text-danger">{{ $totalUserTasks }}</span> To-doList yang
+                                        Kamu memiliki <span class="text-danger">{{ $totalUserTasks }}</span> To-do List yang
                                         belum kamu kerjakan!</span>
                                 </a>
                             @else
@@ -132,16 +136,11 @@
             </div>
         @endif
 
-        {{--  --}}
-
-
-
         <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-
                             <h5 id="pengumuman" class="card-title mb-4">Pengumuman</h5>
                             @if (Auth::user()->role == 'admin')
                                 <div class="mb-3 ml-auto">
@@ -242,41 +241,37 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="col-md-5 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <div>
-                            <h5 class="card-title mb-4" id="todo">Todolist</h5>
-                            <div class="list-wrapper pt-2">
-
+                        <h5 class="card-title mb-4" id="todo">Todolist</h5>
+                        <div class="list-wrapper pt-2">
+                            @if ($todolist->isEmpty())
+                                <p class="text-muted">Tidak ada tugas yang perlu dikerjakan saat ini.</p>
+                            @else
                                 <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                                    @foreach ($todolist->where('user_id', Auth::id()) as $task)
+                                    @foreach ($todolist as $task)
                                         <li class="d-flex align-items-center justify-content-between">
                                             <div class="form-check form-check-flat d-flex">
                                                 <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox"
-                                                        onchange="updateStatus({{ $task->id }}, this.checked)"
-                                                        {{ $task->status === 'selesai' ? 'checked' : '' }}>
+                                                    <input class="checkbox" type="checkbox" onchange="updateStatus({{ $task->id }}, this.checked)" {{ $task->status === 'selesai' ? 'checked' : '' }}>
                                                     {{ $task->tugas }}
                                                 </label>
                                             </div>
-                                            <form method="post" action="{{ route('todo.destroy', $task->id) }}"
-                                                class="ml-auto">
+                                            <form method="post" action="{{ route('todo.destroy', $task->id) }}" class="ml-auto">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-link"><i
-                                                        class="remove ti-close"></i></button>
+                                                <button type="submit" class="btn btn-link"><i class="remove ti-close"></i></button>
                                             </form>
                                         </li>
                                     @endforeach
                                 </ul>
-
-                            </div>
+                            @endif
                         </div>
-                        <div class="add-task">
+
+                        <div class="add-task mt-3">
                             <form method="post" action="{{ route('todo.store') }}">
                                 @csrf
                                 <div class="input-group">
@@ -291,7 +286,6 @@
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -301,7 +295,8 @@
             <div class="dropdown-chart">
                 <div class="chart-info">
                     <p>Data Grafik Anak Yayasan Rumah Damai Tahun {{ $year = date('Y') }}</p>
-                    <button class="chart-export" type="button" id="exportDropdownAnak" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="chart-export" type="button" id="exportDropdownAnak" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Export
                     </button>
                     <div class="dropdown-menu" aria-labelledby="exportDropdownAnak">
@@ -335,7 +330,8 @@
             <div class="dropdown-chart">
                 <div class="chart-info">
                     <p>Data Grafik Pendukung Yayasan Rumah Damai Tahun {{ $year = date('Y') }}</p>
-                    <button class="chart-export" type="button" id="exportDropdownPendukung" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="chart-export" type="button" id="exportDropdownPendukung" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Export
                     </button>
                     <div class="dropdown-menu" aria-labelledby="exportDropdownPendukung">
@@ -364,9 +360,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
     </div>
     </div>
@@ -376,28 +369,28 @@
 
     <script>
         function updateStatus(taskId, checked) {
-            // Buat objek FormData untuk mengirim data
-            var formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}'); // Tambahkan CSRF token
-            formData.append('status', checked ? 'selesai' : 'menunggu'); // Tentukan status baru
+    var formData = new FormData();
+    formData.append('_token', '{{ csrf_token() }}');
+    formData.append('_method', 'PATCH'); // Menggunakan PATCH
+    formData.append('status', checked ? 'selesai' : 'menunggu'); // Tentukan status baru
 
-            // Kirim permintaan POST ke endpoint edit
-            fetch(`/todo/${taskId}/edit`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Task status updated successfully.');
-                        // Refresh halaman
-                        location.reload();
-                    } else {
-                        console.error('Failed to update task status.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+    // Kirim permintaan PATCH ke endpoint edit
+    fetch(`/todo/${taskId}/edit`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            console.log('Task status updated successfully.');
+            // Refresh halaman untuk memuat status baru
+            location.reload();
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
     </script>
 @endsection

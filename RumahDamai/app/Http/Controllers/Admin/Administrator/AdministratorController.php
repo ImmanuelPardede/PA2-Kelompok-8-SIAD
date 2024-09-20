@@ -100,7 +100,7 @@ class AdministratorController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Foto harus berupa gambar dengan maksimum 2MB
         ]);
 
-        // Jika pengguna mengunggah foto, simpan foto yang diunggah, jika tidak, gunakan 'bodat.jpg'
+        // Jika pengguna mengunggah foto, simpan foto yang diunggah, jika tidak, gunakan '1.jpg'
         $user = new User();
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
@@ -254,6 +254,109 @@ class AdministratorController extends Controller
     }
 
 
+    /*======================================================== - Admin - ================================================================  */
+
+    public function editAdminDataDiri(User $user)
+    {
+        $pendidikan = Pendidikan::all();
+        $agama = Agama::all();
+        $jeniskelamin = JenisKelamin::all();
+        $golongandarah = GolonganDarah::all();
+        $lokasi = LokasiTugas::all();
+        if (auth()->user()->id === $user->id && $user->role === 'admin') {
+            return view('admin.DataDiri.edit', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan mengedit Data Diri.');
+        }
+    }
+
+    public function updateAdminDataDiri(Request $request, User $user)
+    {
+        $request->validate([
+            'golongan_darah_id' => 'nullable|string',
+            'jenis_kelamin_id' => 'nullable|string',
+            'agama_id' => 'nullable|string',
+            'pendidikan_id' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'tanggal_masuk' => 'nullable|date',
+            'tanggal_keluar' => 'nullable|date',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Mengisi data kecuali password
+        $user->fill($request->except('password'));
+
+        // Perbarui password jika disertakan dalam permintaan
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        // Proses penyimpanan foto Data Diri jika ada
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
+            $lokasi_simpan = public_path('uploads/pegawai');
+            $foto->move($lokasi_simpan, $nama_foto);
+
+            // Hapus foto lama jika ada
+            if ($user->foto) {
+                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
+                if (file_exists($foto_lama)) {
+                    unlink($foto_lama);
+                }
+            }
+
+            // Set foto baru
+            $user->foto = $nama_foto;
+        }
+
+        // Simpan perubahan
+        $user->save();
+
+        return redirect()->route('admin.DataDiri.show', ['user' => $user])->with('success', 'Data Diri berhasil diperbarui.');
+    }
+
+    public function showAdminDataDiri(User $user)
+    {
+        $pendidikan = Pendidikan::all();
+        $agama = Agama::all();
+        $jeniskelamin = JenisKelamin::all();
+        $golongandarah = GolonganDarah::all();
+        $lokasi = LokasiTugas::all();
+
+        if (auth()->user()->id === $user->id && $user->role === 'admin') {
+            return view('admin.DataDiri.show', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
+        } else {
+            return redirect()->back()->with('error', 'Anda tidak diizinkan melihat Data.');
+        }
+    }
+
+    public function showResetPasswordAdmin(User $user)
+    {
+        return view('admin.DataDiri.password', compact('user'));
+    }
+
+    public function resetPasswordAdmin(Request $request, User $user)
+    {
+        $request->validate([
+            'tanggal_lahir' => 'required|date',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
+
+        // Validasi tanggal lahir
+        if ($request->tanggal_lahir == $user->tanggal_lahir) {
+            // Reset password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('admin.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
+        } else {
+            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        }
+    }
+
     /* ======================================== - GURU - ===================================================== */
     public function editGuruDataDiri(User $user)
     {
@@ -270,59 +373,56 @@ class AdministratorController extends Controller
     }
 
     public function updateGuruDataDiri(Request $request, User $user)
-{
-    // Validasi data
-    $validatedData = $request->validate([
-        'nama_lengkap' => 'nullable|string',
-        'golongan_darah_id' => 'nullable|string',
-        'jenis_kelamin_id' => 'nullable|string',
-        'agama_id' => 'nullable|string',
-        'pendidikan_id' => 'nullable|string',
-        'alamat' => 'nullable|string',
-        'no_telepon' => 'nullable|string|size:12',
-        'lulusan' => 'nullable|string',
-        'pengalaman' => 'nullable|string',
-        'tempat_lahir' => 'nullable|string',
-        'tanggal_lahir' => 'nullable|date',
-        'lokasi_penugasan_id' => 'nullable|string',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
+    {
+        // Validasi data
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'nullable|string',
+            'golongan_darah_id' => 'nullable|string',
+            'jenis_kelamin_id' => 'nullable|string',
+            'agama_id' => 'nullable|string',
+            'pendidikan_id' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'no_telepon' => 'nullable|string|size:12',
+            'lulusan' => 'nullable|string',
+            'pengalaman' => 'nullable|string',
+            'tempat_lahir' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'lokasi_penugasan_id' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-    // Mengisi data yang divalidasi ke model User
-    $user->fill($validatedData);
+        // Mengisi data yang divalidasi ke model User
+        $user->fill($validatedData);
 
-    // Perbarui password jika disertakan dalam permintaan
-    if ($request->has('password')) {
-        $user->password = Hash::make($request->password);
-    }
-
-    // Proses penyimpanan foto Data Diri jika ada
-    if ($request->hasFile('foto')) {
-        $foto = $request->file('foto');
-        $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
-        $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
-        $foto->move($lokasi_simpan, $nama_foto);
-
-        // Hapus foto lama jika ada
-        if ($user->foto) {
-            $foto_lama = public_path('uploads/pegawai/' . $user->foto);
-            if (file_exists($foto_lama)) {
-                unlink($foto_lama);
-            }
+        // Perbarui password jika disertakan dalam permintaan
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
         }
 
-        // Set foto baru
-        $user->foto = $nama_foto;
+        // Proses penyimpanan foto Data Diri jika ada
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
+            $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
+            $foto->move($lokasi_simpan, $nama_foto);
+
+            // Hapus foto lama jika ada
+            if ($user->foto) {
+                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
+                if (file_exists($foto_lama)) {
+                    unlink($foto_lama);
+                }
+            }
+
+            // Set foto baru
+            $user->foto = $nama_foto;
+        }
+
+        // Simpan perubahan pada model pengguna
+        $user->save();
+
+        return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
     }
-
-    // Simpan perubahan pada model pengguna
-    $user->save();
-
-    return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Data Diri guru berhasil diperbarui.');
-}
-
-
-
 
     public function showGuruDataDiri(User $user)
     {
@@ -336,6 +436,30 @@ class AdministratorController extends Controller
             return view('guru.DataDiri.show', compact('user', 'pendidikan', 'agama', 'jeniskelamin', 'golongandarah', 'lokasi'));
         } else {
             return redirect()->back()->with('error', 'Anda tidak diizinkan melihat Data Diri guru lain.');
+        }
+    }
+
+    public function showResetPasswordGuru(User $user)
+    {
+        return view('guru.DataDiri.password', compact('user'));
+    }
+
+    public function resetPasswordGuru(Request $request, User $user)
+    {
+        $request->validate([
+            'tanggal_lahir' => 'required|date',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
+
+        // Validasi tanggal lahir
+        if ($request->tanggal_lahir == $user->tanggal_lahir) {
+            // Reset password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
+        } else {
+            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
         }
     }
 
@@ -381,34 +505,33 @@ class AdministratorController extends Controller
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
         }
-        
 
-            // Proses penyimpanan foto Data Diri jika ada
-            if ($request->hasFile('foto')) {
-                $foto = $request->file('foto');
-                $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
-                $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
-                $foto->move($lokasi_simpan, $nama_foto);
-        
-                // Hapus foto lama jika ada
-                if ($user->foto) {
-                    $foto_lama = public_path('uploads/pegawai/' . $user->foto);
-                    if (file_exists($foto_lama)) {
-                        unlink($foto_lama);
-                    }
+
+        // Proses penyimpanan foto Data Diri jika ada
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $nama_foto = time() . '.' . $foto->getClientOriginalExtension();
+            $lokasi_simpan = public_path('uploads/pegawai'); // Lokasi penyimpanan diubah sesuai kebutuhan
+            $foto->move($lokasi_simpan, $nama_foto);
+
+            // Hapus foto lama jika ada
+            if ($user->foto) {
+                $foto_lama = public_path('uploads/pegawai/' . $user->foto);
+                if (file_exists($foto_lama)) {
+                    unlink($foto_lama);
                 }
-        
-
-                // Set foto baru
-                $user->foto = $nama_foto;
             }
 
-            // Simpan perubahan pada model pengguna
-            $user->save();
+
+            // Set foto baru
+            $user->foto = $nama_foto;
+        }
+
+        // Simpan perubahan pada model pengguna
+        $user->save();
 
 
-            return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Data Diri anda berhasil diperbarui.');
-        
+        return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Data Diri anda berhasil diperbarui.');
     }
 
 
@@ -426,7 +549,31 @@ class AdministratorController extends Controller
         }
     }
 
-    /*==============================================================================================================================  */
+    public function showResetPasswordStaff(User $user)
+    {
+        return view('staff.DataDiri.password', compact('user'));
+    }
+
+    public function resetPasswordStaff(Request $request, User $user)
+    {
+        $request->validate([
+            'tanggal_lahir' => 'required|date',
+            'new_password' => 'required|string|min:8',
+            'confirm_password' => 'required|string|same:new_password',
+        ]);
+
+        // Validasi tanggal lahir
+        if ($request->tanggal_lahir == $user->tanggal_lahir) {
+            // Reset password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
+        } else {
+            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
+        }
+    }
+
+    /*======================================================== - Direktur - ================================================================  */
 
     public function editDirekturDataDiri(User $user)
     {
@@ -533,59 +680,7 @@ class AdministratorController extends Controller
     }
 
 
-    /* ============================================================================================================================== */
-
-    public function showResetPasswordGuru(User $user)
-    {
-        return view('guru.DataDiri.password', compact('user'));
-    }
-
-    public function resetPasswordGuru(Request $request, User $user)
-    {
-        $request->validate([
-            'tanggal_lahir' => 'required|date',
-            'new_password' => 'required|string|min:8',
-            'confirm_password' => 'required|string|same:new_password',
-        ]);
-
-        // Validasi tanggal lahir
-        if ($request->tanggal_lahir == $user->tanggal_lahir) {
-            // Reset password
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-            return redirect()->route('guru.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
-        } else {
-            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
-        }
-    }
-
-    public function showResetPasswordStaff(User $user)
-    {
-        return view('staff.DataDiri.password', compact('user'));
-    }
-
-    public function resetPasswordStaff(Request $request, User $user)
-    {
-        $request->validate([
-            'tanggal_lahir' => 'required|date',
-            'new_password' => 'required|string|min:8',
-            'confirm_password' => 'required|string|same:new_password',
-        ]);
-
-        // Validasi tanggal lahir
-        if ($request->tanggal_lahir == $user->tanggal_lahir) {
-            // Reset password
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-            return redirect()->route('staff.DataDiri.show', ['user' => $user])->with('success', 'Password berhasil direset.');
-        } else {
-            return redirect()->back()->with('error', 'Tanggal lahir tidak cocok. Password tidak direset.');
-        }
-    }
-
-
-
-
+    /* ========================================================= - Active $ Nonactive - ================================================================= */
 
     public function nonaktifkanAdmin($id)
     {

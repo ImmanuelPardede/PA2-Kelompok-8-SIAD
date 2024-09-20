@@ -12,7 +12,8 @@
                         </div>
                     @endif
                     @if ($users->where('role', 'admin')->count() < 2)
-                        <a href="{{ route('admin.administrator.create', ['role' => 'admin']) }}" class="btn btn-success mb-3">Tambah Admin</a>
+                        <a href="{{ route('admin.administrator.create', ['role' => 'admin']) }}"
+                            class="btn btn-success mb-3">Tambah Admin</a>
                     @endif
                 </div>
 
@@ -40,6 +41,15 @@
                                                 class="btn btn-info">Detail</a>
                                             <a href="{{ route('admin.administrator.edit', $user->id) }}"
                                                 class="btn btn-warning">Edit</a>
+                                            <form method="POST" id="deleteForm{{ $user->id }}" class="d-inline"
+                                                action="{{ route('admin.administrator.destroy', $user->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-danger"
+                                                    onclick="handleDeleteConfirmation('deleteForm{{ $user->id }}')">
+                                                    Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -42,6 +42,18 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
+    | Data Diri Admin
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/admin/DataDiri/edit/{user}', [AdministratorController::class, 'editAdminDataDiri'])->name('admin.DataDiri.edit');
+    Route::put('/admin/DataDiri/update/{user}', [AdministratorController::class, 'updateAdminDataDiri'])->name('admin.DataDiri.update');
+    Route::get('/admin/DataDiri/show/{user}', [AdministratorController::class, 'showAdminDataDiri'])->name('admin.DataDiri.show');
+    Route::get('/admin/DataDiri/password/{user}', [AdministratorController::class, 'showResetPasswordAdmin'])->name('admin.DataDiri.password');
+    Route::post('/admin/DataDiri/password/{user}', [AdministratorController::class, 'resetPasswordAdmin'])->name('admin.DataDiri.password');
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Data Anak
     |--------------------------------------------------------------------------
     */

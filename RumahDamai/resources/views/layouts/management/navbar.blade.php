@@ -18,9 +18,7 @@
 
             </ul>
             <ul class="navbar-nav navbar-nav-right">
-
                 <ul class="navbar-nav navbar-nav-right">
-
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                             data-toggle="dropdown">
@@ -70,27 +68,43 @@
                             </span> --}}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                            aria-labelledby="profileDropdown">
                             @if (auth()->user()->role == 'guru')
-                                <a class="dropdown-item" href="{{ route('guru.DataDiri.password', ['user' => auth()->user()->id]) }}">
-                                    <i class="ti-settings text-primary"></i> Settings
-                                </a>
-                                <a class="dropdown-item" href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                <a class="dropdown-item"
+                                    href="{{ route('guru.DataDiri.show', ['user' => auth()->user()->id]) }}">
                                     <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('guru.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
                                 </a>
                             @elseif (auth()->user()->role == 'staff')
-                                <a class="dropdown-item" href="{{ route('staff.DataDiri.password', ['user' => auth()->user()->id]) }}">
-                                    <i class="ti-settings text-primary"></i> Settings
-                                </a>
-                                <a class="dropdown-item" href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                <a class="dropdown-item"
+                                    href="{{ route('staff.DataDiri.show', ['user' => auth()->user()->id]) }}">
                                     <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('staff.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
                                 </a>
                             @elseif (auth()->user()->role == 'direktur')
-                                <a class="dropdown-item" href="{{ route('direktur.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                <a class="dropdown-item"
+                                    href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('direktur.DataDiri.password', ['user' => auth()->user()->id]) }}">
                                     <i class="ti-settings text-primary"></i> Settings
                                 </a>
-                                <a class="dropdown-item" href="{{ route('direktur.DataDiri.show', ['user' => auth()->user()->id]) }}">
+                            @elseif (auth()->user()->role == 'admin')
+                                <a class="dropdown-item"
+                                    href="{{ route('admin.DataDiri.show', ['user' => auth()->user()->id]) }}">
                                     <i class="ti-user text-primary"></i> Data Diri
+                                </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('admin.DataDiri.password', ['user' => auth()->user()->id]) }}">
+                                    <i class="ti-settings text-primary"></i> Settings
                                 </a>
                             @endif
 

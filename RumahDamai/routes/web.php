@@ -43,7 +43,7 @@ Route::delete('admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])
 Route::get('/dashboard', [TodoListController::class, 'index'])->name('dashboard');
 Route::post('/todo/store', [TodoListController::class, 'store'])->name('todo.store');
 Route::delete('/todo/{id}', [TodoListController::class, 'destroy'])->name('todo.destroy');
-Route::post('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit');
+Route::patch('/todo/{id}/edit', [TodoListController::class, 'edit'])->name('todo.edit'); // Gunakan patch untuk update
 
 
 /*

@@ -132,11 +132,13 @@
                             <a href="{{ route('admin.administrator.direktur') }}" class="btn btn-primary mt-3">Kembali</a>
                         @endif
 
-                        <!-- Nonaktifkan atau Aktifkan Pegawai -->
+                        <!-- PDF -->
                         <a href="{{ route('user.pdf', ['id' => $user->id]) }}" class="btn btn-success mt-3">Generate
                             PDF</a>
-                        <!-- Nonaktifkan atau Aktifkan Admin -->
+
                         <div style="float: right;">
+
+                            <!-- Nonaktifkan atau Aktifkan Admin -->
                             @if ($user->role === 'admin')
                                 @if ($user->status === 'aktif')
                                     <form action="{{ route('admin.nonaktifkan.admin', $user->id) }}" method="POST"
@@ -178,26 +180,48 @@
                                 @endif
                             @endif
 
-                            <!-- Nonaktifkan atau Aktifkan Guru -->
-                            @if ($user->role === 'direktur')
+                            <!-- Nonaktifkan atau Aktifkan Staff -->
+                            @if ($user->role === 'staff')
                                 @if ($user->status === 'aktif')
-                                    <form action="{{ route('admin.nonaktifkan.guru', $user->id) }}" method="POST"
+                                    <form action="{{ route('admin.nonaktifkan.staff', $user->id) }}" method="POST"
                                         style="display:inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-danger mt-3"
-                                            onclick="return confirm('Yakin ingin menonaktifkan guru ini?')">Nonaktifkan
-                                            Guru</button>
+                                            onclick="return confirm('Yakin ingin menonaktifkan staff ini?')">Nonaktifkan
+                                            Staff</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('admin.aktifkan.guru', $user->id) }}" method="POST"
+                                    <form action="{{ route('admin.aktifkan.staff', $user->id) }}" method="POST"
                                         style="display:inline;">
                                         @csrf
                                         <button type="submit" class="btn btn-success mt-3"
-                                            onclick="return confirm('Yakin ingin mengaktifkan guru ini?')">Aktifkan
-                                            Guru</button>
+                                            onclick="return confirm('Yakin ingin mengaktifkan staff ini?')">Aktifkan
+                                            Staff</button>
                                     </form>
                                 @endif
                             @endif
+
+                            <!-- Nonaktifkan atau Aktifkan Direktur -->
+                            @if ($user->role === 'direktur')
+                                @if ($user->status === 'aktif')
+                                    <form action="{{ route('admin.nonaktifkan.direktur', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-3"
+                                            onclick="return confirm('Yakin ingin menonaktifkan direktur ini?')">Nonaktifkan
+                                            Direktur</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.aktifkan.direktur', $user->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success mt-3"
+                                            onclick="return confirm('Yakin ingin mengaktifkan direktur ini?')">Aktifkan
+                                            Direktur</button>
+                                    </form>
+                                @endif
+                            @endif
+
                         </div>
                     </div>
                 </div>

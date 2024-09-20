@@ -393,6 +393,29 @@
                     </div>
                 </li> --}}
 
+                {{-- <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#kepegawaian" aria-expanded="false"
+                        aria-controls="kepegawaian">
+                        <i class="mdi mdi-account menu-icon"></i>
+                        <span class="menu-title">Kepegawaian</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="kepegawaian">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.administrator.admin') }}">Admin</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.administrator.guru') }}">Guru</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.administrator.staff') }}">Staff</a></li>
+                            <li class="nav-item"> <a class="nav-link"
+                                    href="{{ route('admin.administrator.direktur') }}">Direktur</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.administrator.all') }}">All</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> --}}
+
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
                         aria-controls="form-elements">

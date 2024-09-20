@@ -10,11 +10,8 @@
                         <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
-                    @endif
-                    @php
-                        $direkturCount = $users->where('role', 'direktur')->count();
-                    @endphp
-                    @if ($direkturCount === 0)
+                    @endif  
+                    @if ($users->where('role', 'direktur')->count() < 2)
                         <a href="{{ route('admin.administrator.create', ['role' => 'direktur']) }}" class="btn btn-success mb-3">Tambah Direktur</a>
                     @endif
                 </div>
