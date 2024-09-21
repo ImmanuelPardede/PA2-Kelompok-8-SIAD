@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Edit Jenis Disabilitas</h2>
@@ -22,19 +22,19 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="kategori_disabilitas">Kategori Disabilitas:</label>
+                        <label for="kategori_disabilitas">Kategori Disabilitas</label>
                         <input type="text" class="form-control" name="kategori_disabilitas"
                             value="{{ old('kategori_disabilitas', $jenisDisabilitas->kategori_disabilitas) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="jenis_disabilitas">Jenis Disabilitas:</label>
+                        <label for="jenis_disabilitas">Jenis Disabilitas</label>
                         <input type="text" class="form-control" name="jenis_disabilitas"
                             value="{{ old('jenis_disabilitas', $jenisDisabilitas->jenis_disabilitas) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="deskripsi">Deskripsi:</label>
+                        <label for="deskripsi">Deskripsi</label>
                         <textarea class="form-control" name="deskripsi">{{ old('deskripsi', $jenisDisabilitas->deskripsi) }}</textarea>
                     </div>
 

@@ -6,7 +6,7 @@
             return $data->tipe_anak === 'disabilitas';
         });
     @endphp
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Tambah PPI B</h2>

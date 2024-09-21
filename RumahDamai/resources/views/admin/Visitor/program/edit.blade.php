@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -16,10 +16,10 @@
                             <!-- Input untuk gambar program -->
                             <div class="form-group">
                                 <div class="d-flex justify-content-center">
-                                <img src="{{ asset($program->img_program) }}" alt="Program Image"
-                                style="width: 500px; height: auto;">
+                                    <img src="{{ asset($program->img_program) }}" alt="Program Image"
+                                        style="width: 500px; height: auto;">
                                 </div>
-                                    <label for="img_program">Gambar Program</label>
+                                <label for="img_program">Gambar Program</label>
                                 <input type="file" class="form-control @error('img_program') is-invalid @enderror"
                                     id="img_program" name="img_program">
                                 <small class="text-muted">Jenis file yang diizinkan: JPG, JPEG, PNG.</small>

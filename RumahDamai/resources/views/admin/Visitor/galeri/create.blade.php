@@ -5,7 +5,6 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title text-left">Form Menambah Galeri</h1>
-
                 <form method="POST" action="{{ route('admin.galeri.store') }}" enctype="multipart/form-data">
                     @csrf
 

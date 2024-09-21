@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->string('no_telepon', 12)->nullable();
             $table->string('lulusan')->nullable();
-            $table->string('pengalaman', 2000)->nullable();
+            $table->text('pengalaman')->nullable();
 
 
             $table->timestamp('tanggal_masuk')->useCurrent();

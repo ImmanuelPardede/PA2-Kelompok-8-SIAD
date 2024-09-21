@@ -14,15 +14,15 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th for="judul">Judul:</th>
+                                        <th for="judul">Judul</th>
                                         <td>{{ $berita->judul }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Kategori:</th>
+                                        <th>Kategori</th>
                                         <td>{{ $berita->kategori->kategori }}</td>
                                     </tr>
                                     <tr>
-                                        <th for="deskripsi">Deskripsi:</th>
+                                        <th for="deskripsi">Deskripsi</th>
                                         <td>{!! $berita->deskripsi !!}</td>
                                     </tr>
                                 </tbody>

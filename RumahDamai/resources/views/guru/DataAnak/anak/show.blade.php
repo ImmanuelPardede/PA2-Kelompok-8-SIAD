@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Anak</h4>

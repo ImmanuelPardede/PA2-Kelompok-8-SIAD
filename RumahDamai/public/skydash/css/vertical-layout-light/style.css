@@ -32123,7 +32123,6 @@ dl li {
 }
 
 .list-wrapper {
-    height: 80%;
     max-height: 390px;
     overflow: scroll;
 }
@@ -49107,6 +49106,8 @@ div.tagsinput span.tag a {
     background-color: #c82333; /* Warna latar belakang merah yang lebih gelap saat tombol dihover */
 }
 
+/* CHART */
+
 .chart-card {
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
@@ -49282,4 +49283,31 @@ div.tagsinput span.tag a {
         padding: 8px 15px; /* Padding lebih kecil untuk item di dropdown */
         font-size: 0.85rem; /* Ukuran font dropdown lebih kecil lagi */
     }
+}
+
+/* Jadwal Pembelajaran Yayasan */
+.table-fixed {
+    table-layout: fixed;
+}
+
+.table-fixed th {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+}
+
+.table-fixed td {
+    width: 125px;
+    height: 125px;
+    text-align: center;
+}
+
+.table-fixed td.special {
+    background-color: lightblue;
+}
+
+.table-fixed td.special {
+    background-color: lightblue;
+    white-space: normal;
+    overflow: visible;
 }

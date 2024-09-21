@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Tambah Semester Tahun Ajaran</h2>
@@ -21,7 +21,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="semester_tahun_ajaran">Tahun Ajaran</label>
+                        <label for="semester_tahun_ajaran">Semester Tahun Ajaran</label>
                         <input type="text" class="form-control" name="semester_tahun_ajaran"
                             value="{{ old('semester_tahun_ajaran') }}" min="1900" max="9999">
                     </div>

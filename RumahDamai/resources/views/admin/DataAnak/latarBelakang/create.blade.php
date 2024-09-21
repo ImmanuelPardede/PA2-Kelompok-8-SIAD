@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Tambah Latar Belakang Anak</h2>
@@ -37,17 +37,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="usia">Usia <span style="color: red">*</span></label>
+                        <label for="usia">Usia</label>
                         <input type="number" class="form-control" id="usia" name="usia" value="{{ old('usia') }}"
                             readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="kelas">Kelas <span style="color: red">*</span></label>
+                        <p class="text-muted mb-2" style="font-style: italic;">Contoh: Pendidikan Lanjut</p>
                         <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}">
                     </div>
                     <div class="form-group">
-                        <label for="tanggal">Tanggal <span style="color: red">*</span></label>
+                        <label for="tanggal">Tanggal</label>
                         <input type="date" class="form-control" name="tanggal"
                             value="{{ old('tanggal') ?? date('Y-m-d') }}" readonly>
                     </div>

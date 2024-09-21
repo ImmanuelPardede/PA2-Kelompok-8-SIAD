@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Diri</h4>
@@ -10,7 +10,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <p class="card-description">{{ $user->nama_lengkap }} {{ $user->nip }} <span class="text-success">{{ $user->status }}</span></p>
+                <p class="card-description">Status : <span class="text-success">{{ $user->status }}</span></p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="table-responsive">

@@ -5,30 +5,24 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title">Edit Galeri Item</h1>
-
-                <!-- Form untuk mengupdate fasilitas item -->
                 <form method="POST" action="{{ route('admin.galeri.update', $galeri->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
                     <div class="mb-3">
                         <label for="judul" class="form-label">judul</label>
                         <input type="text" class="form-control" id="judul" name="judul"
                             value="{{ $galeri->judul }}" placeholder="Enter judul" maxlength="50">
                     </div>
-
                     <div class="mb-3">
                         <label for="waktu" class="form-label">waktu</label>
                         <input type="date" class="form-control" id="waktu" name="waktu"
                             value="{{ $galeri->waktu }}" placeholder="Enter waktu" maxlength="50">
                     </div>
-
                     <div class="mb-3">
                         <label for="lokasi" class="form-label">lokasi</label>
                         <input type="text" class="form-control" id="lokasi" name="lokasi"
                             value="{{ $galeri->lokasi }}" placeholder="Enter lokasi" maxlength="50">
                     </div>
-
                     <!-- Tampilkan gambar saat ini dan input untuk mengganti atau menghapus gambar -->
                     @foreach ($galeri->detailgaleri as $index => $detailgaleri)
                         <div class="mb-4">

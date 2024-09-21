@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Edit Kelas</h2>
@@ -22,13 +22,13 @@
                     @method('PUT')
 
                     <div class="form-group">
-                        <label for="nama_kelas">Nama Kelas:</label>
+                        <label for="nama_kelas">Nama Kelas</label>
                         <input type="text" class="form-control" name="nama_kelas"
                             value="{{ old('nama_kelas', $kelas->nama_kelas) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="tahun_kurikulum_id">Tahun Kurikulum:</label>
+                        <label for="tahun_kurikulum_id">Tahun Kurikulum</label>
                         <select class="form-control js-example-basic-single" id="tahun_kurikulum_id" name="tahun_kurikulum_id">
                             <option value="" disabled>-- Pilih Tahun Kurikulum --</option>
                             @foreach ($tahunKurikulum as $item)
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tahun_ajaran_id">Tahun Ajaran:</label>
+                        <label for="tahun_ajaran_id">Tahun Ajaran</label>
                         <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
                             <option value="" disabled>-- Pilih Tahun Ajaran --</option>
                             @foreach ($tahunAjaran as $item)

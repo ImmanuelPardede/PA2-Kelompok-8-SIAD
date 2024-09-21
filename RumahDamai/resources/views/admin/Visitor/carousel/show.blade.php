@@ -12,11 +12,11 @@
                             <table class="table" style="max-width: 100%;">
                                 <tbody>
                                     <tr>
-                                        <th>Judul:</th>
+                                        <th>Judul</th>
                                         <td>{{ $carouselItem->caption }}</td>
                                     </tr>
                                     <tr>
-                                        <th>SubJudul:</th>
+                                        <th>SubJudul</th>
                                         <td>{{ $carouselItem->subcaption }}</td>
                                     </tr>
                                 </tbody>
@@ -28,7 +28,7 @@
                             <div class="image-frame">
                                 @if ($carouselItem->image_url)
                                     <div class="mb-3">
-                                        <strong>Gambar:</strong>
+                                        <strong>Gambar</strong>
                                         <img src="{{ asset($carouselItem->image_url) }}" alt="Carousel Image"
                                             style="max-width: 300px;">
                                     </div>

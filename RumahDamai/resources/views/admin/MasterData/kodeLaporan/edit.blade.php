@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h2 class="card-title">Edit Kode Laporan</h2>
@@ -21,13 +21,11 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="kode">Kode Laporan</label>
-                        <textarea class="form-control" name="kode">{{ old('kode', $kodeLaporan->kode) }}</textarea>
+                        <input type="text" class="form-control" name="kode" value="{{ old('kode', $kodeLaporan->kode) }}">
                         @error('kode')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
-
                     <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
                     <button type="submit" class="btn btn-success">Perbaharui</button>
                 </form>

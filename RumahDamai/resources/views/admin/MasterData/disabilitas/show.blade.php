@@ -1,7 +1,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Detail Jenis Disabilitas</h4>
@@ -11,15 +11,15 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>Kategori Disabilitas:</th>
+                                        <th>Kategori Disabilitas</th>
                                         <td>{{ $disabilitas->kategori_disabilitas }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Jenis Disabilitas:</th>
+                                        <th>Jenis Disabilitas</th>
                                         <td>{{ $disabilitas->jenis_disabilitas }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Deskripsi:</th>
+                                        <th>Deskripsi</th>
                                         <td>{{ $disabilitas->deskripsi ?? 'Data tidak tersedia' }}</td>
                                     </tr>
                                 </tbody>

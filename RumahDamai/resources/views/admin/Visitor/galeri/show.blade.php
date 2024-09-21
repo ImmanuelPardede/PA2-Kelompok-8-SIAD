@@ -24,7 +24,7 @@
                                         <td>{{ $galeri->lokasi }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Waktu:</th>
+                                        <th>Waktu</th>
                                         <td>{{ $galeri->waktu }}</td>
                                     </tr>
                                 </tbody>

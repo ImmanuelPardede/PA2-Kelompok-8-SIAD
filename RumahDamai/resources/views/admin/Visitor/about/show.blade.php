@@ -2,7 +2,7 @@
 @extends('layouts.management.master')
 
 @section('content')
-    <div class="container">
+    <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Informasi About</h4>
@@ -21,7 +21,7 @@
                                     </tr>
                                     <tr>
                                         <th>Misi</th>
-                                        <td>{!!$abouts->misi!!}</td>
+                                        <td>{!! $abouts->misi !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Wilayah 1</th>
@@ -45,13 +45,15 @@
                             @endif
                             @if ($abouts->img_wilayah1)
                                 <h5>Gambar Wilayah 1</h5>
-                                <img src="{{ asset($abouts->img_wilayah1) }}" alt="Gambar Wilayah 1" class="img-fluid rounded">
+                                <img src="{{ asset($abouts->img_wilayah1) }}" alt="Gambar Wilayah 1"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Gambar Wilayah 1 tidak tersedia.</p>
                             @endif
                             @if ($abouts->img_wilayah2)
                                 <h5>Gambar Wilayah 2</h5>
-                                <img src="{{ asset($abouts->img_wilayah2) }}" alt="Gambar Wilayah 2" class="img-fluid rounded">
+                                <img src="{{ asset($abouts->img_wilayah2) }}" alt="Gambar Wilayah 2"
+                                    class="img-fluid rounded">
                             @else
                                 <p>Gambar Wilayah 2 tidak tersedia.</p>
                             @endif
