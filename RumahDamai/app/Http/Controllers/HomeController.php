@@ -28,35 +28,33 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-        public function dashboard()
-        {
-            $pengumumans = Pengumuman::orderBy('created_at', 'desc')->get();
-            $totalPegawai = User::count();
-            $totalanak = Anak::count();
-            $totalmateri = ModulMateri::count();
-            $todolist = TodoList::all();
-            $totoldonatur = Donatur::count();
+    public function dashboard()
+    {
+        $pengumumans = Pengumuman::orderBy('created_at', 'desc')->get();
+        $totalPegawai = User::count();
+        $totalanak = Anak::count();
+        $totalmateri = ModulMateri::count();
+        $todolist = TodoList::all();
+        $totoldonatur = Donatur::count();
 
-            return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist','totalmateri','totoldonatur'));
-        }
+        return view('dashboard', compact('totalPegawai', 'pengumumans', 'totalanak', 'todolist', 'totalmateri', 'totoldonatur'));
+    }
 
+    public function adminHome()
+    {
+        $totalPegawai = User::count();
+        return view('admin.index', compact('totalPegawai'));
+    }
 
+    public function guruHome()
+    {
+        $totalPegawai = User::count();
+        return view('guru.index', compact('totalPegawai'));
+    }
 
-     public function adminHome()
-     {
-         $totalPegawai = User::count();
-         return view('admin.index', compact('totalPegawai'));
-     }
-
-     public function guruHome()
-     {
-         $totalPegawai = User::count();
-         return view('guru.index', compact('totalPegawai'));
-     }
-
-     public function staffHome()
-     {
-         $totalPegawai = User::count();
-         return view('staff.index', compact('totalPegawai'));
-     }
+    public function staffHome()
+    {
+        $totalPegawai = User::count();
+        return view('staff.index', compact('totalPegawai'));
+    }
 }

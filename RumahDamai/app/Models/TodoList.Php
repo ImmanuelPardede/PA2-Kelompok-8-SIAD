@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TodoList extends Model
 {
     use HasFactory;
-
     protected $table = 'todo_lists';
     protected $fillable = ['tugas', 'user_id', 'status'];
-
-    
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\Pengumuman\PengumumanController;
+use App\Http\Controllers\Pengumuman\MenampilkanPengumumanController;
 use App\Http\Controllers\Admin\Todolist\TodoListController;
 use App\Http\Controllers\Admin\Visitor\FasilitasController;
 use App\Http\Controllers\Admin\Visitor\GaleriController;
@@ -33,6 +34,15 @@ Route::post('admin/pengumuman', [PengumumanController::class, 'store'])->name('a
 Route::get('admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
 Route::put('admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
 Route::delete('admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
+
+
+/*
+|--------------------------------------------------------------------------
+| Display Pengumuman
+|--------------------------------------------------------------------------
+*/
+Route::get('/pengumuman', [MenampilkanPengumumanController::class, 'index'])->name('menampilkanPengumuman.index');
+
 
 
 /*

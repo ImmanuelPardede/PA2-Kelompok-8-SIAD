@@ -66,8 +66,6 @@
 <script src="{{ asset('skydash/js/utama/chartsPendukung.min.js') }}"></script>
 <script src="{{ asset('skydash/js/utama/sidedropdown.js') }}"></script>
 
-
-
 </body>
 
 </html>

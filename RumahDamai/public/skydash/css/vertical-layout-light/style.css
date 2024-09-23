@@ -49311,3 +49311,21 @@ div.tagsinput span.tag a {
     white-space: normal;
     overflow: visible;
 }
+
+
+/* Pagination */
+.pagination .page-item {
+    margin: 0.2rem; /* Optional: Adds some spacing between items */
+}
+
+@media (max-width: 576px) { /* Adjust size for small screens */
+    .pagination {
+        font-size: 0.8rem; /* Decrease font size */
+        flex-wrap: wrap; /* Allows pagination items to wrap on smaller screens */
+        justify-content: center !important; /* Override for mobile */
+    }
+
+    .pagination .page-item .page-link {
+        padding: 0.25rem 0.5rem; /* Reduce padding */
+    }
+}

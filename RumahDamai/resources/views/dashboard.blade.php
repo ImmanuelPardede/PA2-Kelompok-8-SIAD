@@ -177,8 +177,8 @@
                                                 @if (!$pengumuman->isReadByUser(Auth::id()))
                                                     <i class="fas fa-exclamation-circle text-danger"></i>
                                                 @endif
-                                                <a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}"><span
-                                                        class="text-primary">[{{ $pengumuman->kategori }}]</span>
+                                                <a href="{{ route('pengumuman.show', ['id' => $pengumuman->id]) }}">
+                                                    <span class="text-primary">[{{ $pengumuman->kategori }}]</span>
                                                     @if (Auth::user()->role == 'admin')
                                                         <!-- Admin -->
                                                         {!! Str::limit($pengumuman->judul, 40) !!}
@@ -186,8 +186,11 @@
                                                         {!! Str::limit($pengumuman->judul, 60) !!}
                                                     @endif
                                                 </a>
+                                                <br>
+                                                <small class="text-muted">
+                                                    {{ \Carbon\Carbon::parse($pengumuman->updated_at)->format('d/m/Y H:i') }}
+                                                </small>
                                             </td>
-
 
                                             @if (Auth::user()->role == 'admin')
                                                 <td>

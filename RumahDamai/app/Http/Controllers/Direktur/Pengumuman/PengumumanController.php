@@ -11,7 +11,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
-
 class PengumumanController extends Controller
 {
     public function index()
@@ -49,7 +48,6 @@ class PengumumanController extends Controller
             'kategori' => $request->kategori,
             'user_id' => Auth::id(),
         ]);
-
 
         $users = User::where('role', '!=', 'direktur')->get();
 
@@ -102,7 +100,6 @@ class PengumumanController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil dihapus.');
     }
-
 
     public function markAsRead()
     {

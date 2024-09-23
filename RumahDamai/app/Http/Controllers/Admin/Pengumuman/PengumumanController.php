@@ -11,14 +11,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
-
 class PengumumanController extends Controller
 {
     public function index()
     {
         // Mengambil semua pengumuman dari model Pengumuman
         $pengumumans = Pengumuman::all();
-        
+
         // Mengirimkan data pengumuman ke view 'dashboard'
         return view('dashboard', compact('pengumumans'));
     }
@@ -48,27 +47,25 @@ class PengumumanController extends Controller
             'kategori' => $request->kategori,
             'user_id' => Auth::id(),
         ]);
-    
 
-            $users = User::where('role', '!=', 'admin')->get();
+        $pengumuman->created_at = now();
+        $pengumuman->save();
 
-            // Send notification to each user
-            foreach ($users as $user) {
-                $user->notify(new PengumumanNotification($pengumuman));
-            }
-        
+        $users = User::where('role', '!=', 'admin')->get();
 
-              return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil ditambahkan.');
-
+        // Send notification to each user
+        foreach ($users as $user) {
+            $user->notify(new PengumumanNotification($pengumuman));
+        }
+        return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil ditambahkan.');
     }
 
     public function show($id)
     {
-        
         $user = User::all();
         $lokasi = LokasiTugas::all();
         $pengumuman = Pengumuman::findOrFail($id);
-        return view('admin.pengumuman.show', compact('pengumuman','user','lokasi'));
+        return view('admin.pengumuman.show', compact('pengumuman', 'user', 'lokasi'));
     }
 
     public function edit($id)
@@ -104,12 +101,9 @@ class PengumumanController extends Controller
         return redirect()->route('dashboard')->with('success', 'Pengumuman berhasil dihapus.');
     }
 
-
     public function markAsRead()
-{
-    Auth::user()->unreadNotifications->markAsRead();
-    return response()->json(['success' => true]);
-}
-
-
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+        return response()->json(['success' => true]);
+    }
 }

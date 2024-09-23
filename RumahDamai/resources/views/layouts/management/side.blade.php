@@ -35,6 +35,12 @@
                 <span class="menu-title">Jadwal Pembelajaran</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('menampilkanPengumuman.index') }}" class="nav-link">
+                <i class="mdi mdi-bullhorn menu-icon"></i>
+                <span class="menu-title">Pengumuman</span>
+            </a>
+        </li>
         @auth
             @if (auth()->user()->role === 'admin')
                 <li class="nav-item">
