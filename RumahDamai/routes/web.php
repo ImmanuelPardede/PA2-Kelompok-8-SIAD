@@ -44,7 +44,6 @@ Route::delete('admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])
 Route::get('/pengumuman', [MenampilkanPengumumanController::class, 'index'])->name('menampilkanPengumuman.index');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | To-do List

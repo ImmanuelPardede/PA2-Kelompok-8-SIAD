@@ -67,9 +67,15 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-end">
-                    {{ $anakList->links('pagination::bootstrap-4') }}
-                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end justify-content-md-end justify-content-center">
+                                {{ $anakList->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>       
             </div>
         </div>
     </div>

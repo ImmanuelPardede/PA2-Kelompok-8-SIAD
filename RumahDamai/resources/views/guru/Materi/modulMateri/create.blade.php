@@ -56,8 +56,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea id="editor1" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                            autocomplete="deskripsi">
+                            <ol><li></li></ol>{{ old('deskripsi') }}
+                        </textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -69,3 +77,16 @@
         </div>
     </div>
 @endsection
+
+<script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        ClassicEditor
+            .create(document.querySelector('#editor1'), {
+                // Konfigurasi CKEditor 5 untuk textarea pertama
+            })
+            .catch(error => {
+                console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+            });
+    });
+</script>

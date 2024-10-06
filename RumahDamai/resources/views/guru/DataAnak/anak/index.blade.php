@@ -4,63 +4,91 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1 class="display-5 font-weight-bold text-left">Data Anak</h1>
-                    <!-- Tampilkan notifikasi jika ada -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                <div class="d-flex justify-content-center">
+                    <h1 class="card-title head-data">Data Anak</h1>
                 </div>
 
                 <hr>
+
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('guru.anak.export.excel') }}" class="btn btn-primary mr-auto">Export to Excel</a>
-                    <form action="{{ route('guru.anak.index') }}" method="GET" class="d-flex">
-                        <div class="input-group">
-                            <input type="text" name="search" id="search" class="form-control typeahead" placeholder="Cari Nama Anak" aria-label="Cari Nama Anak" value="{{ request('search') ?? '' }}">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-primary" type="submit">Cari</button>
-                            </div>
-                        </div>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" id="search" name="search"
+                            placeholder="Cari..." aria-label="Search">
                     </form>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table mt-3 table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Foto</th>
-                                <th scope="col">Nama Lengkap</th>
-                                <th scope="col">Jenis Kelamin</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($anakList as $anak)
-                                <tr>
-                                    <td><img src="{{ asset($anak->foto_profil) }}" alt=""></td>
-                                    <td>{{ $anak->nama_lengkap }}</td>
-                                    <td>{{ $anak->jenisKelamin->jenis_kelamin }}</td>
-                                    <td>{{ $anak->status }}</td>
-                                    <td>
-                                        <a href="{{ route('guru.anak.show', $anak->id) }}" class="btn btn-info">Detail</a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5">Tidak ada Data Anak.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                <div id="results" class="table-responsive mt-3">
+                    @include('guru.DataAnak.anak._table', ['anakList' => $anakList])
                 </div>
-                <div class="d-flex justify-content-end">
-                    {{ $anakList->links('pagination::bootstrap-4') }}
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end">
+                                {{ $anakList->appends(['search' => request('search')])->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const resultsContainer = document.getElementById('results');
+
+        // Event listener untuk keyup di kolom pencarian
+        searchInput.addEventListener('keyup', function() {
+            let query = this.value;
+
+            // Cek apakah kueri tidak kosong
+            if (query) {
+                fetch(`{{ route('guru.anak.index') }}?search=${query}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        resultsContainer.innerHTML = data; // Perbarui hasil
+                    })
+                    .catch(error => {
+                        console.error('Ada masalah dengan operasi fetch:', error);
+                    });
+            } else {
+                // Jika kueri kosong, kirim permintaan untuk mendapatkan data awal
+                fetch(`{{ route('guru.anak.index') }}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        resultsContainer.innerHTML = data; // Tampilkan data awal
+                    })
+                    .catch(error => {
+                        console.error('Ada masalah dengan operasi fetch:', error);
+                    });
+            }
+        });
+
+        // Cegah pengiriman form saat menekan Enter
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Cegah pengiriman form
+            }
+        });
+    </script>
 @endsection

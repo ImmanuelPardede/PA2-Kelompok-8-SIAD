@@ -49329,3 +49329,34 @@ div.tagsinput span.tag a {
         padding: 0.25rem 0.5rem; /* Reduce padding */
     }
 }
+
+/* Button Back */
+.btn-back {
+    background-color: white;
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.btn-back:hover {
+    background-color: #28a745; /* Hijau saat hover */
+    color: white; /* Warna teks tetap putih */
+}
+
+/* head data */
+.head-data {
+    text-align: center;  /* Center the text */
+    font-size: 1.5rem !important;  /* Force the font size */
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;   /* Make the font bold */
+    color: #007bff;      /* Change the text color (Bootstrap primary color) */
+    margin-top: 2rem;    /* Add space above the heading */
+    margin-bottom: 1rem; /* Add space below the heading */
+}
+
+@media (max-width: 576px) {
+    .head-data {
+        font-size: 1.2rem !important;  /* Smaller font size for mobile */
+        margin-top: 1.5rem;  /* Adjust top margin for smaller screens */
+        margin-bottom: 0.75rem; /* Adjust bottom margin for smaller screens */
+    }
+}

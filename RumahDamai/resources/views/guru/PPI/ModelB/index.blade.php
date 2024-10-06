@@ -1,53 +1,93 @@
 @extends('layouts.management.master')
 
 @section('content')
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="card-title">PPI Model B</h1>
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                <a href="{{ route('ppiB.create') }}" class="btn btn-success mb-3">Tambah PPI B</a>  
-            </div>
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <h1 class="card-title head-data">Data Anak Didik</h1>
+                </div>
 
-            <div class="table-responsive">
-                <table class="table mt-3 table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nama Anak</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($ppiBList as $ppiB)
-                            <tr>
-                                <td>{{ $ppiB->anak->nama_lengkap }}</td>
-                                <td>
-                                    <a href="{{ route('ppiB.show', $ppiB->id) }}" class="btn btn-info">Detail</a>
-                                    <a href="{{ route('ppiB.edit', $ppiB->id) }}" class="btn btn-warning">Edit</a>
-                                    <form method="POST" id="deleteForm{{ $ppiB->id }}" class="d-inline" action="{{ route('ppiB.destroy', $ppiB->id) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $ppiB->id }}')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2">Tidak ada PPI B.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end">
-                {{ $ppiBList->links('pagination::bootstrap-4') }}
+                <hr>
+
+                <div class="d-flex justify-content-end">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Cari..."
+                            aria-label="Search">
+                    </form>
+                </div>
+
+                <div id="results" class="table-responsive mt-3">
+                    @include('guru.ppi.modelB._table', ['anak' => $anak])
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end">
+                                {{ $anak->appends(['search' => request('search')])->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const resultsContainer = document.getElementById('results');
+
+        // Event listener untuk keyup di kolom pencarian
+        searchInput.addEventListener('keyup', function() {
+            let query = this.value;
+
+            // Cek apakah kueri tidak kosong
+            if (query) {
+                fetch(`{{ route('ppiB.index') }}?search=${query}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        resultsContainer.innerHTML = data; // Perbarui hasil
+                    })
+                    .catch(error => {
+                        console.error('Ada masalah dengan operasi fetch:', error);
+                    });
+            } else {
+                // Jika kueri kosong, kirim permintaan untuk mendapatkan data awal
+                fetch(`{{ route('ppiB.index') }}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        resultsContainer.innerHTML = data; // Tampilkan data awal
+                    })
+                    .catch(error => {
+                        console.error('Ada masalah dengan operasi fetch:', error);
+                    });
+            }
+        });
+
+        // Cegah pengiriman form saat menekan Enter
+        searchInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Cegah pengiriman form
+            }
+        });
+    </script>
 @endsection

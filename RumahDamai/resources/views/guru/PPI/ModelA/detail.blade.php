@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-        /* Custom styles for the layout */
         .info-card {
             margin-bottom: 15px;
             padding: 15px;
@@ -78,7 +77,7 @@
                     <div class="col-sm-6">
                         <div class="info-card">
                             <div class="title">Tanggal Lahir</div>
-                            <div>{{ $ppiA->anak->tanggal_lahir }}</div>
+                            <div>{{ \Carbon\Carbon::parse($ppiA->anak->tanggal_lahir)->format('d-m-Y') }}</div>
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -96,7 +95,7 @@
                     <div class="col-sm-6">
                         <div class="info-card">
                             <div class="title">Tanggal Penyusunan</div>
-                            <div>{{ $ppiA->created_at }}</div>
+                            <div>{{ \Carbon\Carbon::parse($ppiA->created_at)->format('d-m-Y') }}</div>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
-                                        <td>{{ $modulMateri->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $modulMateri->deskripsi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

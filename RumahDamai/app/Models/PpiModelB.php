@@ -13,8 +13,6 @@ class PpiModelB extends Model
     protected $fillable = [
         'anak_id',
         'user_id',
-        'file_ppi_b',
-        'deskripsi',
     ];
 
     public function anak()
@@ -25,5 +23,10 @@ class PpiModelB extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function detailPpiB()
+    {
+        return $this->hasOne(DetailPpiB::class, 'ppiB_id');
     }
 }

@@ -19,9 +19,21 @@ use Illuminate\Support\Facades\DB; // Tambahkan ini di atas class controller And
 
 class RaportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $anak = Anak::all();
+        $query = $request->input('search');
+
+        // Paginate the records directly
+        $anak = Anak::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('nama_lengkap', 'like', "%{$query}%")
+                ->orWhere('status', 'like', "%{$query}%");
+        })
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return view('guru.raport._table', ['anak' => $anak])->render();
+        }
+
         return view('guru.raport.index', compact('anak'));
     }
 

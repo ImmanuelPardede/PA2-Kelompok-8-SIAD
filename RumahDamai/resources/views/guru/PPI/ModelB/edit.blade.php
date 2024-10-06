@@ -1,16 +1,12 @@
 @extends('layouts.management.master')
 
 @section('content')
-<div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Edit PPI Model B</h2>
-            @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Edit PPI Model B</h2>
 
+                <!-- Display validation errors -->
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -20,38 +16,65 @@
                         </ul>
                     </div>
                 @endif
-            <form action="{{ route('ppiB.update', $ppiB->id) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="anak_id">Nama Anak</label>
-                    <select class="form-control js-example-basic-single" id="anak_id" name="anak_id">
-                        <option value="" disabled>-- Nama Anak --</option>
-                        @foreach ($anak as $anakdata)
-                            <option value="{{ $anakdata->id }}" {{ $ppiB->anak_id == $anakdata->id ? 'selected' : '' }}>
-                                {{ $anakdata->nama_lengkap }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
 
-                <div class="form-group">
-                    <label for="file_ppi_b">File PPI B</label>
-                    <input type="file" class="form-control" name="file_ppi_b">
-                    <small class="text-muted">Jenis file yang diizinkan: PDF, DOC, DOCX.</small>
-                </div>
+                <form action="{{ route('ppiB.update', $ppiB->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+{{--
+                    <!-- Nama Anak -->
+                    <div class="form-group mb-3">
+                        <label for="anak_id"><strong>Nama Anak</strong></label>
+                        <div>{{ $anak->nama_lengkap }}</div>
+                        <input type="hidden" name="anak_id" value="{{ $anak->id }}">
+                    </div> --}}
 
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea class="form-control" name="deskripsi">{{ old('deskripsi', $ppiB->deskripsi) }}</textarea>
-                </div>
+                    <!-- File PPI B -->
+                    <div class="form-group mb-3">
+                        <label for="file_ppi_b">File PPI B</label>
+                        <div>
+                            @if ($detailppi && $detailppi->file_ppi_b)
+                                <label>File Lama:
+                                    <a href="{{ asset('uploads/ppiB_files/' . $detailppi->file_ppi_b) }}" target="_blank">
+                                        {{ $detailppi->file_ppi_b }}
+                                    </a>
+                                </label><br>
+                            @else
+                                <span>Tidak ada file yang diunggah.</span>
+                            @endif
+                        </div>
+                        <input type="file" class="form-control mt-2" name="file_ppi_b" accept=".pdf,.doc,.docx">
+                        <small class="text-muted">Jenis file yang diizinkan: PDF, DOC, DOCX.</small>
+                    </div>
 
-                <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
-                <button type="submit" class="btn btn-success" id="submitButton" onclick="handleUpdatedConfirmation(event)">Perbaharui</button>
-            </form>
+                    <!-- Deskripsi -->
+                    <div class="form-group mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea id="editor1" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required>{{ old('deskripsi', $detailppi->deskripsi) }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <!-- CKEditor -->
+                    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+
+                        <a href="{{ url()->previous() }}" class="btn btn-primary">Batal</a>
+                        <button type="submit" class="btn btn-success">Perbaharui</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-@endsection
 
-<script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <!-- Initialize CKEditor -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'))
+                .catch(error => {
+                    console.error('Error initializing CKEditor 5:', error);
+                });
+        });
+    </script>
+@endsection

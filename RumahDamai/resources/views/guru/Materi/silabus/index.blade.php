@@ -52,8 +52,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-end">
-                    {{ $silabusList->links('pagination::bootstrap-4') }}
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end justify-content-md-end justify-content-center">
+                                {{ $silabusList->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

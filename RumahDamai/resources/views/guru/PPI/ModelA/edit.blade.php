@@ -110,8 +110,7 @@
 
                         <div class="form-group">
                             <div class="mb-3">
-                                <label for="tujuan_jangka_pendek" class="form-label">Tujuan Jangka pendek (satu tahun)<span
-                                        style="color: red">*</span></label>
+                                <label for="tujuan_jangka_pendek" class="form-label">Tujuan Jangka pendek (satu tahun)</label>
                                 <textarea id="editor7" class="form-control @error('tujuan_jangka_pendek') is-invalid @enderror"
                                     name="tujuan_jangka_pendek" required autocomplete="tujuan_jangka_pendek">{{ $ppi->tujuan_jangka_pendek }}
                             </textarea>

@@ -3,26 +3,64 @@
 namespace App\Http\Controllers\Guru\PPI\ModelB;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPpiB;
 use App\Models\FormatLaporan;
 use App\Models\PpiModelB;
 use App\Models\Anak;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // Add this line
+
 
 class PPIBController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ppiBList = PpiModelB::with('anak')->paginate(10);
-        return view('guru.ppi.modelB.index', compact('ppiBList'));
+        $query = $request->input('search');
+
+        // Combine conditions for filtering 'tipe_anak' and search query with grouping
+        $anak = Anak::where('tipe_anak', 'non_disabilitas')
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where(function ($subQuery) use ($query) {
+                    $subQuery->where('nama_lengkap', 'like', "%{$query}%")
+                        ->orWhere('status', 'like', "%{$query}%");
+                });
+            })
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return view('guru.ppi.modelB._table', ['anak' => $anak])->render();
+        }
+
+        return view('guru.ppi.modelB.index', compact('anak'));
     }
 
-    public function create()
+    public function show($id)
     {
-        $anakList = Anak::all();
-        $formatLaporanList = FormatLaporan::all(); // Mengambil semua format laporan
-        return view('guru.ppi.modelB.create', compact('anakList', 'formatLaporanList'));
+        $anak = Anak::all();
+        $ppiB = PpiModelB::where('anak_id', $id)->get();
+        return view('guru.ppi.modelB.show', compact('ppiB', 'anak', 'id'));
+    }
+
+    public function detail($id)
+    {
+        $ppiB = PpiModelB::findOrFail($id);
+        $detailppi = DetailPpiB::where('ppiB_id', $id)->get(); // Pastikan variabel ini terdefinisi
+        return view('guru.ppi.modelB.detail', compact('ppiB', 'detailppi'));
+    }
+
+    public function create($anak_id)
+    {
+        $anak = Anak::all(); // Retrieve all Anak records
+        $filteredAnak = $anak->filter(function ($data) {
+            return $data->tipe_anak === 'non_disabilitas'; // Adjust condition based on your needs
+        });
+
+        $formatLaporanList = FormatLaporan::all(); // Retrieve format laporan if needed
+
+        return view('guru.ppi.modelB.create', compact('anak', 'filteredAnak', 'formatLaporanList'));
     }
 
     public function store(Request $request)
@@ -35,51 +73,52 @@ class PPIBController extends Controller
             'deskripsi.string' => 'Deskripsi harus berupa teks.',
         ];
 
+        // Validasi input
         $request->validate([
             'anak_id' => 'required|exists:anak,id',
             'file_ppi_b' => 'required|mimes:pdf,doc,docx',
             'deskripsi' => 'nullable|string',
         ], $messages);
 
-
-        $userRole = Auth::user()->role;
-
-        if ($userRole === 'guru') {
-            $filePpiB = null;
-
-            if ($request->hasFile('file_ppi_b')) {
-                $file = $request->file('file_ppi_b');
-                $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
-                $filePpiB = $fileName; // Gunakan nama asli file
-                $file->move(public_path('uploads/ppiB_files'), $filePpiB); // Store file in 'ppiB_files' directory
-            }
-
-            PpiModelB::create([
-                'anak_id' => $request->anak_id,
-                'user_id' => Auth::id(),
-                'file_ppi_b' => $filePpiB,
-                'deskripsi' => $request->deskripsi,
-            ]);
-
-            return redirect()->route('ppiB.index')->with('success', 'PPI Model B berhasil disimpan.');
+        if ($request->hasFile('file_ppi_b')) {
+            $file = $request->file('file_ppi_b');
+            $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
+            $filePpiB = $fileName; // Gunakan nama asli file
+            $file->move(public_path('uploads/ppiB_files'), $filePpiB); // Store file in 'ppiB_files' directory
+        } else {
+            return redirect()->back()->withInput()->withErrors(['file_ppi_b' => 'File PPI B harus diunggah.']);
         }
 
-        return redirect()->route('ppiB.index')->with('error', 'Anda tidak memiliki izin untuk melakukan tindakan ini.');
-    }
+        try {
+            // Buat entri PpiModelB baru
+            $ppiB = new PpiModelB();
+            $ppiB->anak_id = $request->input('anak_id');
+            $ppiB->user_id = Auth::id(); // Assign logged in user ID
+            $ppiB->save();
 
+            // Buat entri DetailPpiB baru
+            $detailPpiB = new DetailPpiB();
+            $detailPpiB->ppiB_id = $ppiB->id;
+            $detailPpiB->file_ppi_b = $filePpiB; // Correctly assign the saved file name
+            $detailPpiB->deskripsi = $request->input('deskripsi');
+            $detailPpiB->save();
 
-    public function show($id)
-    {
-        $ppiB = PpiModelB::findOrFail($id);
-        return view('guru.ppi.modelB.show', compact('ppiB'));
+            // Redirect ke halaman raport dengan pesan sukses
+            return redirect()->route('ppiB.show', ['id' => $ppiB->anak_id])->with('success', 'Raport berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            // Log error for debugging
+            Log::error('Error saving PPI B: ' . $e->getMessage()); // Now this line will work
+            return redirect()->back()->withInput()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
+        }
     }
 
     public function edit($id)
     {
         $ppiB = PpiModelB::findOrFail($id);
-        $anak = Anak::all();
-        $formatLaporanList = FormatLaporan::all();
-        return view('guru.ppi.modelB.edit', compact('ppiB', 'anak', 'formatLaporanList'));
+        $anak = Anak::findOrFail($ppiB->anak_id);
+        $detailppi = DetailPpiB::where('ppiB_id', $id)->firstOrFail();
+
+        return view('guru.ppi.modelB.edit', compact('ppiB', 'anak', 'detailppi'));
     }
 
     public function update(Request $request, $id)
@@ -97,48 +136,78 @@ class PPIBController extends Controller
         $request->validate([
             'anak_id' => 'required|exists:anak,id',
             'file_ppi_b' => 'nullable|mimes:pdf,doc,docx',
-            'deskripsi' => 'nullable|string|required',
+            'deskripsi' => 'required|string',
         ], $messages);
 
-        $filePpiB = $ppiB->file_ppi_b;
+        $detailPpiB = DetailPpiB::where('ppiB_id', $ppiB->id)->firstOrFail();
 
         if ($request->hasFile('file_ppi_b')) {
             $file = $request->file('file_ppi_b');
-            $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
-            $newFilePpiB = $fileName; // Gunakan nama asli file
-            $file->move(public_path('uploads/ppiB_files'), $newFilePpiB); // Store file in 'ppiB_files' directory
+            $originalName = $file->getClientOriginalName(); // Get the original filename
 
-            // Hapus file lama jika ada
-            if ($ppiB->file_ppi_b && file_exists(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b))) {
-                unlink(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b));
+            // Move the file with the original name
+            try {
+                // Move uploaded file
+                $file->move(public_path('uploads/ppiB_files'), $originalName);
+                Log::info("File uploaded: {$originalName}");
+
+                // Delete old file if it exists
+                if ($detailPpiB->file_ppi_b && file_exists(public_path('uploads/ppiB_files/' . $detailPpiB->file_ppi_b))) {
+                    unlink(public_path('uploads/ppiB_files/' . $detailPpiB->file_ppi_b));
+                    Log::info("Old file deleted: {$detailPpiB->file_ppi_b}");
+                }
+
+                // Update the filename to the original filename
+                $detailPpiB->file_ppi_b = $originalName;
+            } catch (\Exception $e) {
+                Log::error('Failed to upload file: ' . $e->getMessage());
+                return redirect()->back()->withInput()->withErrors(['file_ppi_b' => 'Failed to upload file.']);
             }
-
-            $filePpiB = $newFilePpiB;
         }
 
-        // Update data PPI B
-        $ppiB->update([
-            'anak_id' => $request->anak_id,
-            'file_ppi_b' => $filePpiB,
-            'deskripsi' => $request->deskripsi,
-        ]);
+        try {
+            // Update PpiModelB and DetailPpiB
+            $ppiB->anak_id = $request->input('anak_id');
+            $ppiB->user_id = Auth::id();
+            $ppiB->save();
+            Log::info("PpiModelB ID {$id} updated.");
 
-        return redirect()->route('ppiB.index')->with('success', 'PPI Model B berhasil diperbarui.');
+            $detailPpiB->deskripsi = $request->input('deskripsi');
+            $detailPpiB->save();
+            Log::info("DetailPpiB ID {$detailPpiB->id} updated.");
+
+            return redirect()->route('ppiB.show', ['id' => $ppiB->anak_id])->with('success', 'PPI Model B berhasil diperbarui.');
+        } catch (\Exception $e) {
+            Log::error('Error updating PPI B: ' . $e->getMessage());
+            return redirect()->back()->withInput()->withErrors(['error' => 'Terjadi kesalahan. Silakan coba lagi.']);
+        }
     }
 
     public function destroy($id)
     {
+        // Ambil informasi anak terkait dengan raport yang akan dihapus
         $ppiB = PpiModelB::findOrFail($id);
+        $anakId = $ppiB->anak_id;
 
-        // Hapus file terlebih dahulu jika ada
-        if ($ppiB->file_ppi_b && file_exists(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b))) {
-            unlink(public_path('uploads/ppiB_files/' . $ppiB->file_ppi_b));
+        // Ambil detail terkait untuk mendapatkan nama file
+        $detailPpiB = DetailPpiB::where('ppiB_id', $id)->first();
+
+        // Hapus terlebih dahulu semua detailraports terkait
+        DetailPpiB::where('ppiB_id', $id)->delete();
+
+        // Hapus file jika ada
+        if ($detailPpiB && $detailPpiB->file_ppi_b) {
+            $filePath = public_path('uploads/ppiB_files/' . $detailPpiB->file_ppi_b);
+            if (file_exists($filePath)) {
+                unlink($filePath); // Hapus file
+                Log::info("File deleted: {$detailPpiB->file_ppi_b}");
+            }
         }
 
-        // Hapus entitas PPI Model B
+        // Kemudian hapus Raport
         $ppiB->delete();
 
-        return redirect()->route('ppiB.index')->with('success', 'PPI Model B berhasil dihapus.');
+        return redirect()->route('ppiB.show', ['id' => $anakId])->with('success', 'Raport berhasil dihapus.');
     }
 
     public function downloadPpiB($id)

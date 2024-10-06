@@ -12,10 +12,10 @@
                     </form>
                 </h1>
 
-
                 <div id="results" class="table-responsive">
                     @include('pengumuman._table', ['pengumumans' => $pengumumans])
                 </div>
+                
                 <div class="row">
                     <div class="col-md-12">
                         <nav aria-label="Page navigation">
@@ -24,7 +24,7 @@
                             </ul>
                         </nav>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>

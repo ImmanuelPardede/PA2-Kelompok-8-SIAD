@@ -14,17 +14,27 @@ class AnakController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        // Get the search query from the request
+        $query = $request->input('search');
 
-        if ($search) {
-            $anakList = Anak::where('nama_lengkap', 'like', "%{$search}%")
-                ->orderBy('created_at', 'desc')
-                ->paginate(7);
-        } else {
-            $anakList = Anak::orderBy('created_at', 'desc')->paginate(7);
+        // Retrieve paginated results based on the search query
+        $anakList = Anak::with('jenisKelamin') // Ensure the relationship is loaded
+            ->when($query, function ($queryBuilder) use ($query) {
+                return $queryBuilder->where('nama_lengkap', 'like', "%{$query}%")
+                    ->orWhereHas('jenisKelamin', function ($q) use ($query) {
+                        $q->where('jenis_kelamin', 'like', "%{$query}%"); // Filter by gender name
+                    })
+                    ->orWhere('status', 'like', "%{$query}%"); // Filter by status
+            })->paginate(10); // Paginate the results (10 per page)
+
+        // Check if the request is an AJAX request
+        if ($request->ajax()) {
+            // Return the updated table view with paginated results
+            return view('guru.DataAnak.anak._table', data: compact('anakList'))->render();
         }
 
-        return view('guru.DataAnak.Anak.index', compact('anakList'));
+        // Return the full view with paginated results and the search query
+        return view('guru.DataAnak.Anak.index', compact('anakList', 'query'));
     }
 
     /**

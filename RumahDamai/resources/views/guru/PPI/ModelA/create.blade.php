@@ -25,17 +25,13 @@
                     <input type="hidden" name="anak_id" value="{{ $anak_id }}">
 
                     <div class="form-group">
-                        <label for="level_komunikasi" class="form-label">Level Komunikasi<span
-                                style="color: red">*</span></label>
-                        <textarea id="editor1" class="form-control @error('level_komunikasi') is-invalid @enderror" name="level_komunikasi"
-                            required autocomplete="level_komunikasi">
-                <p>Ekspresif&nbsp;:</p><ol><li></li></ol><p>Reseptif&nbsp;:</p><ol><li></li></ol>
-                {{ old('level_komunikasi') }}
-            </textarea>
+                        <label for="level_komunikasi" class="form-label">Level Komunikasi<span style="color: red">*</span></label>
+                        <textarea id="editor1" class="form-control @error('level_komunikasi') is-invalid @enderror" name="level_komunikasi" autocomplete="level_komunikasi">
+                            <p>Ekspresif&nbsp;:</p><ol><li></li></ol><p>Reseptif&nbsp;:</p><ol><li></li></ol>
+                            {{ old('level_komunikasi') }}
+                        </textarea>
                         @error('level_komunikasi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
 

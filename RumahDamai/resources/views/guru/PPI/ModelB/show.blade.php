@@ -4,46 +4,55 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Detail PPI Model B</h4>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h1 class="card-title">Data PPI B @if ($ppiB->isNotEmpty())
+                            {{ $ppiB->first()->anak->nama_lengkap }}
+                        @endif
+                    </h1>
+
+                    <a href="{{ route('ppiB.create', ['anak_id' => $id]) }}" class="btn btn-success">Buat PPI</a>
+                </div>
                 <div class="row">
                     <div class="col-md">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table mt-3 table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Dibuat</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                    <tr>
-                                        <th for="anak">Nama Anak:</th>
-                                        <td>
-                                            @if ($ppiB->anak->nama_lengkap)
-                                                {{ $ppiB->anak->nama_lengkap }}
-                                            @else
-                                                Data Tidak Tersedia
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th for="file_ppi_b">File PPI B:</th>
-                                        <td>
-                                            @if ($ppiB->file_ppi_b)
-                                                <a href="{{ route('ppiB.downloadPpiB', $ppiB->id) }}">{{ $ppiB->file_ppi_b }}</a>
-                                            @else
-                                                Data tidak tersedia
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th for="deskripsi">Deskripsi:</th>
-                                        <td>
-                                            @if ($ppiB->deskripsi)
-                                                {!! nl2br(e($ppiB->deskripsi)) !!}
-                                            @else
-                                                Data tidak tersedia
-                                            @endif
-                                        </td>
-                                    </tr>
+                                    @foreach ($ppiB as $key => $ppi)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($ppi->created_at)->format('d-m-Y') }}</td>
+                                            <!-- Only Date -->
+                                            <td>
+                                                <a href="{{ route('ppiB.detail', $ppi->id) }}"
+                                                    class="btn btn-info">Detail</a>
+                                                <a href="{{ route('ppiB.edit', $ppi->id) }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                <form method="POST" id="deleteForm{{ $ppi->id }}" class="d-inline"
+                                                    action="{{ route('ppiB.destroy', $ppi->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="handleDeleteConfirmation('deleteForm{{ $ppi->id }}')">
+                                                        Hapus
+                                                    </button>
+                                                </form>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        <a href="{{ route('ppiB.index') }}" class="btn btn-primary mt-3">Kembali</a>
+                        <div class="mt-4 d-flex justify-content-end">
+                            <a href="{{ route('ppiB.index') }}" class="btn btn-back">Kembali Ke daftar PPIB Anak Didik</a>
+                        </div>
                     </div>
                 </div>
             </div>

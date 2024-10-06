@@ -14,9 +14,24 @@ use Illuminate\Support\Facades\Auth;
 
 class PPIAController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $anak = Anak::all();
+        $query = $request->input('search');
+
+        // Combine conditions for filtering 'tipe_anak' and search query with grouping
+        $anak = Anak::where('tipe_anak', 'disabilitas')
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where(function ($subQuery) use ($query) {
+                    $subQuery->where('nama_lengkap', 'like', "%{$query}%")
+                        ->orWhere('status', 'like', "%{$query}%");
+                });
+            })
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return view('guru.ppi.modelA._table', ['anak' => $anak])->render();
+        }
+
         return view('guru.ppi.modelA.index', compact('anak'));
     }
 
@@ -34,7 +49,6 @@ class PPIAController extends Controller
         return view('guru.ppi.ModelA.detail', compact('ppiA', 'detailppi'));
     }
 
-
     public function create($anak_id)
     {
         $anak = Anak::findOrFail($anak_id);
@@ -44,7 +58,6 @@ class PPIAController extends Controller
         $users = User::where('role', 'guru')->where('id', $loggedInUserId)->get();
         return view('guru.ppi.modelA.create', compact('anak', 'ppiA', 'anak_id'));
     }
-
 
     public function store(Request $request)
     {
@@ -90,7 +103,7 @@ class PPIAController extends Controller
     public function edit($id)
     {
         $ppiA = PpiModelA::findOrFail($id);
-        $anak = Anak::find($ppiA->anak_id); // Fetch the specific Anak related to the raport
+        $anak = Anak::find(id: $ppiA->anak_id); // Fetch the specific Anak related to the raport
         $detailppi = DetailPpiA::where('ppiA_id', $id)->get(); // Pastikan variabel ini terdefinisi
         return view('guru.ppi.modelA.edit', compact('ppiA', 'detailppi', 'anak'));
     }

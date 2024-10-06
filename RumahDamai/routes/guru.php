@@ -39,6 +39,7 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::post('/ppiA/store', [PPIAController::class, 'store'])->name('ppiA.store');
     Route::get('/ppiA/edit/{id}', [PPIAController::class, 'edit'])->name('ppiA.edit');
     Route::put('/ppiA/{id}', [PPIAController::class, 'update'])->name('ppiA.update');
+
     Route::delete('/ppiA/destroy/{id}', [PPIAController::class, 'destroy'])->name('ppiA.destroy');
     Route::get('/ppiA/detail/{id}', [PPIAController::class, 'detail'])->name('ppiA.detail');
     Route::get('/ppiA/pdf/{id}', [PPIAController::class, 'pdf'])->name('ppiA.pdf');
@@ -51,16 +52,16 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     */
     Route::get('/ppiB', [PPIBController::class, 'index'])->name('ppiB.index');
     Route::get('/ppiB/show/{id}', [PPIBController::class, 'show'])->name('ppiB.show');
-    Route::get('/ppiB/create', [PPIBController::class, 'create'])->name('ppiB.create');
+    Route::get('/ppiB/create/{anak_id}', [PPIBController::class, 'create'])->name('ppiB.create');
     Route::post('/ppiB/store', [PPIBController::class, 'store'])->name('ppiB.store');
     Route::get('/ppiB/edit/{id}', [PPIBController::class, 'edit'])->name('ppiB.edit');
     Route::put('/ppiB/{id}', [PPIBController::class, 'update'])->name('ppiB.update');
+
     Route::delete('/ppiB/destroy/{id}', [PPIBController::class, 'destroy'])->name('ppiB.destroy');
     Route::get('/ppiB/detail/{id}', [PPIBController::class, 'detail'])->name('ppiB.detail');
     Route::get('/ppiB/downloadPpiB/{id}', [PPIBController::class, 'downloadPpiB'])->name('ppiB.downloadPpiB');
     Route::get('/get-format-laporan', [PPIBController::class, 'getFormatLaporan'])->name('get-format-laporan');
     Route::get('/download-format-laporan/{id}', [PPIBController::class, 'downloadFormatLaporan'])->name('downloadFormatLaporan');
-
 
 
     /*
@@ -72,7 +73,6 @@ Route::middleware(['auth', 'user-access:guru'])->group(function () {
     Route::get('/materi/download/{id}', [ModulMateriController::class, 'download'])->name('modulMateri.download');
     Route::resource('/materi/silabus', SilabusController::class);
     Route::post('/modul-materi/{modulMateri}/tambah-jadwal', [ModulMateriController::class, 'tambahJadwalPembelajaran'])->name('modulMateri.tambahJadwal');
-
 
 
     /*
