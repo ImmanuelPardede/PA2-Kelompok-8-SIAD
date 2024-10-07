@@ -13,11 +13,11 @@ class ModulMateri extends Model
     protected $fillable = [
         'kelas_id',
         'nama_materi',
-        'minggu_pembelajaran_id',
-        'tahun_kurikulum_id',
-        'user_id',
-        'file_modul',
         'deskripsi',
+        'user_id',
+        'tahun_kurikulum_id',
+        'minggu_pembelajaran_id',
+        'tahun_ajaran_id',
     ];
 
     public function kelas()
@@ -43,5 +43,10 @@ class ModulMateri extends Model
     public function lokasiPenugasan()
     {
         return $this->belongsTo(LokasiTugas::class, 'lokasi_penugasan_id');
+    }
+
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
     }
 }

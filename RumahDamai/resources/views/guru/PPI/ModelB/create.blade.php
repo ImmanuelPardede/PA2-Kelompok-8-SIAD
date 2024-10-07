@@ -22,16 +22,7 @@
                 @endif
                 <form action="{{ route('ppiB.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="anak_id">Anak<span style="color: red">*</span></label>
-                        <select name="anak_id" id="anak_id" class="form-control js-example-basic-single">
-                            <option value="" disabled selected>-- Pilih Anak --</option>
-                            @foreach ($filteredAnak as $anakItem)
-                                <option value="{{ $anakItem->id }}">{{ $anakItem->nama_lengkap }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
+                    <input type="hidden" name="anak_id" value="{{ $anak_id }}">
 
                     <div id="format_laporan_container" class="form-group">
                         @foreach ($formatLaporanList as $formatLaporan)

@@ -20,13 +20,8 @@
                 <form action="{{ route('ppiB.update', $ppiB->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-{{--
-                    <!-- Nama Anak -->
-                    <div class="form-group mb-3">
-                        <label for="anak_id"><strong>Nama Anak</strong></label>
-                        <div>{{ $anak->nama_lengkap }}</div>
-                        <input type="hidden" name="anak_id" value="{{ $anak->id }}">
-                    </div> --}}
+                    <input type="hidden" name="anak_id" value="{{ $anak->id }}">
+
 
                     <!-- File PPI B -->
                     <div class="form-group mb-3">

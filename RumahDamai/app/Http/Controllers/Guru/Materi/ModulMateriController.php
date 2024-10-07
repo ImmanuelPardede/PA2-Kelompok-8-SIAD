@@ -6,6 +6,7 @@ use App\Models\JadwalPembelajaran;
 use App\Models\Kelas;
 use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -16,28 +17,42 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Carbon\Carbon;
 
 
-
 class ModulMateriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $guruId = Auth::id();
 
+        // Get the current year (you may need to adjust this based on your business logic)
+        $currentYear = now()->year; // This gets the current year
+        $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first(); // Assuming 'tahun_ajaran' holds the year value
+
+        // If there is no specific year provided in the request, use the current year's ID
+        $tahunAjaranId = $request->input('tahun_ajaran_id') ?: ($tahunAjaran ? $tahunAjaran->id : null);
+
+        // Fetch modul materi with filtering
         $modulMateriList = ModulMateri::where('user_id', $guruId)
+            ->when($tahunAjaranId, function ($query, $tahunAjaranId) {
+                return $query->where('tahun_ajaran_id', $tahunAjaranId);
+            })
             ->with('mingguPembelajaran')
             ->orderBy('created_at', 'asc')
             ->paginate(7);
 
-        $mingguPembelajaran = MingguPembelajaran::all(); // Ambil data minggu pembelajaran
+        // Get all available Tahun Ajaran, ordered by year descending
+        $tahunAjaranList = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get(); // Adjust 'tahun_ajaran' to your column name
 
-        return view('guru.materi.modulMateri.index', compact('modulMateriList', 'mingguPembelajaran'));
+        return view('guru.materi.modulMateri.index', compact('modulMateriList', 'tahunAjaranList'));
     }
+
+
 
     public function create()
     {
         $kelas = Kelas::all();
+        $tahunAjaran = TahunAjaran::all(); // Fetch all academic years
 
-        // Ubah cara load data MingguPembelajaran berdasarkan lokasi_penugasan_id
+        // Load MingguPembelajaran based on lokasi_penugasan_id
         $mingguPembelajaran = MingguPembelajaran::where('lokasi_penugasan_id', auth()->user()->lokasi_penugasan_id)->get();
 
         $tahun_kurikulum_id = null;
@@ -51,8 +66,10 @@ class ModulMateriController extends Controller
             }
         }
 
-        return view('guru.materi.modulMateri.create', compact('kelas', 'mingguPembelajaran', 'tahun_kurikulum_id'));
+        return view('guru.materi.modulMateri.create', compact('kelas', 'mingguPembelajaran', 'tahun_kurikulum_id', 'tahunAjaran'));
     }
+
+
 
     public function store(Request $request)
     {
@@ -67,6 +84,8 @@ class ModulMateriController extends Controller
             'file_modul.required' => 'File modul harus diunggah.',
             'file_modul.mimes' => 'File modul harus berupa PDF, DOC, atau DOCX.',
             'file_modul.max' => 'File modul tidak boleh lebih besar dari 2048 KB.',
+            'tahun_ajaran.required' => 'Tahun ajaran harus diisi.',
+            'tahun_ajaran.string' => 'Tahun ajaran harus berupa teks.',
         ];
 
         $request->validate([
@@ -75,6 +94,7 @@ class ModulMateriController extends Controller
             'deskripsi' => 'nullable|string',
             'minggu_pembelajaran_id' => 'required|exists:minggu_pembelajaran,id',
             'file_modul' => 'required|mimes:pdf,doc,docx|max:2048',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajaran,id',
         ], $messages);
 
         $user = Auth::user();
@@ -89,6 +109,7 @@ class ModulMateriController extends Controller
             'tahun_kurikulum_id' => $tahun_kurikulum_id,
             'minggu_pembelajaran_id' => $request->minggu_pembelajaran_id,
             'tanggal_publish' => now(),
+            'tahun_ajaran_id' => $request->tahun_ajaran_id, // Corrected line to save the tahun_ajaran_id
         ]);
 
         if ($request->hasFile('file_modul')) {
@@ -117,13 +138,15 @@ class ModulMateriController extends Controller
     public function edit(string $id)
     {
         $modulMateri = ModulMateri::findOrFail($id);
-        $kelas = Kelas::all(); // Mengambil data kelas untuk dropdown
+        $kelas = Kelas::all(); // Fetch all classes
+        $tahunAjaran = TahunAjaran::all(); // Fetch all academic years
 
-        // Ubah cara load data MingguPembelajaran berdasarkan lokasi_penugasan_id
+        // Load MingguPembelajaran based on lokasi_penugasan_id
         $mingguPembelajaran = MingguPembelajaran::where('lokasi_penugasan_id', auth()->user()->lokasi_penugasan_id)->get();
 
-        return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas', 'mingguPembelajaran'));
+        return view('guru.materi.modulMateri.edit', compact('modulMateri', 'kelas', 'mingguPembelajaran', 'tahunAjaran'));
     }
+
 
     public function update(Request $request, string $id)
     {
@@ -135,6 +158,8 @@ class ModulMateriController extends Controller
             'deskripsi.string' => 'Deskripsi harus berupa teks.',
             'file_modul.mimes' => 'File modul harus berupa PDF, DOC, atau DOCX.',
             'file_modul.max' => 'File modul tidak boleh lebih besar dari 2048 KB.',
+            'tahun_ajaran.required' => 'Tahun ajaran harus diisi.',
+            'tahun_ajaran.string' => 'Tahun ajaran harus berupa teks.',
         ];
 
         $request->validate([
@@ -142,6 +167,7 @@ class ModulMateriController extends Controller
             'nama_materi' => 'required|string',
             'deskripsi' => 'nullable|string',
             'file_modul' => 'sometimes|mimes:pdf,doc,docx|max:2048',
+            'tahun_ajaran_id' => 'required|exists:tahun_ajaran,id',
         ], $messages);
 
         $modulMateri = ModulMateri::findOrFail($id);
@@ -176,6 +202,7 @@ class ModulMateriController extends Controller
             }
 
             $input['file_modul'] = $fileName; // Update the file_modul field
+            $input['tahun_ajaran'] = $request->tahun_ajaran; // Add this line
         }
 
         $modulMateri->update($input);

@@ -38,10 +38,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tahun_ajaran_id">Tahun Ajaran<span style="color: red">*</span></label>
+                        <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                            <option value="" disabled selected>-- Pilih Tahun Ajaran --</option>
+                            @foreach ($tahunAjaran as $tahunItem)
+                                <option value="{{ $tahunItem->id }}">{{ $tahunItem->tahun_ajaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="minggu_pembelajaran_id">Minggu Pembelajaran<span style="color: red">*</span></label>
-                        <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id"
-                            name="minggu_pembelajaran_id" >
-                            <option value="" disabled selected>-- Minggu Pembelajaran--</option>
+                        <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id" >
+                            <option value="" disabled selected>-- Minggu Pembelajaran --</option>
                             @foreach ($mingguPembelajaran as $mingguPembelajaranItem)
                                 <option value="{{ $mingguPembelajaranItem->id }}">
                                     {{ $mingguPembelajaranItem->minggu_pembelajaran }}</option>

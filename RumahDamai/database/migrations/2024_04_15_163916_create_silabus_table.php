@@ -11,6 +11,7 @@ class CreateSilabusTable extends Migration
         Schema::create('silabus', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tahun_kurikulum_id');
+            $table->unsignedInteger('tahun_ajaran_id');
             $table->unsignedInteger('kelas_id');
             $table->unsignedInteger('user_id');
             $table->text('deskripsi')->nullable();
@@ -24,6 +25,7 @@ class CreateSilabusTable extends Migration
 
             $table->foreign('tahun_kurikulum_id')->references('id')->on('tahun_kurikulum')->onDelete('cascade');
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+            $table->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

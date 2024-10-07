@@ -13,6 +13,7 @@ class Silabus extends Model
 
     protected $fillable = [
         'tahun_kurikulum_id',
+        'tahun_ajaran_id',
         'kelas_id',
         'user_id',
         'deskripsi',
@@ -37,5 +38,10 @@ class Silabus extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id');
     }
 }

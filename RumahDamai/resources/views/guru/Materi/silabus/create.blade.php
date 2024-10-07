@@ -35,6 +35,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tahun_ajaran_id">Tahun Ajaran<span style="color: red">*</span></label>
+                        <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                            <option value="" disabled selected>-- Pilih Tahun Ajaran --</option>
+                            @foreach ($tahunAjaran as $tahunItem)
+                                <option value="{{ $tahunItem->id }}">{{ $tahunItem->tahun_ajaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="kelas_id">Nama Kelas<span style="color: red">*</span></label>
                         <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id">
                             <option value="" disabled selected>-- Nama Kelas --</option>

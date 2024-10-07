@@ -44,6 +44,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tahun_ajaran_id">Tahun Ajaran</label>
+                        <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                            <option value="" disabled>-- Pilih Tahun Ajaran --</option>
+                            @foreach ($tahunAjaran as $tahunItem)
+                                <option value="{{ $tahunItem->id }}"
+                                    {{ $modulMateri->tahun_ajaran_id == $tahunItem->id ? 'selected' : '' }}>
+                                    {{ $tahunItem->tahun_ajaran }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="minggu_pembelajaran_id">Minggu Pembelajaran</label>
                         <select class="form-control js-example-basic-single" id="minggu_pembelajaran_id" name="minggu_pembelajaran_id">
                             <option value="" disabled>-- Minggu Pembelajaran --</option>

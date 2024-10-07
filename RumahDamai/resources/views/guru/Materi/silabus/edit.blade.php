@@ -33,6 +33,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tahun_ajaran_id">Tahun Ajaran</label>
+                        <select class="form-control js-example-basic-single" id="tahun_ajaran_id" name="tahun_ajaran_id">
+                            <option value="" disabled>-- Pilih Tahun Ajaran --</option>
+                            @foreach ($tahunAjaran as $tahunItem)
+                                <option value="{{ $tahunItem->id }}"
+                                    {{ $silabus->tahun_ajaran_id == $tahunItem->id ? 'selected' : '' }}>
+                                    {{ $tahunItem->tahun_ajaran }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="kelas_id">Nama Kelas</label>
                         <select class="form-control js-example-basic-single" id="kelas_id" name="kelas_id">
                             @foreach ($kelas as $kelasItem)
@@ -44,7 +57,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Deskripsi<span style="color: red">*</span></label>
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
                         <textarea id="editor1" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" required
                             autocomplete="deskripsi">
             {{ $silabus->deskripsi }}
@@ -57,7 +70,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="hasil_kursus" class="form-label">Hasil Kursus<span style="color: red">*</span></label>
+                        <label for="hasil_kursus" class="form-label">Hasil Kursus</label>
                         <textarea id="editor2" class="form-control @error('hasil_kursus') is-invalid @enderror" name="hasil_kursus" required
                             autocomplete="hasil_kursus">
             {{ $silabus->hasil_kursus }}
@@ -70,8 +83,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="tipe_pembelajaran" class="form-label">Tipe Pembelajaran<span
-                                style="color: red">*</span></label>
+                        <label for="tipe_pembelajaran" class="form-label">Tipe Pembelajaran</label>
                         <textarea id="editor3" class="form-control @error('tipe_pembelajaran') is-invalid @enderror" name="tipe_pembelajaran"
                             required autocomplete="tipe_pembelajaran">
             {{ $silabus->tipe_pembelajaran }}
@@ -84,7 +96,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="penilaian" class="form-label">Penilaian<span style="color: red">*</span></label>
+                        <label for="penilaian" class="form-label">Penilaian</label>
                         <textarea id="editor4" class="form-control @error('penilaian') is-invalid @enderror" name="penilaian" required
                             autocomplete="penilaian">
             {{ $silabus->penilaian }}
@@ -97,7 +109,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="konten_kursus" class="form-label">Konten Kursus<span style="color: red">*</span></label>
+                        <label for="konten_kursus" class="form-label">Konten Kursus</label>
                         <textarea id="editor5" class="form-control @error('konten_kursus') is-invalid @enderror" name="konten_kursus" required
                             autocomplete="konten_kursus">
             {{ $silabus->konten_kursus }}
@@ -111,7 +123,7 @@
 
                     <div class="mb-3">
                         <label for="buku_pegangan_dan_referensi" class="form-label">Buku Pegangan Dan
-                            Referensi<span style="color: red">*</span></label>
+                            Referensi</label>
                         <textarea id="editor6" class="form-control @error('buku_pegangan_dan_referensi') is-invalid @enderror"
                             name="buku_pegangan_dan_referensi" required autocomplete="buku_pegangan_dan_referensi">
             {{ $silabus->buku_pegangan_dan_referensi }}
@@ -124,7 +136,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="alat" class="form-label">Alat<span style="color: red">*</span></label>
+                        <label for="alat" class="form-label">Alat</label>
                         <textarea id="editor7" class="form-control @error('alat') is-invalid @enderror" name="alat" required
                             autocomplete="alat">
             {{ $silabus->alat }}
