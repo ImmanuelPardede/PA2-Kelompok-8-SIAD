@@ -29,6 +29,12 @@ class JadwalPembelajaran extends Model
         'jam_selesai' => null,
     ];
 
+    protected $casts = [
+        'tanggal_pembelajaran' => 'date',
+        'jam_mulai' => 'datetime:H:i',
+        'jam_selesai' => 'datetime:H:i',
+    ];
+
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
@@ -52,5 +58,26 @@ class JadwalPembelajaran extends Model
     public function lokasiPenugasan()
     {
         return $this->belongsTo(LokasiTugas::class, 'lokasi_penugasan_id');
+    }
+
+    /**
+     * Accessor untuk mendapatkan hari pembelajaran dalam bahasa Indonesia.
+     *
+     * @param string $value
+     * @return string
+     */
+    public function getHariPembelajaranAttribute($value)
+    {
+        $days = [
+            'Sunday' => 'Minggu',
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu'
+        ];
+
+        return $days[$value] ?? $value;
     }
 }

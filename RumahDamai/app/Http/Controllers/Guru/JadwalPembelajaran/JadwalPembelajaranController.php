@@ -8,10 +8,12 @@ use App\Models\LokasiTugas;
 use App\Models\MingguPembelajaran;
 use App\Models\ModulMateri;
 use App\Models\JadwalPembelajaran;
+use App\Models\TahunAjaran;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 
@@ -38,21 +40,50 @@ class JadwalPembelajaranController extends Controller
         }
     }
 
-
-    public function index()
+    public function index(Request $request)
     {
         // Ambil ID pengguna yang sedang login
         $userId = Auth::id();
 
-        // Ambil jadwal pembelajaran yang dibuat oleh pengguna itu sendiri
+        // Ambil lokasi penugasan dari pengguna yang login
+        $user = Auth::user();
+        $lokasiPenugasanId = $user->lokasi_penugasan_id; // Asumsi field ini ada di model User
+
+        // Ambil tahun ajaran yang sesuai dengan tahun sekarang
+        $currentYear = date('Y');
+        $tahunAjaranId = null; // Inisialisasi dengan null
+
+        // Asumsi Anda memiliki model bernama 'TahunAjaran' untuk mengambil tahun ajaran saat ini
+        $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first(); // Sesuaikan nama kolom jika perlu
+        if ($tahunAjaran) {
+            $tahunAjaranId = $tahunAjaran->id; // Dapatkan ID tahun ajaran saat ini
+        }
+
+        // Ambil data minggu pembelajaran pertama sebagai default jika tidak ada input dari request
+        $mingguPembelajaran = JadwalPembelajaran::where('minggu_pembelajaran_id')->first();
+        $mingguPembelajaranId = $request->input('minggu_pembelajaran_id') ?: ($mingguPembelajaran ? $mingguPembelajaran->id : null);
+
+        // Ambil jadwal pembelajaran yang sesuai dengan user yang login, lokasi penugasan, minggu pembelajaran yang dipilih,
+        // dan tahun ajaran yang sesuai dengan tahun sekarang
         $jadwalPembelajaran = JadwalPembelajaran::with(['modulMateri', 'modulMateri.mingguPembelajaran'])
-            ->where('user_id', $userId) // Filter berdasarkan ID pengguna
+            ->where('user_id', $userId)
+            ->when($mingguPembelajaranId, function ($query, $mingguPembelajaranId) {
+                return $query->where('minggu_pembelajaran_id', $mingguPembelajaranId);
+            })
+            ->whereHas('modulMateri', function ($query) use ($tahunAjaranId) {
+                return $query->where('tahun_ajaran_id', $tahunAjaranId);
+            })
             ->orderBy('created_at', 'asc')
             ->paginate(7);
 
-        return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran'));
-    }
+        // Ambil data minggu pembelajaran berdasarkan lokasi penugasan pengguna yang login untuk dropdown,
+        // sorting by minggu_pembelajaran as a number
+        $mingguPembelajaranList = MingguPembelajaran::where('lokasi_penugasan_id', $lokasiPenugasanId)
+            ->orderBy(DB::raw('CAST(minggu_pembelajaran AS UNSIGNED)'), 'asc') // Urutkan sebagai angka
+            ->get();
 
+        return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran', 'mingguPembelajaranList'));
+    }
 
     public function store(Request $request)
     {
@@ -94,30 +125,16 @@ class JadwalPembelajaranController extends Controller
             Log::info('Request Data:', $request->all());
 
             $validatedData = $request->validate([
-                'kelas_id' => 'nullable',
-                'minggu_pembelajaran_id' => 'nullable',
-                'modul_materi_id' => 'nullable',
-                'user_id' => 'nullable',
-                'lokasi_penugasan_id' => 'nullable',
-                'tanggal_pembelajaran' => 'nullable|date',
-                'hari_pembelajaran' => 'nullable|string',
-                'jam_mulai' => 'nullable|date_format:H:i',
-                'jam_selesai' => 'nullable|date_format:H:i|after:jam_mulai',
+                'tanggal_pembelajaran' => 'required|date',
+                'jam_mulai' => 'required|date_format:H:i',
+                'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
             ]);
 
+            // Update hari_pembelajaran berdasarkan tanggal_pembelajaran
+            $tanggal = Carbon::createFromFormat('Y-m-d', $validatedData['tanggal_pembelajaran']);
+            $validatedData['hari_pembelajaran'] = $tanggal->translatedFormat('l'); // Atau 'd/m/Y' sesuai kebutuhan
+
             Log::info('Validated Data:', $validatedData);
-
-            if (!array_key_exists('lokasi_penugasan_id', $validatedData)) {
-                $validatedData['lokasi_penugasan_id'] = $jadwalPembelajaran->lokasi_penugasan_id;
-            }
-
-            // Hapus validasi untuk jam_mulai dan jam_selesai jika keduanya tidak diisi
-            if (!$request->filled('jam_mulai')) {
-                unset($validatedData['jam_mulai']);
-            }
-            if (!$request->filled('jam_selesai')) {
-                unset($validatedData['jam_selesai']);
-            }
 
             Log::info('Before Update:', $jadwalPembelajaran->toArray());
 

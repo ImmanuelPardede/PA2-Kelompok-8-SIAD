@@ -49360,3 +49360,188 @@ div.tagsinput span.tag a {
         margin-bottom: 0.75rem; /* Adjust bottom margin for smaller screens */
     }
 }
+
+
+/* =================================================================================================================================
+                                               Dropdown Pilih Minggu Pembelajaran
+================================================================================================================================= */
+.custom-selectDropdown {
+    width: 300px; /* Default width for large screens */
+    padding: 10px; /* Example padding */
+    /* border-radius: 25px;
+    border: 1px solid #007bff;  */
+    transition: border-color 0.3s ease-in-out; /* Smooth transition for border color on focus */
+}
+
+.custom-selectDropdown:focus {
+    border-color: #0056b3; /* Darker blue on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow on focus */
+}
+
+
+
+/* Large Screens (Laptops, Desktops) */
+@media (max-width: 1199.98px) {
+    .custom-selectDropdown {
+        width: 25em; /* Large screens like laptops */
+        max-width: 100%; /* Prevents overflow */
+    }
+}
+
+/* Medium Screens (Tablets, Small Laptops) */
+@media (max-width: 992px) {
+    .custom-selectDropdown {
+        width: 22em; /* Adjust width for tablets */
+        max-width: 100%; /* Ensure dropdown fits smaller screens */
+        padding: 9px; /* Adjusted padding for medium screens */
+    }
+}
+
+/* Mobile Styles (Large Phones, Small Tablets) */
+@media (max-width: 768px) {
+    .custom-selectDropdown {
+        width: 20em; /* For 768px wide displays (like tablets, large phones) */
+        max-width: 100%; /* Prevents overflow */
+        padding: 8px; /* Reduced padding for mobile */
+    }
+}
+
+/* Large Mobile Phones (412px, Galaxy, Pixel 5, etc.) */
+@media (max-width: 576px) {
+    .custom-selectDropdown {
+        width: 21em; /* Adjust width for large mobile displays (412px, 360px) */
+        max-width: 100%; /* Ensure it fits within screen */
+        padding: 7px; /* Padding adjusted for mobile phones */
+    }
+}
+
+/* Large Mobile Phones (412px, Galaxy, Pixel 5, etc.) */
+@media (max-width: 430px) {
+    .custom-selectDropdown {
+        width: 22.3em; /* Adjust width for large mobile displays (412px, 360px) */
+        max-width: 100%; /* Ensure it fits within screen */
+        padding: 7px; /* Padding adjusted for mobile phones */
+    }
+}
+
+@media (max-width: 414px) {
+    .custom-selectDropdown {
+        width: 21.3em; /* Adjust width for large mobile displays (412px, 360px) */
+        max-width: 100%; /* Ensure it fits within screen */
+        padding: 7px; /* Padding adjusted for mobile phones */
+    }
+}
+
+@media (max-width: 414px) {
+    .custom-selectDropdown {
+        width: 21em; /* Adjust width for large mobile displays (412px, 360px) */
+        max-width: 100%; /* Ensure it fits within screen */
+        padding: 7px; /* Padding adjusted for mobile phones */
+    }
+}
+
+/* For 390px Wide Displays (iPhone 12, iPhone 13, etc.) */
+@media (max-width: 390px) {
+    .custom-selectDropdown {
+        width: 19.5em; /* For 390px devices */
+        max-width: 100%; /* No overflow on small phones */
+        padding: 6px; /* Adjusted padding */
+    }
+}
+
+/* Small Mobile Phones (e.g., 375px, iPhone SE, iPhone X) */
+@media (max-width: 375px) {
+    .custom-selectDropdown {
+        width: 18.3em; /* For small phone screens */
+        max-width: 100%; /* Prevents overflow */
+        padding: 6px; /* Reduced padding */
+    }
+}
+
+@media (max-width: 360px) {
+    .custom-selectDropdown {
+        width: 17.3em; /* For small phone screens */
+        max-width: 100%; /* Prevents overflow */
+        padding: 6px; /* Reduced padding */
+    }
+}
+
+/* Very Small Screens (e.g., 350px, 320px wide phones like iPhone 5) */
+@media (max-width: 350px) {
+    .custom-selectDropdown {
+        width: 18em; /* Narrower for very small devices */
+        max-width: 100%; /* Prevents overflow */
+        padding: 5px; /* Reduced padding */
+    }
+}
+
+/* Extra Small Screens (Phones smaller than 320px wide) */
+@media (max-width: 320px) {
+    .custom-selectDropdown {
+        width: 16em; /* Narrow for very small phones */
+        max-width: 100%; /* Ensure full width usage */
+        padding: 4px; /* Minimal padding for tight spaces */
+    }
+}
+
+
+/* =================================================================================================================================
+                                              Base styling for the custom search bar
+================================================================================================================================= */
+.custom-search-form {
+    display: flex;
+    justify-content: end; /* Aligns form to the right */
+    margin-bottom: 10px; /* Adds space below */
+}
+
+.custom-search-input {
+    width: 350px; /* Wider default width for the search input */
+    padding: 12px; /* Comfortable padding */
+    border-radius: 30px; /* Smooth, rounded corners */
+    border: 1px solid #c0c0c0;
+    transition: all 0.3s ease-in-out; /* Smooth transition for focus effects */
+}
+
+.custom-search-input:focus {
+    border-color: #0056b3; /* Darker blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Responsive styling */
+
+/* For tablets and small laptops */
+@media (max-width: 992px) {
+    .custom-search-input {
+        width: 300px; /* Adjust width for tablets */
+        padding: 10px; /* Adjusted padding */
+    }
+}
+
+/* For larger mobile devices */
+@media (max-width: 768px) {
+    .custom-search-input {
+        width: 260px; /* Reduced width for mobile devices */
+        padding: 9px; /* Adjusted padding for smaller devices */
+    }
+}
+
+/* For small mobile devices */
+@media (max-width: 576px) {
+    .custom-search-input {
+        width: 100%; /* Full width on small mobile devices */
+        padding: 8px; /* Smaller padding */
+    }
+
+    .custom-search-form {
+        justify-content: center; /* Center the search bar on smaller devices */
+    }
+}
+
+/* For very small mobile devices */
+@media (max-width: 375px) {
+    .custom-search-input {
+        width: 90%; /* Slight margin on sides for tiny screens */
+        padding: 7px; /* Further reduced padding */
+    }
+}

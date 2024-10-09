@@ -15,35 +15,46 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ModulMateriController extends Controller
 {
     public function index(Request $request)
     {
         $guruId = Auth::id();
+        $guru = Auth::user();
+        $lokasiPenugasanId = $guru->lokasi_penugasan_id;
 
-        // Get the current year (you may need to adjust this based on your business logic)
-        $currentYear = now()->year; // This gets the current year
-        $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first(); // Assuming 'tahun_ajaran' holds the year value
-
-        // If there is no specific year provided in the request, use the current year's ID
+        // Filter Tahun Ajaran
+        $currentYear = now()->year;
+        $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first();
         $tahunAjaranId = $request->input('tahun_ajaran_id') ?: ($tahunAjaran ? $tahunAjaran->id : null);
 
-        // Fetch modul materi with filtering
+        // Filter Minggu Pembelajaran
+        $mingguPembelajaranId = $request->input('minggu_pembelajaran_id') ?: null;
+
+        // Fetch Modul Materi berdasarkan Tahun Ajaran dan Minggu Pembelajaran
         $modulMateriList = ModulMateri::where('user_id', $guruId)
             ->when($tahunAjaranId, function ($query, $tahunAjaranId) {
                 return $query->where('tahun_ajaran_id', $tahunAjaranId);
+            })
+            ->when($mingguPembelajaranId, function ($query, $mingguPembelajaranId) {
+                return $query->where('minggu_pembelajaran_id', $mingguPembelajaranId);
             })
             ->with('mingguPembelajaran')
             ->orderBy('created_at', 'asc')
             ->paginate(7);
 
-        // Get all available Tahun Ajaran, ordered by year descending
-        $tahunAjaranList = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get(); // Adjust 'tahun_ajaran' to your column name
+        // Get all available Tahun Ajaran dan Minggu Pembelajaran untuk dropdown
+        $tahunAjaranList = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
+        $mingguPembelajaranList = MingguPembelajaran::where('lokasi_penugasan_id', $lokasiPenugasanId)
+            ->orderBy(DB::raw('CAST(minggu_pembelajaran AS UNSIGNED)'), 'asc')
+            ->get();
 
-        return view('guru.materi.modulMateri.index', compact('modulMateriList', 'tahunAjaranList'));
+        return view('guru.materi.modulMateri.index', compact('modulMateriList', 'tahunAjaranList', 'mingguPembelajaranList'));
     }
+
 
 
 
@@ -181,34 +192,34 @@ class ModulMateriController extends Controller
         $input['tahun_kurikulum_id'] = $tahun_kurikulum_id;
 
         if ($request->hasFile('file_modul')) {
-            $request->validate([
-                'file_modul' => 'mimes:pdf,doc,docx|max:2048',
-            ]);
-
             $file = $request->file('file_modul');
-            $fileName = $file->getClientOriginalName(); // Menggunakan nama asli file yang diunggah
+            $originalName = $file->getClientOriginalName(); // Get the original filename
 
-            // Pindahkan file ke direktori tujuan
-            $file->move(public_path('uploads/documents'), $fileName);
+            // Move the file with the original name
+            try {
+                // Move uploaded file
+                $file->move(public_path('uploads/documents'), $originalName);
+                Log::info("File uploaded: {$originalName}");
 
-            // Hapus file lama hanya jika file baru berhasil disimpan
-            if ($modulMateri->file_modul) {
-                $fileToDelete = public_path('uploads/documents/' . $modulMateri->file_modul);
-
-                if (file_exists($fileToDelete)) {
-                    // Hapus file lama
-                    unlink($fileToDelete);
+                // Delete old file if it exists
+                if ($modulMateri->file_modul && file_exists(public_path('uploads/documents/' . $modulMateri->file_modul))) {
+                    unlink(public_path('uploads/documents/' . $modulMateri->file_modul));
+                    Log::info("Old file deleted: {$modulMateri->file_modul}");
                 }
-            }
 
-            $input['file_modul'] = $fileName; // Update the file_modul field
-            $input['tahun_ajaran'] = $request->tahun_ajaran; // Add this line
+                // Update the filename to the original filename
+                $modulMateri->file_modul = $originalName;
+            } catch (\Exception $e) {
+                Log::error('Failed to upload file: ' . $e->getMessage());
+                return redirect()->back()->withInput()->withErrors(['file_modul' => 'Failed to upload file.']);
+            }
         }
 
         $modulMateri->update($input);
 
         return redirect()->route('modulMateri.index')->with('success', 'Modul Materi berhasil diperbarui.');
     }
+
 
     public function destroy(string $id)
     {

@@ -11,11 +11,10 @@
                 <hr>
 
                 <div class="d-flex justify-content-end">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Cari..."
-                            aria-label="Search">
+                    <form class="custom-search-form my-2 my-lg-0">
+                        <input class="custom-search-input" type="text" id="search" name="search" placeholder="Cari..." aria-label="Search">
                     </form>
-                </div>
+                </div>                
 
                 <div id="results" class="table-responsive mt-3">
                     @include('guru.ppi.modelB._table', ['anak' => $anak])

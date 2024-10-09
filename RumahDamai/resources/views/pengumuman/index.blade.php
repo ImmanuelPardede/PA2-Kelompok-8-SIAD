@@ -4,15 +4,19 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title d-flex justify-content-between align-items-center">
-                    Daftar Pengumuman
-                    {{-- <input type="text" id="search" class="form-control" placeholder="Cari..." aria-label="Search"> --}}
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Cari..." aria-label="Search">
-                    </form>
-                </h1>
+                <div class="d-flex justify-content-center">
+                    <h1 class="card-title head-data">Daftar Pengumuman</h1>
+                </div>
 
-                <div id="results" class="table-responsive">
+                <hr>
+
+                <div class="d-flex justify-content-end">
+                    <form class="custom-search-form my-2 my-lg-0">
+                        <input class="custom-search-input" type="text" id="search" name="search" placeholder="Cari..." aria-label="Search">
+                    </form>
+                </div>   
+
+                <div id="results" class="table-responsive mt-3">
                     @include('pengumuman._table', ['pengumumans' => $pengumumans])
                 </div>
                 

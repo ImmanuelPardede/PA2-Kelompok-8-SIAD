@@ -13,7 +13,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <form action="{{ route('silabus.index') }}" method="GET">
                         <div class="form-group">
-                            <select class="form-control js-example-basic-single" name="tahun_ajaran_id" id="tahun_ajaran_id"
+                            <select class="form-control js-example-basic-single custom-selectDropdown" name="tahun_ajaran_id" id="tahun_ajaran_id"
                                 onchange="this.form.submit()">
                                 <option value="" disabled selected>-- Pilih Tahun Ajaran --</option>
                                 @foreach ($tahunAjaranList as $tahunAjaran)

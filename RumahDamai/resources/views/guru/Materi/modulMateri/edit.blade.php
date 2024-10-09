@@ -71,6 +71,17 @@
 
                     <div class="form-group">
                         <label for="file_modul">File Modul</label>
+                        <div>
+                            @if ($modulMateri && $modulMateri->file_modul)
+                                <label>File Lama:
+                                    <a href="{{ asset('uploads/documents/' . $modulMateri->file_modul) }}" target="_blank">
+                                        {{ $modulMateri->file_modul }}
+                                    </a>
+                                </label><br>
+                            @else
+                                <span>Tidak ada file yang diunggah.</span>
+                            @endif
+                        </div>
                         <input type="file" class="form-control" name="file_modul">
                         <small class="text-muted">Jenis file yang diizinkan: PDF, DOC, DOCX.</small>
                     </div>

@@ -12,10 +12,11 @@
 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('guru.anak.export.excel') }}" class="btn btn-primary mr-auto">Export to Excel</a>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" id="search" name="search"
-                            placeholder="Cari..." aria-label="Search">
-                    </form>
+                    <div class="d-flex justify-content-end">
+                        <form class="custom-search-form my-2 my-lg-0">
+                            <input class="custom-search-input" type="text" id="search" name="search" placeholder="Cari..." aria-label="Search">
+                        </form>
+                    </div>   
                 </div>
 
                 <div id="results" class="table-responsive mt-3">

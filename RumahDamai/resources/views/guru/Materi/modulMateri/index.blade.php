@@ -11,18 +11,45 @@
                 <hr>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <form action="{{ route('modulMateri.index') }}" method="GET">
-                        <div class="form-group">
-                            <select class="form-control js-example-basic-single" name="tahun_ajaran_id" id="tahun_ajaran_id" onchange="this.form.submit()">
-                                <option value="" disabled selected>-- Pilih Tahun Ajaran --</option>
-                                @foreach($tahunAjaranList as $tahunAjaran)
-                                <option value="{{ $tahunAjaran->id }}" {{ request('tahun_ajaran_id') == $tahunAjaran->id ? 'selected' : '' }}>
-                                    {{ $tahunAjaran->tahun_ajaran }} <!-- Adjust this to match the attribute in your model -->
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </form>
+                    <div class="d-flex">
+                        <form action="{{ route('modulMateri.index') }}" method="GET" class="mx-1">
+                            <div class="form-group">
+                                <!-- Dropdown Tahun Ajaran -->
+                                <select class="form-control js-example-basic-single custom-selectDropdown"
+                                    name="tahun_ajaran_id" id="tahun_ajaran_id" onchange="this.form.submit()">
+                                    <option value="" disabled {{ !request('tahun_ajaran_id') ? 'selected' : '' }}>--
+                                        Pilih Tahun Ajaran --</option>
+                                    @foreach ($tahunAjaranList as $tahunAjaran)
+                                        <option value="{{ $tahunAjaran->id }}"
+                                            {{ request('tahun_ajaran_id') == $tahunAjaran->id ? 'selected' : '' }}>
+                                            {{ $tahunAjaran->tahun_ajaran }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+
+                        <!-- Filter Minggu Pembelajaran (tanpa mereset Tahun Ajaran) -->
+                        <form action="{{ route('modulMateri.index') }}" method="GET" class="mx-1">
+                            <div class="form-group">
+                                <!-- Hidden field to keep the selected Tahun Ajaran when Minggu Pembelajaran is chosen -->
+                                <input type="hidden" name="tahun_ajaran_id" value="{{ request('tahun_ajaran_id') }}">
+
+                                <!-- Dropdown Minggu Pembelajaran -->
+                                <select class="form-control js-example-basic-single custom-selectDropdown"
+                                    name="minggu_pembelajaran_id" id="minggu_pembelajaran_id" onchange="this.form.submit()">
+                                    <option value="" disabled selected>-- Pilih Minggu Pembelajaran --</option>
+                                    @foreach ($mingguPembelajaranList as $mingguPembelajaran)
+                                        <option value="{{ $mingguPembelajaran->id }}"
+                                            {{ request('minggu_pembelajaran_id') == $mingguPembelajaran->id ? 'selected' : '' }}>
+                                            {{ $mingguPembelajaran->minggu_pembelajaran }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
                     <a href="{{ route('modulMateri.create') }}" class="btn btn-success mb-3">Tambah Modul Materi</a>
                 </div>
 
@@ -41,12 +68,16 @@
                                     <td>{{ $modulMateri->nama_materi }}</td>
                                     <td>{{ $modulMateri->mingguPembelajaran->minggu_pembelajaran }}</td>
                                     <td>
-                                        <a href="{{ route('modulMateri.show', $modulMateri->id) }}" class="btn btn-info">Detail</a>
-                                        <a href="{{ route('modulMateri.edit', $modulMateri->id) }}" class="btn btn-warning">Edit</a>
-                                        <form method="POST" id="deleteForm{{ $modulMateri->id }}" class="d-inline" action="{{ route('modulMateri.destroy', $modulMateri->id) }}">
+                                        <a href="{{ route('modulMateri.show', $modulMateri->id) }}"
+                                            class="btn btn-info">Detail</a>
+                                        <a href="{{ route('modulMateri.edit', $modulMateri->id) }}"
+                                            class="btn btn-warning">Edit</a>
+                                        <form method="POST" id="deleteForm{{ $modulMateri->id }}" class="d-inline"
+                                            action="{{ route('modulMateri.destroy', $modulMateri->id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn btn-danger" onclick="handleDeleteConfirmation('deleteForm{{ $modulMateri->id }}')">
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="handleDeleteConfirmation('deleteForm{{ $modulMateri->id }}')">
                                                 Hapus
                                             </button>
                                         </form>
