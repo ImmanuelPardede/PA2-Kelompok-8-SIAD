@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="col-lg-12 grid-margin stretch-card">
-
         <div class="card">
             <div class="card-body">
                 <div>
@@ -14,8 +13,8 @@
                     </div>
                 @endif
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="bg-primary text-white">
+                    <table class="table table-bordered table-hover calendar-table">
+                        <thead class="bg-primary text-white text-center">
                             <tr>
                                 <th width="125">Time</th>
                                 @foreach ($weekDays as $day)
@@ -27,32 +26,34 @@
                             @if (isset($calendarData) && count($calendarData) > 0)
                                 @foreach ($calendarData as $time => $days)
                                     <tr>
-                                        <td>{{ \Carbon\Carbon::parse(explode(' - ', $time)[0])->format('H:i') }} -
+                                        <td class="align-middle text-center time-slot">
+                                            {{ \Carbon\Carbon::parse(explode(' - ', $time)[0])->format('H:i') }} -
                                             {{ \Carbon\Carbon::parse(explode(' - ', $time)[1])->format('H:i') }}
                                         </td>
                                         @foreach ($weekDays as $day)
                                             @if (isset($days[$day]))
                                                 <td class="align-middle text-center special"
-                                                    style="background-color: {{ $days[$day]['color'] ?? '#ffffff' }}">
+                                                    style="background-color: {{ $days[$day]['color'] ?? '#ffffff' }};">
                                                     @if ($days[$day]['time_start'] != '-')
                                                         <div>
-                                                            {{ $days[$day]['guru'] }}<br>
+                                                            <strong>{{ $days[$day]['guru'] }}</strong><br>
                                                             {{ $days[$day]['kelas'] }}<br>
                                                         </div>
                                                     @else
-                                                        ....
+                                                        <div>....</div>
                                                     @endif
                                                 </td>
                                             @else
-                                                <td class="special">....</td>
+                                                <td class="align-middle text-center special">
+                                                    <div>....</div>
+                                                </td>
                                             @endif
                                         @endforeach
                                     </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="{{ count($weekDays) + 1 }}" class="text-center">Tidak ada data
-                                        jadwal pembelajaran tersedia.</td>
+                                    <td colspan="{{ count($weekDays) + 1 }}" class="text-center">Tidak ada data jadwal pembelajaran tersedia.</td>
                                 </tr>
                             @endif
                         </tbody>

@@ -12,13 +12,13 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex">
+                        <!-- Filter Tahun Ajaran -->
                         <form action="{{ route('modulMateri.index') }}" method="GET" class="mx-1">
                             <div class="form-group">
                                 <!-- Dropdown Tahun Ajaran -->
                                 <select class="form-control js-example-basic-single custom-selectDropdown"
                                     name="tahun_ajaran_id" id="tahun_ajaran_id" onchange="this.form.submit()">
-                                    <option value="" disabled {{ !request('tahun_ajaran_id') ? 'selected' : '' }}>--
-                                        Pilih Tahun Ajaran --</option>
+                                    <option value="" disabled {{ !request('tahun_ajaran_id') ? 'selected' : '' }}>-- Pilih Tahun Ajaran --</option>
                                     @foreach ($tahunAjaranList as $tahunAjaran)
                                         <option value="{{ $tahunAjaran->id }}"
                                             {{ request('tahun_ajaran_id') == $tahunAjaran->id ? 'selected' : '' }}>
@@ -38,7 +38,7 @@
                                 <!-- Dropdown Minggu Pembelajaran -->
                                 <select class="form-control js-example-basic-single custom-selectDropdown"
                                     name="minggu_pembelajaran_id" id="minggu_pembelajaran_id" onchange="this.form.submit()">
-                                    <option value="" disabled selected>-- Pilih Minggu Pembelajaran --</option>
+                                    <option value="" disabled {{ !request('minggu_pembelajaran_id') ? 'selected' : '' }}>-- Pilih Minggu Pembelajaran --</option>
                                     @foreach ($mingguPembelajaranList as $mingguPembelajaran)
                                         <option value="{{ $mingguPembelajaran->id }}"
                                             {{ request('minggu_pembelajaran_id') == $mingguPembelajaran->id ? 'selected' : '' }}>

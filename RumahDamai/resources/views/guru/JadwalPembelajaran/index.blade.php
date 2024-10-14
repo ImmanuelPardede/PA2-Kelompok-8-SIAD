@@ -13,16 +13,22 @@
                 <div class="d-flex justify-content-end align-items-center mb-3">
                     <form action="{{ route('jadwalPembelajaran.index') }}" method="GET">
                         <div class="form-group mb-0">
-                            <select class="form-control js-example-basic-single custom-selectDropdown" name="minggu_pembelajaran_id" id="minggu_pembelajaran_id" onchange="this.form.submit()">
+                            <!-- Dropdown Minggu Pembelajaran -->
+                            <select class="form-control js-example-basic-single custom-selectDropdown"
+                                    name="minggu_pembelajaran_id"
+                                    id="minggu_pembelajaran_id"
+                                    onchange="this.form.submit()">
                                 <option value="" disabled selected>-- Pilih Minggu Pembelajaran --</option>
                                 @foreach ($mingguPembelajaranList as $mingguPembelajaran)
-                                    <option value="{{ $mingguPembelajaran->id }}" {{ request('minggu_pembelajaran_id') == $mingguPembelajaran->id ? 'selected' : '' }}>
+                                    <option value="{{ $mingguPembelajaran->id }}"
+                                        {{ request('minggu_pembelajaran_id') == $mingguPembelajaran->id ? 'selected' : '' }}>
                                         {{ $mingguPembelajaran->minggu_pembelajaran }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                     </form>
+
                 </div>
 
                 <div class="table-responsive">
@@ -43,7 +49,7 @@
                             @forelse ($jadwalPembelajaran as $jadwal)
                                 <tr>
                                     <td>{{ $jadwal->kelas->nama_kelas ?? '-' }}</td>
-                                    <td>{{ $jadwal->guru->nama_lengkap ?? '-' }}</td>
+                                    <td>{{ explode(' ', $jadwal->guru->nama_lengkap)[0] ?? '-' }}</td>
                                     <td>{{ $jadwal->mingguPembelajaran->minggu_pembelajaran ?? '-' }}</td>
                                     <td>{{ optional($jadwal->tanggal_pembelajaran)->format('d/m/Y') ?? '-' }}</td>
                                     <td>{{ $jadwal->hari_pembelajaran ?? '-' }}</td>
@@ -60,6 +66,15 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end">
+                                {{ $jadwalPembelajaran->appends(['search' => request('search')])->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

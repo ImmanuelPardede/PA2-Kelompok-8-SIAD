@@ -44,7 +44,11 @@ class ModulMateriController extends Controller
             })
             ->with('mingguPembelajaran')
             ->orderBy('created_at', 'asc')
-            ->paginate(7);
+            ->paginate(7)
+            ->appends([
+                'tahun_ajaran_id' => $tahunAjaranId,
+                'minggu_pembelajaran_id' => $mingguPembelajaranId
+            ]);  // Menjaga filter pada pagination
 
         // Get all available Tahun Ajaran dan Minggu Pembelajaran untuk dropdown
         $tahunAjaranList = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
@@ -54,6 +58,7 @@ class ModulMateriController extends Controller
 
         return view('guru.materi.modulMateri.index', compact('modulMateriList', 'tahunAjaranList', 'mingguPembelajaranList'));
     }
+
 
 
 

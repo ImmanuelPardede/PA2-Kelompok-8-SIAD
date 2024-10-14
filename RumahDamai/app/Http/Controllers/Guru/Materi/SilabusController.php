@@ -20,17 +20,21 @@ class SilabusController extends Controller
         $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first();
         $tahunAjaranId = $request->input('tahun_ajaran_id') ?: ($tahunAjaran ? $tahunAjaran->id : null);
 
+        // Dapatkan data silabus dan tambahkan appends untuk menjaga filter pada pagination
         $silabusList = Silabus::where('user_id', $guruId)
             ->when($tahunAjaranId, function ($query, $tahunAjaranId) {
                 return $query->where('tahun_ajaran_id', $tahunAjaranId);
             })
             ->orderBy('created_at', 'asc')
-            ->paginate(7);
+            ->paginate(7)
+            ->appends(['tahun_ajaran_id' => $tahunAjaranId]);  // Menjaga filter saat pagination
 
+        // Ambil daftar tahun ajaran
         $tahunAjaranList = TahunAjaran::orderBy('tahun_ajaran', 'desc')->get();
 
         return view('guru.materi.silabus.index', compact('silabusList', 'tahunAjaranList'));
     }
+
 
     public function create()
     {

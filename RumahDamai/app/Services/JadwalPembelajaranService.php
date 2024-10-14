@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class JadwalPembelajaranService
 {
-     /**
+    /**
      * Menghasilkan data kalender berdasarkan minggu pembelajaran aktif.
      *
      * @param array $weekDays Hari-hari dalam seminggu.
@@ -19,15 +19,16 @@ class JadwalPembelajaranService
     public function generateCalendarData($weekDays, $startOfWeek, $endOfWeek, $lokasi_penugasan_id)
     {
         $calendarData = [];
+        $now = Carbon::now(); // Dapatkan waktu sekarang
+        $today = Carbon::today(); // Dapatkan tanggal hari ini
 
-        // Ambil semua jadwal pembelajaran yang sesuai dengan tanggal dan lokasi penugasan
+        // Ambil semua jadwal pembelajaran yang relevan
         $jadwalPembelajaran = JadwalPembelajaran::with(['kelas', 'guru'])
             ->whereBetween('tanggal_pembelajaran', [$startOfWeek, $endOfWeek])
             ->where('lokasi_penugasan_id', $lokasi_penugasan_id)
             ->orderBy('jam_mulai')
             ->get();
 
-        // Inisialisasi calendarData dengan semua slot waktu dan hari sebagai null
         foreach ($jadwalPembelajaran as $jadwal) {
             $timeText = "{$jadwal->jam_mulai} - {$jadwal->jam_selesai}";
 
@@ -36,8 +37,35 @@ class JadwalPembelajaranService
             }
 
             $day = $jadwal->hari_pembelajaran;
+            $scheduleDate = Carbon::parse($jadwal->tanggal_pembelajaran);
+            $startTime = Carbon::parse($jadwal->jam_mulai);
+            $endTime = Carbon::parse($jadwal->jam_selesai);
 
-            // Pastikan hari valid dan sesuai dengan weekDays
+            // Logika warna berdasarkan waktu sekarang dan waktu jadwal
+            if ($scheduleDate->isToday()) {
+                // Jika waktu sekarang berada di antara jam mulai dan jam selesai
+                if ($now->isBetween($startTime, $endTime, true)) {
+                    $color = '#99cc99'; // Warna biru untuk waktu saat ini di dalam jadwal
+                }
+                // Jika waktu sekarang mendekati jadwal (kurang dari 30 menit ke waktu mulai)
+                elseif ($now->diffInMinutes($startTime, false) > 0 && $now->diffInMinutes($startTime, false) <= 30) {
+                    $color = '#ffff99'; // Kuning untuk waktu mendekati 30 menit ke depan
+                }
+                // Jika waktu sekarang sudah lewat dari jam selesai
+                elseif ($now->isAfter($endTime)) {
+                    $color = '#ff9999'; // Merah untuk jadwal yang sudah lewat
+                }
+                // Jadwal untuk waktu di masa depan
+                else {
+                    $color = '#ccffcc'; // Hijau untuk jadwal di masa depan
+                }
+            } elseif ($scheduleDate->isPast()) {
+                $color = '#ffcccc'; // Merah untuk jadwal yang sudah lewat
+            } else {
+                $color = '#ccffcc'; // Hijau untuk jadwal di masa depan
+            }
+
+            // Pastikan hari valid dan cocok dengan weekDays
             if (in_array($day, $weekDays)) {
                 $calendarData[$timeText][$day] = [
                     'kelas' => $jadwal->kelas ? $jadwal->kelas->nama_kelas : 'Kosong',
@@ -45,8 +73,8 @@ class JadwalPembelajaranService
                     'hari' => $day,
                     'time_start' => $jadwal->jam_mulai,
                     'time_end' => $jadwal->jam_selesai,
-                    'rowspan' => 1, // Jika diperlukan, sesuaikan logika rowspan
-                    'color' => '#f0f0f0' // Atur warna sesuai kebutuhan
+                    'rowspan' => 1, // Sesuaikan jika perlu
+                    'color' => $color, // Set warna yang sudah ditentukan
                 ];
             }
         }

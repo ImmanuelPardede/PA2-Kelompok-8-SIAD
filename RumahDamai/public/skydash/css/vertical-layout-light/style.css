@@ -49545,3 +49545,89 @@ div.tagsinput span.tag a {
         padding: 7px; /* Further reduced padding */
     }
 }
+
+
+/* =================================================================================================================================
+                                                            Calendar Table
+================================================================================================================================= */
+
+.calendar-table {
+    table-layout: fixed; /* Fixed layout for uniform cell sizes */
+    width: 100%; /* Full width */
+    border-collapse: separate; /* Use separate borders for styling */
+    border-spacing: 0; /* No spacing between borders */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for table */
+    border-radius: 15px; /* Rounded corners for table */
+    overflow: hidden; /* Hide overflow for rounded corners */
+}
+
+.calendar-table td {
+    width: 14%; /* Equal width for all columns */
+    height: 120px; /* Fixed height for rows */
+    vertical-align: middle; /* Center content vertically */
+    padding: 12px; /* Cell padding */
+    text-align: center; /* Center text */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+}
+
+.calendar-table th {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+    font-size: 1rem; /* Font size */
+    padding: 15px; /* Padding */
+    border-bottom: 2px solid #0056b3; /* Bottom border for distinction */
+}
+
+.calendar-table td {
+    background-color: #f9f9f9; /* Cell background color */
+    border: 1px solid #e0e0e0; /* Border color */
+    border-radius: 5px; /* Rounded corners for cells */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cell shadow */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.calendar-table td:hover {
+    background-color: #e9f0f7; /* Hover color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Hover shadow */
+}
+
+.calendar-table td.special {
+    font-size: 1rem; /* Font size for special cells */
+    color: #495057; /* Text color */
+}
+
+.calendar-table td.time-slot {
+    background-color: #eaeaea; /* Time slot background */
+    color: #333; /* Text color */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inset shadow */
+    border-right: 1px solid #dee2e6; /* Right border */
+    border-left: 1px solid #dee2e6; /* Left border */
+}
+
+.calendar-table td.special div {
+    padding: 10px; /* Inner padding */
+    font-size: 0.9rem; /* Font size for inner div */
+}
+
+.calendar-table td.special div strong {
+    font-weight: 600; /* Bold text for names */
+    color: #007bff; /* Color for strong text */
+}
+
+/* Subtle hover effect for the entire table row */
+.calendar-table tr:hover {
+    background-color: #f2f7fa; /* Row hover color */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calendar-table td,
+    .calendar-table th {
+        font-size: 0.8rem; /* Smaller font size */
+        padding: 8px; /* Smaller padding */
+    }
+
+    .calendar-table td.time-slot {
+        font-size: 0.9rem; /* Font size adjustment */
+    }
+}

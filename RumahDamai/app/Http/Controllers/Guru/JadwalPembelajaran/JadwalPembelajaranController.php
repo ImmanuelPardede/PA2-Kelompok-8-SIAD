@@ -41,49 +41,50 @@ class JadwalPembelajaranController extends Controller
     }
 
     public function index(Request $request)
-    {
-        // Ambil ID pengguna yang sedang login
-        $userId = Auth::id();
+{
+    // Ambil ID pengguna yang sedang login
+    $userId = Auth::id();
 
-        // Ambil lokasi penugasan dari pengguna yang login
-        $user = Auth::user();
-        $lokasiPenugasanId = $user->lokasi_penugasan_id; // Asumsi field ini ada di model User
+    // Ambil lokasi penugasan dari pengguna yang login
+    $user = Auth::user();
+    $lokasiPenugasanId = $user->lokasi_penugasan_id; // Asumsi field ini ada di model User
 
-        // Ambil tahun ajaran yang sesuai dengan tahun sekarang
-        $currentYear = date('Y');
-        $tahunAjaranId = null; // Inisialisasi dengan null
+    // Ambil tahun ajaran yang sesuai dengan tahun sekarang
+    $currentYear = date('Y');
+    $tahunAjaranId = null; // Inisialisasi dengan null
 
-        // Asumsi Anda memiliki model bernama 'TahunAjaran' untuk mengambil tahun ajaran saat ini
-        $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first(); // Sesuaikan nama kolom jika perlu
-        if ($tahunAjaran) {
-            $tahunAjaranId = $tahunAjaran->id; // Dapatkan ID tahun ajaran saat ini
-        }
-
-        // Ambil data minggu pembelajaran pertama sebagai default jika tidak ada input dari request
-        $mingguPembelajaran = JadwalPembelajaran::where('minggu_pembelajaran_id')->first();
-        $mingguPembelajaranId = $request->input('minggu_pembelajaran_id') ?: ($mingguPembelajaran ? $mingguPembelajaran->id : null);
-
-        // Ambil jadwal pembelajaran yang sesuai dengan user yang login, lokasi penugasan, minggu pembelajaran yang dipilih,
-        // dan tahun ajaran yang sesuai dengan tahun sekarang
-        $jadwalPembelajaran = JadwalPembelajaran::with(['modulMateri', 'modulMateri.mingguPembelajaran'])
-            ->where('user_id', $userId)
-            ->when($mingguPembelajaranId, function ($query, $mingguPembelajaranId) {
-                return $query->where('minggu_pembelajaran_id', $mingguPembelajaranId);
-            })
-            ->whereHas('modulMateri', function ($query) use ($tahunAjaranId) {
-                return $query->where('tahun_ajaran_id', $tahunAjaranId);
-            })
-            ->orderBy('created_at', 'asc')
-            ->paginate(7);
-
-        // Ambil data minggu pembelajaran berdasarkan lokasi penugasan pengguna yang login untuk dropdown,
-        // sorting by minggu_pembelajaran as a number
-        $mingguPembelajaranList = MingguPembelajaran::where('lokasi_penugasan_id', $lokasiPenugasanId)
-            ->orderBy(DB::raw('CAST(minggu_pembelajaran AS UNSIGNED)'), 'asc') // Urutkan sebagai angka
-            ->get();
-
-        return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran', 'mingguPembelajaranList'));
+    // Asumsi Anda memiliki model bernama 'TahunAjaran' untuk mengambil tahun ajaran saat ini
+    $tahunAjaran = TahunAjaran::where('tahun_ajaran', $currentYear)->first();
+    if ($tahunAjaran) {
+        $tahunAjaranId = $tahunAjaran->id; // Dapatkan ID tahun ajaran saat ini
     }
+
+    // Ambil minggu pembelajaran berdasarkan input dari request atau gunakan default minggu pertama jika tidak ada input
+    $mingguPembelajaranId = $request->input('minggu_pembelajaran_id') ?: null;
+
+    // Ambil jadwal pembelajaran sesuai filter yang dipilih
+    $jadwalPembelajaran = JadwalPembelajaran::with(['modulMateri', 'modulMateri.mingguPembelajaran'])
+        ->where('user_id', $userId)
+        ->when($mingguPembelajaranId, function ($query, $mingguPembelajaranId) {
+            return $query->where('minggu_pembelajaran_id', $mingguPembelajaranId);
+        })
+        ->whereHas('modulMateri', function ($query) use ($tahunAjaranId) {
+            return $query->where('tahun_ajaran_id', $tahunAjaranId);
+        })
+        ->orderBy('created_at', 'asc')
+        ->paginate(7)
+        ->appends([
+            'minggu_pembelajaran_id' => $mingguPembelajaranId, // Tambahkan parameter untuk pagination
+        ]);
+
+    // Ambil data minggu pembelajaran berdasarkan lokasi penugasan pengguna yang login untuk dropdown
+    $mingguPembelajaranList = MingguPembelajaran::where('lokasi_penugasan_id', $lokasiPenugasanId)
+        ->orderBy(DB::raw('CAST(minggu_pembelajaran AS UNSIGNED)'), 'asc') // Urutkan sebagai angka
+        ->get();
+
+    return view('guru.JadwalPembelajaran.index', compact('jadwalPembelajaran', 'mingguPembelajaranList'));
+}
+
 
     public function store(Request $request)
     {
