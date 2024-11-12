@@ -4,14 +4,27 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-center">
                     <h1 class="card-title">Data Sponsor</h1>
-                    <!-- Tampilkan notifikasi jika ada -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <form action="{{ route('dataSponsor.index') }}" method="GET">
+                        <div class="form-group">
+                            <select class="form-control js-example-basic-single custom-selectDropdown" name="tanggal_sponsor" id="tanggal_sponsor"
+                                onchange="this.form.submit()">
+                                <option value="" disabled selected>-- Pilih Tahun --</option>
+                                @foreach ($tanggalSponsorList as $tanggalSponsor)
+                                    <option value="{{ $tanggalSponsor->tahun }}"
+                                        {{ request('tanggal_sponsor') == $tanggalSponsor->tahun ? 'selected' : '' }}>
+                                        {{ $tanggalSponsor->tahun }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                    @endif
+                    </form>
                     <a href="{{ route('dataSponsor.create') }}" class="btn btn-success mb-3">Tambah Sponsor</a>
                 </div>
 
@@ -45,14 +58,21 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2">Tidak Data Sponsor.</td>
+                                    <td colspan="2">Tidak ada Data Sponsor.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-end">
-                    {{ $sponsorList->links('pagination::bootstrap-4') }}
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end">
+                                {{ $sponsorList->appends(['search' => request('search')])->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

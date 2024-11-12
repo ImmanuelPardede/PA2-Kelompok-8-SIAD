@@ -13,11 +13,30 @@ use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
-    public function index()
-    {
-        $sponsorList = Sponsor::orderBy('created_at', 'desc')->paginate(7);
-        return view('staff.DataSponsor.index', compact('sponsorList'));
-    }
+    public function index(Request $request)
+{
+    $currentYear = now()->year;
+    $selectedYear = $request->input('tanggal_sponsor') ?: $currentYear;
+
+    $sponsorList = Sponsor::when($selectedYear, function ($query, $selectedYear) {
+            return $query->whereYear('tanggal_sponsor', $selectedYear);
+        })
+        ->orderBy('created_at', 'desc')  // Mengurutkan dari yang paling baru
+        ->paginate(7)
+        ->appends(['tanggal_sponsor' => $selectedYear]); // Menjaga filter saat pagination
+
+    // Mengambil tahun yang unik saja dari kolom 'tanggal_sponsor'
+    $tanggalSponsorList = Sponsor::selectRaw('YEAR(tanggal_sponsor) as tahun')
+        ->groupBy('tahun')
+        ->orderBy('tahun', 'desc')  // Mengurutkan dari yang paling baru
+        ->get();
+
+    return view('staff.DataSponsor.index', compact('sponsorList', 'tanggalSponsorList', 'selectedYear'));
+}
+
+
+
+
 
     public function create()
     {

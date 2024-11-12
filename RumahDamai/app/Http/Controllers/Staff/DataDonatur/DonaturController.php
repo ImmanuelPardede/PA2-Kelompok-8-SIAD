@@ -12,10 +12,25 @@ use Illuminate\Support\Facades\Auth;
 
 class DonaturController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $donaturList = Donatur::orderBy('created_at', 'desc')->paginate(7);
-        return view('staff.DataDonatur.index', compact('donaturList'));
+        $currentYear = now()->year;
+        $selectedYear = $request->input('tanggal_donatur') ?: $currentYear;
+
+        $donaturList = Donatur::when($selectedYear, function ($query, $selectedYear) {
+            return $query->whereYear('tanggal_donatur', $selectedYear);
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(7)
+        ->appends(['tanggal_donatur' => $selectedYear]); // Menjaga filter saat pagination
+
+    // Mengambil tahun yang unik saja dari kolom 'tanggal_sponsor'
+    $tanggalDonaturList = Donatur::selectRaw('YEAR(tanggal_donatur) as tahun')
+        ->groupBy('tahun')
+        ->orderBy('tahun', 'desc')
+        ->get();
+
+        return view('staff.DataDonatur.index', compact('donaturList', 'tanggalDonaturList', 'selectedYear'));
     }
 
     public function create()

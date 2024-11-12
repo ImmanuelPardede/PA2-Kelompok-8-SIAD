@@ -6,12 +6,25 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h1 class="card-title">Data Donatur</h1>
-                    <!-- Tampilkan notifikasi jika ada -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <form action="{{ route('dataDonatur.index') }}" method="GET">
+                        <div class="form-group">
+                            <select class="form-control js-example-basic-single custom-selectDropdown" name="tanggal_donatur" id="tanggal_donatur"
+                                onchange="this.form.submit()">
+                                <option value="" disabled selected>-- Pilih Tahun --</option>
+                                @foreach ($tanggalDonaturList as $tanggalDonatur)
+                                    <option value="{{ $tanggalDonatur->tahun }}"
+                                        {{ request('tanggal_donatur') == $tanggalDonatur->tahun ? 'selected' : '' }}>
+                                        {{ $tanggalDonatur->tahun }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-                    @endif
+                    </form>
                     <a href="{{ route('dataDonatur.create') }}" class="btn btn-success mb-3">Tambah Donatur</a>
                 </div>
 
@@ -51,8 +64,15 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="d-flex justify-content-end">
-                    {{ $donaturList->links('pagination::bootstrap-4') }}
+            
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-end">
+                                {{ $donaturList->appends(['search' => request('search')])->links('pagination::bootstrap-4') }}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>

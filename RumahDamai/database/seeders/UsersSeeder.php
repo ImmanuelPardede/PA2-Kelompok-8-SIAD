@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => '0',
             'lokasi_penugasan_id' => '1',
-            'tanggal_lahir' => '2022-01-01', // Example date of birth
+            'tanggal_lahir' => '2001-01-01',
         ];
 
         // Generate NIP for Admin

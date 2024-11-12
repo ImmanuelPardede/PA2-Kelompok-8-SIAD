@@ -74,7 +74,7 @@
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
-                                        <td>{{ $donatur->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $donatur->deskripsi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Jumlah Donasi</th>

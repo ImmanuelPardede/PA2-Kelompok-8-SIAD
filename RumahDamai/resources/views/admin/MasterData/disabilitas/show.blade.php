@@ -20,7 +20,7 @@
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
-                                        <td>{{ $disabilitas->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $disabilitas->deskripsi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

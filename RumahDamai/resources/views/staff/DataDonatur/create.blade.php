@@ -63,11 +63,20 @@
                         <input type="text" class="form-control" id="no_hp_donatur" name="no_hp_donatur"
                             value="{{ old('no_hp_donatur') }}">
                     </div>
+
                     <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <input type="text" class="form-control" id="deskripsi" name="deskripsi"
-                            value="{{ old('deskripsi') }}">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea id="editor1" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                            autocomplete="deskripsi">
+                            <ol><li></li></ol>{{ old('deskripsi') }}
+                        </textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+
                     <div class="form-group">
                         <label for="jumlah_donasi">Jumlah Total</label>
                         <div class="input-group">
@@ -77,6 +86,11 @@
                             <input type="number" class="form-control" id="jumlah_donasi" name="jumlah_donasi"
                                 value="{{ old('jumlah_donasi') }}">
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Terbilang</label>
+                        <input type="text" class="form-control" id="terbilang" name="terbilang" readonly>
                     </div>
 
                     <div class="form-group">
@@ -93,8 +107,68 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            ClassicEditor
+                .create(document.querySelector('#editor1'), {
+                    // Konfigurasi CKEditor 5 untuk textarea pertama
+                })
+                .catch(error => {
+                    console.error('Ada kesalahan saat menginisialisasi CKEditor 5:', error);
+                });
+        });
+    </script>
     <script>
         $(document).ready(function() {
+            function convertToWords(number) {
+                const words = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"];
+                const levels = ["", "ribu", "juta", "miliar", "triliun"];
+                if (number == 0) return "nol";
+
+                let result = "";
+                let level = 0;
+
+                while (number > 0) {
+                    let group = number % 1000;
+                    let groupWords = "";
+
+                    if (group >= 100) {
+                        groupWords += words[Math.floor(group / 100)] + " ratus ";
+                        group %= 100;
+                    }
+                    if (group >= 10) {
+                        if (group >= 20) {
+                            groupWords += words[Math.floor(group / 10)] + " puluh ";
+                            group %= 10;
+                        } else if (group >= 11) {
+                            groupWords += "sebelas";
+                            group = 0;
+                        } else {
+                            groupWords += "sepuluh";
+                            group = 0;
+                        }
+                    }
+                    if (group > 0) {
+                        groupWords += words[group] + " ";
+                    }
+
+                    if (groupWords.trim()) {
+                        result = groupWords.trim() + " " + levels[level] + " " + result;
+                    }
+
+                    level++;
+                    number = Math.floor(number / 1000);
+                }
+                return result.trim();
+            }
+
+            $('#jumlah_donasi').on('blur', function() {
+                const amount = $(this).val();
+                const words = convertToWords(parseInt(amount, 10));
+                $('#terbilang').val(words);
+            });
+
             $('#donasi_id').change(function() {
                 if ($(this).val().indexOf('lainnya') !== -1) {
                     $('#lainnya_div').show();

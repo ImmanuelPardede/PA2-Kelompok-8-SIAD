@@ -83,7 +83,7 @@
                                     </tr>
                                     <tr>
                                         <th>Deskripsi</th>
-                                        <td>{{ $sponsor->deskripsi ?? 'Data tidak tersedia' }}</td>
+                                        <td>{!! $sponsor->deskripsi ?? 'Data tidak tersedia' !!}</td>
                                     </tr>
                                     <tr>
                                         <th>Jumlah Sponsor</th>
